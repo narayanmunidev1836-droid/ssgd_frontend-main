@@ -1,0 +1,85 @@
+.Custom-Card {
+  padding: 24px;
+  max-height: 500px;
+  overflow: auto !important;
+}
+.Custom-Card h4 {
+  font-size: 30px;
+  color: var(--text-color);
+  font-weight: 700;
+  text-align: center;
+}
+.custom-page-content {
+  padding-top: 80px;
+}
+.custom-page-content h4 {
+  font-size: 23px;
+  font-weight: 700;
+  color: var(--text-color) !important;
+}
+.custom-page-div {
+  padding: 20px !important;
+}
+.custom-image {
+  height: auto;
+  width: 65%;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+.shimmer-title,
+.shimmer-image,
+.shimmer-text-line {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.6s infinite linear;
+  border-radius: 6px;
+}
+
+.shimmer-title {
+  width: 40%;
+  height: 25px;
+  margin-bottom: 20px;
+}
+
+.shimmer-image {
+  width: 100%;
+  height: 250px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+}
+
+.shimmer-text-line {
+  height: 16px;
+  margin-bottom: 12px;
+  width: 100%;
+}
+
+.shimmer-text-line.short {
+  width: 70%;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+@media (min-width: 767.98px) and (max-width: 1024px) {
+  .custom-page-content {
+    margin-top: 53px !important;
+  }
+}
+@media (min-width: 200px) and (max-width: 576px) {
+  .custom-page-content {
+    margin-top: 53px !important;
+  }
+}
+@media (min-width: 576px) and (max-width: 767px) {
+  .custom-page-content {
+    margin-top: 53px !important;
+  }
+}

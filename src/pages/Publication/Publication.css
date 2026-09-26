@@ -1,0 +1,251 @@
+.publications-bg {
+  background-image: url("../../assets/images/parallax-walllpaper.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: auto;
+  /* height: 878px; */
+  padding: 100px 0 100px 0;
+  background-attachment: fixed;
+}
+
+.white {
+  font-size: 46px;
+  color: #fff;
+}
+
+.publications-bg img {
+  height: 50px;
+  width: 50px;
+  object-fit: cover;
+}
+.publication-box {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+@keyframes shimmer {
+  0% {
+    background-position: -450px 0;
+  }
+  100% {
+    background-position: 450px 0;
+  }
+}
+
+.publication-shimmer-card-data {
+  animation: shimmer 1.6s infinite linear;
+  background: linear-gradient(to right, #f0f0f0 8%, #e0e0e0 18%, #f0f0f0 33%);
+  background-size: 1000px 100%;
+  border-radius: 10px;
+  width: 220px;
+  height: 160px;
+  margin: 10px;
+}
+
+.publication-card-1 {
+  background-color: #4484b1a8 !important;
+  border-radius: 10px !important;
+  padding: 20px;
+  width: 220px;
+}
+
+.publication-card-2 {
+  background-color: #99343793 !important;
+  border-radius: 10px !important;
+  padding: 20px;
+  width: 220px;
+}
+
+.publication-card-3 {
+  background-color: #c0aeae51 !important;
+  border-radius: 10px !important;
+  padding: 20px;
+  width: 220px;
+}
+
+.publication-card-4 {
+  background-color: #ce793c66 !important;
+  border-radius: 10px !important;
+  padding: 20px;
+  width: 220px;
+}
+
+.publication-card-5 {
+  background-color: #6ace3c38 !important;
+  border-radius: 10px !important;
+  padding: 20px;
+  width: 220px;
+}
+
+.publication-card-6 {
+  background-color: #ccbd5b38 !important;
+  border-radius: 10px !important;
+  padding: 20px;
+  width: 220px;
+}
+
+.publication-card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  cursor: pointer;
+}
+
+.publication-card-content img {
+  transition: transform 0.3s ease-in-out;
+}
+
+.publication-card-content:hover img {
+  transform: scale(1.1);
+}
+
+.publication-card-content h6 {
+  font-size: 24px;
+  color: #fff;
+  font-weight: 700;
+  text-transform: capitalize;
+}
+
+.publication-card-content p {
+  color: #fff;
+  font-size: 15px;
+  line-height: 1.5;
+  margin-top: 30px;
+}
+
+.publication-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.container.publication {
+  padding-top: 90px;
+}
+
+.spinner-container {
+  position: relative;
+}
+.spinner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+}
+
+@media (max-width: 1920px) {
+  .publication-bg {
+    height: auto;
+    /* padding: 50px 0px !important; */
+  }
+}
+
+@media (max-width: 899px) {
+  .publication-card-content p {
+    font-size: 18px;
+  }
+
+  .publications-bg {
+    padding: 50px 0px;
+    height: auto;
+  }
+  .publication-box {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 1024px) {
+  .publication-card-content p {
+    font-size: 26px;
+  }
+  .publication-box {
+    justify-content: center;
+  }
+  .publications-bg {
+    padding: 50px 50px;
+    height: auto;
+  }
+}
+
+@media (max-width: 1199.99px) {
+  .publication-card-content p {
+    font-size: 30px;
+  }
+  .publication-box {
+    justify-content: center;
+  }
+  .publications-bg {
+    height: auto;
+    padding: 50px 50px;
+  }
+}
+@media (max-width: 767px) {
+  .publication-card-1 {
+    width: 200px;
+  }
+  .publication-card-2 {
+    width: 200px;
+  }
+  .publication-card-3 {
+    width: 200px;
+  }
+  .publication-card-4 {
+    width: 200px;
+  }
+  .publication-card-5 {
+    width: 200px;
+  }
+  .publication-card-6 {
+    width: 200px;
+  }
+  .publication-card-content h6 {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 576px) {
+  .publications-bg {
+    padding: 50px 0px;
+    height: auto;
+  }
+
+  .section-title.publication {
+    font-size: 28px;
+  }
+
+  .publication-card-content h6 {
+    font-size: 18px;
+  }
+
+  .publication-card-content p {
+    font-size: 30px;
+  }
+  .publication-box {
+    justify-content: center;
+  }
+  .publication-card-1 {
+    width: 155px;
+  }
+  .publication-card-2 {
+    width: 155px;
+  }
+  .publication-card-3 {
+    width: 155px;
+  }
+  .publication-card-4 {
+    width: 155px;
+  }
+  .publication-card-5 {
+    width: 155px;
+  }
+  .publication-card-6 {
+    width: 155px;
+  }
+  .publications-bg img {
+    height: 42px;
+    width: 42px;
+  }
+}

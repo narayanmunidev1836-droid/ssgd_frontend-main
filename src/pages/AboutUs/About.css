@@ -1,0 +1,118 @@
+.container.about-container {
+  border-radius: 15px;
+  padding: 15px 10px 50px 10px;
+  /* border-top: 8px solid #b5090e; */
+  border-top: 8px solid var(--text-color);
+  border-left: 1px solid #25618c;
+  border-right: 1px solid #25618c;
+  border-bottom: 1px solid #25618c;
+  position: relative;
+  z-index: 0;
+}
+
+.container.about-container h1 {
+  font-size: 25px;
+  margin: 0 0 20px;
+  color: var(--global-color);
+  font-weight: 700;
+}
+
+.container.about {
+  /* border: 2px solid #efefef; */
+  border: 1px solid var(--text-color);
+  border-radius: 10px;
+  padding: 12px 10px 14px 10px;
+}
+
+.container.about .about-image {
+  width: 150px;
+  margin: 0 auto;
+  display: flex;
+}
+
+.about-text h1 {
+  text-align: center;
+  font-size: 18px;
+  margin: 14px 0px 14px;
+  /* color: #b5090e; */
+  color: var(--text-color);
+  font-weight: 700;
+}
+
+.about-text1 {
+  /* text-align: center; */
+  font-size: 18px;
+  margin: 14px 0px 14px;
+  /* color: #b5090e; */
+  color: var(--text-color);
+  font-weight: 700;
+}
+
+.about-text p {
+  text-align: center;
+}
+
+.about p {
+  text-align: center;
+}
+
+.about-us-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.about-list {
+  list-style: auto !important;
+  margin-left: 20px;
+  color: #777;
+  line-height: 1.7;
+}
+.about-list li {
+  padding: 4px;
+  line-height: 1.7;
+  text-align: justify;
+  color: rgb(61, 61, 60);
+}
+
+.span-bg-color {
+  /* background: #285677; */
+  /* background: #204661; */
+  /* background-color: #08416b59; */
+  background-color: var(--text-color);
+  color: #fff;
+  font-size: 20px;
+  letter-spacing: 0.5px;
+  padding: 18px;
+  text-align: center;
+  text-transform: capitalize;
+  width: 90%;
+  position: absolute;
+  top: -1%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 65%;
+  z-index: 999;
+  border-radius: 12px 12px 0px 0px;
+}
+
+.square-icon {
+  transform: rotate(45deg);
+  color: var(--text-color);
+  font-size: 12px;
+}
+
+@media (max-width: 767px) {
+  .aboutus-inner-container {
+    padding-top: 55px !important;
+  }
+}
+
+@media (max-width: 1024px) {
+  .aboutusType1 {
+    margin-top: 80px;
+  }
+  .span-bg-color {
+    font-size: 15px;
+  }
+}

@@ -1,0 +1,103 @@
+.sant-bg-image {
+  width: 100%;
+  background-image: url("../../assets/images/HOME\ PAGE\ ABOUT\ SAINTS\ BG\ copy.jpg");
+  padding: 50px 50px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.sant-photos-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 80px;
+}
+
+.sant-photo-content {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.sant-photo-content h4 {
+  text-transform: capitalize;
+  font-size: 16px !important;
+  color: #fff;
+  cursor: pointer;
+  padding: 20px 0px 0px 0px;
+}
+
+.sant-photo-content p {
+  color: #777;
+  position: relative;
+  font-size: 15px;
+  background-position: center;
+  background-size: cover;
+  line-height: 1.7;
+  text-align: center;
+}
+.sant-img-placeholder {
+  width: 200px;
+  height: 200px;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 37%, #f0f0f0 63%);
+  background-size: 400% 100%;
+  animation: shimmer 1.2s ease-in-out infinite;
+  border-radius: 50%;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -400px 0;
+  }
+  100% {
+    background-position: 400px 0;
+  }
+}
+
+.sant-img {
+  width: 200px;
+  transition: box-shadow 0.2s ease-in-out;
+  border-radius: 50%;
+}
+
+.sant-img:hover {
+  box-shadow: 0px 0px 20px 0px rgba(166, 15, 15, 0.592);
+  cursor: pointer;
+  border-radius: 50%;
+}
+
+@media (min-width: 900px) and (max-width: 1199.98px) {
+  .sant-img {
+    width: 165px;
+  }
+}
+
+@media (max-width: 768px) {
+  .sant-bg-image {
+    padding: 50px 50px;
+    height: auto;
+  }
+}
+
+@media (min-width: 576px) and (max-width: 899.98px) {
+  .sant-photo-content {
+    padding: 0px 0px 30px 0px;
+  }
+}
+
+@media (max-width: 576px) {
+  .sant-img {
+    width: 155px;
+  }
+  .sant-photo-content {
+    gap: 0px;
+  }
+  .sant-bg-image {
+    /* padding: 0px 50px; */
+  }
+  .pt-5-mobile {
+    padding-top: 45px !important;
+  }
+}

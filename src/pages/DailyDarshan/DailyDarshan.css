@@ -1,0 +1,138 @@
+.daily-darshan-img {
+  width: 250px;
+}
+.date-picker-daily-darshan {
+  display: flex;
+  justify-content: end;
+  padding: 0px 0px 30px 0px;
+}
+.wallpaper-grid {
+  width: 90% !important;
+}
+/* .daily-media-container{
+  height: 200px;
+  width: 677px;
+  margin-bottom: 224px;
+} */
+/* .daily-darshan button {
+  border: 0px;
+  font-size: 14px;
+  padding: 10px 15px 10px 15px;
+  border: 1px solid var(--text-color);
+  background-color: var(--text-color);
+  color: #fff;
+  border-radius: 2px;
+  letter-spacing: 0.5px;
+  transition: background-color 0.3s ease, color 0.3s ease, border 0.3s ease;
+} */
+
+/* .daily-darshan button:hover {
+  background-color: transparent;
+  color: var(--text-color);
+  border: 1px solid var(--text-color);
+} */
+
+.date-picker {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: -43px;
+}
+.date-picker-wrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.date-picker-inner-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  padding-top: 10px;
+}
+.multiple-darshan {
+  padding-top: 20px;
+}
+.darshan-details h6 {
+  font-size: 22px;
+  font-weight: bold;
+  color: var(--text-color);
+  text-transform: uppercase;
+}
+.darshan-details p {
+  color: #777 !important;
+  font-size: 18px;
+  padding-bottom: 26px;
+}
+.picker {
+  padding-top: 0px;
+}
+
+.no-data {
+  font-size: 25px;
+  color: var(--global-color);
+  line-height: 1.2;
+  font-weight: 700;
+  text-align: center;
+}
+
+.thumbnail-img-wallpaper {
+  /* height: 300px; */
+  /* transition: transform 0.3s ease-in-out; */
+  height: 250px;
+  width: 100%;
+  object-fit: contain;
+}
+
+.thumbnail-img-wallpaper:hover {
+  /* transform: scale(1.1); */
+}
+
+.css-o9k5xi-MuiInputBase-root-MuiOutlinedInput-root.Mui-error
+  .MuiOutlinedInput-notchedOutline {
+  border: 1px solid #000 !important;
+}
+
+.daily-katha.multiple-darshan {
+  padding: 20px 0px 20px 0px;
+}
+.daily_darshan {
+  padding-top: 80px;
+}
+@media (max-width: 1199.98px) {
+  .date-picker-daily-darshan {
+    padding: 0px 0px 0px 0px;
+  }
+  .date-picker-wrap h4 {
+    font-size: 20px !important;
+  }
+  .daily-katha.multiple-darshan {
+    padding: 20px 0px 20px 0px;
+  }
+}
+
+@media (max-width: 991.98px) {
+  /* .date-picker.daily-darshan {
+    padding-top: 78px;
+  } */
+  .daily-katha.multiple-darshan {
+    padding: 20px 0px 20px 0px;
+  }
+}
+
+@media (max-width: 767.98px) {
+  /* .date-picker.daily-darshan {
+    padding-top: 78px;
+  } */
+  .daily-katha.multiple-darshan {
+    padding: 20px 0px 20px 0px;
+  }
+}
+
+@media (max-width: 575.98px) {
+  /* .date-picker.daily-darshan {
+    padding-top: 78px;
+  } */
+  .daily-katha.multiple-darshan {
+    padding: 20px 0px 20px 0px;
+  }
+}

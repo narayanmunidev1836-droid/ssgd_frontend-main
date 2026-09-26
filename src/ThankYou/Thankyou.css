@@ -1,0 +1,106 @@
+.thankyou-message {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+  margin: 50px 0px 33px 0px;
+}
+
+.thankyou {
+  display: flex;
+  justify-content: space-between;
+  width: 80%;
+}
+.thankyou-text {
+  color: var(--global-color);
+  font-size: 18px;
+  font-weight: 600;
+}
+.thankyou-title {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.thankyou-data {
+  color: var(--text-color);
+  font-size: 18px;
+  font-weight: 600;
+}
+.download-btn{
+  padding: 9px 8px;
+  background: var(--text-color);
+  border-radius: 4px;
+  border: none;
+  color: white;
+  font-size: 14px;
+}
+
+@media (max-width: 575.98px) {
+  .thankyou-text {
+    font-size: 15px;
+  }
+  .thankyou-data {
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 1199.98px) {
+  .thankyou-title {
+    width: 50%;
+  }
+  .thankyou {
+    width: 90%;
+    overflow: auto;
+  }
+}
+
+
+/* =-=-=-=-=- */
+
+.payment-status {
+  margin-top: 40px;
+}
+
+.status-card {
+  padding: 20px;
+  text-align: center;
+}
+
+.status-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.success-icon {
+  font-size: 64px;
+  color: #4caf50;
+  margin-bottom: 16px;
+}
+
+.fail-icon {
+  font-size: 64px;
+  color: #f44336;
+  margin-bottom: 16px;
+}
+
+.status-title {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.fail-text {
+  color: #f44336;
+}
+
+.status-description {
+  color: #555;
+  margin-bottom: 20px !important;
+}
+
+.status-details {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  align-items: center;
+}

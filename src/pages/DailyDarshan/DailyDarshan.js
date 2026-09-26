@@ -1,0 +1,353 @@
+import React, { useState, useEffect } from "react";
+import image from "../../assets/images/subheader.jpg";
+import CommonBreadcrumbs from "../../common/CommonBreadcrumbs/CommonBreadcrumbs";
+import Typography from "@mui/material/Typography";
+import Container from "@mui/material/Container";
+import TextField from "@mui/material/TextField";
+import dayjs from "dayjs";
+import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import Grid from "@mui/material/Grid";
+import "lightgallery/css/lightgallery.css";
+import "lightgallery/css/lg-zoom.css";
+import "lightgallery/css/lg-thumbnail.css";
+import "lightgallery/scss/lightgallery.scss";
+import "lightgallery/scss/lg-zoom.scss";
+import { FaSearchPlus } from "react-icons/fa";
+import image1 from "../../assets/images/date.png";
+import imageNotFound from "../../assets/images/NoImageFound.jpg.png";
+import { fetchDailyDarshanData, fetchSlider } from "../../api/API";
+import Loader from "../../common/Loader/Loader";
+import InnerpageLoader from "../Home/InnerpageLoader";
+import "./DailyDarshan.css";
+import Lightbox from "react-image-lightbox";
+import FullpageLoader from "../../common/HomeSliderLoader/FullpageLoader";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
+import AOS from "aos";
+import "aos/dist/aos.css";
+
+const breadcrumbsData = [
+  { label: "Home", url: "/" },
+  <label color="text.primary" className="active-link-color">
+    Daily Darshan
+  </label>,
+];
+
+const DailyDarshan = () => {
+  const [apiData, setApiData] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [selectedDate, setSelectedDate] = useState(null);
+  const [availableDates, setAvailableDates] = useState([]);
+  const [banner, setBanner] = useState([]);
+  const [thumbnailImage, setThumbnailImage] = useState("");
+  const [rerender, setRerender] = useState(false);
+  const [imageLoaded, setImageLoaded] = useState(false);
+  const [photoIndex, setPhotoIndex] = useState(0);
+  const [darshanIndex, setDarshanIndex] = useState(0);
+  const [isOpen, setIsOpen] = useState(false);
+
+    const onInit = () => {
+      };
+
+  useEffect(() => {
+    AOS.init({
+      duration: 1000,
+      once: false,
+    });
+  }, []);
+  const fetchData = async (date) => {
+    setLoading(true);
+    try {
+      var data = {
+        url: process.env.REACT_APP_API_URL,
+        page: "daily",
+        type: "darshan",
+      };
+      if (date) {
+        const formattedDate = date.format("MM/DD/YYYY");
+        data["date"] = formattedDate;
+      }
+
+      const response = await fetchDailyDarshanData(data);
+      const dailyData = response.data?.responseBody?.daily;
+      if (dailyData && dailyData.length > 0) {
+        const firstDailyItem = dailyData[0];
+        if (firstDailyItem.date) {
+          setSelectedDate(dayjs(firstDailyItem.date, "MM/DD/YYYY"));
+        }
+        setApiData(dailyData);
+        setThumbnailImage(firstDailyItem?.media.thumb_media);
+        const dates = response.data.responseBody?.available_dates || [];
+        setAvailableDates(dates);
+      } else {
+        setSelectedDate(null);
+        setApiData([]);
+        setThumbnailImage(null);
+        setAvailableDates([]);
+      }
+
+      setLoading(false);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const onChangeSelected = (newValue) => {
+    fetchData(newValue);
+  };
+
+  // useEffect(() => {
+  //   console.log("apiData", apiData);
+  // }, [apiData]);
+
+  useEffect(() => {
+    const fetchBanner = async () => {
+      setLoading(true);
+      try {
+        const response = await fetchSlider({
+          url: process.env.REACT_APP_API_URL,
+          page: "daily",
+        });
+        setBanner(response.data.responseBody);
+                setLoading(false);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+        setLoading(false);
+      }
+    };
+
+    fetchBanner();
+  }, []);
+
+  const handleImageLoad = () => {
+    setImageLoaded(true);
+  };
+
+  const handleDownload = async (e, i) => {
+    try {
+      const imageUrl = e?.media?.media?.[i];
+      if (!imageUrl) {
+        console.error("Invalid image URL");
+        return;
+      }
+
+      const cacheBustingUrl = `${imageUrl}?t=${new Date().getTime()}`;
+
+      const response = await fetch(cacheBustingUrl, { mode: "cors" });
+
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+
+      const blob = await response.blob();
+      const url = URL.createObjectURL(blob);
+
+      const anchor = document.createElement("a");
+      anchor.href = url;
+      anchor.download = imageUrl.split("/").pop();
+      anchor.target = "_blank";
+
+      document.body.appendChild(anchor);
+      anchor.click();
+
+      document.body.removeChild(anchor);
+      URL.revokeObjectURL(url);
+    } catch (error) {
+      console.error("Error downloading media:", error);
+    }
+  };
+
+  return (
+    <>
+      <div className="contact-img-wrap">
+        <div className="spinner-container-banner">
+          {!imageLoaded && (
+            <div className="shimmer-activity-wrapper">
+              <div className="shimmer" />
+            </div>
+          )}
+          <InnerpageLoader
+            src={banner}
+            className="about-img"
+            onImageLoad={handleImageLoad}
+          />
+        </div>
+        {imageLoaded && (
+          <div className="breadcrumbs-wrap">
+            <CommonBreadcrumbs items={breadcrumbsData} separator="›" />
+          </div>
+        )}
+      </div>
+
+      <Container className="daily_darshan">
+        <div className="spinner-container">
+          <div className="date-picker daily-darshan">
+            <div className="date-picker-inner-wrap">
+              <div className="date-picker-wrap">
+                <div>
+                  <img src={image1} className="date-picker-img" />
+                </div>
+                <div>
+                  <h4>
+                    {selectedDate
+                      ? selectedDate.format("MMMM DD, YYYY")
+                      : "No date selected"}
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <div className="date-picker-daily-darshan daily-darshan-page">
+              <LocalizationProvider
+                dateAdapter={AdapterDayjs}
+                style={{ paddingTop: "0px" }}
+                className="picker"
+              >
+                <DemoContainer components={["DatePicker", "DatePicker"]}>
+                  <DatePicker
+                    value={selectedDate}
+                    onChange={(newValue) => {
+                      setSelectedDate(newValue);
+                      fetchData(newValue);
+                    }}
+                    renderInput={(params) => <TextField {...params} />}
+                    shouldDisableDate={(day) => {
+                      const formattedDay = dayjs(day).format("MM/DD/YYYY");
+                      const availableDatesArray = Object.values(
+                        availableDates
+                      ).map((date) => date.replace(/\\\//g, "/"));
+                      return !availableDatesArray.includes(formattedDay);
+                    }}
+                    className="katha-date-picker"
+                  />
+                </DemoContainer>
+              </LocalizationProvider>
+            </div>
+          </div>
+
+          <div className="d-flex " style={{ flexWrap: "wrap" }}>
+            {loading
+              ? [...Array(4)].map((_, index) => (
+                  <Grid item xs={12} sm={6} md={3} key={index}>
+                    <div className="slider-item mt-4" key={index}>
+                      <div className="slider-item-shimmer">
+                        <div
+                          className="slider-item-shimmer-text small"
+                          style={{ height: "31px" }}
+                        />
+                      </div>
+                    </div>
+                  </Grid>
+                ))
+              : apiData?.map((e, index) => {
+                  const darshanClass =
+                    apiData.length > 1 ? "multiple-darshan" : "";
+                  return (
+                    <>
+                      <div className={`daily-katha ${darshanClass}`}>
+                        <h6>{e.media.title}</h6>
+                        <p>{e.media.short_description}</p>
+                      </div>
+
+                      <Grid container spacing={3}>
+                        {e.media.media.map((mediaItem, i) => {
+                          return (
+                            <>
+                              <Grid item xs={12} sm={6} md={3} key={index}>
+                                <div
+                                  key={index}
+                                  className="wallpaper-content"
+                                  style={{ width: "100%" }}
+                                  data-aos="fade-up"
+                                >
+                                  <div
+                                    onClick={() => {
+                                      setDarshanIndex(index);
+                                      setPhotoIndex(i);
+                                      setIsOpen(true);
+                                    }}
+                                  >
+                                    <LazyLoadImage
+                                      src={e.media.media[i]}
+                                      alt=""
+                                      className="wallpaper-img"
+                                      wrapperClassName="lazy-load-image-background aboutustype"
+                                      afterLoad={() => {
+                                        const image = document.querySelector(
+                                          `.lazy-load-image-background[data-src="${e.media.media[i]}"]`
+                                        );
+                                        if (image) {
+                                          image.classList.add(
+                                            "lazy-load-image-loaded"
+                                          );
+                                        }
+                                      }}
+                                    />
+                                    <div className="search-icon">
+                                      <FaSearchPlus />
+                                    </div>
+                                  </div>
+
+                                  <button
+                                    onClick={() => handleDownload(e, i)}
+                                    className="mt-2"
+                                  >
+                                    Download
+                                  </button>
+                                </div>
+                              </Grid>
+                            </>
+                          );
+                        })}
+
+                        {isOpen && (
+                          <Lightbox
+                            mainSrc={
+                              apiData[darshanIndex].media.media[photoIndex]
+                            }
+                            nextSrc={
+                              apiData[darshanIndex].media.media[
+                                (photoIndex + 1) %
+                                  apiData[darshanIndex].media.media.length
+                              ]
+                            }
+                            prevSrc={
+                              apiData[darshanIndex].media.media[
+                                (photoIndex + apiData.length - 1) %
+                                  apiData[darshanIndex].media.media.length
+                              ]
+                            }
+                            onCloseRequest={() => setIsOpen(false)}
+                            onMovePrevRequest={() =>
+                              setPhotoIndex(
+                                (photoIndex + apiData.length - 1) %
+                                  apiData[darshanIndex].media.media.length
+                              )
+                            }
+                            onMoveNextRequest={() =>
+                              setPhotoIndex(
+                                (photoIndex + 1) %
+                                  apiData[darshanIndex].media.media.length
+                              )
+                            }
+                          />
+                        )}
+                      </Grid>
+                    </>
+                  );
+                })}
+          </div>
+        </div>
+      </Container>
+    </>
+  );
+};
+
+export default DailyDarshan;

@@ -1,0 +1,258 @@
+.contact-input:focus ~ label,
+textarea:focus ~ label {
+  font-size: 0.75em;
+  /* color: #999; */
+  color: var(--text-color);
+  top: -10px;
+  -webkit-transition: all 0.225s ease;
+  transition: all 0.225s ease;
+}
+
+.contact-input,
+.contact-textarea {
+  /* padding: 25px; */
+  padding: 15px;
+  border: 0;
+  /* width: 100%; */
+  font-size: 1rem;
+  color: gray;
+  border-radius: 4px;
+  /* background-color: #f7f7f7; */
+}
+
+.styled-input {
+  float: left;
+  width: 293px;
+  margin: 1rem 0;
+  position: relative;
+  border-radius: 4px;
+}
+
+.styled-input label {
+  color: var(--text-color);
+  padding: 1.3rem 30px 1rem 30px;
+  position: absolute;
+  top: 10px;
+  left: 0;
+  -webkit-transition: all 0.25s ease;
+  transition: all 0.25s ease;
+  pointer-events: none;
+}
+
+.contact-textarea {
+  /* height: 140px !important; */
+  height: 158px !important;
+  width: 100%;
+  border: 1px solid #ccc;
+}
+
+textarea {
+  min-height: 0 !important;
+}
+
+.styled-input.wide {
+  width: 650px;
+  max-width: 100%;
+}
+
+.styled-input.wide.message {
+  width: 100%;
+}
+
+.contact-input {
+  width: 100%;
+}
+
+input:focus,
+textarea:focus {
+  outline: 0;
+}
+
+input:focus ~ span,
+textarea:focus ~ span {
+  width: 100%;
+  -webkit-transition: all 0.075s ease;
+  transition: all 0.075s ease;
+}
+
+textarea {
+  width: 100%;
+  min-height: 15em;
+}
+
+.submit-btn {
+  background-color: var(--text-color);
+  color: #fff;
+  cursor: pointer;
+  border: 1px solid var(--text-color);
+  border-radius: 2px;
+  text-align: center;
+  width: 180px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 10px;
+  border-radius: 30px;
+  transition: all 300ms ease;
+  margin: 0 auto;
+  text-transform: uppercase;
+}
+
+.submit-btn:hover {
+  color: var(--text-color) !important;
+  border: 1px solid var(--text-color) !important;
+  background-color: transparent !important;
+}
+
+.contact-img {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+}
+
+.contact-img-wrap {
+  position: relative;
+}
+
+.contact-wrap {
+  background-color: #fff;
+  box-shadow: 0px 10px 50px 0px rgba(53, 82, 99, 0.09);
+  border-radius: 10px;
+  padding: 30px 40px 30px 40px;
+  /* margin-top: 40px; */
+}
+
+.contact-box-1 {
+  background-color: #fff;
+  border: 2px solid #efefef;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* padding: 50px; */
+  /* padding: 24px; */
+  padding: 28px;
+  border-radius: 10px;
+  /* cursor: pointer; */
+  position: relative;
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.contact-box-1:hover {
+  box-shadow: 0px 10px 50px 0px rgba(53, 82, 99, 0.09);
+  border-color: transparent;
+}
+
+.contact.email {
+  /* font-size: 24px !important; */
+  font-size: 20px !important;
+  margin-bottom: 10px;
+}
+
+.abcd {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.abcd p:last-of-type {
+  margin-bottom: 15px;
+}
+
+.contact-box-content {
+  display: flex;
+  gap: 5px;
+  align-items: baseline;
+}
+
+.contact-box-1 h6 {
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--text-color);
+  font-size: 13px;
+}
+
+.icon {
+  color: var(--text-color);
+}
+
+.contact-icon {
+  height: 50px;
+}
+
+.contact-icon1 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.google-map {
+  width: 100%;
+  height: 280px;
+}
+
+.phone-input .form-control {
+  width: 100% !important;
+  height: 50px;
+  margin-bottom: 17px;
+}
+.contact-text-area {
+  height: 120px;
+  padding: 14px;
+}
+.loader1 {
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid var(--text-color);
+  border-radius: 50%;
+  width: 27px;
+  height: 27px;
+  animation: spin 1s linear infinite;
+}
+.PhoneInputInput {
+  padding: 12px;
+  border: 1px solid #dee2e6;
+  border-radius: 0.375rem;
+  margin-bottom: 20px;
+}
+.contact-us-form {
+  padding-top: 60px;
+}
+.contact-input {
+  width: 150px;
+  border-radius: 2px;
+  border: 1px solid #dee2e6;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@media (min-width: 576px) and (max-width: 991.98px) {
+  .contact.email {
+    font-size: 22px !important;
+  }
+  .contact-form {
+    /* padding-top: 82px !important; */
+  }
+}
+
+@media (max-width: 991.98px) {
+  .contact-img {
+    height: auto;
+  }
+}
+
+@media (min-width: 200px) and (max-width: 574.99px) {
+  .donation-input {
+    width: auto !important;
+  }
+  .contact-form {
+    padding-top: 0px !important;
+  }
+}

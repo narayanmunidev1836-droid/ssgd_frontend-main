@@ -1,0 +1,12 @@
+.nav-loader {
+  width: 30px;
+  height: 30px;
+  border: 3.5px solid var(--global-color);
+  border-bottom-color: transparent;
+  border-radius: 50%;
+  border-top-color: transparent;
+  display: inline-block;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+  margin-left: 50px;
+}

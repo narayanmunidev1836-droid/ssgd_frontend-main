@@ -1,0 +1,53 @@
+<!-- <!DOCTYPE html>
+<html>
+
+<body>
+  <audio id="myAudio" controls>
+    <source src="https://www2.cs.uic.edu/~i101/SoundFiles/StarWars60.wav" type="audio/ogg">
+    <source src="horse.mp3" type="audio/mpeg">
+  </audio>
+
+  <button onclick="downloadAudio()">Download Audio</button>
+
+  <script>
+    function downloadAudio() {
+      var audio = document.getElementById("myAudio");
+      var source = audio.src;
+      var link = document.createElement("a");
+      link.href = source;
+      link.download = "https://www2.cs.uic.edu/~i101/SoundFiles/StarWars60.wav";
+      link.click();
+    }
+  </script>
+
+</body>
+
+</html> -->
+
+
+<!DOCTYPE html>
+<html>
+
+<body>
+
+    <audio id="myAudio" controls>
+        <source id="audioSource" src="https://www2.cs.uic.edu/~i101/SoundFiles/StarWars60.wav" type="audio/wav">
+    </audio>
+
+    <button onclick="downloadAudio()">Download Audio</button>
+
+    <script>
+        function downloadAudio() {
+            var audioSource = document.getElementById("audioSource");
+            var audioURL = audioSource.src;
+
+            var link = document.createElement("a");
+            link.href = audioURL;
+            link.download = "StarWars60.wav";
+            link.click();
+        }
+    </script>
+
+</body>
+
+</html>

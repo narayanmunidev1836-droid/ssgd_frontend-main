@@ -1,0 +1,225 @@
+.activities-content p {
+  color: #000;
+  font-size: 14px;
+  line-height: 1.5;
+  text-align: left;
+}
+
+.activities-content {
+  display: flex;
+  /* justify-content: space-between; */
+  align-items: center;
+  padding: 20px;
+}
+.activities-content h4 {
+  flex: 1;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  max-width: 100%;
+  color: var(--text-color);
+  font-size: 18px !important;
+  font-weight: 700;
+}
+
+.activities-content .GrFormNextLink {
+  flex-shrink: 0;
+  margin-left: 10px;
+}
+
+.activity-img.home {
+  width: 100%;
+  transition: transform 0.3s ease-in-out;
+  height: 250px;
+  object-fit: fill;
+}
+
+.activities-img {
+  width: 100%;
+  transition: transform 0.3s ease-in-out;
+  height: 250px;
+  object-fit: fill;
+}
+
+.activity-img.home:hover {
+  transform: scale(1.1);
+}
+
+.activities-img:hover {
+  transform: scale(1.1);
+}
+
+.activities-img-thumbnail {
+  /* width: 100%; */
+  width: 235px;
+  transition: transform 0.3s ease-in-out;
+  height: 170px;
+  object-fit: fill;
+}
+
+.activities-img-thumbnail:hover {
+  transform: scale(1.1);
+}
+
+.activities-name {
+  color: var(--text-color);
+  font-size: 18px;
+  font-weight: bold;
+  text-align: left;
+  text-align: center;
+}
+
+.activities-content-wrap {
+  box-shadow: none !important;
+  border: 1px solid var(--box-border-color);
+  cursor: pointer;
+  border-radius: 0px !important;
+  /* height: 290px; */
+  height: 265px;
+}
+
+.activities-name-wrap {
+  position: absolute;
+  width: 80%;
+  background-color: #fff;
+  bottom: -35px;
+  padding: 20px;
+  z-index: 999;
+  text-align: center;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.activities-name-wrap h6 {
+  color: var(--text-color);
+  font-size: 16px;
+  font-weight: 600;
+}
+@keyframes shimmer {
+  0% {
+    background-position: -450px 0;
+  }
+  100% {
+    background-position: 450px 0;
+  }
+}
+
+.activity-shimmer-card {
+  width: 100%;
+  height: 265px;
+  background: linear-gradient(to right, #eeeeee 8%, #dddddd 18%, #eeeeee 33%);
+  background-size: 1000px 100%;
+  animation: shimmer 1.5s infinite linear;
+  border-radius: 0px;
+  border: 1px solid #ccc;
+}
+
+@media (min-width: 900px) and (max-width: 1024px) {
+  .activity-shimmer-card {
+    height: 230px;
+  }
+}
+
+@media (max-width: 576px) {
+  .activity-shimmer-card {
+    height: 130px;
+  }
+}
+
+@media (min-width: 900px) and (max-width: 1024px) {
+  .activity-img.home {
+    height: 200px;
+  }
+  .activities-content-wrap {
+    height: 230px;
+  }
+}
+
+@media (max-width: 767px) {
+  .activities-content-wrap {
+    height: auto;
+  }
+}
+
+@media (max-width: 576px) {
+  .activities-content-wrap {
+    height: auto;
+  }
+  .activity-img.home {
+    /* height: 160px; */
+    /* height: 145px; */
+    /* height: 130px; */
+  }
+  .activities-content h4 {
+    font-size: 16px !important;
+  }
+}
+
+
+/* .slick-dots li button {
+    margin-top: -15px;
+} */
+
+.homeSlider .slick-dots {
+  bottom: -30px !important;
+}
+
+.slick-dots li.slick-active button:before {
+  opacity: 0.75;
+  color: var(--global-color);
+}
+
+.slick-dots li button:before {
+  font-size: 13px;
+  line-height: 20px;
+  position: absolute;
+  top: 10px;
+  left: 0;
+  width: 20px;
+  height: 20px;
+  content: "•";
+  text-align: center;
+  opacity: 0.25;
+  color: var(--global-color);
+}
+.homeActivityImg{
+  width: 100% !important;
+}
+
+.activities-img-slider {
+  object-fit: fill !important;
+  width: 100% !important;
+  max-height: 250px !important;
+  object-position: center center !important;
+
+transition: all ease-in-out 0.3s;
+}
+.activities-img-slider:hover{
+  transform: scale(1.1);
+}
+
+.grid-container {
+  display: grid !important;
+  grid-template-columns: repeat(4, 1fr) !important;
+  gap: 10px !important;
+}
+
+.slick-slide > div {
+  margin-right: 10px !important;
+}
+
+.slick-slide:last-child > div {
+  margin-right: 0 !important;
+}
+
+.activities-inner-content-slider {
+  text-align: center !important;
+  font-size: 14px !important;
+  line-height: 1.2 !important;
+  padding: 6px 15px 6px 15px !important;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  justify-content: center;
+}

@@ -1,0 +1,170 @@
+/* Variable Declarations */
+:root {
+    --tablet-width: 768px;
+    --phone-width: 480px;
+  }
+  
+  /* Global Styles */
+  * {
+    box-sizing: border-box;
+  }
+  
+  html, body {
+    font-family: sans-serif;
+    color: #222;
+    background-color: #fcfcfc;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Container Styles */
+  .container {
+    max-width: 640px;
+    margin: 2rem auto;
+    padding: 1rem;
+  }
+  
+  /* Divider Styles */
+  .divider {
+    margin: 1rem 0;
+    border: none;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  /* Audio Styles */
+  audio {
+    width: 100%;
+  }
+  
+  /* Input and Button Styles */
+  input, button {
+    display: inline-flex;
+    align-items: center;
+    border-radius: 0.25rem;
+    border: 1px solid #ddd;
+    font-size: 1rem;
+    outline: 0;
+    background-color: transparent;
+  }
+  
+  input {
+    width: 100%;
+    padding: 0.5rem;
+  }
+  
+  input:focus {
+    border-color: #aaa;
+  }
+  
+  /* Material Icons Styles */
+  .material-icons.md-18 { font-size: 18px; }
+  .material-icons.md-24 { font-size: 24px; }
+  .material-icons.md-36 { font-size: 36px; }
+  .material-icons.md-48 { font-size: 48px; }
+  
+  /* Button Styles */
+  button {
+    margin: 0.25rem;
+    padding: 0.25rem 0.5rem;
+    justify-content: center;
+    cursor: pointer;
+    color: #444;
+  }
+  
+  button:hover {
+    border-color: #aaa;
+    color: #222;
+  }
+  
+  button:active {
+    background-color: #eee;
+  }
+  
+  /* Player Styles */
+  .player .title {
+    font-size: 1.25rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+  }
+  
+  .player .time {}
+  
+  .player .controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 1rem 0;
+  }
+  
+  .player .controls .controls-left { margin-right: auto; } 
+  .player .controls .controls-right { margin-left: auto; } 
+  
+  @media(max-width: var(--phone-width)) {
+    .player .controls {
+      flex-direction: column;
+    }
+  }
+  
+  /* Playlist Styles */
+  .playlist {
+    list-style: none;
+    padding: 0;
+    background-color: #efefef;
+    padding: 0.5rem;
+  }
+  
+  .playlist > li {
+    padding: 0.5rem;
+    position: relative;
+    overflow: hidden;
+    white-space: nowrap;
+    cursor: pointer;
+    opacity: 0.75;
+    display: flex;
+    align-items: center;
+    user-select: none;
+  }
+  
+  .playlist > li:not(:last-child) {
+    border-bottom: 1px solid #ccc;
+  }
+  
+  .playlist > li.current {
+    font-weight: bold;
+  }
+  
+  .playlist > li:hover {
+    opacity: 1;
+  }
+  
+  /* Play-Pause Button Styles */
+  .playlist .play-pause-button {
+    margin-right: 0.5rem;
+  }
+  
+  /* Add Track Form Styles */
+  .add-track-form {
+    display: flex;
+    align-items: center;
+  }
+  
+  @media(max-width: var(--phone-width)) {
+    .add-track-form {
+      flex-wrap: wrap;
+    }
+  
+    .add-track-form input {
+      width: calc(50% - 0.5rem / 2) !important;
+    }
+  
+    .add-track-form button {
+      width: 100% !important;
+      margin: 0.5rem 0 0 !important;
+    }
+  
+    .add-track-form button:before {
+      content: attr(data-title);
+      margin-right: 0.5rem;
+    }
+  }
+  
