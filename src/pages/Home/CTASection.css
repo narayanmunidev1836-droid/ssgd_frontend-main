@@ -1,0 +1,97 @@
+/* =========================================================
+   CTA SECTION
+   Background image: ./cta-background.png
+   Designed to closely match the supplied reference banner.
+   ========================================================= */
+
+.cta-section {
+  width: 100%;
+  min-height: 258px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  overflow: hidden;
+
+  background-image: url("../../assets/images/cta-background.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+
+  position: relative;
+}
+
+/* Right-side content sits exactly inside the cream panel. */
+.cta-content-panel {
+  width: 58%;
+  box-sizing: border-box;
+  padding: 30px 55px 30px 42px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+
+  position: relative;
+  z-index: 2;
+}
+
+/* Heading */
+.cta-heading {
+  margin: 0;
+  color: #7b1424;
+
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 30px;
+  font-weight: 700;
+  line-height: 1.18;
+  letter-spacing: -0.3px;
+}
+
+/* Description */
+.cta-description {
+  margin: 0;
+
+  color: #66615d;
+  font-family: "Poppins", Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.45;
+}
+
+/* Donate button */
+.cta-btn {
+  margin-top: 7px;
+  min-width: 260px;
+  height: 52px;
+  padding: 0 28px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+
+  border: 0;
+  border-radius: 28px;
+  outline: none;
+
+  background: #9d1024;
+  color: #fff;
+
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 18px;
+  font-weight: 700;
+
+  cursor: pointer;
+  white-space: nowrap;
+
+  box-shadow: 0 5px 15px rgba(122, 18, 34, 0.24);
+  transition:
+    transform 0.25s ease,
+    background-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.cta-arrow {
+  font-family: Arial, sans-serif;
+  font-size: 23px;
+}

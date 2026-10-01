@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import Card from "@mui/material/Card";
 import Grid from "@mui/material/Grid";
 import Container from "@mui/material/Container";
-import SectionTitle from "../../common/SectionTitle/SectionTitle";
 import { GrFormNextLink } from "react-icons/gr";
 import AOS from "aos";
 import "aos/dist/aos.css";
@@ -123,7 +122,23 @@ const Activities = ({ setIsActivityLoaded }) => {
       <Container>
         <div className="spinner-container">
           <>
-            <SectionTitle title="Activities" />
+            <div className="activities-section-header" data-aos="fade-up">
+              <div className="activities-heading-wrap">
+                <span className="activities-section-icon">🏛</span>
+                <div>
+                  <h2 className="activities-section-title">Our Activities</h2>
+                  <p className="activities-section-subtitle">
+                    Serving society through diverse initiatives
+                  </p>
+                </div>
+              </div>
+              <button
+                className="activities-view-all-btn"
+                onClick={() => navigate("/activities")}
+              >
+                View All &nbsp;&#8594;
+              </button>
+            </div>
             <div className="section-padding"></div>
             <Slider {...sliderSettings} className="homeSlider">
               {!apiData || !Object.keys(apiData).length
@@ -161,21 +176,23 @@ const Activities = ({ setIsActivityLoaded }) => {
                             handleClick(activity.activity_id, activity.title)
                           }
                         >
-                          <LazyLoadImage
-                            src={activity.image}
-                            style={{ width: "100%" }}
-                            alt={activity.title}
-                            className="activities-img-slider home homeActivityImg"
-                            wrapperClassName="lazy-load-image-background homeActivityImg"
-                            afterLoad={() => {
-                              const image = document.querySelector(
-                                `.lazy-load-image-background[data-src="${activity.image}"]`
-                              );
-                              if (image) {
-                                image.classList.add("lazy-load-image-loaded");
-                              }
-                            }}
-                          />
+                          <div className="act-img-wrap">
+                            <LazyLoadImage
+                              src={activity.image}
+                              style={{ width: "100%" }}
+                              alt={activity.title}
+                              className="activities-img-slider home homeActivityImg"
+                              wrapperClassName="lazy-load-image-background homeActivityImg"
+                              afterLoad={() => {
+                                const image = document.querySelector(
+                                  `.lazy-load-image-background[data-src="${activity.image}"]`
+                                );
+                                if (image) {
+                                  image.classList.add("lazy-load-image-loaded");
+                                }
+                              }}
+                            />
+                          </div>
                           <div className="activities-inner-content-slider">
                             <p className="sub-activites-name">
                               {activity.name}

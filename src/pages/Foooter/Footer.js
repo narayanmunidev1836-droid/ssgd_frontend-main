@@ -86,7 +86,6 @@ const Footer = () => {
 
   return (
     <>
-      <div className="section-padding"></div>
       <div className="footer-bg">
         <Container>
           <Grid container spacing={4} className="footer-wrap">
