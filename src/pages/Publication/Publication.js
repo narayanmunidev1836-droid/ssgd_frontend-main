@@ -44,7 +44,6 @@ const Publication = ({ setIsPublicationLoaded }) => {
 
   return (
     <>
-      <div className="section-padding"></div>
       <div className="publications-section p-4">
         <Container>
           {/* Section Header */}
@@ -99,7 +98,6 @@ const Publication = ({ setIsPublicationLoaded }) => {
           </div>
         </Container>
       </div>
-      <div className="section-padding"></div>
     </>
   );
 };
