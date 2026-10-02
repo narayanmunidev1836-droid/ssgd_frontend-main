@@ -8,6 +8,7 @@ import g3 from "../../assets/images/community_activities.jpg";
 import g4 from "../../assets/images/medical_activities.jpg";
 import g5 from "../../assets/images/child_development_activities.jpg";
 import g6 from "../../assets/images/cultural_activities.jpg";
+import { Container } from "@mui/material";
 
 const galleryImages = [g1, g2, g3, g4, g5, g6];
 
@@ -41,7 +42,8 @@ function SantPhotos() {
 
   return (
     <section className="gallery-section">
-      <div className="container">
+      <Container>
+        <div className="container">
         <div className="gallery-section-header" data-aos="fade-up">
           <div className="gallery-heading-wrap">
             <div>
@@ -71,6 +73,7 @@ function SantPhotos() {
           </Slider>
         </div>
       </div>
+      </Container>
     </section>
   );
 }

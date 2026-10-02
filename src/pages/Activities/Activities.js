@@ -59,6 +59,7 @@ const Activities = ({ setIsActivityLoaded }) => {
   const sliderSettings = {
     dots: true,
     infinite: true,
+    arrows: false,
     slidesToShow: 4,
     cssEase: "linear",
     slidesToScroll: 1,
@@ -124,6 +125,7 @@ const Activities = ({ setIsActivityLoaded }) => {
             backgroundImage: `url("${ElegantImage}")`,
           }}
         >
+        <Container>
           <div className="activities-background-overlay">
             <div
               className="activities-section-header"
@@ -241,6 +243,7 @@ const Activities = ({ setIsActivityLoaded }) => {
                   })}
             </Slider>
           </div>
+          </Container>
         </section>
 
       <div className="paddingBotomSection"></div>
