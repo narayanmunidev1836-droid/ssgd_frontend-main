@@ -124,7 +124,6 @@ const Activities = ({ setIsActivityLoaded }) => {
           <>
             <div className="activities-section-header" data-aos="fade-up">
               <div className="activities-heading-wrap">
-                <span className="activities-section-icon">🏛</span>
                 <div>
                   <h2 className="activities-section-title">Our Activities</h2>
                   <p className="activities-section-subtitle">

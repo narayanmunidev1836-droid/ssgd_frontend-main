@@ -44,7 +44,6 @@ function SantPhotos() {
       <div className="container">
         <div className="gallery-section-header" data-aos="fade-up">
           <div className="gallery-heading-wrap">
-            <span className="gallery-section-icon">🏛</span>
             <div>
               <h2 className="gallery-section-title">Gallery</h2>
               <p className="gallery-section-subtitle">

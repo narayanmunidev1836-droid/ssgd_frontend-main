@@ -49,7 +49,6 @@ const Publication = ({ setIsPublicationLoaded }) => {
           {/* Section Header */}
           <div className="pub-section-header" data-aos="fade-up">
             <div className="pub-section-heading-wrap">
-              <span className="pub-section-icon">🏛</span>
               <div>
                 <h2 className="pub-section-title">Our Publications</h2>
                 <p className="pub-section-subtitle">

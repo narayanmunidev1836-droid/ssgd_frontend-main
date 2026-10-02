@@ -2,12 +2,13 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import "./MissionSection.css";
 import missionImg from "../../assets/images/temple.jpg";
+import missionBg from "../../assets/images/mission-background.png";
 
 const MissionSection = () => {
   const navigate = useNavigate();
 
   return (
-    <section className="mission-section">
+    <section className="mission-section" style={{ backgroundImage: `url(${missionBg})` }}>
       <div className="container">
         <div className="mission-inner">
           {/* Left: Text Content */}
