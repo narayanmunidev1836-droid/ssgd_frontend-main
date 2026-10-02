@@ -333,12 +333,12 @@ useEffect(() => {
             {/* </div> */}
           </div>
 
-          <div className="search-container">
-            <IoSearch className="search-icon1" />
+          <div className="activities-search-container">
+            <IoSearch className="activities-search-icon" />
             <input
               type="search"
-              className="search-input"
-              placeholder="Search.."
+              className="activities-search-input"
+              placeholder="Search activities..."
               value={searchData}
               onChange={(e) => setSearchData(e.target.value)}
             />
@@ -346,7 +346,7 @@ useEffect(() => {
         </div>
       </Container>
       <Container>
-        <hr></hr>
+        <hr className="filter-divider" />
 
         {hasMore && activityListLoader ? (
           <Grid
@@ -380,37 +380,39 @@ useEffect(() => {
               return (
                 <Grid item xs={12} sm={6} md={3} key={index}>
                   <Card className="activities-inner-content-wrap-sub-actvities h-100">
-                    <LazyLoadImage
-                      src={
-                        activity?.thumbnail_image !== ""
-                          ? activity.thumbnail_image
-                          : imageNotFound
-                      }
-                      alt={activity?.title || "No Image Found"}
-                      className="activities-img"
-                      wrapperClassName="lazy-load-image-background aboutustype"
-                      afterLoad={() => {
-                        const image = document.querySelector(
-                          `.lazy-load-image-background[data-src="${
-                            activity?.thumbnail_image || imageNotFound
-                          }"]`
-                        );
-                        if (image) {
-                          image.classList.add("lazy-load-image-loaded");
+                    <div className="sub-act-img-wrap">
+                      <LazyLoadImage
+                        src={
+                          activity?.thumbnail_image !== ""
+                            ? activity.thumbnail_image
+                            : imageNotFound
                         }
-                      }}
-                      onClick={() =>
-                        handleClick(
-                          activity.activity_id,
-                          activity.id,
-                          activity.image,
-                          formattedDate
-                        )
-                      }
-                      onError={(e) => {
-                        e.target.src = imageNotFound;
-                      }}
-                    />
+                        alt={activity?.title || "No Image Found"}
+                        className="activities-img"
+                        wrapperClassName="lazy-load-image-background aboutustype"
+                        afterLoad={() => {
+                          const image = document.querySelector(
+                            `.lazy-load-image-background[data-src="${
+                              activity?.thumbnail_image || imageNotFound
+                            }"]`
+                          );
+                          if (image) {
+                            image.classList.add("lazy-load-image-loaded");
+                          }
+                        }}
+                        onClick={() =>
+                          handleClick(
+                            activity.activity_id,
+                            activity.id,
+                            activity.image,
+                            formattedDate
+                          )
+                        }
+                        onError={(e) => {
+                          e.target.src = imageNotFound;
+                        }}
+                      />
+                    </div>
 
                     <div className="activities-inner-content-sub-actvities">
                       <p

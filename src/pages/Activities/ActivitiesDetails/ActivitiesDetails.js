@@ -427,40 +427,42 @@ const ActivitiesDetails = () => {
                     data-aos="fade-up"
                     onClick={() => handleClick(event.id, event.activity_id)}
                   >
-                    <LazyLoadImage
-                      src={
-                        event
-                          ? event.image !== ""
-                            ? event.image
+                    <div className="detail-act-img-wrap">
+                      <LazyLoadImage
+                        src={
+                          event
+                            ? event.image !== ""
+                              ? event.image
+                              : imageNotFound
                             : imageNotFound
-                          : imageNotFound
-                      }
-                      className="activities-img-slider"
-                      wrapperClassName="lazy-load-image-background aboutustype"
-                      afterLoad={() => {
-                        const imageElement = document.querySelector(
-                          `.lazy-load-image-background[data-src="${
-                            event ? event.thumbnail_image : imageNotFound
-                          }"] img`
-                        );
-                        if (imageElement) {
-                          imageElement.classList.add("lazy-load-image-loaded");
                         }
-                      }}
-                      onError={(e) => {
-                        e.target.src = imageNotFound;
-                      }}
-                    />
+                        className="activities-img-slider"
+                        wrapperClassName="lazy-load-image-background aboutustype"
+                        afterLoad={() => {
+                          const imageElement = document.querySelector(
+                            `.lazy-load-image-background[data-src="${
+                              event ? event.thumbnail_image : imageNotFound
+                            }"] img`
+                          );
+                          if (imageElement) {
+                            imageElement.classList.add("lazy-load-image-loaded");
+                          }
+                        }}
+                        onError={(e) => {
+                          e.target.src = imageNotFound;
+                        }}
+                      />
+                    </div>
 
                     <div className="activities-inner-content-slider">
-                      <p className="sub-activites-name  ">
+                      <p className="sub-activites-name">
                         {event.activity_name}
                       </p>
 
                       <h4 className="sub-activities-title">{event.title}</h4>
-                      <p className="sub-activites-name">
+                      <h6 className="sub-activities-desc">
                         {event.short_description ? event.short_description : <span style={{opacity:0}}>...</span>}
-                      </p>
+                      </h6>
                     </div>
                     <div className="activities-date">
                       <div>
