@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import Card from "@mui/material/Card";
 import Grid from "@mui/material/Grid";
 import Container from "@mui/material/Container";
-import { GrFormNextLink } from "react-icons/gr";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { fetchActivitiy } from "../../api/API";
@@ -11,14 +10,10 @@ import "./Activities.css";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
 import Slider from "react-slick";
+import ElegantImage from "../../assets/images/Elegant Temple Background.png";
 
 const Activities = ({ setIsActivityLoaded }) => {
   const navigate = useNavigate();
-
-  // const handleClick = (activity_id) => {
-  //   // navigate("/activities");
-  //   navigate(`/activities/${activity_id}`);
-  // };
 
   const handleClick = (activity_id, title) => {
     navigate(`/activities/${activity_id}/${title}`);
@@ -34,31 +29,32 @@ const Activities = ({ setIsActivityLoaded }) => {
   const [apiData, setApiData] = useState({});
   const [loading, setLoading] = useState(false);
 
-  
   useEffect(() => {
     fetchData();
   }, []);
 
   const fetchData = async () => {
     setLoading(true);
+
     try {
       const response = await fetchActivitiy({
         url: process.env.REACT_APP_API_URL,
         page: "home",
       });
-      if (response.data.status == true) {
-        // setIsActivityLoaded(true);
+
+      if (response.data.status === true) {
         setApiData(response.data.responseBody.activities);
-                setLoading(false);
+        setLoading(false);
+
+        if (setIsActivityLoaded) {
+          setIsActivityLoaded(true);
+        }
       }
     } catch (error) {
       console.error("Error fetching data:", error);
       setLoading(false);
     }
   };
-
-  useEffect(() => {
-      }, [apiData]);
 
   const sliderSettings = {
     dots: true,
@@ -103,7 +99,7 @@ const Activities = ({ setIsActivityLoaded }) => {
         breakpoint: 600,
         settings: {
           slidesToShow: 1,
-          slidesToScroll: 2,
+          slidesToScroll: 1,
         },
       },
       {
@@ -116,33 +112,53 @@ const Activities = ({ setIsActivityLoaded }) => {
     ],
   };
 
+  const hasActivities =
+    apiData && Object.keys(apiData).length > 0;
+
   return (
     <>
-      <div className="section-padding"></div>
-      <Container>
-        <div className="spinner-container">
-          <>
-            <div className="activities-section-header" data-aos="fade-up">
+
+     <section
+          className="activities-background-section"
+          style={{
+            backgroundImage: `url("${ElegantImage}")`,
+          }}
+        >
+          <div className="activities-background-overlay">
+            <div
+              className="activities-section-header"
+              data-aos="fade-up"
+            >
               <div className="activities-heading-wrap">
                 <div>
-                  <h2 className="activities-section-title">Our Activities</h2>
+                  <h2 className="activities-section-title">
+                    Our Activities
+                  </h2>
+
                   <p className="activities-section-subtitle">
                     Serving society through diverse initiatives
                   </p>
                 </div>
               </div>
+
               <button
+                type="button"
                 className="activities-view-all-btn"
                 onClick={() => navigate("/activities")}
               >
-                View All &nbsp;&#8594;
+                View All&nbsp;&nbsp;→
               </button>
             </div>
-            <div className="section-padding"></div>
+
+            <div className="activities-slider-spacing"></div>
+
             <Slider {...sliderSettings} className="homeSlider">
-              {!apiData || !Object.keys(apiData).length
+              {!hasActivities
                 ? [...Array(4)].map((_, index) => (
-                    <div className="slider-item" key={index} data-aos="fade-up">
+                    <div
+                      className="slider-item"
+                      key={index}
+                    >
                       <div className="slider-item-shimmer">
                         <div className="slider-item-shimmer-text" />
                         <div className="slider-item-shimmer-text small" />
@@ -151,13 +167,21 @@ const Activities = ({ setIsActivityLoaded }) => {
                   ))
                 : Object.values(apiData).map((activity) => {
                     const date = new Date(activity.activity_date);
-                    const options = { day: "numeric", month: "short" };
-                    const formattedDate = date.toLocaleDateString(
-                      "en-US",
-                      options
-                    );
+
+                    const options = {
+                      day: "numeric",
+                      month: "short",
+                    };
+
+                    const formattedDate =
+                      date.toLocaleDateString(
+                        "en-US",
+                        options
+                      );
+
                     const day = date.getDate();
-                    const month = formattedDate.split(" ")[0];
+                    const month =
+                      formattedDate.split(" ")[0];
 
                     return (
                       <Grid
@@ -172,7 +196,10 @@ const Activities = ({ setIsActivityLoaded }) => {
                           className="activities-inner-content-wrap h-100"
                           data-aos="fade-up"
                           onClick={() =>
-                            handleClick(activity.activity_id, activity.title)
+                            handleClick(
+                              activity.activity_id,
+                              activity.title
+                            )
                           }
                         >
                           <div className="act-img-wrap">
@@ -182,31 +209,28 @@ const Activities = ({ setIsActivityLoaded }) => {
                               alt={activity.title}
                               className="activities-img-slider home homeActivityImg"
                               wrapperClassName="lazy-load-image-background homeActivityImg"
-                              afterLoad={() => {
-                                const image = document.querySelector(
-                                  `.lazy-load-image-background[data-src="${activity.image}"]`
-                                );
-                                if (image) {
-                                  image.classList.add("lazy-load-image-loaded");
-                                }
-                              }}
                             />
                           </div>
+
                           <div className="activities-inner-content-slider">
                             <p className="sub-activites-name">
                               {activity.name}
                             </p>
+
                             <h4 className="sub-activities-title">
                               {activity.title}
                             </h4>
+
                             <h6 className="sub-activities-desc">
                               {activity.short_description}
                             </h6>
                           </div>
+
                           <div className="activities-date">
                             <div>
                               <h5>{day}</h5>
                             </div>
+
                             <div>
                               <p>{month}</p>
                             </div>
@@ -216,9 +240,9 @@ const Activities = ({ setIsActivityLoaded }) => {
                     );
                   })}
             </Slider>
-          </>
-        </div>
-      </Container>
+          </div>
+        </section>
+
       <div className="paddingBotomSection"></div>
     </>
   );

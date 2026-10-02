@@ -1,12 +1,61 @@
-/* ========== Activities Section ========== */
+/* =========================================================
+   ACTIVITIES SECTION
+   ========================================================= */
 
-/* ======= Section Header ======= */
+/*
+  Elegant Temple Background.png is applied from JSX to
+  .activities-background-section.
+
+  The important part is:
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  This makes the ElegantImage fill the complete Activities
+  section instead of behaving like a small image behind
+  the content.
+*/
+
+.activities-background-section {
+  width: 100%;
+  position: relative;
+
+  padding: 42px 28px 55px;
+
+  box-sizing: border-box;
+
+  border-radius: 0;
+
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+
+  overflow: hidden;
+
+  isolation: isolate;
+}
+
+/*
+  Very light overlay keeps the cards readable while keeping
+  the original Elegant Temple Background visible.
+*/
+.activities-background-overlay {
+  width: 100%;
+  position: relative;
+  z-index: 1;
+}
+
+/* =========================================================
+   SECTION HEADER
+   ========================================================= */
 
 .activities-section-header {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: space-between;
-  gap: 16px;
+
+  gap: 20px;
+
   flex-wrap: wrap;
 }
 
@@ -16,66 +65,102 @@
   gap: 14px;
 }
 
-.activities-section-icon {
-  font-size: 36px;
-  line-height: 1;
-  margin-top: 2px;
-  flex-shrink: 0;
-}
-
 .activities-section-title {
   font-size: 28px;
   font-weight: 700;
+
   color: var(--text-color);
-  margin: 0 0 4px 0;
+
+  margin: 0 0 4px;
+
   line-height: 1.25;
 }
 
 .activities-section-subtitle {
   font-size: 13.5px !important;
+
   color: var(--muted-text) !important;
+
   margin: 0 !important;
 }
 
 .activities-view-all-btn {
-  background: transparent;
+  background: rgba(255, 255, 255, 0.78);
+
   border: 1.5px solid var(--box-border-color);
+
   color: var(--text-color);
+
   padding: 9px 20px;
+
   border-radius: 40px;
+
   font-size: 13.5px;
   font-weight: 600;
+
   cursor: pointer;
+
   transition: var(--transition);
+
   white-space: nowrap;
+
   font-family: "Poppins", sans-serif;
+
+  backdrop-filter: blur(5px);
 }
 
 .activities-view-all-btn:hover {
-  background: var(--text-color-faint);
+  background: #fff;
+
   border-color: var(--text-color);
+
+  transform: translateY(-1px);
 }
 
-/* ======= Card Wrapper (MUI Card override) ======= */
+/* =========================================================
+   SLIDER SPACING
+   ========================================================= */
+
+.activities-slider-spacing {
+  height: 34px;
+}
+
+/* =========================================================
+   CARD
+   ========================================================= */
 
 .activities-inner-content-wrap {
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08) !important;
+  height: 100%;
+
+  box-shadow:
+    0 5px 22px rgba(0, 0, 0, 0.10) !important;
+
   border: none !important;
-  border-top: none !important;
+
   cursor: pointer;
-  border-radius: var(--border-radius) !important;
+
+  border-radius:
+    var(--border-radius) !important;
+
   overflow: hidden;
+
   transition: var(--transition);
+
   position: relative;
+
   background: #fff !important;
 }
 
 .activities-inner-content-wrap:hover {
   transform: translateY(-7px);
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.14) !important;
+
+  box-shadow:
+    0 16px 40px rgba(0, 0, 0, 0.16) !important;
 }
 
-/* ======= Activity Image ======= */
+/* =========================================================
+   ACTIVITY IMAGE
+   ========================================================= */
 
 .act-img-wrap {
   position: relative;
@@ -83,22 +168,38 @@
 }
 
 .act-img-wrap::after {
-  content: '';
+  content: "";
+
   position: absolute;
+
   bottom: 0;
   left: 0;
   right: 0;
+
   height: 60px;
-  background: linear-gradient(to top, rgba(8, 65, 107, 0.22) 0%, transparent 100%);
+
+  background:
+    linear-gradient(
+      to top,
+      rgba(8, 65, 107, 0.22),
+      transparent
+    );
+
   pointer-events: none;
 }
 
 .activities-img-slider {
   object-fit: cover !important;
+
   width: 100% !important;
+
   height: 200px !important;
+
   object-position: center center !important;
-  transition: transform 0.45s ease !important;
+
+  transition:
+    transform 0.45s ease !important;
+
   display: block;
 }
 
@@ -106,106 +207,172 @@
   width: 100% !important;
 }
 
-.activities-inner-content-wrap:hover .activities-img-slider {
+.activities-inner-content-wrap:hover
+.activities-img-slider {
   transform: scale(1.07);
 }
 
-/* ======= Text Content ======= */
+/* =========================================================
+   CARD TEXT
+   ========================================================= */
 
 .activities-inner-content-slider {
   padding: 14px 16px 16px !important;
+
   display: flex;
+
   flex-direction: column;
+
   gap: 8px;
+
   text-align: left !important;
+
   flex: 1;
 }
 
 .sub-activites-name {
   display: inline-flex;
+
   align-items: center;
+
   gap: 5px;
+
   font-size: 10px !important;
+
   text-transform: uppercase;
+
   letter-spacing: 0.08em;
+
   color: var(--global-color);
+
   font-weight: 700;
+
   margin: 0;
+
   line-height: 1;
+
   background: rgba(181, 9, 14, 0.07);
+
   padding: 4px 10px;
+
   border-radius: 20px;
+
   width: fit-content;
 }
 
 .sub-activities-title {
   font-size: 14.5px !important;
+
   font-weight: 700;
+
   color: var(--text-color);
+
   margin: 0;
+
   line-height: 1.4;
+
   display: -webkit-box;
+
   -webkit-line-clamp: 2;
+
   -webkit-box-orient: vertical;
+
   overflow: hidden;
 }
 
 .sub-activities-desc {
   font-size: 11.5px !important;
+
   color: var(--muted-text) !important;
+
   font-weight: 400;
+
   line-height: 1.5;
+
   display: -webkit-box;
+
   -webkit-line-clamp: 1;
+
   -webkit-box-orient: vertical;
+
   overflow: hidden;
+
   margin: 0;
+
   display: flex;
+
   align-items: center;
+
   gap: 4px;
 }
 
 .sub-activities-desc::before {
-  content: '📍';
+  content: "📍";
+
   font-size: 11px;
+
   flex-shrink: 0;
 }
 
-/* ======= Date Badge ======= */
+/* =========================================================
+   DATE BADGE
+   ========================================================= */
 
 .activities-date {
   position: absolute;
+
   top: 12px;
   right: 12px;
+
   background: var(--text-color);
+
   color: #fff;
+
   padding: 6px 10px;
+
   border-radius: 10px;
+
   text-align: center;
+
   min-width: 44px;
-  box-shadow: 0 4px 12px rgba(8, 65, 107, 0.4);
+
+  box-shadow:
+    0 4px 12px rgba(8, 65, 107, 0.4);
+
   z-index: 2;
+
   backdrop-filter: blur(4px);
 }
 
 .activities-date h5 {
   font-size: 17px !important;
+
   font-weight: 800;
+
   color: #fff;
+
   line-height: 1.05;
-  justify-content: center;
+
+  margin: 0;
 }
 
 .activities-date p {
   font-size: 10px;
+
   color: rgba(255, 255, 255, 0.82);
+
   text-transform: uppercase;
+
   letter-spacing: 0.07em;
+
   margin: 0;
+
   line-height: 1.3;
 }
 
-/* ======= Shimmer ======= */
+/* =========================================================
+   SHIMMER
+   ========================================================= */
 
 .slider-item {
   padding: 0 6px;
@@ -213,66 +380,98 @@
 
 .slider-item-shimmer {
   background: #f0f2f5;
+
   border-radius: var(--border-radius);
+
   height: 260px;
+
   overflow: hidden;
+
   position: relative;
 }
 
 .slider-item-shimmer::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(110deg, transparent 25%, rgba(255,255,255,0.4) 50%, transparent 75%);
-  background-size: 200% 100%;
-  animation: shimmerEffect 1.5s infinite linear;
-}
+  content: "";
 
-@keyframes shimmerEffect {
-  0%   { background-position: 200% 0; }
-  100% { background-position: -200% 0; }
+  position: absolute;
+
+  inset: 0;
+
+  background:
+    linear-gradient(
+      110deg,
+      transparent 25%,
+      rgba(255, 255, 255, 0.4) 50%,
+      transparent 75%
+    );
+
+  background-size: 200% 100%;
+
+  animation:
+    shimmerEffect 1.5s infinite linear;
 }
 
 .slider-item-shimmer-text {
   background: #e2e5ea;
+
   border-radius: 4px;
+
   height: 14px;
+
   margin: 12px 14px;
 }
 
 .slider-item-shimmer-text.small {
   width: 55%;
+
   height: 11px;
 }
 
-@keyframes shimmer {
-  0%   { background-position: -450px 0; }
-  100% { background-position: 450px 0; }
+@keyframes shimmerEffect {
+  0% {
+    background-position: 200% 0;
+  }
+
+  100% {
+    background-position: -200% 0;
+  }
 }
 
-/* ======= Slick Dots ======= */
+/* =========================================================
+   SLICK
+   ========================================================= */
 
 .homeSlider .slick-dots {
-  bottom: -30px !important;
+  bottom: -34px !important;
 }
 
 .slick-dots li.slick-active button:before {
   opacity: 1;
+
   color: var(--global-color);
+
   font-size: 10px;
 }
 
 .slick-dots li button:before {
   font-size: 8px;
+
   line-height: 20px;
+
   position: absolute;
+
   top: 10px;
   left: 0;
+
   width: 20px;
   height: 20px;
+
   content: "•";
+
   text-align: center;
+
   opacity: 0.25;
+
   color: var(--global-color);
 }
 
@@ -284,44 +483,63 @@
   margin-right: 0 !important;
 }
 
-/* ======= Grid layout ======= */
+/* =========================================================
+   GRID / LEGACY
+   ========================================================= */
 
 .grid-container {
   display: grid !important;
-  grid-template-columns: repeat(4, 1fr) !important;
+
+  grid-template-columns:
+    repeat(4, 1fr) !important;
+
   gap: 10px !important;
 }
 
-/* ======= Legacy (other pages) ======= */
-
 .activities-content {
   display: flex;
+
   align-items: center;
+
   padding: 18px;
 }
 
 .activities-content p {
   color: #444;
+
   font-size: 14px;
+
   line-height: 1.5;
+
   text-align: left;
 }
 
 .activities-content h4 {
   flex: 1;
+
   overflow: hidden;
+
   white-space: nowrap;
+
   text-overflow: ellipsis;
+
   max-width: 100%;
+
   color: var(--text-color);
+
   font-size: 17px !important;
+
   font-weight: 700;
 }
 
 .activity-img.home {
   width: 100%;
-  transition: transform 0.35s ease;
+
+  transition:
+    transform 0.35s ease;
+
   height: 220px;
+
   object-fit: cover;
 }
 
@@ -331,8 +549,12 @@
 
 .activities-img {
   width: 100%;
-  transition: transform 0.35s ease;
+
+  transition:
+    transform 0.35s ease;
+
   height: 220px;
+
   object-fit: cover;
 }
 
@@ -342,35 +564,96 @@
 
 .activities-content-wrap {
   box-shadow: var(--card-shadow) !important;
+
   border: none !important;
+
   cursor: pointer;
-  border-radius: var(--border-radius) !important;
+
+  border-radius:
+    var(--border-radius) !important;
+
   overflow: hidden;
+
   height: auto;
 }
 
 .activities-name {
   color: var(--text-color);
+
   font-size: 16px;
+
   font-weight: bold;
+
   text-align: center;
 }
 
-/* ======= Responsive ======= */
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 991px) {
+  .activities-background-section {
+    padding: 35px 22px 50px;
+  }
+}
 
 @media (max-width: 767px) {
-  .activities-content-wrap {
-    height: auto;
+  .activities-background-section {
+    padding: 30px 14px 48px;
+
+    background-position: center center;
+  }
+
+  .activities-section-header {
+    align-items: flex-start;
+  }
+
+  .activities-section-title {
+    font-size: 24px;
+  }
+
+  .activities-section-subtitle {
+    font-size: 12px !important;
+  }
+
+  .activities-view-all-btn {
+    padding: 8px 16px;
+
+    font-size: 12px;
+  }
+
+  .activities-slider-spacing {
+    height: 25px;
   }
 }
 
 @media (max-width: 576px) {
+  .activities-background-section {
+    padding: 26px 10px 45px;
+
+    border-radius: 0;
+  }
+
+  .activities-section-header {
+    gap: 12px;
+  }
+
+  .activities-section-title {
+    font-size: 22px;
+  }
+
+  .activities-section-subtitle {
+    font-size: 11px !important;
+  }
+
   .activities-content-wrap {
     height: auto;
   }
+
   .activities-content h4 {
     font-size: 15px !important;
   }
+
   .activities-img-slider {
     height: 160px !important;
   }
