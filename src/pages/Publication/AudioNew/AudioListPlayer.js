@@ -6,9 +6,8 @@ import { BsRepeat1 } from "react-icons/bs";
 import { BsRepeat } from "react-icons/bs";
 import PlayCircleIcon from "@mui/icons-material/PlayCircle";
 import PauseCircleIcon from "@mui/icons-material/PauseCircle";
-import { IoIosPause, IoMdDownload } from "react-icons/io";
-import { BiSolidDownload } from "react-icons/bi";
-import Loader from "../../../common/Loader/Loader";
+import MusicNoteIcon from "@mui/icons-material/MusicNote";
+import VolumeUpIcon from "@mui/icons-material/VolumeUp";
 import InnerpageLoader from "../../Home/InnerpageLoader";
 import {
   downloadAudio,
@@ -25,15 +24,14 @@ import { fetchPublicationDetails } from "../../../api/API";
 import { Container } from "@mui/material";
 import PublicationSearchModal from "../../../common/PublicationSearchModal/PublicationSearchModal";
 import AudioPlayerLoader from "../../../common/Loader/AudioPlayerLoader";
-import FullpageLoader from "../../../common/HomeSliderLoader/FullpageLoader";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
-const AudioListPlayer = ({ audioListData , publiCationLoading }) => {
-    const params = useParams();
-  
+const AudioListPlayer = ({ audioListData, publiCationLoading }) => {
+  const params = useParams();
+
   const [isAlbumDetail, setIsAlbumDetail] = useState(false);
   const [finalAudioListData, setFinalAudioListData] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -55,6 +53,11 @@ const AudioListPlayer = ({ audioListData , publiCationLoading }) => {
   const [isLoader, setIsLoader] = useState(false);
   const [downloadComplete, setDownloadComplete] = useState(false);
   const [downloadingIndex, setDownloadingIndex] = useState(null);
+
+  // Custom player state
+  const [currentTime, setCurrentTime] = useState(0);
+  const [duration, setDuration] = useState(0);
+  const [volume, setVolume] = useState(1);
 
   ///FOR BREADCRUM
   const [publicationDetailResponse, setPublicationDetailResponse] = useState();
@@ -81,11 +84,10 @@ const AudioListPlayer = ({ audioListData , publiCationLoading }) => {
             page: "publication",
             album_id: params.album_id,
           });
-                    setFinalAudioListData(response.data.responseBody.list);
-          // setPublication(response.data.responseBody.publication);
+          setFinalAudioListData(response.data.responseBody.list);
           setPublicationDetailResponse(response.data.responseBody);
           setAlbumName(response.data.responseBody.albums.title);
-                                      } catch (error) {
+        } catch (error) {
           console.error("Error fetching data:", error);
         }
       };
@@ -115,7 +117,7 @@ const AudioListPlayer = ({ audioListData , publiCationLoading }) => {
         idKey = "album_id";
         idValue = params.album_id;
       } else {
-                setIsLoader(false);
+        setIsLoader(false);
         return;
       }
 
@@ -144,12 +146,19 @@ const AudioListPlayer = ({ audioListData , publiCationLoading }) => {
   useEffect(() => {
     if (Array.isArray(finalAudioListData)) {
       const modifiedListData = finalAudioListData.map((audio) => {
-                let src;
+        let src;
         try {
           src = JSON.parse(audio.media)[0];
         } catch (error) {}
 
         return { ...audio, isPlaying: false, src: src };
+      });
+
+      // Sort ascending by number prefix in track name
+      modifiedListData.sort((a, b) => {
+        const numA = parseInt(a.name?.match(/^\d+/)?.[0] || "0");
+        const numB = parseInt(b.name?.match(/^\d+/)?.[0] || "0");
+        return numA - numB;
       });
 
       const audioPlayerHelperClone = { ...audioPlayerHelper };
@@ -174,7 +183,6 @@ const AudioListPlayer = ({ audioListData , publiCationLoading }) => {
       const response = await fetchPublicationList({
         url: process.env.REACT_APP_API_URL,
         page: "publication",
-        // order_by: "all",
         publication_id: publicationid,
       });
 
@@ -194,7 +202,7 @@ const AudioListPlayer = ({ audioListData , publiCationLoading }) => {
       setList(response.data.responseBody);
 
       setPublicationList(response?.data?.responseBody.list_publication);
-          } catch (error) {
+    } catch (error) {
       console.error("Error fetching data:", error);
     }
   };
@@ -214,16 +222,12 @@ const AudioListPlayer = ({ audioListData , publiCationLoading }) => {
     fetchData1(PublicationId);
     setActiveStatus(isActive);
 
-    // window.history.pushState(
-    //   null,
-    //   "",
-    //   `/publication-detail/${PublicationId}/${publicationName}`
-    // );
     setPublicationId(PublicationId);
 
     navigate(`/publication-detail/${PublicationId}/${publicationName}`);
     setPublicationId(PublicationId);
-              };
+  };
+
   const breadcrumbsData = [
     { label: "Home", url: "/" },
     {
@@ -248,6 +252,53 @@ const AudioListPlayer = ({ audioListData , publiCationLoading }) => {
 
   const audioRef = useRef(null);
 
+  // Time tracking for custom player
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    const handleTimeUpdate = () => setCurrentTime(audio.currentTime);
+    const handleLoadedMetadata = () => setDuration(audio.duration);
+    const handleDurationChange = () => {
+      if (audio.duration && !isNaN(audio.duration)) {
+        setDuration(audio.duration);
+      }
+    };
+
+    audio.addEventListener("timeupdate", handleTimeUpdate);
+    audio.addEventListener("loadedmetadata", handleLoadedMetadata);
+    audio.addEventListener("durationchange", handleDurationChange);
+
+    return () => {
+      audio.removeEventListener("timeupdate", handleTimeUpdate);
+      audio.removeEventListener("loadedmetadata", handleLoadedMetadata);
+      audio.removeEventListener("durationchange", handleDurationChange);
+    };
+  }, []);
+
+  const formatTime = (seconds) => {
+    if (!seconds || isNaN(seconds)) return "0:00";
+    const mins = Math.floor(seconds / 60);
+    const secs = Math.floor(seconds % 60);
+    return `${mins}:${secs.toString().padStart(2, "0")}`;
+  };
+
+  const handleSeek = (e) => {
+    const time = parseFloat(e.target.value);
+    if (audioRef.current) {
+      audioRef.current.currentTime = time;
+      setCurrentTime(time);
+    }
+  };
+
+  const handleVolumeChange = (e) => {
+    const vol = parseFloat(e.target.value);
+    if (audioRef.current) {
+      audioRef.current.volume = vol;
+      setVolume(vol);
+    }
+  };
+
   useEffect(() => {
     const audio = audioRef.current;
 
@@ -259,12 +310,10 @@ const AudioListPlayer = ({ audioListData , publiCationLoading }) => {
         const newSrc =
           audioPlayerHelper.songs[audioPlayerHelper.currentIndex].src;
 
-        // Check if the current audio source is the same as the new source
         if (currentSrc !== newSrc) {
-          await audio.load(); // Load the new source
+          await audio.load();
         }
 
-        // Check If Any Song is isPlaying is Set To True then Start Audio Player
         const isAnySongPlaying = audioPlayerHelper.songs.some(
           (song) => song.isPlaying
         );
@@ -274,29 +323,23 @@ const AudioListPlayer = ({ audioListData , publiCationLoading }) => {
         } else {
           await audio.pause();
         }
-      } catch (e) {
-              }
+      } catch (e) {}
     };
     const currentSong = audioPlayerHelper.songs[audioPlayerHelper.currentIndex];
-    setCurrentSongTitle(currentSong?.name);
+    setCurrentSongTitle(currentSong?.name?.replace(/^\d+\s*[-.):\s]*\s*/, "") || currentSong?.name);
 
     playAudio();
 
-    
     return () => {
       audio?.removeEventListener("ended", handleSongEnded);
     };
   }, [audioPlayerHelper]);
 
   const updateAudioState = (audioPlayerHelperClone) => {
-    // Convert state objects to strings for comparison
     const stateString = JSON.stringify(audioPlayerHelper);
     const cloneString = JSON.stringify(audioPlayerHelperClone);
-
-    // Check if the string representations are equal
     const isSameValue = stateString === cloneString;
 
-    
     if (!isSameValue) {
       updateAudioPlayerHelper(audioPlayerHelperClone);
     }
@@ -331,17 +374,12 @@ const AudioListPlayer = ({ audioListData , publiCationLoading }) => {
   };
 
   const handlePauseFromPlayer = () => {
-    // Clone the audioPlayerHelper state
     const audioPlayerHelperClone = { ...audioPlayerHelper };
-
-    // Update the isPlaying property of the currently playing song to false
     const updatedSongs = audioPlayerHelperClone.songs.map((song, index) => ({
       ...song,
       isPlaying:
         index === audioPlayerHelperClone.currentIndex ? false : song.isPlaying,
     }));
-
-    // Update the cloned state with the new array of songs
     updateAudioState({
       ...audioPlayerHelperClone,
       songs: updatedSongs,
@@ -349,16 +387,11 @@ const AudioListPlayer = ({ audioListData , publiCationLoading }) => {
   };
 
   const handlePlayFromPlayer = () => {
-    // Clone the audioPlayerHelper state
     const audioPlayerHelperClone = { ...audioPlayerHelper };
-
-    // Update the isPlaying property of the currently playing song to true
     const updatedSongs = audioPlayerHelperClone.songs.map((song, index) => ({
       ...song,
       isPlaying: index === audioPlayerHelperClone.currentIndex,
     }));
-
-    // Update the cloned state with the new array of songs
     updateAudioState({
       ...audioPlayerHelperClone,
       songs: updatedSongs,
@@ -366,16 +399,11 @@ const AudioListPlayer = ({ audioListData , publiCationLoading }) => {
   };
 
   const handlePlayFromList = (index) => {
-    // Clone the audioPlayerHelper state
     const audioPlayerHelperClone = { ...audioPlayerHelper };
-
-    // Create a new array of songs with updated isPlaying values
     const updatedSongs = audioPlayerHelperClone.songs.map((song, i) => ({
       ...song,
       isPlaying: i === index,
     }));
-
-    // Update the cloned state with the new array of songs and currentIndex
     updateAudioState({
       ...audioPlayerHelperClone,
       songs: updatedSongs,
@@ -384,16 +412,11 @@ const AudioListPlayer = ({ audioListData , publiCationLoading }) => {
   };
 
   const handlePauseFromList = (index) => {
-    // Clone the audioPlayerHelper state
     const audioPlayerHelperClone = { ...audioPlayerHelper };
-
-    // Update the isPlaying property of the song at the specified index to false
     const updatedSongs = audioPlayerHelperClone.songs.map((song, i) => ({
       ...song,
       isPlaying: i === index ? false : song.isPlaying,
     }));
-
-    // Update the cloned state with the new array of songs
     updateAudioState({
       ...audioPlayerHelperClone,
       songs: updatedSongs,
@@ -401,20 +424,14 @@ const AudioListPlayer = ({ audioListData , publiCationLoading }) => {
   };
 
   const toggleLoopMode = () => {
-    // Clone the audioPlayerHelper state
     const audioPlayerHelperClone = { ...audioPlayerHelper };
-
     audioPlayerHelperClone.loopMode =
       audioPlayerHelperClone.loopMode === "all" ? "single" : "all";
-
     updateAudioState(audioPlayerHelperClone);
   };
 
   const playNextSong = () => {
-    // Clone the audioPlayerHelper state
     const audioPlayerHelperClone = { ...audioPlayerHelper };
-
-    // Calculate the index of the next song
     let nextIndex;
     if (audioPlayerHelperClone.loopMode === "all") {
       nextIndex =
@@ -423,18 +440,13 @@ const AudioListPlayer = ({ audioListData , publiCationLoading }) => {
     } else {
       nextIndex = audioPlayerHelperClone.currentIndex + 1;
       if (nextIndex >= audioPlayerHelperClone.songs.length) {
-        // If currentIndex is at the end of the playlist and loopMode is 'single', stay at the same index
         nextIndex = audioPlayerHelperClone.currentIndex;
       }
     }
-
-    // Create a new array of songs with updated isPlaying values
     const updatedSongs = audioPlayerHelperClone.songs.map((song, i) => ({
       ...song,
       isPlaying: i === nextIndex,
     }));
-
-    // Update the cloned state with the new array of songs and currentIndex
     updateAudioState({
       ...audioPlayerHelperClone,
       songs: updatedSongs,
@@ -443,10 +455,7 @@ const AudioListPlayer = ({ audioListData , publiCationLoading }) => {
   };
 
   const playPreviousSong = () => {
-    // Clone the audioPlayerHelper state
     const audioPlayerHelperClone = { ...audioPlayerHelper };
-
-    // Calculate the index of the previous song
     let prevIndex;
     if (audioPlayerHelperClone.loopMode === "all") {
       prevIndex =
@@ -457,18 +466,13 @@ const AudioListPlayer = ({ audioListData , publiCationLoading }) => {
     } else {
       prevIndex = audioPlayerHelperClone.currentIndex - 1;
       if (prevIndex < 0) {
-        // If currentIndex is at the beginning of the playlist and loopMode is 'single', stay at the same index
         prevIndex = audioPlayerHelperClone.currentIndex;
       }
     }
-
-    // Create a new array of songs with updated isPlaying values
     const updatedSongs = audioPlayerHelperClone.songs.map((song, i) => ({
       ...song,
       isPlaying: i === prevIndex,
     }));
-
-    // Update the cloned state with the new array of songs and currentIndex
     updateAudioState({
       ...audioPlayerHelperClone,
       songs: updatedSongs,
@@ -485,7 +489,7 @@ const AudioListPlayer = ({ audioListData , publiCationLoading }) => {
           page: "publication",
         });
         setBanner(response.data.responseBody);
-                setLoading(false);
+        setLoading(false);
       } catch (error) {
         console.error("Error fetching data:", error);
         setLoading(false);
@@ -495,32 +499,21 @@ const AudioListPlayer = ({ audioListData , publiCationLoading }) => {
     fetchBanner();
   }, []);
 
-  const handleDownloadAudio = (index) => {
-    var src = audioPlayerHelper.songs[index].src;
-  };
-
   const handleDownload = (song, index) => {
     const url = audioPlayerHelper.songs[index].src;
     setIsLoading(true);
     setDownloadingIndex(index);
-    // Fetch the PDF content
     fetch(url)
       .then((response) => response.blob())
       .then((blob) => {
-        // Create a temporary URL for the Blob
         const blobUrl = URL.createObjectURL(blob);
-        // Create a temporary anchor element
         const link = document.createElement("a");
         link.href = blobUrl;
-        link.download = `${song?.name}.mp3`; // Set the file name here
+        link.download = `${song?.name}.mp3`;
         link.style.display = "none";
-        // Append the anchor to the body
         document.body.appendChild(link);
-        // Trigger a click event on the anchor to initiate the download
         link.click();
-        // Remove the temporary anchor element
         document.body.removeChild(link);
-        // Revoke the Blob URL
         URL.revokeObjectURL(blobUrl);
         setDownloadingIndex(null);
         setIsLoading(false);
@@ -535,12 +528,17 @@ const AudioListPlayer = ({ audioListData , publiCationLoading }) => {
   const handleImageLoad = () => {
     setImageLoaded(true);
   };
+
   useEffect(() => {
     AOS.init({
       duration: 1000,
       once: false,
     });
   }, []);
+
+  const isCurrentPlaying =
+    audioPlayerHelper.songs[audioPlayerHelper.currentIndex]?.isPlaying;
+
   return (
     <div>
       {isAlbumDetail && (
@@ -559,7 +557,6 @@ const AudioListPlayer = ({ audioListData , publiCationLoading }) => {
               </div>
             )}
           </div>
-          {/* {!imageLoaded && <FullpageLoader />} */}
           {!imageLoaded && (
             <div className="shimmer-activity-wrapper">
               <div className="shimmer" />
@@ -567,6 +564,7 @@ const AudioListPlayer = ({ audioListData , publiCationLoading }) => {
           )}
         </div>
       )}
+
       <Container>
         {Array.isArray(publicationList) && publicationList.length > 0 ? (
           <div className="publication-serach-wrap pt-lg-5 pt-md-0">
@@ -604,12 +602,13 @@ const AudioListPlayer = ({ audioListData , publiCationLoading }) => {
         ) : (
           <div
             className="publication-serach-wrap"
-            style={{ display: "flex", justifyContent: "beetween" }}
+            style={{ display: "flex", justifyContent: "space-between" }}
           >
             <div>
               <div className="publication-tabs">
-                {/* <div className="publication-tab-wrap">
+                <div className="publication-tab-wrap">
                   <div
+                    className="shimmerTab"
                     style={{
                       display: "flex",
                       alignItems: "center",
@@ -620,20 +619,6 @@ const AudioListPlayer = ({ audioListData , publiCationLoading }) => {
                       <div key={index} className="publication-tab-shimmer" />
                     ))}
                   </div>
-                </div> */}
-                <div className="publication-tab-wrap">
-                    <div
-                      className="shimmerTab"
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                        gap: "10px",
-                      }}
-                    >
-                      {[...Array(5)].map((_, index) => (
-                        <div key={index} className="publication-tab-shimmer" />
-                      ))}
-                    </div>
                 </div>
               </div>
             </div>
@@ -643,284 +628,287 @@ const AudioListPlayer = ({ audioListData , publiCationLoading }) => {
 
         {typeof finalAudioListData === "string" ||
         (Array.isArray(!finalAudioListData) && !finalAudioListData) ? (
-          <div className="no-data mt-4">
-            {/* No data available for the selected year. */}
-            No data available
-          </div>
-        ) : Array.isArray(finalAudioListData) && finalAudioListData.length > 0 ? (
-          <div className="audio-player-1"  data-aos="fade-up">
-            <div className="audio-player-image">
-              <div className="audio-player-wrap">
-                <div className="">
-                  <div className="audio-player-inneer-wrap pt-5">
-                    <div className="audio-player-img-wrap d-flex">
-                      <div className="audio-section-width">
-                        {/* <img
-                          // src={
-                          //   audioPlayerHelper.songs[audioPlayerHelper.currentIndex]
-                          //     ?.image
-                          // }
-                          //working
-                          src={
-                            publicationDetailResponse?.albums?.image ??
-                            imageNotFound
-                          }
-                          alt=""
-                          className="audio-img-1"
-                        /> */}
-                        <LazyLoadImage
-                          src={
-                            publicationDetailResponse?.albums?.image ??
-                            imageNotFound
-                          }
-                          alt=""
-                          className="audio-img-1"
-                          wrapperClassName="lazy-load-image-background aboutustype"
-                          afterLoad={() => {
-                            const image = document.querySelector(
-                              `.lazy-load-image-background[data-src="${
-                                publicationDetailResponse?.albums?.image ??
-                                imageNotFound
-                              }"]`
-                            );
-                            if (image) {
-                              image.classList.add("lazy-load-image-loaded");
-                            }
-                          }}
-                        />
-                      </div>
-                      <div className="audio-section-width-wrap">
-                        <p className="audio-album-name">{albumName}</p>
-                        <div className="audio-title-wrap">
-                          {currentSongTitle && (
-                            <p className="current-song-title-data">
-                              {currentSongTitle}
-                            </p>
-                          )}
-                        </div>
-                        <hr className="m-0 mb-2" />
-                        <div
-                          className="d-flex gap-2"
-                          onClick={handleDownloadAllAudio}
-                        >
-                          <DownloadForOfflineIcon className="download-icon-player" />
-                          <p className="download-album">Download Album</p>
-                          {isLoader && <AudioPlayerLoader />}
-                        </div>
-                      </div>
+          <div className="no-data mt-4">No data available</div>
+        ) : Array.isArray(finalAudioListData) &&
+          finalAudioListData.length > 0 ? (
+          <div className="audio-player-1" data-aos="fade-up">
+            {/* ---- Album Detail Card ---- */}
+            <div className="album-detail-card">
+              <div className="album-detail-left">
+                <LazyLoadImage
+                  src={
+                    publicationDetailResponse?.albums?.image ?? imageNotFound
+                  }
+                  alt=""
+                  className="album-detail-img"
+                  wrapperClassName="lazy-load-image-background aboutustype"
+                />
+              </div>
+              <div className="album-detail-right">
+                <span className="album-category-badge">
+                  <MusicNoteIcon style={{ fontSize: 16 }} />{" "}
+                  {publicationDetailResponse?.publication?.name || ""}
+                </span>
+                <h2 className="album-detail-title">{albumName}</h2>
+                <p className="album-detail-desc">
+                  {publicationDetailResponse?.albums?.short_description ||
+                    ""}
+                </p>
+                <div className="album-meta-row">
+                  <div className="album-meta-item">
+                    <MusicNoteIcon className="album-meta-icon" />
+                    <div>
+                      <span className="album-meta-label">Total Tracks</span>
+                      <strong className="album-meta-value">
+                        {audioPlayerHelper.songs.length}
+                      </strong>
                     </div>
                   </div>
+                </div>
+                <div className="album-action-buttons">
+                  <button
+                    className="album-download-btn"
+                    onClick={handleDownloadAllAudio}
+                  >
+                    <DownloadForOfflineIcon /> Download Album
+                    {isLoader && <AudioPlayerLoader />}
+                  </button>
                 </div>
               </div>
             </div>
 
-            <div className="track-container-1">
+            {/* ---- Track List Table ---- */}
+            <div className="track-table-wrap">
+              <div className="track-table-header">
+                <div className="track-col-num">#</div>
+                <div className="track-col-title">Title</div>
+                <div className="track-col-actions">Actions</div>
+              </div>
               {audioPlayerHelper.songs.map((song, index) => (
-                <>
-                  <div className="audio-wrap" data-aos="fade-up">
-                    <div className="audio-list-wrap1" key={index}>
-                      <div className="audio-list-wrap">
-                        {/* <div>
-                          <img
-                            src={
-                              publicationDetailResponse?.albums?.image ??
-                              imageNotFound
-                            }
-                            className="audio-list-image"
-                          />
-                        </div> */}
-                        <div
-                          onClick={() => {
-                            if (
-                              audioPlayerHelper.currentIndex === index &&
-                              song.isPlaying
-                            ) {
-                              handlePauseFromList(index);
-                            } else {
-                              handlePlayFromList(index);
-                            }
-                          }}
-                        >
-                          <h6
-                            key={song.id}
-                            className={`current-song-title-color ${
-                              song.isPlaying ? "current-song-title" : ""
-                            }`}
-                          >
-                            {song?.name}
-                          </h6>
-                          <p>{song.short_description}</p>
-                        </div>
+                <div
+                  className={`track-row ${
+                    audioPlayerHelper.currentIndex === index && song.isPlaying
+                      ? "track-row-active"
+                      : ""
+                  }`}
+                  key={index}
+                  onClick={() => {
+                    if (
+                      audioPlayerHelper.currentIndex === index &&
+                      song.isPlaying
+                    ) {
+                      handlePauseFromList(index);
+                    } else {
+                      handlePlayFromList(index);
+                    }
+                  }}
+                >
+                  <div className="track-col-num">
+                    {audioPlayerHelper.currentIndex === index &&
+                    song.isPlaying ? (
+                      <div className="playing">
+                        <span className="playing__bar playing__bar1"></span>
+                        <span className="playing__bar playing__bar2"></span>
+                        <span className="playing__bar playing__bar3"></span>
                       </div>
-
-                      <div
-                        className="audio-list-1"
-                        // onClick={() => {
-                        //   if (
-                        //     audioPlayerHelper.currentIndex === index &&
-                        //     song.isPlaying
-                        //   ) {
-                        //     handlePauseFromList(index);
-                        //   } else {
-                        //     handlePlayFromList(index);
-                        //   }
-                        // }}
-                      >
-                        <div className="d-flex">
-                          <button
-                            onClick={() => {
-                              if (
-                                audioPlayerHelper.currentIndex === index &&
-                                song.isPlaying
-                              ) {
-                                handlePauseFromList(index);
-                              } else {
-                                handlePlayFromList(index);
-                              }
-                            }}
-                            className="play-pause-btn"
-                          >
-                            <div className="player-1">
-                              {audioPlayerHelper.currentIndex === index &&
-                                song.isPlaying && (
-                                  <div className="playing">
-                                    <span className="playing__bar playing__bar1"></span>
-                                    <span className="playing__bar playing__bar2"></span>
-                                    <span className="playing__bar playing__bar3"></span>
-                                  </div>
-                                )}
-
-                              {audioPlayerHelper.currentIndex === index &&
-                              song.isPlaying ? (
-                                <PauseCircleIcon className="pause-icon-audio" />
-                              ) : (
-                                <PlayCircleIcon className="play-icon-audio" />
-                              )}
-                            </div>
-                          </button>
-                          {/* <button
-                            className="play-pause-btn"
-                            onClick={() => handleDownload(song, index)}
-                          >
-                            <DownloadForOfflineIcon className="download-icon-audio" />
-                          </button> */}
-                          <button
-                            className="play-pause-btn"
-                            onClick={() => handleDownload(song, index)}
-                          >
-                            {downloadingIndex === index ? (
-                              <AudioPlayerLoader />
-                            ) : (
-                              <DownloadForOfflineIcon className="download-icon-audio" />
-                            )}
-                          </button>
-                        </div>
-                      </div>
-                    </div>
+                    ) : (
+                      song.name?.match(/^\d+/)?.[0] || String(index + 1).padStart(2, "0")
+                    )}
                   </div>
-                </>
+                  <div className="track-col-title">
+                    <h6
+                      className={`track-name ${
+                        song.isPlaying ? "track-name-active" : ""
+                      }`}
+                    >
+                      {song?.name?.replace(/^\d+\s*[-.):\s]*\s*/, "") || song?.name}
+                    </h6>
+                    {song.short_description && (
+                      <p className="track-desc">{song.short_description}</p>
+                    )}
+                  </div>
+                  <div className="track-col-actions">
+                    <button
+                      className="track-play-btn"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        if (
+                          audioPlayerHelper.currentIndex === index &&
+                          song.isPlaying
+                        ) {
+                          handlePauseFromList(index);
+                        } else {
+                          handlePlayFromList(index);
+                        }
+                      }}
+                    >
+                      {audioPlayerHelper.currentIndex === index &&
+                      song.isPlaying ? (
+                        <PauseCircleIcon className="track-icon-play" />
+                      ) : (
+                        <PlayCircleIcon className="track-icon-play" />
+                      )}
+                    </button>
+                    <button
+                      className="track-download-btn"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleDownload(song, index);
+                      }}
+                    >
+                      {downloadingIndex === index ? (
+                        <AudioPlayerLoader />
+                      ) : (
+                        <DownloadForOfflineIcon className="track-icon-download" />
+                      )}
+                    </button>
+                  </div>
+                </div>
               ))}
             </div>
           </div>
         ) : (
+          /* ---- Shimmer Loading State ---- */
           <div className="audio-player-1" data-aos="fade-up">
-            <div className="audio-player-image">
-              <div className="audio-player-wrap">
-                <div className="">
-                  <div className="audio-player-inneer-wrap pt-5">
-                    <div className="audio-player-img-wrap d-flex">
-                      <div className="audio-section-width">
-                        <div className="publication-detail-image-card"></div>
-                      </div>
-                      <div className="audio-section-width-wrap">
-                        <div className="publication-tab-shimmer"></div>
-                        <div className="audio-title-wrap pt-2">
-                          <div className="publication-tab-shimmer"></div>
-                        </div>
-                        <hr className="m-0 my-2" />
-                        <div className="publication-tab-shimmer w-25"></div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+            <div className="album-shimmer-card">
+              <div className="album-shimmer-img"></div>
+              <div className="album-shimmer-info">
+                <div
+                  className="album-shimmer-line"
+                  style={{ width: "30%" }}
+                ></div>
+                <div
+                  className="album-shimmer-line"
+                  style={{ width: "70%", height: "28px" }}
+                ></div>
+                <div
+                  className="album-shimmer-line"
+                  style={{ width: "50%" }}
+                ></div>
+                <div
+                  className="album-shimmer-line"
+                  style={{ width: "80%", marginTop: "10px" }}
+                ></div>
+                <div
+                  className="album-shimmer-line"
+                  style={{ width: "40%", height: "40px", marginTop: "10px" }}
+                ></div>
               </div>
             </div>
 
-            <div className="track-container-1">
-              {[...Array(5)].map((index) => (
-                <>
-                  <div className="audio-wrap">
-                    <div className="audio-list-wrap1" key={index}>
-                      <div className="audio-list-wrap">
-                        {/* <div>
-                          <img
-                            src={
-                              publicationDetailResponse?.albums?.image ??
-                              imageNotFound
-                            }
-                            className="audio-list-image"
-                          />
-                        </div> */}
-                        <div>
-                          <h6>
-                            <div
-                              className="publication-tab-shimmer"
-                              style={{ width: "500px", height: "25px" }}
-                            ></div>
-                          </h6>
-                        </div>
-                      </div>
-
-                      <div className="audio-list-1">
-                        <div className="d-flex gap-2">
-                          <div className="publication-button-round-shimmer"></div>
-                          <div className="publication-button-round-shimmer"></div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </>
+            <div className="track-table-wrap">
+              {[...Array(6)].map((_, index) => (
+                <div className="track-shimmer-row" key={index}>
+                  <div className="track-shimmer-num"></div>
+                  <div className="track-shimmer-title"></div>
+                  <div className="track-shimmer-btn"></div>
+                  <div className="track-shimmer-btn"></div>
+                </div>
               ))}
             </div>
           </div>
         )}
-
-        
-
-        {/*======== End =======  */}
       </Container>
+
+      {/* ---- Bottom Audio Player ---- */}
       {typeof finalAudioListData === "string" ||
-      (Array.isArray(finalAudioListData) && finalAudioListData.length === 0) ? (
+      (Array.isArray(finalAudioListData) &&
+        finalAudioListData.length === 0) ? (
         <div></div>
       ) : (
-        <div className="audio-player-container-2 mt-3" data-aos="fade-up">
-          <div className="audio-player-div">
-            <button onClick={toggleLoopMode} className="audio-btn">
-              {audioPlayerHelper.loopMode === "all" ? (
-                <BsRepeat className="play-repeatIcon" />
-              ) : (
-                <BsRepeat1 className="play-repeatIcon" />
-              )}
-            </button>
-            <TbPlayerTrackPrevFilled
-              onClick={playPreviousSong}
-              className="prev-icon  prev-album-icon"
+        <div className="audio-bottom-player">
+          <div className="bottom-player-left">
+            <img
+              src={
+                publicationDetailResponse?.albums?.image ?? imageNotFound
+              }
+              alt=""
+              className="bottom-player-img"
             />
-
-            <audio
-              ref={audioRef}
-              controls
-              src={audioPlayerHelper.songs[audioPlayerHelper.currentIndex]?.src}
-              autoPlay={false}
-              onPause={handlePauseFromPlayer}
-              onPlay={handlePlayFromPlayer}
-              className="audio-player"
-            />
-            <TbPlayerTrackNextFilled
-              onClick={playNextSong}
-              className="next-icon"
-            />
+            <div className="bottom-player-info">
+              <p className="bottom-player-title">{currentSongTitle}</p>
+              <p className="bottom-player-album">{albumName}</p>
+              <span className="bottom-player-time">
+                {formatTime(currentTime)} / {formatTime(duration)}
+              </span>
+            </div>
           </div>
+
+          <div className="bottom-player-center">
+            <div className="bottom-player-controls">
+              <button onClick={toggleLoopMode} className="bottom-ctrl-btn">
+                {audioPlayerHelper.loopMode === "all" ? (
+                  <BsRepeat className="bottom-ctrl-icon" />
+                ) : (
+                  <BsRepeat1 className="bottom-ctrl-icon" />
+                )}
+              </button>
+              <button onClick={playPreviousSong} className="bottom-ctrl-btn">
+                <TbPlayerTrackPrevFilled className="bottom-ctrl-icon" />
+              </button>
+              {isCurrentPlaying ? (
+                <button
+                  onClick={handlePauseFromPlayer}
+                  className="bottom-play-btn"
+                >
+                  <PauseCircleIcon className="bottom-play-icon" />
+                </button>
+              ) : (
+                <button
+                  onClick={handlePlayFromPlayer}
+                  className="bottom-play-btn"
+                >
+                  <PlayCircleIcon className="bottom-play-icon" />
+                </button>
+              )}
+              <button onClick={playNextSong} className="bottom-ctrl-btn">
+                <TbPlayerTrackNextFilled className="bottom-ctrl-icon" />
+              </button>
+            </div>
+            <div className="bottom-progress-wrap">
+              <span className="bottom-progress-time">
+                {formatTime(currentTime)}
+              </span>
+              <input
+                type="range"
+                min="0"
+                max={duration || 0}
+                value={currentTime}
+                onChange={handleSeek}
+                className="bottom-progress-bar"
+                step="0.1"
+              />
+              <span className="bottom-progress-time">
+                {formatTime(duration)}
+              </span>
+            </div>
+          </div>
+
+          <div className="bottom-player-right">
+            <div className="bottom-volume-wrap">
+              <VolumeUpIcon className="bottom-volume-icon" />
+              <input
+                type="range"
+                min="0"
+                max="1"
+                step="0.01"
+                value={volume}
+                onChange={handleVolumeChange}
+                className="bottom-volume-bar"
+              />
+            </div>
+          </div>
+
+          <audio
+            ref={audioRef}
+            src={
+              audioPlayerHelper.songs[audioPlayerHelper.currentIndex]?.src
+            }
+            autoPlay={false}
+            onPause={handlePauseFromPlayer}
+            onPlay={handlePlayFromPlayer}
+            style={{ display: "none" }}
+          />
         </div>
       )}
     </div>

@@ -16,7 +16,7 @@ import PublicationSearchModal from "../../../common/PublicationSearchModal/Publi
 import PublicationFilter from "../../../common/PublicationFilter/PublicationFilter";
 import FullpageLoader from "../../../common/HomeSliderLoader/FullpageLoader";
 import ActivityLoader from "../../../common/Loader/ActivityLoader";
-import { Grid, Skeleton } from "@mui/material";
+import { Grid } from "@mui/material";
 
 const PublicationDetails = () => {
   const breadcrumbsData = [

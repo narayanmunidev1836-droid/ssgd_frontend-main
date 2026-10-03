@@ -1,82 +1,124 @@
+/* =========================================================
+   KATHA / BOOK ALBUM CARDS
+   ========================================================= */
+
 .katha-content-wrap {
   padding: 30px 0px 0px 0px;
 }
 
-/* .katha-img-wrap {
-  border: 1px solid var(--global-color);
-  padding: 10px;
-  border-radius: 2px;
-} */
+.katha-img-wrap {
+  background: #fff;
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  box-shadow: 0 5px 22px rgba(0, 0, 0, 0.1);
+  border: none !important;
+  padding: 0 !important;
+  transition: var(--transition);
+  cursor: pointer;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.katha-img-wrap:hover {
+  transform: translateY(-7px);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.16);
+}
 
 .katha-img-wrap button {
-  border: 0px;
-  font-size: 14px;
-  padding: 10px 15px 10px 15px;
-  border: 1px solid var(--text-color);
-  background-color: var(--text-color);
+  border: none;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 9px 20px;
+  background-color: var(--global-color);
   color: #fff;
-  border-radius: 2px;
-  letter-spacing: 0.5px;
-  transition: background-color 0.3s ease, color 0.3s ease, border 0.3s ease;
-}
-.katha-content-publication {
-  gap: 6px !important;
-  padding: 0 !important;
+  border-radius: 40px;
+  letter-spacing: 0.3px;
+  transition: var(--transition);
+  font-family: "Poppins", sans-serif;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(181, 9, 14, 0.25);
 }
 
 .katha-img-wrap button:hover {
-  background-color: transparent;
-  color: var(--text-color);
-  border: 1px solid var(--text-color);
+  background-color: var(--global-color-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(181, 9, 14, 0.35);
+}
+
+.katha-img-wrap .lazy-load-image-background {
+  width: 100% !important;
+  display: block !important;
+  overflow: hidden;
+  border-radius: var(--border-radius) var(--border-radius) 0 0;
 }
 
 .katha-img {
-  width: 100%;
+  width: 100% !important;
   height: 250px;
-  object-fit: contain;
+  object-fit: cover !important;
+  display: block;
+  border-radius: var(--border-radius) var(--border-radius) 0 0;
+  transition: transform 0.45s ease;
+}
+
+.katha-img-wrap:hover .katha-img {
+  transform: scale(1.05);
 }
 
 .video-album-img {
   width: 100%;
-  /* height: 250px; */
   height: 160px;
   object-fit: contain;
+  transition: transform 0.45s ease;
 }
 
 .video-albums-image {
   width: 100%;
-  /* height: 250px; */
   height: 160px;
   object-fit: contain;
+  transition: transform 0.45s ease;
 }
 
 .katha-albums-image {
   width: 100%;
   height: 250px;
-  object-fit: contain;
+  object-fit: cover;
+  transition: transform 0.45s ease;
 }
 
 .katha-content {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 15px 0px 0px 0px;
+  padding: 16px 14px 20px;
   gap: 10px;
-  /* overflow: hidden; */
+  flex: 1;
+}
+
+.katha-content-publication {
+  gap: 6px !important;
+  padding: 0 !important;
 }
 
 .katha-content h4 {
   color: var(--text-color);
-  /* overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis !important;
-  max-width: 90%; */
+  font-size: 14.5px !important;
+  font-weight: 700;
+  line-height: 1.4;
+  text-align: center;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  margin: 0;
 }
 
 .katha-content-wrap p {
-  font-size: 14px;
-  line-height: 1.2;
+  font-size: 13px;
+  line-height: 1.3;
   text-align: center;
+  color: var(--muted-text);
 }
 
 .book-details {
@@ -96,6 +138,10 @@
   padding: 5px 0px 0px 0px;
 }
 
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
 @media (max-width: 767px) {
   .video-album-img {
     height: auto;
@@ -104,12 +150,23 @@
 
 @media (max-width: 576px) {
   .katha-img-wrap {
-    padding: 10px;
+    padding: 0;
   }
   .video-album-img {
     height: auto;
   }
   .katha-img {
     height: auto;
+  }
+  .katha-content {
+    padding: 12px 10px 16px;
+    gap: 8px;
+  }
+  .katha-content h4 {
+    font-size: 13px !important;
+  }
+  .katha-img-wrap button {
+    font-size: 12px;
+    padding: 8px 16px;
   }
 }
