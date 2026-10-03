@@ -6,7 +6,7 @@ import App from "./App";
 import { Provider } from "react-redux";
 // import reportWebVitals from "./reportWebVitals";
 import { store } from "./Redux/store";
-import faviconUrl from "../src/assets/images/SSGD-logo.jpeg";
+import faviconUrl from "../src/assets/images/SSGD-logo.webp";
 
 // const root = ReactDOM.createRoot(document.getElementById("root"));
 // root.render(

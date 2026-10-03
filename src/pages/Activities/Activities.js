@@ -10,7 +10,7 @@ import "./Activities.css";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
 import Slider from "react-slick";
-import ElegantImage from "../../assets/images/Elegant Temple Background.png";
+import ElegantImage from "../../assets/images/Elegant Temple Background.webp";
 
 const Activities = ({ setIsActivityLoaded }) => {
   const navigate = useNavigate();

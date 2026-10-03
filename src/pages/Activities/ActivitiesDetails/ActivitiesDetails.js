@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import image7 from "../../../assets/images/date.png";
+import image7 from "../../../assets/images/date.webp";
 import Container from "@mui/material/Container";
 import Slider from "react-slick";
 import Card from "@mui/material/Card";
@@ -12,7 +12,7 @@ import LightGallery from "lightgallery/react";
 import lgThumbnail from "lightgallery/plugins/thumbnail";
 import lgZoom from "lightgallery/plugins/zoom";
 import { FaSearchPlus } from "react-icons/fa";
-import imageNotFound from "../../../assets/images/NoImageFound.jpg.png";
+import imageNotFound from "../../../assets/images/NoImageFound.webp";
 import dayjs from "dayjs";
 import Loader from "../../../common/Loader/Loader";
 import InnerpageLoader from "../../Home/InnerpageLoader";

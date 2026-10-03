@@ -3,7 +3,7 @@ import Lightbox from "react-image-lightbox";
 import "react-image-lightbox/style.css";
 import { FaSearchPlus } from "react-icons/fa";
 import Grid from "@mui/material/Grid";
-import imageNotFound from "../../src/assets/images/NoImageFound.jpg.png";
+import imageNotFound from "../../src/assets/images/NoImageFound.webp";
 import { useLocation } from "react-router-dom";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";

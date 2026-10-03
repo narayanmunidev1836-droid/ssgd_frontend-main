@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
-import image from "../assets/images/subheader.jpg";
+import image from "../assets/images/subheader.webp";
 import CommonBreadcrumbs from "../common/CommonBreadcrumbs/CommonBreadcrumbs";
 import Dialog from "../common/Dialog/Dialog";
 import { useParams } from "react-router-dom";

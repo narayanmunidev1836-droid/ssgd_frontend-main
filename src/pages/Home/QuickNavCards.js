@@ -1,10 +1,10 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import "./QuickNavCards.css";
-import darshanImg from "../../assets/images/daily-darshan-img1.jpg";
-import kathaImg from "../../assets/images/B.Swami_1.jpg";
-import eventsImg from "../../assets/images/slider_10.jpg";
-import donationImg from "../../assets/images/community_activities.jpg";
+import darshanImg from "../../assets/images/daily-darshan-img1.webp";
+import kathaImg from "../../assets/images/B.Swami_1.webp";
+import eventsImg from "../../assets/images/slider_10.webp";
+import donationImg from "../../assets/images/community_activities.webp";
 
 const cards = [
   {

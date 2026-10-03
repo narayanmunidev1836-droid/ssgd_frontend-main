@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import image1 from "../../../assets/images/Satsang App Gopalanand Swamini Vato.jpg";
-import image2 from "../../../assets/images/Satsang App Ghanshyam Lilamrut Sagar.jpg";
-import image3 from "../../../assets/images/Vachanamrut Kavya.jpg";
-import image4 from "../../../assets/images/Satsang App Harililamrut.jpg";
-import image5 from "../../../assets/images/Satsang App Bhaktachintamani.jpg";
-import image6 from "../../../assets/images/Satsang App Suprabhatam.jpg";
+import image1 from "../../../assets/images/Satsang App Gopalanand Swamini Vato.webp";
+import image2 from "../../../assets/images/Satsang App Ghanshyam Lilamrut Sagar.webp";
+import image3 from "../../../assets/images/Vachanamrut Kavya.webp";
+import image4 from "../../../assets/images/Satsang App Harililamrut.webp";
+import image5 from "../../../assets/images/Satsang App Bhaktachintamani.webp";
+import image6 from "../../../assets/images/Satsang App Suprabhatam.webp";
 import Grid from "@mui/material/Grid";
 import { useNavigate } from "react-router-dom";
 import { fetchPublicationList } from "../../../api/API";

@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
-import image from "../../assets/images/subheader.jpg";
+import image from "../../assets/images/subheader.webp";
 import CommonBreadcrumbs from "../../common/CommonBreadcrumbs/CommonBreadcrumbs";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
-import image1 from "../../assets/images/date.png";
+import image1 from "../../assets/images/date.webp";
 import TextField from "@mui/material/TextField";
 import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";

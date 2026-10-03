@@ -1,8 +1,8 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import "./MissionSection.css";
-import missionImg from "../../assets/images/templeTemp.png";
-import missionBg from "../../assets/images/mission-background.png";
+import missionImg from "../../assets/images/templeTemp.webp";
+import missionBg from "../../assets/images/mission-background.webp";
 
 const MissionSection = () => {
   const navigate = useNavigate();

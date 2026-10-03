@@ -14,7 +14,7 @@ import {
   fetchPublicationList,
   fetchSlider,
 } from "../../../api/API";
-import imageNotFound from "../../../../src/assets/images/NoImageFound.jpg.png";
+import imageNotFound from "../../../../src/assets/images/NoImageFound.webp";
 import "./AudioPlayer.css";
 import DownloadForOfflineIcon from "@mui/icons-material/DownloadForOffline";
 

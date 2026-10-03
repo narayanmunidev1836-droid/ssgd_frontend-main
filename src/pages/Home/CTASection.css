@@ -1,6 +1,6 @@
 /* =========================================================
    CTA SECTION
-   Background image: ./cta-background.png
+   Background image: ./cta-background.webp
    Designed to closely match the supplied reference banner.
    ========================================================= */
 
@@ -12,7 +12,7 @@
   justify-content: flex-end;
   overflow: hidden;
 
-  background-image: url("../../assets/images/cta-background.png");
+  background-image: url("../../assets/images/cta-background.webp");
   background-position: center;
   background-repeat: no-repeat;
   background-size: 100% 100%;

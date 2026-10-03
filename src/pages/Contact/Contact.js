@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import image from "../../assets/images/subheader.jpg";
+import image from "../../assets/images/subheader.webp";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
-import image1 from "../../assets/images/email.png";
-import image2 from "../../assets/images/call.png";
-import image3 from "../../assets/images/location.png";
+import image1 from "../../assets/images/email.webp";
+import image2 from "../../assets/images/call.webp";
+import image3 from "../../assets/images/location.webp";
 import { HiArrowSmallRight } from "react-icons/hi2";
 import CommonBreadcrumbs from "../../common/CommonBreadcrumbs/CommonBreadcrumbs";
 import { FaUser } from "react-icons/fa";

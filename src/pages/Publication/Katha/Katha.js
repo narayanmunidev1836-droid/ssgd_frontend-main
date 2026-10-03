@@ -1,8 +1,8 @@
 import React from "react";
 import Grid from "@mui/material/Grid";
 import Container from '@mui/material/Container';
-import image1 from "../../../assets/images/01. Shastriji Maharaj.jpg";
-import image2 from "../../../assets/images/02. Purani Premprakash Swami.jpg";
+import image1 from "../../../assets/images/01. Shastriji Maharaj.webp";
+import image2 from "../../../assets/images/02. Purani Premprakash Swami.webp";
 import "./Katha.css";
 
 const Katha = () => {

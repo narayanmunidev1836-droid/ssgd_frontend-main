@@ -1,10 +1,10 @@
 import react from "react";
-import image from "../../assets/images/subheader.jpg";
+import image from "../../assets/images/subheader.webp";
 import CommonBreadcrumbs from "../../common/CommonBreadcrumbs/CommonBreadcrumbs";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
-import image3 from "../../assets/images/Satsang App Mantra Mahima.jpg";
+import image3 from "../../assets/images/Satsang App Mantra Mahima.webp";
 import "./Founder.css";
 
 const Founder = () => {

@@ -14,7 +14,7 @@
   transform: translateY(-50%);
   width: 300px;
   height: 300px;
-  background: url('../../assets/images/abstract.png') center/contain no-repeat;
+  background: url('../../assets/images/abstract.webp') center/contain no-repeat;
   opacity: 0.05;
   pointer-events: none;
   z-index: 0;
@@ -39,7 +39,7 @@
   transform: translateY(-50%);
   width: 280px;
   height: 280px;
-  background: url('../../assets/images/Tample.png') center/contain no-repeat;
+  background: url('../../assets/images/Tample.webp') center/contain no-repeat;
   opacity: 0.05;
   pointer-events: none;
   z-index: 0;

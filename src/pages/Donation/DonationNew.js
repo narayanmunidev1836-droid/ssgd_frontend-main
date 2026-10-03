@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import image from "../../assets/images/subheader.jpg";
+import image from "../../assets/images/subheader.webp";
 import CommonBreadcrumbs from "../../common/CommonBreadcrumbs/CommonBreadcrumbs";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
@@ -44,7 +44,7 @@ import "react-phone-input-2/lib/bootstrap.css";
 import Loader from "../../common/Loader/Loader";
 import InnerpageLoader from "../Home/InnerpageLoader";
 import FullpageLoader from "../../common/HomeSliderLoader/FullpageLoader";
-import image1 from "../../assets/images/daily-darshan-image2.jpg";
+import image1 from "../../assets/images/daily-darshan-image2.webp";
 import { CgCloseO } from "react-icons/cg";
 import Radio from "@mui/material/Radio";
 import FormLabel from "@mui/material/FormLabel";

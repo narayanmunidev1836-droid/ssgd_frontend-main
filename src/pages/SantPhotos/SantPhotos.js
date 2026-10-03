@@ -2,12 +2,12 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import Slider from "react-slick";
 import "./SantPhotos.css";
-import g1 from "../../assets/images/brahamanad_tradition.jpg";
-import g2 from "../../assets/images/education_activities.jpg";
-import g3 from "../../assets/images/community_activities.jpg";
-import g4 from "../../assets/images/medical_activities.jpg";
-import g5 from "../../assets/images/child_development_activities.jpg";
-import g6 from "../../assets/images/cultural_activities.jpg";
+import g1 from "../../assets/images/brahamanad_tradition.webp";
+import g2 from "../../assets/images/education_activities.webp";
+import g3 from "../../assets/images/community_activities.webp";
+import g4 from "../../assets/images/medical_activities.webp";
+import g5 from "../../assets/images/child_development_activities.webp";
+import g6 from "../../assets/images/cultural_activities.webp";
 import { Container } from "@mui/material";
 
 const galleryImages = [g1, g2, g3, g4, g5, g6];

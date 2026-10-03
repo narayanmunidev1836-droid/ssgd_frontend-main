@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import image from "../../assets/images/subheader.jpg";
-import image1 from "../../assets/images/swaminarayan.jpg";
+import image from "../../assets/images/subheader.webp";
+import image1 from "../../assets/images/swaminarayan.webp";
 import Grid from "@mui/material/Grid";
 import Container from "@mui/material/Container";
 import SectionTitle from "../../common/SectionTitle/SectionTitle";

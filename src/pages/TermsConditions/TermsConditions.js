@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import image from "../../assets/images/subheader.jpg";
+import image from "../../assets/images/subheader.webp";
 import Container from "@mui/material/Container";
 import CommonBreadcrumbs from "../../common/CommonBreadcrumbs/CommonBreadcrumbs";
 import Typography from "@mui/material/Typography";

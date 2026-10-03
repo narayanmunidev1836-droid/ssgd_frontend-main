@@ -10,10 +10,10 @@
 // import lgThumbnail from "lightgallery/plugins/thumbnail";
 // import lgAutoplay from "lightgallery/plugins/autoplay";
 // import lgZoom from "lightgallery/plugins/zoom";
-// import image1 from "../../assets/images/child_d_1.jpg";
-// import image2 from "../../assets/images/child_d_2.jpg";
-// import image3 from "../../assets/images/child_d_3.jpg";
-// import image4 from "../../assets/images/child_d_4.jpg";
+// import image1 from "../../assets/images/child_d_1.webp";
+// import image2 from "../../assets/images/child_d_2.webp";
+// import image3 from "../../assets/images/child_d_3.webp";
+// import image4 from "../../assets/images/child_d_4.webp";
 // import Container from "@mui/material/Container";
 // import { FaSearchPlus } from "react-icons/fa";
 // import Grid from "@mui/material/Grid";
@@ -81,11 +81,11 @@
 
 // -------------
 import React from "react";
-import image1 from "../../assets/images/child_d_1.jpg";
-import image2 from "../../assets/images/child_d_2.jpg";
-import image3 from "../../assets/images/child_d_3.jpg";
-import image4 from "../../assets/images/child_d_4.jpg";
-import image from "../../assets/images/date.png";
+import image1 from "../../assets/images/child_d_1.webp";
+import image2 from "../../assets/images/child_d_2.webp";
+import image3 from "../../assets/images/child_d_3.webp";
+import image4 from "../../assets/images/child_d_4.webp";
+import image from "../../assets/images/date.webp";
 import LightGallery from "lightgallery/react";
 
 // import styles
@@ -179,11 +179,11 @@ export default Gallery;
 // slider
 // import React from "react";
 // import Slider from "react-slick";
-// import image1 from "../../assets/images/child_d_1.jpg";
-// import image2 from "../../assets/images/child_d_2.jpg";
-// import image3 from "../../assets/images/child_d_3.jpg";
-// import image4 from "../../assets/images/child_d_4.jpg";
-// import image from "../../assets/images/date.png";
+// import image1 from "../../assets/images/child_d_1.webp";
+// import image2 from "../../assets/images/child_d_2.webp";
+// import image3 from "../../assets/images/child_d_3.webp";
+// import image4 from "../../assets/images/child_d_4.webp";
+// import image from "../../assets/images/date.webp";
 // import { FaSearchPlus } from "react-icons/fa";
 // import Container from "@mui/material/Container";
 

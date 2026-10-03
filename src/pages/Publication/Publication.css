@@ -14,7 +14,7 @@
   transform: translateY(-50%);
   width: 280px;
   height: 280px;
-  background: url('../../assets/images/Tample.png') center/contain no-repeat;
+  background: url('../../assets/images/Tample.webp') center/contain no-repeat;
   opacity: 0.06;
   pointer-events: none;
   z-index: 0;

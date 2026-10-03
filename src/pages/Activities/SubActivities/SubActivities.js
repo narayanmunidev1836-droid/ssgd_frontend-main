@@ -5,7 +5,7 @@ import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
 import Select from "@mui/material/Select";
-import imageNotFound from "../../../assets/images/NoImageFound.jpg.png";
+import imageNotFound from "../../../assets/images/NoImageFound.webp";
 import { useNavigate } from "react-router-dom";
 import CommonBreadcrumbs from "../../../common/CommonBreadcrumbs/CommonBreadcrumbs";
 import {

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import image from "../../assets/images/subheader.jpg";
+import image from "../../assets/images/subheader.webp";
 import CommonBreadcrumbs from "../../common/CommonBreadcrumbs/CommonBreadcrumbs";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
@@ -16,8 +16,8 @@ import "lightgallery/css/lg-thumbnail.css";
 import "lightgallery/scss/lightgallery.scss";
 import "lightgallery/scss/lg-zoom.scss";
 import { FaSearchPlus } from "react-icons/fa";
-import image1 from "../../assets/images/date.png";
-import imageNotFound from "../../assets/images/NoImageFound.jpg.png";
+import image1 from "../../assets/images/date.webp";
+import imageNotFound from "../../assets/images/NoImageFound.webp";
 import { fetchDailyDarshanData, fetchSlider } from "../../api/API";
 import Loader from "../../common/Loader/Loader";
 import InnerpageLoader from "../Home/InnerpageLoader";

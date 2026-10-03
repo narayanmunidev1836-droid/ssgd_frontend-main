@@ -1,6 +1,6 @@
 import React from "react";
 import "./FullpageLoader.css";
-import logo from "../../assets/images/SSGD-logo.jpeg";
+import logo from "../../assets/images/SSGD-logo.webp";
 
 const FullpageLoader = () => {
   return (

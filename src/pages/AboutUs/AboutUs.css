@@ -130,7 +130,7 @@
 }
 
 .about-us-parallax {
-  background-image: url("../../assets/images/background.jpg");
+  background-image: url("../../assets/images/background.webp");
   background-attachment: fixed;
   background-position: center;
   background-repeat: repeat;

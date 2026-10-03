@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
-import image from "../../../../assets/images/subheader.jpg";
-import image1 from "../../../../assets/images/Satsang App Gopalanand Swamini Vato.jpg";
+import image from "../../../../assets/images/subheader.webp";
+import image1 from "../../../../assets/images/Satsang App Gopalanand Swamini Vato.webp";
 import CommonBreadcrumbs from "../../../../common/CommonBreadcrumbs/CommonBreadcrumbs";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";

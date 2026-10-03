@@ -17,7 +17,7 @@
   transform: translate(-50%, -50%);
   width: 340px;
   height: 340px;
-  background: url('../../assets/images/akdm-gray.png') center/contain no-repeat;
+  background: url('../../assets/images/akdm-gray.webp') center/contain no-repeat;
   opacity: 0.07;
   pointer-events: none;
   z-index: 0;
