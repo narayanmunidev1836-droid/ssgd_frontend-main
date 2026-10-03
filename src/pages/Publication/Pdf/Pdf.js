@@ -1,15 +1,13 @@
 import React, { useEffect, useState } from "react";
-import image from "../../../assets/images/subheader.jpg";
 import CommonBreadcrumbs from "../../../common/CommonBreadcrumbs/CommonBreadcrumbs";
-import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { useNavigate, useParams } from "react-router-dom";
 import { useLocation } from "react-router-dom";
-import Loader from "../../../common/Loader/Loader";
 import InnerpageLoader from "../../Home/InnerpageLoader";
 import { fetchPublicationList, fetchSlider } from "../../../api/API";
 import PublicationSearchModal from "../../../common/PublicationSearchModal/PublicationSearchModal";
-import FullpageLoader from "../../../common/HomeSliderLoader/FullpageLoader";
+import MenuBookIcon from "@mui/icons-material/MenuBook";
+import "./Pdf.css";
 
 const Pdf = () => {
   const [pdfUrl, setPdfUrl] = useState("");
@@ -241,51 +239,43 @@ const Pdf = () => {
         )}
       </Container>
 
-      <div>
-        {" "}
-        <Container>
-          {imageLoaded ? (
-            <div
-              className="darshan-details mt-4"
-              style={{ display: "flex", gap: "10px",paddingBottom:"20px" }}
-            >
-              {/* <p>Book -</p> */}
-              <h6>{name}</h6>
+      <Container className="pdf-viewer-wrap">
+        {imageLoaded ? (
+          <div className="pdf-book-header">
+            <div className="pdf-book-header-icon">
+              <MenuBookIcon />
             </div>
-          ) : (
-            <div
-              className="darshan-details my-4"
-              style={{ display: "flex", gap: "10px" }}
-            >
-              <div className="publication-Search-shimmer" />
+            <div className="pdf-book-info">
+              <h4 className="pdf-book-title">{name || "Book"}</h4>
+              <p className="pdf-book-category">
+                Publication
+              </p>
             </div>
-          )}
-          {pdfloading && (
-            <div className="d-flex justify-content-center align-items-center w-100">
-              <div className="publication-image-card w-100" style={{height:"100vh"}}/>
+          </div>
+        ) : (
+          <div className="pdf-header-shimmer">
+            <div className="pdf-shimmer-icon"></div>
+            <div style={{ flex: 1, display: "flex", flexDirection: "column", gap: "8px" }}>
+              <div className="pdf-shimmer-line" style={{ width: "50%" }}></div>
+              <div className="pdf-shimmer-line" style={{ width: "30%", height: "14px" }}></div>
             </div>
-          )}
+          </div>
+        )}
+
+        {pdfloading && (
+          <div className="pdf-shimmer-iframe"></div>
+        )}
+        <div className="pdf-iframe-card" style={{ display: pdfloading ? "none" : "block" }}>
           <iframe
             title="pdf-viewer"
-            // src={pdfUrl}'
             src={`https://docs.google.com/gview?url=${pdfUrl}&embedded=true`}
-            
-            style={{
-              width: "100%",
-              height: "100vh",
-              margin: "0 auto",
-              // display: "flex",
-              //   marginTop: "50px",
-              marginBottom: "25px",
-              display: pdfloading ? "none" : "flex",
-              WebkitOverflowScrolling: "touch",
- 
-            }}
             onLoad={() => setPdfLoading(false)}
-             sandbox="allow-same-origin allow-scripts allow-forms"
+            sandbox="allow-same-origin allow-scripts allow-forms allow-popups allow-popups-to-escape-sandbox allow-downloads"
+            allow="fullscreen"
+            allowFullScreen
           ></iframe>
-        </Container>
-      </div>
+        </div>
+      </Container>
     </>
   );
 };
