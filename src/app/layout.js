@@ -38,6 +38,9 @@ import "../views/Activities/ActivitiesDetails/ActivitiesDetails.css";
 import "lightgallery/css/lightgallery.css";
 import "lightgallery/css/lg-zoom.css";
 import "lightgallery/css/lg-thumbnail.css";
+/* react-image-lightbox: DailyDarshan.js mounts <Lightbox> without importing
+   style.css (only Images.js did), so /daily-darshan opened it unstyled. */
+import "react-image-lightbox/style.css";
 import "../views/Publication/PublicationDetails/PublicationDetails.css";
 import "../views/Publication/Wallpaper/Wallpaper.css";
 import "../views/Publication/Tablist/Tablist.css";
