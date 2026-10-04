@@ -149,7 +149,7 @@ const PrarthnaMandir = () => {
                               </Grid>
                               <Grid item xs={12} sm={12} md={9} className="pt-5">
                               {[...Array(4)].map((_, index) => (
-                                <div className="slider-item-shimmer-text-about mt-3" />
+                                <div className="slider-item-shimmer-text-about mt-3" key={index} />
                               ))}
                            </Grid>
                           </div>

@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Fragment } from "react";
 import _image from "../../assets/images/subheader.webp";
 const image = _image.src;
 import CommonBreadcrumbs from "../../common/CommonBreadcrumbs/CommonBreadcrumbs";
@@ -254,7 +254,7 @@ const DailyDarshan = () => {
                   const darshanClass =
                     apiData.length > 1 ? "multiple-darshan" : "";
                   return (
-                    <>
+                    <Fragment key={index}>
                       <div className={`daily-katha ${darshanClass}`}>
                         <h6>{e.media.title}</h6>
                         <p>{e.media.short_description}</p>
@@ -263,10 +263,9 @@ const DailyDarshan = () => {
                       <Grid container spacing={3}>
                         {e.media.media.map((mediaItem, i) => {
                           return (
-                            <>
-                              <Grid item xs={12} sm={6} md={3} key={index}>
+                            <Fragment key={i}>
+                              <Grid item xs={12} sm={6} md={3}>
                                 <div
-                                  key={index}
                                   className="wallpaper-content"
                                   style={{ width: "100%" }}
                                   data-aos="fade-up"
@@ -307,7 +306,7 @@ const DailyDarshan = () => {
                                   </button>
                                 </div>
                               </Grid>
-                            </>
+                            </Fragment>
                           );
                         })}
 
@@ -344,7 +343,7 @@ const DailyDarshan = () => {
                           />
                         )}
                       </Grid>
-                    </>
+                    </Fragment>
                   );
                 })}
           </div>

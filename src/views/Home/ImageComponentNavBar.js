@@ -1,45 +1,28 @@
 "use client";
 import React from "react";
-import { useState } from "react";
-import HomeSliderLoader from "../../common/HomeSliderLoader/HomeSliderLoader";
-import Loader from "../../common/Loader/Loader";
-import NavbarLoader from "../../common/NavbarLoader/NavbarLoader";
-export default function ImageComponentNavBar({ src, width, size, className }) {
-  const [loading, setLoading] = useState(true);
+import _defaultLogo from "../../assets/images/logo.png";
 
+const defaultLogo = _defaultLogo.src;
+
+export default function ImageComponentNavBar({ src, width, size, className }) {
   return (
     <div
       style={{
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        // width: width ? width : "100%",
-        // marginTop: "-150px",
       }}
     >
       <img
-        src={src}
+        src={src || defaultLogo}
         className={className}
-        style={{
-          display: loading ? "none" : "block",
-          // width: "100%",
-          animation: "fadeIn 0.5s",
+        alt="logo"
+        onError={(e) => {
+          if (!e.currentTarget.src.endsWith(defaultLogo)) {
+            e.currentTarget.src = defaultLogo;
+          }
         }}
-        onLoad={(e) => {
-          setLoading(false);
-        }}
-      ></img>
-      <div
-        style={{
-          display: loading ? "block" : "none",
-          height: size,
-          //   fontSize: size ? size : "24px",
-        }}
-      >
-        <NavbarLoader />
-
-        {/* <HomeSliderLoader /> */}
-      </div>
+      />
     </div>
   );
 }

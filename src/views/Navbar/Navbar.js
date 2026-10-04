@@ -12,6 +12,9 @@ import ImageComponentNavBar from "../Home/ImageComponentNavBar";
 import Header from "../Header/Header";
 import FullpageLoader from "../../common/HomeSliderLoader/FullpageLoader";
 import { FormattedText } from "../../common/UrlFormate/FormatedText";
+import _defaultLogoImage from "../../assets/images/logo.png";
+
+const _defaultLogo = _defaultLogoImage.src;
 
 function Navbar() {
   const [activeNavLink, setActiveNavLink] = useState(false);
@@ -398,7 +401,16 @@ function Navbar() {
           >
             <div className="offcanvas-header">
               <h5 className="offcanvas-title" id="offcanvasNavbarLabel">
-                <img src={navbarLogo} alt="logo" className="navbar-logo" />
+                <img
+                  src={navbarLogo || _defaultLogo}
+                  alt="logo"
+                  className="navbar-logo"
+                  onError={(e) => {
+                    if (!e.currentTarget.src.endsWith(_defaultLogo)) {
+                      e.currentTarget.src = _defaultLogo;
+                    }
+                  }}
+                />
               </h5>
               <button
                 type="button"
