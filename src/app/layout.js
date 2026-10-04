@@ -31,6 +31,13 @@ import "../common/Loader/Lazyloader.css";
 import "../views/Contact/Contact.css";
 import "../views/Foooter/Footer.css";
 import "../views/Activities/ActivitiesDetails/ActivitiesDetails.css";
+/* lightgallery CSS: ActivitiesDetails.js mounts <LightGallery> but never imported
+   the plugin styles, so Next dropped them on /activities-detail - the portal that
+   lightgallery appends to <body> (after <footer>) rendered unstyled and showed the
+   gallery photos below the footer. Global import (CRA bundled it on every route). */
+import "lightgallery/css/lightgallery.css";
+import "lightgallery/css/lg-zoom.css";
+import "lightgallery/css/lg-thumbnail.css";
 import "../views/Publication/PublicationDetails/PublicationDetails.css";
 import "../views/Publication/Wallpaper/Wallpaper.css";
 import "../views/Publication/Tablist/Tablist.css";
