@@ -1,7 +1,8 @@
+"use client";
 import React, { useState, useEffect } from "react";
 import Grid from "@mui/material/Grid";
-import { useNavigate } from "react-router-dom";
-import { useParams } from "react-router-dom";
+import { useNavigate } from "../common/routerCompat.js";
+import { useParams } from "../common/routerCompat.js";
 import VideoList from "./VideoList";
 import AOS from "aos";
 import "aos/dist/aos.css";

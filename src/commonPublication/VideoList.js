@@ -1,10 +1,12 @@
+"use client";
 import React, { useState, useEffect } from "react";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
-import image from "../assets/images/subheader.webp";
+import _image from "../assets/images/subheader.webp";
+const image = _image.src;
 import CommonBreadcrumbs from "../common/CommonBreadcrumbs/CommonBreadcrumbs";
 import Dialog from "../common/Dialog/Dialog";
-import { useParams } from "react-router-dom";
+import { useParams } from "../common/routerCompat.js";
 import { fetchPublicationDetails } from "../api/API";
 import AOS from "aos";
 import "aos/dist/aos.css";
@@ -39,7 +41,7 @@ const VideoList = () => {
     const fetchData = async () => {
       try {
         const response = await fetchPublicationDetails({
-          url: process.env.REACT_APP_API_URL,
+          url: process.env.NEXT_PUBLIC_API_URL,
           page: "publication",
           album_id: id,
         });

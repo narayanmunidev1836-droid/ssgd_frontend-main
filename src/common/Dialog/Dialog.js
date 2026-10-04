@@ -1,3 +1,4 @@
+"use client";
 import React, { useRef, useEffect, useState } from "react";
 import Card from "@mui/material/Card";
 import { CgCloseO } from "react-icons/cg";

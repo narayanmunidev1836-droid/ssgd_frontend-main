@@ -1,6 +1,8 @@
+"use client";
 import React from "react";
 import "./FullpageLoader.css";
-import logo from "../../assets/images/SSGD-logo.webp";
+import _logo from "../../assets/images/SSGD-logo.webp";
+const logo = _logo.src;
 
 const FullpageLoader = () => {
   return (

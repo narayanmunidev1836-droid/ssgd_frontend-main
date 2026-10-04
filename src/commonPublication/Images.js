@@ -1,10 +1,12 @@
+"use client";
 import React, { useState, useEffect } from "react";
 import Lightbox from "react-image-lightbox";
 import "react-image-lightbox/style.css";
 import { FaSearchPlus } from "react-icons/fa";
 import Grid from "@mui/material/Grid";
-import imageNotFound from "../../src/assets/images/NoImageFound.webp";
-import { useLocation } from "react-router-dom";
+import _imageNotFound from "../../src/assets/images/NoImageFound.webp";
+const imageNotFound = _imageNotFound.src;
+import { useLocation } from "../common/routerCompat.js";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
 import AOS from "aos";

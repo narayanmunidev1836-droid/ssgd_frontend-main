@@ -1,7 +1,8 @@
+"use client";
 import React, { useState, useEffect, useRef } from "react";
 import { IoSearch } from "react-icons/io5";
 import { fetchPublicationSearchData } from "../../api/API";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "../routerCompat.js";
 
 const PublicationSearchModal = ({ onTap }) => {
   const [modalOpen, setModalOpen] = useState(false);
@@ -40,7 +41,7 @@ const PublicationSearchModal = ({ onTap }) => {
     try {
       const response = await fetchPublicationSearchData(
         {
-          url: process.env.REACT_APP_API_URL,
+          url: process.env.NEXT_PUBLIC_API_URL,
           page: "publication",
         },
         searchData

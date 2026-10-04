@@ -1,0 +1,115 @@
+import "bootstrap/dist/css/bootstrap.css";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+/* ---- Global CSS: every stylesheet CRA loaded on every route (single main.css),
+   imported in CRA/webpack module-graph order so the cascade matches the CRA build.
+   Next otherwise loads only the current route's component CSS, which drops rules
+   owned by other routes (e.g. /about-us losing About.css). ---- */
+import "../index.css";
+import "../views/Navbar/Navbar.css";
+import "../common/NavbarLoader/NavbarLoader.css";
+import "../common/HomeSliderLoader/HomeSliderLoader.css";
+import "../common/Loader/Loader.css";
+import "../views/Header/Header.css";
+import "../common/HomeSliderLoader/FullpageLoader.css";
+import "../views/Home/Home.css";
+import "../views/Home/QuickNavCards.css";
+import "../views/Home/MissionSection.css";
+import "../views/Videos/Videos.css";
+import "../views/Publication/Publication.css";
+import "../views/Activities/Activities.css";
+import "../views/Home/StatsSection.css";
+import "../views/SantPhotos/SantPhotos.css";
+import "../views/Home/CTASection.css";
+import "../views/AboutUs/AboutUs.css";
+import "../common/CommonBreadcrumbs/CommonBreadcrumbs.css";
+import "../common/HomeSliderLoader/SubpageLoader.css";
+import "../views/Activities/SubActivities/SubActivities.css";
+import "../common/Loader/ActivityLoader.css";
+import "../views/Branches/Branches.css";
+import "../common/Loader/Lazyloader.css";
+import "../views/Contact/Contact.css";
+import "../views/Foooter/Footer.css";
+import "../views/Activities/ActivitiesDetails/ActivitiesDetails.css";
+import "../views/Publication/PublicationDetails/PublicationDetails.css";
+import "../views/Publication/Wallpaper/Wallpaper.css";
+import "../views/Publication/Tablist/Tablist.css";
+import "../views/Publication/Katha/Katha.css";
+import "../common/Dialog/Dialog.css";
+import "../views/Publication/AudioNew/AudioPlayer.css";
+import "../common/Loader/AudioPlayerLoader.css";
+import "../views/AboutUs/About.css";
+import "../views/DailyDarshan/DailyDarshan.css";
+import "../views/DailyKatha/DailyKatha.css";
+import "../views/Donation/Donation.css";
+import "../views/TermsConditions/TermsConditions.css";
+import "../views/AboutUs/Founder.css";
+import "../views/Publication/Pdf/Pdf.css";
+import "../ThankYou/Thankyou.css";
+import "../views/CustomePage/CustomPage.css";
+import "../views/Donation/Donors.css";
+import Providers from "./Providers";
+
+export const metadata = {
+  title: "Sanskardham",
+  description: "",
+  keywords: "",
+  icons: {
+    icon: "/favicon.webp",
+    apple: "/logo192.png",
+  },
+};
+
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+  themeColor: "#000000",
+};
+
+export default function RootLayout({ children }) {
+  return (
+    <html lang="en">
+      <body>
+        {/* ---- CDN assets ported from CRA public/index.html ----
+             Font Awesome + Poppins stay on the CDN (no npm package in use).
+             Bootstrap/Slick CSS moved to npm imports at the top of this file:
+             Next puts its own stylesheet links in <head> BEFORE body-level CDN
+             links, which inverts CRA's cascade order (CDN first, bundle last)
+             and measurably changes computed styles. Bundling them ahead of
+             index.css restores CRA ordering. ---- */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+          rel="stylesheet"
+        />
+        <link
+          rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+          integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+          crossOrigin="anonymous"
+          referrerPolicy="no-referrer"
+        />
+
+        <noscript>You need to enable JavaScript to run this app.</noscript>
+
+        {/* CRA parity: App.js ran `console.log = function no_console() {}` on
+            render, so the app ships no console.log noise. Same override here,
+            before hydration (console.warn/error untouched). */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `if (true) { console.log = function no_console() {}; }`,
+          }}
+        />
+
+        <Providers>{children}</Providers>
+
+        <script
+          src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+          crossOrigin="anonymous"
+        />
+      </body>
+    </html>
+  );
+}

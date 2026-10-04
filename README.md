@@ -1,70 +1,75 @@
-# Getting Started with Create React App
+# SSGD website (Next.js)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Website for SSGD — a multi-site religious/cultural organization. Migrated from Create React App to **Next.js 16 (App Router)**; see [`MIGRATION_PLAN.md`](./MIGRATION_PLAN.md) for the full migration record.
 
-## Available Scripts
+## Requirements
 
-In the project directory, you can run:
+- **Node.js >= 20.9** (Next 16 minimum; developed on v22.11.0)
+- npm
 
-### `npm start`
+## Commands
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+```bash
+npm run dev     # dev server (next dev) at http://localhost:3000
+npm start       # alias of npm run dev
+npm run build   # production build to .next/
+npm run serve   # production server (next start)
+npm test        # leftover CRA test script — not wired up, no tests exist
+```
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Environment
 
-### `npm test`
+```bash
+REACT_APP_API_URL is gone — use:
+NEXT_PUBLIC_API_URL=https://www.ssgd.org/
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- Only `NEXT_PUBLIC_*` variables are inlined into the browser bundle; changing one requires a **rebuild** (multi-site deployments rebuild with a different `NEXT_PUBLIC_API_URL`).
+- The API base URL resolves to `https://beadm.ssgd.org/api/v1/`. Commented-out entries in `.env` show alternate site URLs (USA, Surat, …) for multi-site deployment.
 
-### `npm run build`
+## Project structure
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```
+src/
+  app/                  # App Router
+    layout.js           # root layout: <Providers>, Navbar/Footer, global CSS, CDN <link>/<script>
+    page.js             # /
+    (main)/…            # every routed page (navbar + footer)
+    (bare)/view_bill/   # route rendered WITHOUT navbar/footer
+    not-found.js        # 404
+  common/
+    routerCompat.js     # react-router-shaped API on top of next/navigation
+    …                   # shared UI (breadcrumbs, loaders, dialogs, filters, scroll utils)
+  views/                # one directory per feature/page (was src/pages/ in CRA)
+  commonPublication/    # publication list/table components
+  api/                  # axios instance + ~25 named functions in API.js
+  Redux/                # Redux Toolkit store (kept for parity, currently unused)
+  assets/               # images (static imports)
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Notes:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- `src/views/Foooter/` keeps the original typo on purpose — renaming would churn imports for no behavior change.
+- All component CSS is imported through `src/app/layout.js` in the CRA bundle's order. CRA shipped one stylesheet for every route; Next only loads the current route's CSS, so the global import list is what preserves the cascade.
 
-### `npm run eject`
+## `src/common/routerCompat.js`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+The app was written against `react-router-dom` v6. `routerCompat` exports the same surface on top of the Next router so the migrated components stay untouched:
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+| Export | Behaviour |
+|---|---|
+| `useNavigate()` | `navigate(to, {replace, state})` — number → `router.back()`; state is round-tripped through `sessionStorage` (`setNavState`/`getNavState`) |
+| `useLocation()` | `pathname` + `search`, memoised on `pathname|search` (safe as an effect dep) |
+| `useParams()` | passthrough to `next/navigation` |
+| `Link` | `<a>` + `router.push`, `scroll={false}` |
+| `NavLink` | appends `active` + `aria-current="page"`; `end` defaults to `true` when `to === "/"` (react-router v6 default) |
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Do not import `react-router-dom` anywhere — `grep react-router-dom src` must stay at 0.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## Deploy
 
-## Learn More
+Node server only (no static export):
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+```bash
+npm run build && npm run serve   # next build + next start
+```

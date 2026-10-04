@@ -1,8 +1,9 @@
+"use client";
 import React, { useEffect, useState } from "react";
 import Container from "@mui/material/Container";
 import Card from "@mui/material/Card";
 import "./Thankyou.css";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "../common/routerCompat.js";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { Button, CardContent, Typography } from "@mui/material";

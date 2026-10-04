@@ -1,7 +1,8 @@
+"use client";
 import React, { useState, useEffect } from "react";
 import Grid from "@mui/material/Grid";
-import { useNavigate } from "react-router-dom";
-import { useParams } from "react-router-dom";
+import { useNavigate } from "../common/routerCompat.js";
+import { useParams } from "../common/routerCompat.js";
 import BookList from "./BookList";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";

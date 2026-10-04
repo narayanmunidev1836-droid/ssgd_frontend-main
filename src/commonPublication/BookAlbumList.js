@@ -1,11 +1,12 @@
+"use client";
 import React, { useState, useEffect } from "react";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import CommonBreadcrumbs from "../common/CommonBreadcrumbs/CommonBreadcrumbs";
-import { useNavigate } from "react-router-dom";
-import { useParams } from "react-router-dom";
+import { useNavigate } from "../common/routerCompat.js";
+import { useParams } from "../common/routerCompat.js";
 import PublicationSearchModal from "../common/PublicationSearchModal/PublicationSearchModal";
-import InnerpageLoader from "../pages/Home/InnerpageLoader";
+import InnerpageLoader from "../views/Home/InnerpageLoader";
 import {
   fetchPublicationDetails,
   fetchPublicationList,
@@ -79,7 +80,7 @@ const BookAlbumList = () => {
     const fetchData = async () => {
       try {
         const response = await fetchPublicationDetails({
-          url: process.env.REACT_APP_API_URL,
+          url: process.env.NEXT_PUBLIC_API_URL,
           page: "publication",
           album_id: id,
         });
@@ -98,7 +99,7 @@ const BookAlbumList = () => {
     const fetchBanner = async () => {
       try {
         const response = await fetchSlider({
-          url: process.env.REACT_APP_API_URL,
+          url: process.env.NEXT_PUBLIC_API_URL,
           page: "publication",
         });
         setBanner(response.data.responseBody);
@@ -167,7 +168,7 @@ const BookAlbumList = () => {
 
     try {
       const response = await fetchPublicationList({
-        url: process.env.REACT_APP_API_URL,
+        url: process.env.NEXT_PUBLIC_API_URL,
         page: "publication",
         order_by: "all",
         publication_id: publicationid,
@@ -202,7 +203,7 @@ const BookAlbumList = () => {
     const fetchBanner = async () => {
       try {
         const response = await fetchSlider({
-          url: process.env.REACT_APP_API_URL,
+          url: process.env.NEXT_PUBLIC_API_URL,
           page: "publication",
         });
         setBanner(response.data.responseBody);
