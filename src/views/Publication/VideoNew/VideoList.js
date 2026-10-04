@@ -20,6 +20,16 @@ import "react-lazy-load-image-component/src/effects/blur.css";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
+const parseMediaUrl = (media) => {
+  try {
+    const parsed = typeof media === "string" ? JSON.parse(media) : media;
+    if (Array.isArray(parsed)) return parsed[0] || null;
+    return parsed || null;
+  } catch (error) {
+    return null;
+  }
+};
+
 const VideoList = ({ videoListData, publiCationLoading }) => {
   const params = useParams();
     const location = useLocation();
@@ -102,11 +112,16 @@ const VideoList = ({ videoListData, publiCationLoading }) => {
       });
       setVideoDetailsList(response.data.responseBody.list);
       setPublicationDetailResponse(response.data.responseBody);
-            if (
+      if (
         response.data.responseBody.list &&
         response.data.responseBody.list.length > 0
       ) {
-        setMediaUrl(JSON.parse(response.data.responseBody.list[0].media)[0]);
+        const firstMedia = parseMediaUrl(
+          response.data.responseBody.list[0].media
+        );
+        if (firstMedia) {
+          setMediaUrl(firstMedia);
+        }
       }
           } catch (error) {
       console.error("Error fetching data:", error);
@@ -153,7 +168,10 @@ const VideoList = ({ videoListData, publiCationLoading }) => {
         (item) => item.id.toString() === is_open
       );
             if (video) {
-        setMediaUrl(JSON.parse(video.media)[0]);
+        const videoUrl = parseMediaUrl(video.media);
+        if (videoUrl) {
+          setMediaUrl(videoUrl);
+        }
       }
     }
   });
@@ -268,11 +286,13 @@ const VideoList = ({ videoListData, publiCationLoading }) => {
     const fetchAllVideoDetails = async () => {
       if (Array.isArray(videoDetailsList)) {
       const videoPromises = videoDetailsList.map(async (item) => {
-        const mediaArray = JSON.parse(item.media);
-        const firstMedia = mediaArray[0];
+        const firstMedia = parseMediaUrl(item.media);
+        if (!firstMedia) return null;
+
         const videoId = firstMedia.match(
           /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/
         )?.[1];
+        if (!videoId) return null;
 
         const videoData = await fetchVideoDetails(videoId);
         return { videoData, item };
@@ -280,7 +300,7 @@ const VideoList = ({ videoListData, publiCationLoading }) => {
 
       const resolvedVideos = await Promise.all(videoPromises);
       setYoutubeData(
-        resolvedVideos.filter((video) => video.videoData !== null)
+        resolvedVideos.filter((video) => video && video.videoData !== null)
       );
           }else{
       setYoutubeData([]);
@@ -414,9 +434,10 @@ const VideoList = ({ videoListData, publiCationLoading }) => {
             </div>
             <div>
               <button
-                onClick={() =>
-                  handleViewDetailsClick(JSON.parse(item?.item?.media)[0])
-                }
+                onClick={() => {
+                  const url = parseMediaUrl(item?.item?.media);
+                  if (url) handleViewDetailsClick(url);
+                }}
               >
                 View Details
               </button>
