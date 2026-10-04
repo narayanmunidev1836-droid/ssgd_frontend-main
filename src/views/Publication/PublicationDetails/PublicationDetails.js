@@ -19,6 +19,8 @@ import FavouriteAlbumList from "../Favourites/FavouriteAlbumList";
 import FullpageLoader from "../../../common/HomeSliderLoader/FullpageLoader";
 import ActivityLoader from "../../../common/Loader/ActivityLoader";
 import { BsHeartFill } from "react-icons/bs";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { Grid } from "@mui/material";
 
 const PublicationDetails = () => {
@@ -399,6 +401,7 @@ const PublicationDetails = () => {
         )}
       </Container>
       <div className="section-padding"></div>
+      <ToastContainer position="top-right" autoClose={2000} />
     </>
   );
 };

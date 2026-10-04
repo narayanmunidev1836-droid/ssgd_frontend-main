@@ -28,6 +28,7 @@ import { useNavigate, useParams } from "../../../common/routerCompat.js";
 import { fetchPublicationDetails } from "../../../api/API";
 import { Container } from "@mui/material";
 import PublicationSearchModal from "../../../common/PublicationSearchModal/PublicationSearchModal";
+import FavouriteAlbumList from "../Favourites/FavouriteAlbumList";
 import AudioPlayerLoader from "../../../common/Loader/AudioPlayerLoader";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
@@ -60,6 +61,7 @@ const AudioListPlayer = ({ audioListData, publiCationLoading }) => {
   const [downloadingIndex, setDownloadingIndex] = useState(null);
   const [isFavourite, setIsFavourite] = useState(false);
   const [favouriteTracks, setFavouriteTracks] = useState([]);
+  const [showFavourites, setShowFavourites] = useState(false);
 
   const FAVOURITE_KEY = "favouriteAudioAlbums";
   const FAVOURITE_TRACK_KEY = "favouriteAudioTracks";
@@ -253,7 +255,9 @@ const AudioListPlayer = ({ audioListData, publiCationLoading }) => {
             id: key,
             name: song?.name || "",
             album_id: params.album_id ? params.album_id.toString() : "",
+            publication_id: params.pub_id ? params.pub_id.toString() : "",
             album_title: typeof albumName === "string" ? albumName : "",
+            src: typeof song?.src === "string" ? song.src : "",
           },
         ];
 
@@ -421,6 +425,7 @@ const AudioListPlayer = ({ audioListData, publiCationLoading }) => {
     publicationData,
     isActive
   ) => {
+    setShowFavourites(false);
     setPublicationAlbumData(null);
     setSelectedPublicationslugn(ui_slug);
     setActiveTab(index);
@@ -742,6 +747,8 @@ const AudioListPlayer = ({ audioListData, publiCationLoading }) => {
     });
   }, []);
 
+  const currentSong = audioPlayerHelper.songs[audioPlayerHelper.currentIndex];
+
   const isCurrentPlaying =
     audioPlayerHelper.songs[audioPlayerHelper.currentIndex]?.isPlaying;
 
@@ -782,7 +789,7 @@ const AudioListPlayer = ({ audioListData, publiCationLoading }) => {
                       <button
                         className={
                           publicationId?.toString() ===
-                          publication.id.toString()
+                            publication.id.toString() && !showFavourites
                             ? "active-tab"
                             : ""
                         }
@@ -800,6 +807,14 @@ const AudioListPlayer = ({ audioListData, publiCationLoading }) => {
                       </button>
                     </div>
                   ))}
+                  <div>
+                    <button
+                      className={showFavourites ? "active-tab" : ""}
+                      onClick={() => setShowFavourites(true)}
+                    >
+                      <BsHeartFill /> Favourites
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
@@ -832,7 +847,9 @@ const AudioListPlayer = ({ audioListData, publiCationLoading }) => {
           </div>
         )}
 
-        {typeof finalAudioListData === "string" ||
+        {showFavourites ? (
+          <FavouriteAlbumList />
+        ) : typeof finalAudioListData === "string" ||
         (Array.isArray(!finalAudioListData) && !finalAudioListData) ? (
           <div className="no-data mt-4">No data available</div>
         ) : Array.isArray(finalAudioListData) &&
@@ -1059,7 +1076,8 @@ const AudioListPlayer = ({ audioListData, publiCationLoading }) => {
       </Container>
 
       {/* ---- Bottom Audio Player ---- */}
-      {typeof finalAudioListData === "string" ||
+      {showFavourites ||
+      typeof finalAudioListData === "string" ||
       (Array.isArray(finalAudioListData) &&
         finalAudioListData.length === 0) ? (
         <div></div>
@@ -1112,6 +1130,29 @@ const AudioListPlayer = ({ audioListData, publiCationLoading }) => {
               <button onClick={playNextSong} className="bottom-ctrl-btn">
                 <TbPlayerTrackNextFilled className="bottom-ctrl-icon" />
               </button>
+              {currentSong && (
+                <button
+                  className={`bottom-fav-btn ${
+                    isTrackFavourite(currentSong)
+                      ? "bottom-fav-btn-active"
+                      : ""
+                  }`}
+                  onClick={() => toggleFavouriteTrack(currentSong)}
+                  aria-pressed={isTrackFavourite(currentSong)}
+                  aria-label="Favourite"
+                  title={
+                    isTrackFavourite(currentSong)
+                      ? "Remove from favourite"
+                      : "Add to favourite"
+                  }
+                >
+                  {isTrackFavourite(currentSong) ? (
+                    <BsHeartFill className="bottom-fav-icon" />
+                  ) : (
+                    <BsHeart className="bottom-fav-icon" />
+                  )}
+                </button>
+              )}
             </div>
             <div className="bottom-progress-wrap">
               <span className="bottom-progress-time">

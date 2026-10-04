@@ -1,9 +1,14 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Grid from "@mui/material/Grid";
 import { useNavigate } from "../../../common/routerCompat.js";
-import { BsHeartFill } from "react-icons/bs";
-import { toast, ToastContainer } from "react-toastify";
+import {
+  BsHeartFill,
+  BsChevronRight,
+  BsPlayCircleFill,
+  BsPauseCircleFill,
+} from "react-icons/bs";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import _imageNotFound from "../../../assets/images/NoImageFound.webp";
 const imageNotFound = _imageNotFound.src;
@@ -17,6 +22,9 @@ const FavouriteAlbumList = () => {
   const navigate = useNavigate();
   const [albums, setAlbums] = useState([]);
   const [tracks, setTracks] = useState([]);
+  const [playingId, setPlayingId] = useState(null);
+  const audioRef = useRef(null);
+  const audioSrcRef = useRef("");
 
   const loadFavourites = () => {
     try {
@@ -89,6 +97,60 @@ const FavouriteAlbumList = () => {
     }
   };
 
+  const openTrackAlbum = (track) => {
+    if (track?.album_id && track?.publication_id) {
+      navigate(
+        `/audio-album/${track.album_id}/publication/${track.publication_id}`
+      );
+    }
+  };
+
+  useEffect(() => {
+    return () => {
+      if (audioRef.current) {
+        audioRef.current.pause();
+        audioRef.current = null;
+        audioSrcRef.current = "";
+      }
+    };
+  }, []);
+
+  const togglePlay = (track, index) => {
+    const src = typeof track?.src === "string" ? track.src : "";
+    const key = String(track.id ?? index);
+
+    if (!src) {
+      toast.info("Audio not available for this track");
+      return;
+    }
+
+    if (!audioRef.current) {
+      audioRef.current = new Audio();
+      audioRef.current.onended = () => setPlayingId(null);
+    }
+
+    const audio = audioRef.current;
+
+    if (playingId === key && !audio.paused) {
+      audio.pause();
+      setPlayingId(null);
+      return;
+    }
+
+    if (audioSrcRef.current !== src) {
+      audio.src = src;
+      audioSrcRef.current = src;
+    }
+
+    audio
+      .play()
+      .then(() => setPlayingId(key))
+      .catch(() => {
+        setPlayingId(null);
+        toast.error("Unable to play this track");
+      });
+  };
+
   return (
     <div className="favourite-list-wrap" data-aos="fade-up">
       <div className="favourite-section-head">
@@ -157,36 +219,89 @@ const FavouriteAlbumList = () => {
             <h4 className="favourite-section-title">My Favourite Tracks</h4>
             <span className="favourite-count">{tracks.length} tracks</span>
           </div>
-          <div className="favourite-track-table">
-            {tracks.map((track, index) => (
-              <div
-                className="favourite-track-row"
-                key={String(track.id ?? index)}
-              >
-                <span className="favourite-track-num">
-                  {String(index + 1).padStart(2, "0")}
-                </span>
-                <span className="favourite-track-name">
-                  {cleanTrackName(track.name)}
-                </span>
-                <span className="favourite-track-album">
-                  {track.album_title || ""}
-                </span>
-                <button
-                  className="favourite-track-remove"
-                  aria-label="Remove from favourite"
-                  title="Remove from favourite"
-                  onClick={() => removeTrack(track.id ?? track)}
-                >
-                  <BsHeartFill />
-                </button>
-              </div>
-            ))}
-          </div>
+          <table className="favourite-track-table">
+            <thead>
+              <tr className="favourite-track-header">
+                <th className="favourite-track-num">#</th>
+                <th className="favourite-track-name">Track</th>
+                <th className="favourite-track-album">Album</th>
+                <th className="favourite-track-actions-cell">
+                  <div className="favourite-track-actions">Action</div>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {tracks.map((track, index) => {
+                const canOpenAlbum = Boolean(
+                  track.album_id && track.publication_id
+                );
+                return (
+                  <tr
+                    className="favourite-track-row"
+                    key={String(track.id ?? index)}
+                  >
+                    <td className="favourite-track-num">
+                      {String(index + 1).padStart(2, "0")}
+                    </td>
+                    <td className="favourite-track-name">
+                      {cleanTrackName(track.name)}
+                    </td>
+                    <td className="favourite-track-album">
+                      {track.album_title || ""}
+                    </td>
+                    <td className="favourite-track-actions-cell">
+                      <div className="favourite-track-actions">
+                        <button
+                          className={`favourite-track-play ${
+                            playingId === String(track.id ?? index)
+                              ? "favourite-track-play-active"
+                              : ""
+                          }`}
+                          aria-label={
+                            playingId === String(track.id ?? index)
+                              ? "Pause"
+                              : "Play"
+                          }
+                          title={
+                            playingId === String(track.id ?? index)
+                              ? "Pause"
+                              : "Play"
+                          }
+                          onClick={() => togglePlay(track, index)}
+                        >
+                          {playingId === String(track.id ?? index) ? (
+                            <BsPauseCircleFill />
+                          ) : (
+                            <BsPlayCircleFill />
+                          )}
+                        </button>
+                        <button
+                          className="favourite-track-remove"
+                          aria-label="Remove from favourite"
+                          title="Remove from favourite"
+                          onClick={() => removeTrack(track.id ?? track)}
+                        >
+                          <BsHeartFill />
+                        </button>
+                        {canOpenAlbum && (
+                          <button
+                            className="favourite-track-goto"
+                            title="Go to album"
+                            onClick={() => openTrackAlbum(track)}
+                          >
+                            Go to album
+                            <BsChevronRight />
+                          </button>
+                        )}
+                      </div>
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
         </div>
       )}
-
-      <ToastContainer position="top-right" autoClose={2000} />
     </div>
   );
 };
