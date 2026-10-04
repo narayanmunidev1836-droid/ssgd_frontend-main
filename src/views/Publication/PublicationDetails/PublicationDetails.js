@@ -15,8 +15,10 @@ import BookAndAlbumList from "../../../commonPublication/BookAndAlbumList";
 import InnerpageLoader from "../../Home/InnerpageLoader";
 import PublicationSearchModal from "../../../common/PublicationSearchModal/PublicationSearchModal";
 import PublicationFilter from "../../../common/PublicationFilter/PublicationFilter";
+import FavouriteAlbumList from "../Favourites/FavouriteAlbumList";
 import FullpageLoader from "../../../common/HomeSliderLoader/FullpageLoader";
 import ActivityLoader from "../../../common/Loader/ActivityLoader";
+import { BsHeartFill } from "react-icons/bs";
 import { Grid } from "@mui/material";
 
 const PublicationDetails = () => {
@@ -44,6 +46,7 @@ const PublicationDetails = () => {
   const [loading, setLoading] = useState(false);
   const [imageLoaded, setImageLoaded] = useState(false);
   const [orderBy, setrderBy] = useState("all");
+  const [showFavourites, setShowFavourites] = useState(false);
   const [publiCationLoading, setPublicationLoading] = useState(true);
 
   // NEW STATES
@@ -144,6 +147,7 @@ const PublicationDetails = () => {
   // Add scroll handler effect
   useEffect(() => {
     const handleScroll = () => {
+      if (showFavourites) return;
       if (
         window.innerHeight + document.documentElement.scrollTop
         >= document.documentElement.offsetHeight - 650
@@ -156,7 +160,7 @@ const PublicationDetails = () => {
   
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [hasMore, loadMoreLoading, initialLoading]);
+  }, [hasMore, loadMoreLoading, initialLoading, showFavourites]);
 
   useEffect(() => {
     if (publicationId) {
@@ -173,6 +177,7 @@ const PublicationDetails = () => {
     publicationData,
     isActive
   ) => {
+    setShowFavourites(false);
     setPublicationAlbumData(null);
     setSelectedPublicationslugn(ui_slug);
     setActiveTab(index);
@@ -192,7 +197,12 @@ const PublicationDetails = () => {
   };
 
   const handleOrderBy = (data) => {
-        setrderBy(data);
+    if (data === "favourites") {
+      setShowFavourites(true);
+      return;
+    }
+    setShowFavourites(false);
+    setrderBy(data);
   };
 
   useEffect(() => {
@@ -290,7 +300,7 @@ const PublicationDetails = () => {
                           <button
                             className={
                               publicationId?.toString() ===
-                              publication.id.toString()
+                                publication.id.toString() && !showFavourites
                                 ? "active-tab"
                                 : ""
                             }
@@ -308,11 +318,24 @@ const PublicationDetails = () => {
                           </button>
                         </div>
                       ))}
+                      <div>
+                        <button
+                          className={showFavourites ? "active-tab" : ""}
+                          onClick={() => setShowFavourites(true)}
+                        >
+                          <BsHeartFill /> Favourites
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </div>
 
-                <PublicationFilter HandleOrderBy={handleOrderBy} />
+                {!showFavourites && (
+                  <PublicationFilter
+                    HandleOrderBy={handleOrderBy}
+                    value={orderBy}
+                  />
+                )}
                 <PublicationSearchModal onTap={updateDataByApi} />
               </div>
             )
@@ -320,6 +343,10 @@ const PublicationDetails = () => {
         </>
       </Container>
       <Container className="pt-2">
+        {showFavourites ? (
+          <FavouriteAlbumList />
+        ) : (
+          <>
         {Array.isArray(publicationList) && publicationList.length === 0 && (
           <div className="pt-5">
             <Grid container spacing={3}>
@@ -367,6 +394,8 @@ const PublicationDetails = () => {
               </Grid>
             ))}
           </Grid>
+        )}
+          </>
         )}
       </Container>
       <div className="section-padding"></div>

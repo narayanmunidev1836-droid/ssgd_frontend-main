@@ -5,10 +5,14 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 
 const PublicationFilter = (props) => {
-  const [selectedValue, setSelectedValue] = useState("all");
+  const [internalValue, setInternalValue] = useState("all");
+  const selectedValue =
+    props.value !== undefined && props.value !== null
+      ? props.value
+      : internalValue;
 
   const handleChange = (event) => {
-    setSelectedValue(event.target.value);
+    setInternalValue(event.target.value);
     props.HandleOrderBy(event.target.value);
   };
     return (
@@ -37,6 +41,7 @@ const PublicationFilter = (props) => {
           <option value="newest">Newest</option>
           <option value="oldest">Oldest</option>
           <option value="alpha">Alphabetical</option>
+          <option value="favourites">My Favourites</option>
         </select>
       </div>
     </>

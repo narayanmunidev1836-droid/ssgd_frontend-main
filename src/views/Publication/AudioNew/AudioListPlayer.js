@@ -5,6 +5,9 @@ import { TbPlayerTrackPrevFilled } from "react-icons/tb";
 import { TbPlayerTrackNextFilled } from "react-icons/tb";
 import { BsRepeat1 } from "react-icons/bs";
 import { BsRepeat } from "react-icons/bs";
+import { BsShare, BsHeart, BsHeartFill } from "react-icons/bs";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import PlayCircleIcon from "@mui/icons-material/PlayCircle";
 import PauseCircleIcon from "@mui/icons-material/PauseCircle";
 import MusicNoteIcon from "@mui/icons-material/MusicNote";
@@ -55,6 +58,11 @@ const AudioListPlayer = ({ audioListData, publiCationLoading }) => {
   const [isLoader, setIsLoader] = useState(false);
   const [downloadComplete, setDownloadComplete] = useState(false);
   const [downloadingIndex, setDownloadingIndex] = useState(null);
+  const [isFavourite, setIsFavourite] = useState(false);
+  const [favouriteTracks, setFavouriteTracks] = useState([]);
+
+  const FAVOURITE_KEY = "favouriteAudioAlbums";
+  const FAVOURITE_TRACK_KEY = "favouriteAudioTracks";
 
   // Custom player state
   const [currentTime, setCurrentTime] = useState(0);
@@ -143,6 +151,202 @@ const AudioListPlayer = ({ audioListData, publiCationLoading }) => {
       setIsLoader(false);
     }
     setIsLoader(false);
+  };
+
+  const readFavouriteAlbums = () => {
+    try {
+      const stored = JSON.parse(localStorage.getItem(FAVOURITE_KEY) || "[]");
+      if (!Array.isArray(stored)) return [];
+      return stored.map((item) =>
+        typeof item === "string" ? { album_id: item } : item
+      );
+    } catch (error) {
+      return [];
+    }
+  };
+
+  const getAlbumSnapshot = () => ({
+    album_id: params.album_id ? params.album_id.toString() : "",
+    publication_id: params.pub_id ? params.pub_id.toString() : "",
+    title: typeof albumName === "string" && albumName ? albumName : "",
+    image: publicationDetailResponse?.albums?.image || "",
+  });
+
+  useEffect(() => {
+    if (!params.album_id) return;
+    const stored = readFavouriteAlbums();
+    setIsFavourite(
+      stored.some(
+        (album) => String(album.album_id) === params.album_id.toString()
+      )
+    );
+  }, [params.album_id]);
+
+  const getTrackKey = (song) => String(song?.id ?? song?.name ?? "");
+  const getTrackId = (item) => String(item?.id ?? item ?? "");
+  const favouriteTrackIds = favouriteTracks.map(getTrackId);
+
+  const isTrackFavourite = (song) => {
+    const key = getTrackKey(song);
+    return key ? favouriteTrackIds.includes(key) : false;
+  };
+
+  const allTracksFavourite =
+    Array.isArray(finalAudioListData) &&
+    finalAudioListData.length > 0 &&
+    finalAudioListData.every((song) => isTrackFavourite(song));
+
+  const isAlbumFavourite = isFavourite || allTracksFavourite;
+
+  const toggleFavourite = () => {
+    if (!params.album_id) return;
+    const stored = readFavouriteAlbums();
+    const albumId = params.album_id.toString();
+
+    if (isAlbumFavourite) {
+      const updated = stored.filter(
+        (album) => String(album.album_id) !== albumId
+      );
+      localStorage.setItem(FAVOURITE_KEY, JSON.stringify(updated));
+      setIsFavourite(false);
+
+      if (allTracksFavourite) {
+        setFavouriteTracks([]);
+        localStorage.setItem(FAVOURITE_TRACK_KEY, JSON.stringify([]));
+      }
+      toast.info("Removed from favourite");
+    } else {
+      const updated = [...stored, getAlbumSnapshot()];
+      localStorage.setItem(FAVOURITE_KEY, JSON.stringify(updated));
+      setIsFavourite(true);
+      toast.success("Added to favourite");
+    }
+  };
+
+  useEffect(() => {
+    try {
+      const stored = JSON.parse(
+        localStorage.getItem(FAVOURITE_TRACK_KEY) || "[]"
+      );
+      setFavouriteTracks(
+        Array.isArray(stored)
+          ? stored.map((item) =>
+              typeof item === "string" ? { id: item } : item
+            )
+          : []
+      );
+    } catch (error) {
+      setFavouriteTracks([]);
+    }
+  }, []);
+
+  const toggleFavouriteTrack = (song) => {
+    const key = getTrackKey(song);
+    if (!key) return;
+
+    const alreadyFavourite = favouriteTrackIds.includes(key);
+    const updated = alreadyFavourite
+      ? favouriteTracks.filter((item) => getTrackId(item) !== key)
+      : [
+          ...favouriteTracks,
+          {
+            id: key,
+            name: song?.name || "",
+            album_id: params.album_id ? params.album_id.toString() : "",
+            album_title: typeof albumName === "string" ? albumName : "",
+          },
+        ];
+
+    setFavouriteTracks(updated);
+    localStorage.setItem(FAVOURITE_TRACK_KEY, JSON.stringify(updated));
+
+    if (alreadyFavourite) {
+      toast.info("Removed from favourite");
+    } else {
+      const updatedIds = updated.map(getTrackId);
+      const albumNowFavourite =
+        Array.isArray(finalAudioListData) &&
+        finalAudioListData.length > 0 &&
+        finalAudioListData.every((track) =>
+          updatedIds.includes(getTrackKey(track))
+        );
+
+      if (albumNowFavourite) {
+        const stored = readFavouriteAlbums();
+        const albumId = params.album_id ? params.album_id.toString() : "";
+        if (albumId && !stored.some((album) => String(album.album_id) === albumId)) {
+          localStorage.setItem(
+            FAVOURITE_KEY,
+            JSON.stringify([...stored, getAlbumSnapshot()])
+          );
+          setIsFavourite(true);
+        }
+        toast.success("Album added to favourite");
+      } else {
+        toast.success("Added to favourite");
+      }
+    }
+  };
+
+  const copyLink = async (link) => {
+    try {
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(link);
+      } else {
+        const textArea = document.createElement("textarea");
+        textArea.value = link;
+        textArea.style.position = "fixed";
+        textArea.style.opacity = "0";
+        document.body.appendChild(textArea);
+        textArea.focus();
+        textArea.select();
+        document.execCommand("copy");
+        document.body.removeChild(textArea);
+      }
+      toast.success("Link copied to clipboard");
+    } catch (error) {
+      toast.error("Unable to copy link");
+    }
+  };
+
+  const shareLink = async ({ title, text, url }) => {
+    const link = url || window.location.href;
+    if (typeof navigator !== "undefined" && navigator.share) {
+      try {
+        await navigator.share({ title, text, url: link });
+        return;
+      } catch (error) {
+        if (error?.name === "AbortError") return;
+      }
+    }
+    copyLink(link);
+  };
+
+  const getAlbumTitle = () =>
+    typeof albumName === "string" && albumName ? albumName : "Audio Album";
+
+  const handleShareAlbum = () => {
+    const title = getAlbumTitle();
+    shareLink({
+      title,
+      text: `Listen to ${title}`,
+      url: window.location.href,
+    });
+  };
+
+  const handleShareSong = (song, index) => {
+    const songName =
+      song?.name?.replace(/^\d+\s*[-.):\s]*\s*/, "") || song?.name || "Audio";
+    const rawUrl = audioPlayerHelper.songs[index]?.src;
+    const songUrl =
+      rawUrl && /^https?:\/\//i.test(rawUrl) ? rawUrl : window.location.href;
+    const albumTitle =
+      typeof albumName === "string" && albumName ? albumName : "";
+    shareLink({
+      title: songName,
+      text: `Listen to ${songName}${albumTitle ? ` - ${albumTitle}` : ""}`,
+      url: songUrl,
+    });
   };
 
   useEffect(() => {
@@ -675,6 +879,19 @@ const AudioListPlayer = ({ audioListData, publiCationLoading }) => {
                     <DownloadForOfflineIcon /> Download Album
                     {isLoader && <AudioPlayerLoader />}
                   </button>
+                  <button className="album-share-btn" onClick={handleShareAlbum}>
+                    <BsShare /> Share
+                  </button>
+                  <button
+                    className={`album-fav-btn ${
+                      isAlbumFavourite ? "album-fav-btn-active" : ""
+                    }`}
+                    onClick={toggleFavourite}
+                    aria-pressed={isAlbumFavourite}
+                  >
+                    {isAlbumFavourite ? <BsHeartFill /> : <BsHeart />}
+                    {isAlbumFavourite ? "Favourited" : "Favourite"}
+                  </button>
                 </div>
               </div>
             </div>
@@ -764,6 +981,33 @@ const AudioListPlayer = ({ audioListData, publiCationLoading }) => {
                         <DownloadForOfflineIcon className="track-icon-download" />
                       )}
                     </button>
+                    <button
+                      className="track-share-btn"
+                      aria-label="Share"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleShareSong(song, index);
+                      }}
+                    >
+                      <BsShare className="track-icon-share" />
+                    </button>
+                    <button
+                      className={`track-fav-btn ${
+                        isTrackFavourite(song) ? "track-fav-btn-active" : ""
+                      }`}
+                      aria-label="Favourite"
+                      aria-pressed={isTrackFavourite(song)}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        toggleFavouriteTrack(song);
+                      }}
+                    >
+                      {isTrackFavourite(song) ? (
+                        <BsHeartFill className="track-icon-fav" />
+                      ) : (
+                        <BsHeart className="track-icon-fav" />
+                      )}
+                    </button>
                   </div>
                 </div>
               ))}
@@ -803,6 +1047,8 @@ const AudioListPlayer = ({ audioListData, publiCationLoading }) => {
                 <div className="track-shimmer-row" key={index}>
                   <div className="track-shimmer-num"></div>
                   <div className="track-shimmer-title"></div>
+                  <div className="track-shimmer-btn"></div>
+                  <div className="track-shimmer-btn"></div>
                   <div className="track-shimmer-btn"></div>
                   <div className="track-shimmer-btn"></div>
                 </div>
@@ -913,6 +1159,7 @@ const AudioListPlayer = ({ audioListData, publiCationLoading }) => {
           />
         </div>
       )}
+      <ToastContainer position="top-right" autoClose={2000} />
     </div>
   );
 };

@@ -118,14 +118,12 @@ const Images = ({ publicatioAlbumnData,publiCationLoading }) => {
             ? JSON.parse(item.thumb_media)
             : null;
             return (
-              <>
-                <Grid item xs={12} sm={6} md={3} key={index}>
-                  <div
-                    key={index}
-                    className="wallpaper-content"
-                    style={{ width: "100%" }}
-                    data-aos="fade-up"
-                  >
+              <Grid item xs={12} sm={6} md={3} key={item.id ?? index}>
+                <div
+                  className="wallpaper-content"
+                  style={{ width: "100%" }}
+                  data-aos="fade-up"
+                >
                     <div
                       onClick={() => {
                         setPhotoIndex(index);
@@ -170,9 +168,8 @@ const Images = ({ publicatioAlbumnData,publiCationLoading }) => {
                     >
                       Download
                     </button>
-                  </div>
-                </Grid>
-              </>
+                </div>
+              </Grid>
             );
           })
         )}
