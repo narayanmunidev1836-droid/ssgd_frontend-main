@@ -12,7 +12,7 @@ import ImageComponentNavBar from "../Home/ImageComponentNavBar";
 import Header from "../Header/Header";
 import FullpageLoader from "../../common/HomeSliderLoader/FullpageLoader";
 import { FormattedText } from "../../common/UrlFormate/FormatedText";
-import _defaultLogoImage from "../../assets/images/logo.png";
+import _defaultLogoImage from "../../assets/images/logo.webp";
 
 const _defaultLogo = _defaultLogoImage.src;
 

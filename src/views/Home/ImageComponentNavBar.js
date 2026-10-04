@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import _defaultLogo from "../../assets/images/logo.png";
+import _defaultLogo from "../../assets/images/logo.webp";
 
 const defaultLogo = _defaultLogo.src;
 

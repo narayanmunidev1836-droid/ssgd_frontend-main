@@ -13,7 +13,7 @@ import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import _templeHeroBg from "../../assets/images/Serene Golden Temple Panorama.png";
+import _templeHeroBg from "../../assets/images/Serene Golden Temple Panorama.webp";
 const templeHeroBg = _templeHeroBg.src;
 
 const getLocationBadge = (branch) => {
