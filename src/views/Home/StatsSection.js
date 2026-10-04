@@ -29,7 +29,6 @@ const stats = [
 const StatsSection = () => {
   return (
     <div className="stats-section">
-      <div className="stats-decorative-line" />
       <div className="container">
         <div className="stats-grid">
           {stats.map((stat, index) => (
