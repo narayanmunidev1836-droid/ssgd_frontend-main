@@ -225,3 +225,251 @@
     padding: 8px 8px 10px;
   }
 }
+
+/* ── Daily Darshan: date card and darshan headings ───────────── */
+.dd-date-card {
+  margin-top: 28px;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 6px 28px rgba(59, 10, 10, 0.08);
+  border-top: 3px solid #c8a96e;
+  padding: 20px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.dd-date-info {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-width: 0;
+}
+
+.dd-date-icon {
+  width: 46px;
+  height: 46px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.dd-date-value {
+  font-family: "Poppins", sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: #3b0a0a;
+  margin: 0;
+}
+
+.dd-item-head {
+  margin: 40px 0 18px;
+  position: relative;
+  padding-left: 16px;
+}
+
+.dd-item-head::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 4px;
+  bottom: 4px;
+  width: 4px;
+  border-radius: 4px;
+  background: linear-gradient(180deg, #c8a96e, #8b1c1c);
+}
+
+.dd-item-title {
+  font-family: "Poppins", sans-serif;
+  font-size: 22px;
+  font-weight: 800;
+  color: #1a2a6c;
+  margin: 0 0 6px;
+  overflow-wrap: anywhere;
+}
+
+.dd-item-desc {
+  font-size: 15px;
+  color: #555;
+  line-height: 1.7;
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 560px) {
+  .dd-date-card {
+    padding: 16px;
+  }
+
+  .dd-item-title {
+    font-size: 19px;
+  }
+}
+
+/* ── Darshan photo card (refined) ───────────────────────────── */
+.dd-cell .wallpaper-content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  overflow: hidden;
+  border-radius: 18px;
+  background: #fff;
+  box-shadow: 0 8px 26px rgba(59, 10, 10, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.dd-cell .wallpaper-content:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 36px rgba(59, 10, 10, 0.16);
+}
+
+/* Photo frame: soft warm background, photo fully visible */
+.dd-cell .wallpaper-content > div:first-child {
+  position: relative;
+  cursor: zoom-in;
+  aspect-ratio: 3 / 4;
+  background: linear-gradient(160deg, #fbf3e6 0%, #f1e3c9 100%);
+  padding: 12px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dd-cell .lazy-load-image-background {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.dd-cell .wallpaper-img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 10px;
+}
+
+/* Zoom cue on hover */
+.dd-cell .search-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.85);
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: rgba(139, 28, 28, 0.9);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  pointer-events: none;
+}
+
+.dd-cell .wallpaper-content > div:first-child:hover .search-icon {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+/* Download button: solid, full width, attached to the card bottom */
+.dd-cell .wallpaper-content > button {
+  width: 100%;
+  margin: 0;
+  height: 46px;
+  border: 0;
+  border-radius: 0;
+  background: #8b1c1c;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.dd-cell .wallpaper-content > button:hover {
+  background: #6e0e13;
+  color: #fff;
+}
+
+/* ── Darshan photo card: same style as the Publication wallpaper card ── */
+.dd-cell .wallpaper-content {
+  border-radius: 16px;
+  box-shadow: 0 5px 22px rgba(0, 0, 0, 0.1);
+  padding: 0 0 4px;
+  text-align: center;
+}
+
+.dd-cell .wallpaper-content:hover {
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.16);
+}
+
+.dd-cell .wallpaper-content > div:first-child {
+  aspect-ratio: auto;
+  height: 250px;
+  padding: 0;
+  background: none;
+  overflow: hidden;
+  cursor: pointer;
+  border-radius: 16px 16px 0 0;
+}
+
+.dd-cell .lazy-load-image-background {
+  height: 100%;
+}
+
+.dd-cell .wallpaper-img {
+  height: 100%;
+  object-fit: cover;
+  border-radius: 16px 16px 0 0;
+}
+
+.dd-cell .wallpaper-content:hover .wallpaper-img {
+  transform: scale(1.05);
+}
+
+.dd-cell .search-icon {
+  top: 50%;
+  width: 44px;
+  height: 44px;
+  font-size: 22px;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(4px);
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.dd-cell .wallpaper-content > div:first-child:hover .search-icon {
+  opacity: 1;
+  transform: translate(-50%, -50%);
+}
+
+/* Download: centred pill, like the wallpaper cards */
+.dd-cell .wallpaper-content > button {
+  width: auto;
+  height: auto;
+  margin: 12px auto 8px;
+  padding: 9px 20px;
+  border: none;
+  border-radius: 40px;
+  background-color: var(--global-color, #b5090e);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  text-transform: none;
+  box-shadow: 0 4px 14px rgba(181, 9, 14, 0.25);
+  font-family: "Poppins", sans-serif;
+}
+
+.dd-cell .wallpaper-content > button:hover {
+  background-color: var(--global-color-hover, #8b0a0e);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(181, 9, 14, 0.35);
+}

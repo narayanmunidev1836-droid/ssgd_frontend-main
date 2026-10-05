@@ -24,6 +24,7 @@ import { fetchDailyDarshanData, fetchSlider } from "../../api/API";
 import Loader from "../../common/Loader/Loader";
 import InnerpageLoader from "../Home/InnerpageLoader";
 import "./DailyDarshan.css";
+import "../DailyKatha/DailyKatha.css";
 import Lightbox from "react-image-lightbox";
 import FullpageLoader from "../../common/HomeSliderLoader/FullpageLoader";
 import { LazyLoadImage } from "react-lazy-load-image-component";
@@ -191,27 +192,17 @@ const DailyDarshan = () => {
 
       <div className="dd-page"><div className="dd-container">
         <div className="spinner-container">
-          <div className="date-picker daily-darshan">
-            <div className="date-picker-inner-wrap">
-              <div className="date-picker-wrap">
-                <div>
-                  <img src={image1} className="date-picker-img" />
-                </div>
-                <div>
-                  <h4>
-                    {selectedDate
-                      ? selectedDate.format("MMMM DD, YYYY")
-                      : "No date selected"}
-                  </h4>
-                </div>
-              </div>
+          <div className="dd-date-card">
+            <div className="dd-date-info">
+              <img src={image1} className="dd-date-icon" alt="" />
+              <h4 className="dd-date-value">
+                {selectedDate
+                  ? selectedDate.format("MMMM DD, YYYY")
+                  : "No date selected"}
+              </h4>
             </div>
-            <div className="date-picker-daily-darshan daily-darshan-page">
-              <LocalizationProvider
-                dateAdapter={AdapterDayjs}
-                style={{ paddingTop: "0px" }}
-                className="picker"
-              >
+            <div className="dk-date-picker">
+              <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <DemoContainer components={["DatePicker", "DatePicker"]}>
                   <DatePicker
                     value={selectedDate}
@@ -219,7 +210,6 @@ const DailyDarshan = () => {
                       setSelectedDate(newValue);
                       fetchData(newValue);
                     }}
-                    renderInput={(params) => <TextField {...params} />}
                     shouldDisableDate={(day) => {
                       const formattedDay = dayjs(day).format("MM/DD/YYYY");
                       const availableDatesArray = Object.values(
@@ -228,6 +218,10 @@ const DailyDarshan = () => {
                       return !availableDatesArray.includes(formattedDay);
                     }}
                     className="katha-date-picker"
+                    slotProps={{
+                      textField: { size: "small", fullWidth: true },
+                      popper: { className: "dk-picker-popper" },
+                    }}
                   />
                 </DemoContainer>
               </LocalizationProvider>
@@ -253,9 +247,9 @@ const DailyDarshan = () => {
                     apiData.length > 1 ? "multiple-darshan" : "";
                   return (
                     <Fragment key={index}>
-                      <div className={`daily-katha ${darshanClass}`}>
-                        <h6>{e.media.title}</h6>
-                        <p>{e.media.short_description}</p>
+                      <div className={`dd-item-head ${darshanClass}`}>
+                        <h3 className="dd-item-title">{e.media.title}</h3>
+                        <p className="dd-item-desc">{e.media.short_description}</p>
                       </div>
 
                       <div className="dd-grid">

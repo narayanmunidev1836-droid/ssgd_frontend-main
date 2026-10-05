@@ -341,15 +341,13 @@ const AudioListPlayer = ({ audioListData, publiCationLoading }) => {
   const handleShareSong = (song, index) => {
     const songName =
       song?.name?.replace(/^\d+\s*[-.):\s]*\s*/, "") || song?.name || "Audio";
-    const rawUrl = audioPlayerHelper.songs[index]?.src;
-    const songUrl =
-      rawUrl && /^https?:\/\//i.test(rawUrl) ? rawUrl : window.location.href;
     const albumTitle =
       typeof albumName === "string" && albumName ? albumName : "";
+    // Share the website page, never the backend media URL
     shareLink({
       title: songName,
       text: `Listen to ${songName}${albumTitle ? ` - ${albumTitle}` : ""}`,
-      url: songUrl,
+      url: window.location.href,
     });
   };
 
@@ -427,6 +425,8 @@ const AudioListPlayer = ({ audioListData, publiCationLoading }) => {
   ) => {
     setShowFavourites(false);
     setPublicationAlbumData(null);
+    // Clear the open album right away so it is not shown while the route change is pending
+    setFinalAudioListData([]);
     setSelectedPublicationslugn(ui_slug);
     setActiveTab(index);
     setIndicatorPosition(index);
