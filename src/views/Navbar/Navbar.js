@@ -252,11 +252,13 @@ function Navbar() {
 
   return (
     <>
+      {/* Red top bar hidden for now; links moved into the main menu.
       <Header
         donation={donation}
         handleClickDonation={handleClickDonation}
         pages={pages}
       />
+      */}
       <nav className="navbar">
         <div className="container-fluid">
           <div className="navbar-right-wrap">
@@ -351,6 +353,21 @@ function Navbar() {
                 <li className="nav-item active">
                   <NavLink to="/branches" className="nav-link">
                     Branches
+                  </NavLink>
+                </li>
+                <li className="nav-item">
+                  <NavLink to="/donation" className="nav-link">
+                    Donations
+                  </NavLink>
+                </li>
+                <li className="nav-item">
+                  <NavLink to="/daily-katha" className="nav-link">
+                    Daily Katha
+                  </NavLink>
+                </li>
+                <li className="nav-item">
+                  <NavLink to="/daily-darshan" className="nav-link">
+                    Daily Darshan
                   </NavLink>
                 </li>
                 <li className="nav-item">
@@ -550,6 +567,36 @@ function Navbar() {
                     onClick={() => handleNavLinkClick("/branches")}
                   >
                     Branches
+                  </a>
+                </li>
+
+                <li className="nav-item">
+                  <a
+                    data-bs-dismiss="offcanvas"
+                    className="nav-link"
+                    onClick={() => handleNavLinkClick("/donation")}
+                  >
+                    Donations
+                  </a>
+                </li>
+
+                <li className="nav-item">
+                  <a
+                    data-bs-dismiss="offcanvas"
+                    className="nav-link"
+                    onClick={() => handleNavLinkClick("/daily-katha")}
+                  >
+                    Daily Katha
+                  </a>
+                </li>
+
+                <li className="nav-item">
+                  <a
+                    data-bs-dismiss="offcanvas"
+                    className="nav-link"
+                    onClick={() => handleNavLinkClick("/daily-darshan")}
+                  >
+                    Daily Darshan
                   </a>
                 </li>
 

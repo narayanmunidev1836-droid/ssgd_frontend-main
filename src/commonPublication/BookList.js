@@ -53,6 +53,11 @@ const BookList = ({ publicatioAlbumnData,publiCationLoading }) => {
     });
   };
 
+  // View button: open the PDF straight in a new tab
+  const openBookInNewTab = (pdfName) => {
+    window.open(pdfName, "_blank", "noopener,noreferrer");
+  };
+
   useEffect(() => {
     AOS.init({
       duration: 1000,
@@ -108,12 +113,7 @@ const BookList = ({ publicatioAlbumnData,publiCationLoading }) => {
                     <div>
                       <button
                         onClick={() =>
-                          handleView(
-                            JSON.parse(book.media)[0],
-                            book.name,
-                            book.short_description,
-                            book.publications_id
-                          )
+                          openBookInNewTab(JSON.parse(book.media)[0])
                         }
                       >
                         View
