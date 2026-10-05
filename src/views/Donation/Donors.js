@@ -1,7 +1,5 @@
 "use client";
 import React, { useState, useEffect, useRef } from "react";
-import Container from "@mui/material/Container";
-import Grid from "@mui/material/Grid";
 import { useLocation, useNavigate } from "../../common/routerCompat.js";
 import { fetchDonation, fetchNavbarData } from "../../api/API";
 import { toast, ToastContainer } from "react-toastify";
@@ -10,10 +8,10 @@ import "./Donors.css";
 import FullpageLoader from "../../common/HomeSliderLoader/FullpageLoader";
 import DonationShimmer from "./DonationShimmer";
 import AOS from "aos";
-import "aos/dist/aos.css";
+import "aos/dist/aos.css";
 
 
-const Donors = () => {
+const Donors = () => {
   const [blogData, setBlogData] = useState({});
   const [loader, setLoader] = useState(true);
   const [qrDialog, setQrDialog] = useState(null);
@@ -207,12 +205,12 @@ const Donors = () => {
   const renderBlogSection = (key, blogs) => (
     <>
       <ToastContainer />
-      <h2 className="section_title pt-5">{getTitle(key).toUpperCase()}</h2>
-      <Grid container spacing={3} justifyContent="center" className="pt-5">
+      <h2 className="dn-section-title">{getTitle(key).toUpperCase()}</h2>
+      <div className="dn-grid">
         {blogs.map((blog, index) => {
                     const blogDetails = JSON.parse(blog.details);
           return (
-            <Grid key={index} item xs={12} sm={12} md={12} lg={6}>
+            <div key={index} className="dn-cell">
               <div className="bank-info-wrap" data-aos="fade-up">
                 <div className="container">
                   <h4 className="bank-details">{blog.blog_title}</h4>
@@ -250,10 +248,10 @@ const Donors = () => {
                 </div>
                 )}
               </div>
-            </Grid>
+            </div>
           );
         })}
-      </Grid>
+      </div>
     </>
   );
 
@@ -284,7 +282,7 @@ const Donors = () => {
   };
 
   return (
-    <Container className="pt-5">
+    <div className="dn-page"><div className="dn-container">
       {/* {Object.keys(blogData).map((key) => {
         if (Array.isArray(blogData[key]) && blogData[key].length > 0) {
           return <div key={key}>{renderBlogSection(key, blogData[key])}</div>;
@@ -311,7 +309,7 @@ const Donors = () => {
           {qrDialog?.imageUrl && (
             <img
               src={qrDialog.imageUrl}
-              alt={qrDialog.title ? `${qrDialog.title} QR code` : "Donation QR code"}
+              alt={qrDialog.title ? `${qrDialog.title} QR Code` : "QR Code"}
             />
           )}
           <button type="submit" className="qr-dialog-close" aria-label="Close QR code">
@@ -319,7 +317,7 @@ const Donors = () => {
           </button>
         </form>
       </dialog>
-    </Container>
+    </div></div>
   );
 };
 

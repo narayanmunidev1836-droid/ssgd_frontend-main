@@ -4,15 +4,14 @@ import InnerpageLoader from "../Home/InnerpageLoader";
 import { customDetailPage, fetchSlider } from "../../api/API";
 import CommonBreadcrumbs from "../../common/CommonBreadcrumbs/CommonBreadcrumbs";
 import { useParams } from "../../common/routerCompat.js";
-import { Card, Container, Grid } from "@mui/material";
 import "../CustomePage/CustomPage.css";
 import FullpageLoader from "../../common/HomeSliderLoader/FullpageLoader";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import _slider1 from "../../assets/images/slider_1.webp";
-const slider1 = _slider1.src;
+const slider1 = _slider1.src;
 
-const CustomPage = () => {
+const CustomPage = () => {
   const [CustomPageData, setCustomPageData] = useState({});
   const [banner, setBanner] = useState(null);
   const param = useParams();
@@ -107,8 +106,9 @@ const CustomPage = () => {
         )}
       </div>
  
-      <Container className="custom-page-content">
-        <div className="container about-container about-us-content custom-page-div" data-aos="fade-up">
+      <div className="cp-page">
+      <div className="cp-container">
+        <article className="cp-card" data-aos="fade-up">
           {loading ?  <>
             <div className="shimmer-title" style={{width:"37%"}}/>
             <div className="shimmer-text-line" />
@@ -131,8 +131,9 @@ const CustomPage = () => {
           <p className="mt-4"></p>
           </>
 }
-        </div>
-      </Container>
+        </article>
+      </div>
+      </div>
     </>
   );
 };

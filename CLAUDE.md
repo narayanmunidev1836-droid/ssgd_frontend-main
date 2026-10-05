@@ -1,6 +1,6 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+Guidance for Claude Code when working in this repository.
 
 ## Commands
 
@@ -10,46 +10,66 @@ npm run build      # Production build to .next/
 npm run serve      # Production server (next start)
 ```
 
-`npm test` is a leftover CRA script; there are no tests.
+There are no tests. The `npm test` CRA script is gone from `package.json`.
 
-Build must be green before and after any change. `MIGRATION_PLAN.md` holds the migration record, status table and gates — read it (and never skip a gate) when touching routing, layout or CSS.
+Keep the build green before and after any change. `MIGRATION_PLAN.md` is the migration record (status table, locked decisions, gates). Read it before touching routing, layout or CSS.
 
-## Architecture Overview
+## Stack
 
-Next.js **16 App Router** (JavaScript, no TypeScript) website for SSGD — a multi-site religious/cultural organization. Multiple regional deployments are controlled via environment variables. Rendering is SSR with `"use client"` on components that need the browser.
+Next.js 16 App Router website in JavaScript (no TypeScript) for SSGD, a multi-site religious and cultural organization. Pages render on the server, and components that need the browser are marked `"use client"`. Deploy as a Node server (`npm run build && npm run serve`), not a static export.
 
-### Key Directories
+Key dependencies: React 19, Redux Toolkit (`react-redux`), Axios, Bootstrap 5.3.2, slick-carousel, `react-slick`, lightgallery, `react-toastify`, Emotion + MUI (date pickers only, via `@mui/x-date-pickers`), `sass`, `dayjs`, `libphonenumber-js`.
 
-- **`src/app/`** — App Router. `layout.js` is the single root layout: `<Providers>` (Redux), Navbar/Footer, global CSS imports, and the CDN `<link>`/`<script>` tags ported from CRA's `index.html`. Route groups: `(main)/…` (navbar + footer) and `(bare)/view_bill` (no navbar/footer). `not-found.js` = 404.
-- **`src/common/routerCompat.js`** — the react-router-shaped API (`useNavigate`, `useLocation`, `useParams`, `Link`, `NavLink`, `setNavState`/`getNavState`) on top of `next/navigation`. **Never import `react-router-dom`** — `grep react-router-dom src` must stay at 0.
-- **`src/api/`** — All backend communication. `index.js` creates an Axios instance with a request interceptor that attaches a Bearer token from `localStorage` (client-side only). `url.js` sets the base URL from `NEXT_PUBLIC_API_URL`. `API.js` exports ~25 named async functions.
-- **`src/Redux/`** — Redux Toolkit store with a single `audioSlice` (`currentSongIndex`, `isPlaying`, `currentTime`). Kept for parity; currently unused by any page.
-- **`src/views/`** — One directory per route/feature (this was `src/pages/` in CRA). Each page fetches its own data directly via `src/api/API.js`.
-- **`src/common/`** — Shared UI: breadcrumbs, loaders/skeletons, dialogs, publication filters, scroll utilities.
+## Directory map
 
-### Data Flow
+- **`src/app/`** — App Router.
+  - `layout.js` is the single root layout. It renders `<Providers>`, the Navbar and Footer, the global CSS imports, and the CDN `<link>`/`<script>` tags ported from CRA's `index.html`.
+  - Route groups: `(main)/…` (with navbar and footer) and `(bare)/view_bill` (no navbar or footer).
+  - `Providers.js` holds Redux and the `console.log` override. `not-found.js` is the 404 page.
+- **`src/common/routerCompat.js`** — a react-router-shaped API (`useNavigate`, `useLocation`, `useParams`, `Link`, `NavLink`, `setNavState`/`getNavState`) built on `next/navigation`. **Never import `react-router-dom`.** `grep -rn "react-router-dom" src` should only match this file's comments.
+- **`src/api/`** — all backend calls.
+  - `url.js` hardcodes the base URL `https://beadm.ssgd.org/api/v1/`. It does not read `NEXT_PUBLIC_API_URL`.
+  - `index.js` is an Axios instance. Its request interceptor sets the `authorization` header to the raw value of `localStorage["Token"]`. It is not a `Bearer` token.
+  - `API.js` holds the named async functions that pages call directly.
+- **`src/views/`** — one directory per route or feature (formerly `src/pages/`). Each page fetches its own data in client effects. There is no global loading or error state.
+- **`src/common/`** — shared UI: breadcrumbs, loaders and skeletons, dialogs, publication filters, scroll utilities, `LanguageToggle`.
+- **`src/commonPublication/`** — shared list components for publications (books, albums, videos, images).
+- **`src/i18n/`** — `en.js` and `gu.js` dictionaries, `LanguageProvider.js` (state, persisted in `localStorage["siteLanguage"]`), `useT.js`, and `dateLocale.js`. The default language is `en`.
+- **`src/Redux/`** — a single `audioSlice` and `store.js`. Kept for parity; no page uses it.
 
-Pages call API functions from `src/api/API.js` directly (no intermediary service layer). Token-based auth: the token lives in `localStorage` and is attached by the Axios request interceptor, so all fetching runs in client effects. No global loading/error state — each page manages its own.
+## Data flow and state
 
-### Styling
+- Pages call `src/api/API.js` directly. There is no service layer in between.
+- Browser-only state lives in `localStorage`. Known keys include `Token`, `siteName` (multi-site branding), `siteLanguage`, `selectedMemberData`, `verifiedData`, `verifiedOtp`, and `otpExpiryTime`. Every access in the browser must be guarded, because SSR has no `localStorage`.
+- The API request body includes a site identifier. See the comment in `.env`.
 
-Three approaches coexist: Bootstrap 5 + slick-carousel from **npm** (imported first in `src/app/layout.js`), component-scoped `.css` files, and Emotion for MUI. MUI is used only for date pickers (`@mui/x-date-pickers`). Font Awesome and Poppins stay on CDN (tags in the root layout `<body>`).
+## Styling
 
-**All 43 reachable component CSS files are imported globally in `src/app/layout.js`, in the exact order the CRA bundle produced.** CRA shipped one stylesheet for every route; Next only loads the current route's CSS, so removing an import silently drops rules that other pages depend on. Add new component CSS to that list rather than relying on route-level imports alone.
+Three approaches coexist:
+1. Bootstrap 5 and slick-carousel, imported from **npm** at the top of `src/app/layout.js`.
+2. Component-scoped `.css` files.
+3. Emotion, used only through MUI date pickers.
 
-### Environment
+Font Awesome and Poppins stay on CDN, in tags inside the root layout `<body>`.
+
+**All reachable component CSS files are imported globally in `src/app/layout.js`, in the order the CRA bundle produced.** CRA shipped one stylesheet for every route, but Next loads only the current route's CSS. Removing an import silently drops rules other pages depend on. When you add component CSS, add its import to that list. Do not rely on route-level imports alone.
+
+## Environment
 
 ```
-NEXT_PUBLIC_API_URL=https://www.ssgd.org/
+NEXT_PUBLIC_API_URL="https://www.ssgd.org/"
 ```
 
-`NEXT_PUBLIC_*` values are inlined at build time — changing one requires `npm run build` again. The API base URL resolves to `https://beadm.ssgd.org/api/v1/`; commented-out entries in `.env` show alternate site URLs (USA, Surat, etc.) for multi-site deployment.
+This variable is not read by `src/api/url.js` (see above). It is a site identifier, and `.env` has commented-out alternates for the other deployments (USA, Surat, and others). `NEXT_PUBLIC_*` values are inlined at build time, so changing one requires `npm run build` again.
 
-### Notable Patterns
+## Conventions
 
-- `console.log` is disabled globally (parity with the old `App.js:6`).
-- Site name used in UI comes from `localStorage` (supports multi-site branding).
-- The `Foooter/` directory name is a typo — preserved on purpose so imports don't churn.
-- Skeleton loader components in `src/common/` mirror the shape of the content they replace.
-- Static image imports return `StaticImageData`; call sites use `import _x from "…"; const x = _x.src;`.
-- Deploy = Node server: `npm run build && npm run serve` (not static export).
+- `console.log` is overridden to a no-op in `src/app/Providers.js` and `src/app/layout.js`, for parity with the old CRA `App.js`. `console.warn` and `console.error` still work.
+- Static image imports return `StaticImageData`. Use `import _x from "…"; const x = _x.src;` at call sites. `MIGRATION_PLAN.md` §1 lists an open image codemod that still has `<img src>` rendering `[object Object]` in places.
+- `src/views/Foooter/` is a deliberate typo. Keep it so imports do not churn.
+- Skeleton loaders in `src/common/` match the shape of the content they replace.
+- Multi-site branding reads `siteName` from `localStorage`, so pages must not assume a single site.
+
+## Migration status
+
+The CRA → Next.js migration is documented in `MIGRATION_PLAN.md`. Phases 1–8 are marked complete. The remaining open items are the image codemod, the Phase 6 visual parity check, and browser hydration QA. Check the plan's status table before starting migration work.

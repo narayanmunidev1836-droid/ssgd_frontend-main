@@ -200,3 +200,287 @@ iframe.katha-video {
     width: 100%;
   }
 }
+
+/* ── Daily Katha (redesign) ───────────────────────────────────── */
+.dk-page {
+  background: linear-gradient(180deg, #fdf9f4 0%, #f7f1e8 100%);
+  padding: 0 0 60px;
+}
+
+.dk-container {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+
+.dk-heading {
+  position: relative;
+  padding: 36px 0 8px 28px;
+}
+
+.dk-heading::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 42px;
+  bottom: 8px;
+  width: 4px;
+  border-radius: 4px;
+  background: linear-gradient(180deg, #c8a96e, #8b1c1c);
+}
+
+.dk-title {
+  font-family: "Poppins", sans-serif;
+  font-size: 28px;
+  font-weight: 800;
+  color: #3b0a0a;
+  margin: 0;
+  line-height: 1.25;
+}
+
+.dk-date-card {
+  margin-top: 28px;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 6px 28px rgba(59, 10, 10, 0.08);
+  border-top: 3px solid #c8a96e;
+  padding: 20px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.dk-date-info {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-width: 0;
+}
+
+.dk-date-icon {
+  width: 46px;
+  height: 46px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.dk-date-value {
+  font-family: "Poppins", sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: #3b0a0a;
+  margin: 0;
+}
+
+.dk-date-picker {
+  min-width: 0;
+}
+
+.dk-item {
+  margin-top: 40px;
+}
+
+.dk-item-head {
+  margin-bottom: 18px;
+}
+
+.dk-item-title {
+  font-family: "Poppins", sans-serif;
+  font-size: 22px;
+  font-weight: 800;
+  color: #1a2a6c;
+  margin: 0 0 6px;
+  overflow-wrap: anywhere;
+}
+
+.dk-item-desc {
+  font-size: 15px;
+  color: #555;
+  line-height: 1.7;
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+/* 16:9 video boxes that scale with the column width */
+.dk-video {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 14px;
+  overflow: hidden;
+  background: #000;
+  box-shadow: 0 8px 28px rgba(59, 10, 10, 0.14);
+}
+
+.dk-video iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.dk-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+  margin-top: 24px;
+}
+
+.dk-card {
+  min-width: 0;
+  background: #fff;
+  border-radius: 16px;
+  padding: 10px;
+  box-shadow: 0 6px 24px rgba(59, 10, 10, 0.08);
+}
+
+.dk-loading {
+  margin-top: 30px;
+}
+
+@media (max-width: 760px) {
+  .dk-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 560px) {
+  .dk-container {
+    padding: 0 16px;
+  }
+
+  .dk-title {
+    font-size: 24px;
+  }
+
+  .dk-date-card {
+    padding: 16px;
+  }
+
+  .dk-date-picker {
+    width: 100%;
+  }
+
+  .dk-item-title {
+    font-size: 19px;
+  }
+}
+
+/* ── Date picker: input ──────────────────────────────────────── */
+.dk-date-picker {
+  width: 260px;
+  max-width: 100%;
+}
+
+.dk-date-picker .MuiOutlinedInput-root {
+  border-radius: 12px;
+  background: #fdfaf5;
+  font-family: "Poppins", sans-serif;
+  transition: box-shadow 0.2s ease;
+}
+
+.dk-date-picker .MuiOutlinedInput-notchedOutline {
+  border-color: #e3d9c8;
+}
+
+.dk-date-picker .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline {
+  border-color: #c8a96e;
+}
+
+.dk-date-picker .MuiOutlinedInput-root.Mui-focused {
+  box-shadow: 0 0 0 3px rgba(200, 169, 110, 0.2);
+}
+
+.dk-date-picker .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+  border-color: #c8a96e;
+  border-width: 1px;
+}
+
+.dk-date-picker .MuiInputBase-input {
+  font-size: 15px;
+  font-weight: 600;
+  color: #3b0a0a;
+  padding: 11px 14px;
+}
+
+.dk-date-picker .MuiSvgIcon-root,
+.dk-date-picker .MuiIconButton-root {
+  color: #8b1c1c;
+}
+
+/* ── Date picker: calendar popup ─────────────────────────────── */
+.dk-picker-popper .MuiPaper-root {
+  border-radius: 18px;
+  border-top: 3px solid #c8a96e;
+  box-shadow: 0 16px 48px rgba(59, 10, 10, 0.18);
+  font-family: "Poppins", sans-serif;
+  overflow: hidden;
+}
+
+.dk-picker-popper .MuiPickersCalendarHeader-root {
+  padding: 10px 14px 4px;
+}
+
+.dk-picker-popper .MuiPickersCalendarHeader-label {
+  font-size: 16px;
+  font-weight: 700;
+  color: #3b0a0a;
+}
+
+.dk-picker-popper .MuiPickersArrowSwitcher-root .MuiIconButton-root {
+  color: #8b1c1c;
+  background: #fbf3e6;
+  border-radius: 10px;
+}
+
+.dk-picker-popper .MuiPickersArrowSwitcher-root .MuiIconButton-root:hover {
+  background: #f3e4c8;
+}
+
+.dk-picker-popper .MuiDayCalendar-weekDayLabel {
+  color: #8b1c1c;
+  font-weight: 700;
+  font-size: 12px;
+  text-transform: uppercase;
+}
+
+.dk-picker-popper .MuiPickersDay-root {
+  font-size: 14px;
+  font-weight: 600;
+  color: #3b0a0a;
+  border-radius: 10px;
+}
+
+.dk-picker-popper .MuiPickersDay-root:hover {
+  background: #fbf3e6;
+}
+
+.dk-picker-popper .MuiPickersDay-root.MuiPickersDay-today {
+  border: 1px solid #c8a96e;
+}
+
+.dk-picker-popper .MuiPickersDay-root.Mui-selected {
+  background: #8b1c1c;
+  color: #fff;
+}
+
+.dk-picker-popper .MuiPickersDay-root.Mui-selected:hover,
+.dk-picker-popper .MuiPickersDay-root.Mui-selected:focus {
+  background: #6e0e13;
+}
+
+/* Dates with no katha are muted */
+.dk-picker-popper .MuiPickersDay-root.Mui-disabled {
+  color: #c9bfae;
+  opacity: 0.7;
+}
+
+@media (max-width: 560px) {
+  .dk-date-picker {
+    width: 100%;
+  }
+}

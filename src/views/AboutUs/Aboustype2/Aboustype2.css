@@ -1,0 +1,102 @@
+/* ── About Us · Tradition photo grid (Aboustype2) ───────────── */
+.at2-page {
+  background: linear-gradient(180deg, #fdf9f4 0%, #f7f1e8 100%);
+  padding: 40px 0 60px;
+}
+
+.at2-container {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+
+.at2-heading {
+  position: relative;
+  padding-left: 28px;
+  margin-bottom: 28px;
+}
+
+.at2-heading::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 4px;
+  bottom: 4px;
+  width: 4px;
+  border-radius: 4px;
+  background: linear-gradient(180deg, #c8a96e, #8b1c1c);
+}
+
+.at2-title {
+  font-family: "Poppins", sans-serif;
+  font-size: 26px;
+  font-weight: 800;
+  color: #3b0a0a;
+  margin: 0;
+  line-height: 1.25;
+}
+
+.at2-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 22px;
+}
+
+.at2-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 10px;
+  box-shadow: 0 6px 24px rgba(59, 10, 10, 0.08);
+  min-width: 0;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.at2-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 34px rgba(59, 10, 10, 0.14);
+}
+
+.at2-image-wrap {
+  display: block;
+  width: 100%;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #fbf7f0;
+}
+
+/* Photos are shown whole, never cropped */
+.at2-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 3;
+  object-fit: contain;
+}
+
+@media (max-width: 1000px) {
+  .at2-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 720px) {
+  .at2-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+  }
+}
+
+@media (max-width: 420px) {
+  .at2-container {
+    padding: 0 16px;
+  }
+
+  .at2-title {
+    font-size: 21px;
+  }
+
+  .at2-card {
+    padding: 8px;
+  }
+}

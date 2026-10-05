@@ -116,3 +116,52 @@
     font-size: 15px;
   }
 }
+
+/* Loading skeleton for the detail page (matches Aboustype1 layout) */
+.at1-skel {
+  border-radius: 8px;
+  margin-bottom: 12px;
+}
+
+.at1-skel-title {
+  height: 22px;
+  width: 42%;
+  margin-bottom: 18px;
+}
+
+.at1-skel-photo {
+  height: 240px;
+  border-radius: 12px;
+  margin-bottom: 18px;
+}
+
+.at1-skel-line {
+  height: 14px;
+}
+
+.at1-skel-line:nth-child(3n) {
+  width: 78%;
+}
+
+/* Shown when the detail page data cannot be loaded */
+.at-load-error {
+  max-width: 560px;
+  margin: 80px auto;
+  padding: 0 20px;
+  text-align: center;
+  color: #444;
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+.at-load-error button {
+  margin-top: 12px;
+  padding: 9px 22px;
+  border: 2px solid #8b1c1c;
+  border-radius: 6px;
+  background: #8b1c1c;
+  color: #fff;
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  cursor: pointer;
+}

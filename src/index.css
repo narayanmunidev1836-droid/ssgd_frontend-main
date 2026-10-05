@@ -339,3 +339,22 @@ p {
 @media (min-width: 200px) and (max-width: 400px) {}
 @media (min-width: 400px) and (max-width: 576px) {}
 @media (min-width: 576px) and (max-width: 767px) {}
+
+/* Inner-page banner: shimmer and image share one box, no blank band above the photo */
+.contact-img-wrap .spinner-container-banner {
+  min-height: 250px;
+}
+
+.contact-img-wrap .shimmer-activity-wrapper {
+  position: absolute;
+  inset: 0;
+  height: auto;
+  z-index: 1;
+}
+
+.contact-img-wrap .about-img {
+  display: block;
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+}

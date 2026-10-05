@@ -137,3 +137,91 @@
     padding: 20px 0px 20px 0px;
   }
 }
+
+/* ── Daily Darshan (redesign) ─────────────────────────────────── */
+.dd-page {
+  background: linear-gradient(180deg, #fdf9f4 0%, #f7f1e8 100%);
+  padding: 0 0 60px;
+}
+
+.dd-container {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+
+.dd-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 22px;
+  margin-top: 16px;
+}
+
+.dd-cell {
+  min-width: 0;
+}
+
+.dd-cell .wallpaper-content {
+  background: #fff;
+  border-radius: 16px;
+  padding: 10px 10px 14px;
+  box-shadow: 0 6px 24px rgba(59, 10, 10, 0.08);
+  box-sizing: border-box;
+  height: 100%;
+}
+
+.dd-cell .wallpaper-img,
+.dd-cell .lazy-load-image-background {
+  display: block;
+  width: 100%;
+}
+
+.dd-cell .wallpaper-img {
+  aspect-ratio: 4 / 3;
+  object-fit: contain;
+  background: #fbf7f0;
+  border-radius: 10px;
+}
+
+.dd-cell button {
+  width: 100%;
+  padding: 8px 12px;
+  border: 2px solid #8b1c1c;
+  border-radius: 6px;
+  background: transparent;
+  color: #8b1c1c;
+  font-family: "Poppins", sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.25s ease, color 0.25s ease;
+}
+
+.dd-cell button:hover {
+  background: #8b1c1c;
+  color: #fff;
+}
+
+@media (max-width: 1000px) {
+  .dd-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 720px) {
+  .dd-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+  }
+}
+
+@media (max-width: 420px) {
+  .dd-container {
+    padding: 0 16px;
+  }
+
+  .dd-cell .wallpaper-content {
+    padding: 8px 8px 10px;
+  }
+}

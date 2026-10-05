@@ -4,14 +4,12 @@ import _image from "../../assets/images/subheader.webp";
 const image = _image.src;
 import CommonBreadcrumbs from "../../common/CommonBreadcrumbs/CommonBreadcrumbs";
 import Typography from "@mui/material/Typography";
-import Container from "@mui/material/Container";
 import TextField from "@mui/material/TextField";
 import dayjs from "dayjs";
 import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-import Grid from "@mui/material/Grid";
 import "lightgallery/css/lightgallery.css";
 import "lightgallery/css/lg-zoom.css";
 import "lightgallery/css/lg-thumbnail.css";
@@ -33,14 +31,14 @@ import "react-lazy-load-image-component/src/effects/blur.css";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
-const breadcrumbsData = [
-  { label: "Home", url: "/" },
-  <label color="text.primary" className="active-link-color">
-    Daily Darshan
-  </label>,
-];
-
 const DailyDarshan = () => {
+  const breadcrumbsData = [
+    { label: "Home", url: "/" },
+    <label color="text.primary" className="active-link-color">
+      Daily Darshan
+    </label>,
+  ];
+
   const [apiData, setApiData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [selectedDate, setSelectedDate] = useState(null);
@@ -191,7 +189,7 @@ const DailyDarshan = () => {
         )}
       </div>
 
-      <Container className="daily_darshan">
+      <div className="dd-page"><div className="dd-container">
         <div className="spinner-container">
           <div className="date-picker daily-darshan">
             <div className="date-picker-inner-wrap">
@@ -239,7 +237,7 @@ const DailyDarshan = () => {
           <div className="d-flex " style={{ flexWrap: "wrap" }}>
             {loading
               ? [...Array(4)].map((_, index) => (
-                  <Grid item xs={12} sm={6} md={3} key={index}>
+                  <div className="dd-cell" key={index}>
                     <div className="slider-item mt-4" key={index}>
                       <div className="slider-item-shimmer">
                         <div
@@ -248,7 +246,7 @@ const DailyDarshan = () => {
                         />
                       </div>
                     </div>
-                  </Grid>
+                  </div>
                 ))
               : apiData?.map((e, index) => {
                   const darshanClass =
@@ -260,11 +258,11 @@ const DailyDarshan = () => {
                         <p>{e.media.short_description}</p>
                       </div>
 
-                      <Grid container spacing={3}>
+                      <div className="dd-grid">
                         {e.media.media.map((mediaItem, i) => {
                           return (
                             <Fragment key={i}>
-                              <Grid item xs={12} sm={6} md={3}>
+                              <div className="dd-cell">
                                 <div
                                   className="wallpaper-content"
                                   style={{ width: "100%" }}
@@ -305,7 +303,7 @@ const DailyDarshan = () => {
                                     Download
                                   </button>
                                 </div>
-                              </Grid>
+                              </div>
                             </Fragment>
                           );
                         })}
@@ -342,13 +340,13 @@ const DailyDarshan = () => {
                             }
                           />
                         )}
-                      </Grid>
+                      </div>
                     </Fragment>
                   );
                 })}
           </div>
         </div>
-      </Container>
+      </div></div>
     </>
   );
 };

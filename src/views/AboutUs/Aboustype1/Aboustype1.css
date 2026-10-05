@@ -1,0 +1,410 @@
+/* ── About Us · Detail page, text + photo layout (Aboustype1) ── */
+.at1-page {
+  background: linear-gradient(180deg, #fdf9f4 0%, #f7f1e8 100%);
+  padding: 40px 0 60px;
+}
+
+.at1-container {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+
+.at1-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(260px, 1fr);
+  gap: 28px;
+  align-items: start;
+}
+
+.at1-main,
+.at1-side {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  min-width: 0;
+}
+
+/* Main sections */
+.at1-section {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 6px 28px rgba(59, 10, 10, 0.08);
+  border-top: 3px solid #c8a96e;
+  padding: 26px 28px;
+  min-width: 0;
+}
+
+.at1-section-title {
+  font-family: "Poppins", sans-serif;
+  font-size: 22px;
+  font-weight: 800;
+  color: #3b0a0a;
+  margin: 0 0 16px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #efe4cf;
+  overflow-wrap: anywhere;
+}
+
+/* Photos shown whole, never cropped */
+.at1-photo {
+  margin-bottom: 18px;
+}
+
+.at1-photo-img,
+.at1-photo .lazy-load-image-background {
+  display: block;
+  width: 100%;
+}
+
+.at1-photo-img {
+  height: auto;
+  border-radius: 12px;
+  object-fit: contain;
+  background: #fbf7f0;
+}
+
+.at1-text {
+  font-size: 15px;
+  line-height: 1.85;
+  color: #444;
+  overflow-wrap: anywhere;
+}
+
+.at1-text p {
+  margin: 0 0 14px;
+}
+
+/* Side highlight */
+.at1-highlight {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 6px 28px rgba(59, 10, 10, 0.08);
+  overflow: hidden;
+  border-top: 3px solid #8b1c1c;
+}
+
+.at1-highlight-photo {
+  background: #fbf7f0;
+}
+
+.at1-highlight-img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+.at1-highlight-body {
+  padding: 22px 24px 24px;
+}
+
+.at1-highlight-title {
+  font-family: "Poppins", sans-serif;
+  font-size: 22px;
+  font-weight: 800;
+  color: #3b0a0a;
+  margin: 0 0 12px;
+  overflow-wrap: anywhere;
+}
+
+.at1-highlight-text {
+  font-size: 14.5px;
+  line-height: 1.75;
+  color: #555;
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+/* Side lists */
+.at1-list-card {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.07);
+  padding: 20px 22px;
+  border-left: 4px solid #c8a96e;
+  min-width: 0;
+}
+
+.at1-list-title {
+  font-family: "Poppins", sans-serif;
+  font-size: 17px;
+  font-weight: 800;
+  color: #1a2a6c;
+  margin: 0 0 10px;
+  overflow-wrap: anywhere;
+}
+
+.at1-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.at1-list li {
+  position: relative;
+  padding-left: 18px;
+  font-size: 14.5px;
+  color: #444;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.at1-list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.55em;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #8b1c1c;
+}
+
+@media (max-width: 900px) {
+  .at1-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .at1-side {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+  }
+
+  .at1-highlight {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 560px) {
+  .at1-container {
+    padding: 0 16px;
+  }
+
+  .at1-section {
+    padding: 20px 18px;
+  }
+
+  .at1-section-title {
+    font-size: 19px;
+  }
+
+  .at1-side {
+    grid-template-columns: 1fr;
+  }
+
+  .at1-highlight-title {
+    font-size: 19px;
+  }
+}
+/* ── Detail page top block: hero card, breadcrumb, list cards ── */
+.at1-top {
+  background: linear-gradient(180deg, #fbf3e6 0%, #fdf9f4 100%);
+  padding: 0 0 8px;
+}
+
+.at1-hero-wrap {
+  position: relative;
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 36px 20px 0;
+  box-sizing: border-box;
+}
+
+.at1-hero {
+  display: grid;
+  grid-template-columns: minmax(240px, 340px) minmax(0, 1fr);
+  gap: 32px;
+  align-items: center;
+  background: #fff;
+  border-radius: 18px;
+  border-top: 3px solid #8b1c1c;
+  box-shadow: 0 10px 36px rgba(59, 10, 10, 0.12);
+  padding: 26px;
+  margin-bottom: 36px;
+  box-sizing: border-box;
+}
+
+.at1-hero-photo {
+  background: #fbf7f0;
+  border-radius: 14px;
+  overflow: hidden;
+  min-width: 0;
+}
+
+.at1-hero-img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+.at1-hero-body {
+  min-width: 0;
+}
+
+.at1-hero-title {
+  font-family: "Poppins", sans-serif;
+  font-size: 30px;
+  font-weight: 800;
+  line-height: 1.25;
+  color: #3b0a0a;
+  margin: 0 0 14px;
+  overflow-wrap: anywhere;
+}
+
+.at1-hero-text {
+  font-size: 16px;
+  line-height: 1.8;
+  color: #555;
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+/* Breadcrumb straddles the bottom edge of the hero card */
+.at1-hero-wrap .breadcrumbs-wrap {
+  position: absolute;
+  top: calc(100% - 36px);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+}
+
+.at1-lists {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 24px 20px 0;
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 22px;
+}
+
+.at1-lists .at1-list-card {
+  margin: 0;
+  min-width: 0;
+}
+
+@media (max-width: 720px) {
+  .at1-hero-wrap {
+    padding: 22px 16px 0;
+  }
+
+  .at1-hero {
+    grid-template-columns: 1fr;
+    gap: 18px;
+    padding: 18px;
+  }
+
+  .at1-hero-title {
+    font-size: 23px;
+  }
+
+  .at1-hero-text {
+    font-size: 15px;
+  }
+
+  .at1-lists {
+    grid-template-columns: 1fr;
+    padding: 24px 16px 0;
+  }
+}
+
+/* Main sections: two per row, smaller photos; one column on phones */
+.at1-main {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+}
+
+.at1-main .at1-section {
+  margin: 0;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.at1-main .at1-section-title {
+  font-size: 18px;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+}
+
+.at1-main .at1-photo {
+  max-width: 260px;
+  margin: 0 auto 14px;
+}
+
+.at1-main .at1-photo-img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 340px;
+  object-fit: contain;
+  border-radius: 10px;
+}
+
+.at1-main .at1-text {
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+@media (max-width: 720px) {
+  .at1-main {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .at1-main .at1-photo {
+    max-width: 100%;
+  }
+}
+
+/* Hero: photo aligns to the top; breadcrumb sits in the card's bottom padding, clear of the text */
+.at1-hero {
+  align-items: start;
+  padding-bottom: 52px;
+}
+
+.at1-hero-wrap .breadcrumbs-wrap {
+  top: auto;
+  bottom: 14px;
+  transform: translateX(-50%);
+}
+
+/* Suggestions heading sits inside the cream block at the bottom */
+.pm-container > .at1-section-title {
+  margin: 8px 0 22px;
+}
+
+/* Suggestions heading */
+.pm-heading {
+  font-family: "Poppins", sans-serif;
+  font-size: 22px;
+  font-weight: 800;
+  color: #3b0a0a;
+  margin: 8px 0 22px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #efe4cf;
+}
+
+/* Hero: photo on top, title and description below (no empty space beside a short photo) */
+.at1-hero {
+  grid-template-columns: minmax(0, 1fr);
+  gap: 22px;
+}
+
+.at1-hero-photo {
+  max-width: 460px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.at1-hero-body {
+  text-align: left;
+}

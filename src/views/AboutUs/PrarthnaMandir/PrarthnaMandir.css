@@ -1,0 +1,88 @@
+/* ── About Us · related places grid (PrarthnaMandir) ───────── */
+.pm-page {
+  background: linear-gradient(180deg, #fdf9f4 0%, #f7f1e8 100%);
+  padding: 8px 0 60px;
+}
+
+.pm-container {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+
+.pm-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 22px;
+}
+
+.pm-card {
+  background: #fff;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 6px 24px rgba(59, 10, 10, 0.08);
+  cursor: pointer;
+  min-width: 0;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.pm-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 34px rgba(59, 10, 10, 0.14);
+}
+
+.pm-card-photo {
+  background: #fbf7f0;
+  padding: 8px;
+}
+
+/* Photos shown whole, never cropped */
+.pm-card-img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 3;
+  object-fit: contain;
+}
+
+.pm-card-title {
+  padding: 12px 14px 14px;
+  text-align: center;
+}
+
+.pm-card-title p {
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  color: #3b0a0a;
+  overflow-wrap: anywhere;
+}
+
+.pm-card:hover .pm-card-title p {
+  color: #8b1c1c;
+}
+
+@media (max-width: 1000px) {
+  .pm-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 720px) {
+  .pm-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+  }
+}
+
+@media (max-width: 420px) {
+  .pm-container {
+    padding: 0 16px;
+  }
+
+  .pm-grid {
+    grid-template-columns: 1fr;
+  }
+}

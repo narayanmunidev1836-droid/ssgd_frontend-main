@@ -1,12 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import _image from "../../assets/images/subheader.webp";
-const image = _image.src;
 import CommonBreadcrumbs from "../../common/CommonBreadcrumbs/CommonBreadcrumbs";
-import Typography from "@mui/material/Typography";
-import Container from "@mui/material/Container";
-import Grid from "@mui/material/Grid";
-import Card from "@mui/material/Card";
 import _image1 from "../../assets/images/date.webp";
 const image1 = _image1.src;
 import TextField from "@mui/material/TextField";
@@ -16,10 +10,8 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import dayjs from "dayjs";
 import { fetchDailykathaData, fetchSlider } from "../../api/API";
-import Loader from "../../common/Loader/Loader";
 import InnerpageLoader from "../Home/InnerpageLoader";
 import "./DailyKatha.css";
-import FullpageLoader from "../../common/HomeSliderLoader/FullpageLoader";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
@@ -32,16 +24,12 @@ const DailyKatha = () => {
   ];
 
   const [apiData, setApiData] = useState([]);
-  const [kathaTitle, setKathaTitle] = useState([]);
-  const [kathaDesc, setKathaDesc] = useState([]);
   const [loading, setLoading] = useState(false);
   const [banner, setBanner] = useState([]);
   const [selectedDate, setSelectedDate] = useState(null);
   const [availableDates, setAvailableDates] = useState([]);
   const [imageLoaded, setImageLoaded] = useState(false);
 
-  useEffect(() => {
-      }, [availableDates]);
   const fetchData = async (date) => {
     setLoading(true);
     try {
@@ -79,6 +67,7 @@ const DailyKatha = () => {
       setLoading(false);
     }
   };
+
   useEffect(() => {
     fetchData();
   }, []);
@@ -133,15 +122,6 @@ const DailyKatha = () => {
     setImageLoaded(true);
   };
 
-  //function to calculate the height of the iframe
-  const calculateHeight = () => {
-    // Assume a default aspect ratio of 16:9 for YouTube videos
-    const aspectRatio = 9 / 16;
-    const width = document.querySelector(".container").offsetWidth;
-    const height = width * aspectRatio;
-    return height;
-  };
-
   useEffect(() => {
     AOS.init({
       duration: 1000,
@@ -171,133 +151,112 @@ const DailyKatha = () => {
         )}
       </div>
 
-      <Container className="daily-katha">
-        <div className="date-picker">
-          <div className="date-picker-inner-wrap">
-            <div className="date-picker-wrap">
+      <div className="dk-page">
+        <div className="dk-container">
+          <div className="dk-heading" data-aos="fade-up">
+            <h2 className="dk-title">Daily Katha</h2>
+          </div>
+
+          {/* Date picker card */}
+          <div className="dk-date-card" data-aos="fade-up">
+            <div className="dk-date-info">
+              <img src={image1} className="dk-date-icon" alt="" />
               <div>
-                <img src={image1} className="date-picker-img" alt="" />
-              </div>
-              <div>
-                <h4>
+                <h4 className="dk-date-value">
                   {selectedDate
                     ? selectedDate.format("MMMM DD, YYYY")
                     : "No date selected"}
                 </h4>
               </div>
             </div>
-          </div>
-          <div className="date-picker-daily-darshan">
-            <LocalizationProvider dateAdapter={AdapterDayjs}>
-              <DemoContainer components={["DatePicker", "DatePicker"]}>
-                <DatePicker
-                  value={selectedDate}
-                  onChange={(newValue) => {
-                    setSelectedDate(newValue);
-                    onChangeSelected(newValue);
-                  }}
-                  renderInput={(params) => <TextField {...params} />}
-                  shouldDisableDate={(day) => {
-                    const formattedDay = dayjs(day).format("MM/DD/YYYY");
-                    const availableDatesArray = Object.values(
-                      availableDates
-                    ).map((date) => date.replace(/\\\//g, "/"));
-                    return !availableDatesArray.includes(formattedDay);
-                  }}
-                  className="katha-date-picker"
-                />
-              </DemoContainer>
-            </LocalizationProvider>
-          </div>
-        </div>
-        {/* {loading ? (
-          <>
-            <div className="shimmer-text" style={{ width: "70%" }} />
-            <div className="shimmer-text mt-2" style={{ width: "40%" }} />
-          </>
-        ) : (
-          <div className="darshan-details" data-aos="fade-up">
-            <h6>{apiData[0]?.media?.title}</h6>
-            <p>{apiData[0]?.media?.short_description}</p>
-          </div>
-        )} */}
-
-        <div className="spinner-container">
-          {loading ? (
-            <div className="video-content-wrap shimmer-active mt-4">
-              <div className="video-inner-content-wrap">
-                <div className="shimmer-Data shimmer-card"></div>
-              </div>
+            <div className="dk-date-picker">
+              <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <DemoContainer components={["DatePicker", "DatePicker"]}>
+                  <DatePicker
+                    value={selectedDate}
+                    onChange={(newValue) => {
+                      setSelectedDate(newValue);
+                      onChangeSelected(newValue);
+                    }}
+                    renderInput={(params) => <TextField {...params} />}
+                    shouldDisableDate={(day) => {
+                      const formattedDay = dayjs(day).format("MM/DD/YYYY");
+                      const availableDatesArray = Object.values(
+                        availableDates
+                      ).map((date) => date.replace(/\\\//g, "/"));
+                      return !availableDatesArray.includes(formattedDay);
+                    }}
+                    className="katha-date-picker"
+                    slotProps={{
+                      textField: { size: "small", fullWidth: true },
+                      popper: { className: "dk-picker-popper" },
+                    }}
+                  />
+                </DemoContainer>
+              </LocalizationProvider>
             </div>
-          ) : (
-            <>
-              {apiData.map((dailyItem, dailyIndex) => {
-                const mediaList = dailyItem?.media?.media || [];
-                const firstMedia = mediaList[0];
-                const remainingMedia = mediaList.slice(1);
+          </div>
 
-                return (
-                  <div key={dailyIndex} data-aos="fade-up">
-                    <div className="darshan-details">
-                      <h6>{dailyItem?.media?.title}</h6>
-                      <p>{dailyItem?.media?.short_description}</p>
-                    </div>
+          <div className="spinner-container">
+            {loading ? (
+              <div className="dk-loading">
+                <div className="dk-video shimmer"></div>
+              </div>
+            ) : (
+              <>
+                {apiData.map((dailyItem, dailyIndex) => {
+                  const mediaList = dailyItem?.media?.media || [];
+                  const firstMedia = mediaList[0];
+                  const remainingMedia = mediaList.slice(1);
 
-                    <div className="daily-media-container">
-                      {/* Main Video */}
-                      {firstMedia && (
-                        <iframe
-                          width="100%"
-                          height={calculateHeight()}
-                          src={getYoutubeEmbedUrl(firstMedia)}
-                          title={dailyItem?.media?.title || "YouTube video"}
-                          frameBorder="0"
-                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                          allowFullScreen
-                          className="katha-video"
-                        ></iframe>
+                  return (
+                    <section key={dailyIndex} className="dk-item" data-aos="fade-up">
+                      <div className="dk-item-head">
+                        <h3 className="dk-item-title">{dailyItem?.media?.title}</h3>
+                        <p className="dk-item-desc">{dailyItem?.media?.short_description}</p>
+                      </div>
+
+                      {/* Main video */}
+                      {firstMedia && getYoutubeEmbedUrl(firstMedia) && (
+                        <div className="dk-video">
+                          <iframe
+                            src={getYoutubeEmbedUrl(firstMedia)}
+                            title={dailyItem?.media?.title || "YouTube video"}
+                            frameBorder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowFullScreen
+                          ></iframe>
+                        </div>
                       )}
 
-                      {/* Additional Videos */}
-                      <Container>
-                        <Grid
-                          container
-                          spacing={3}
-                          justifyContent="center"
-                          className="daily-katha-video-wrap pt-5"
-                        >
-                          {remainingMedia.map((mediaItem, mediaIndex) => (
-                            <Grid
-                              item
-                              xs={12}
-                              sm={6}
-                              md={4}
-                              key={mediaIndex}
-                              style={{ padding: "0px 0px 30px" }}
-                            >
-                              <Card className="daily-katha-videos">
-                                <iframe
-                                  width="100%"
-                                  height="315"
-                                  src={getYoutubeEmbedUrl(mediaItem)}
-                                  title={`Additional Video ${mediaIndex + 1}`}
-                                  frameBorder="0"
-                                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                  allowFullScreen
-                                ></iframe>
-                              </Card>
-                            </Grid>
-                          ))}
-                        </Grid>
-                      </Container>
-                    </div>
-                  </div>
-                );
-              })}
-            </>
-          )}
+                      {/* Additional videos */}
+                      {remainingMedia.length > 0 && (
+                        <div className="dk-grid">
+                          {remainingMedia.map((mediaItem, mediaIndex) =>
+                            getYoutubeEmbedUrl(mediaItem) ? (
+                              <div className="dk-card" key={mediaIndex}>
+                                <div className="dk-video">
+                                  <iframe
+                                    src={getYoutubeEmbedUrl(mediaItem)}
+                                    title={`Additional Video ${mediaIndex + 1}`}
+                                    frameBorder="0"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                    allowFullScreen
+                                  ></iframe>
+                                </div>
+                              </div>
+                            ) : null
+                          )}
+                        </div>
+                      )}
+                    </section>
+                  );
+                })}
+              </>
+            )}
+          </div>
         </div>
-      </Container>
+      </div>
     </>
   );
 };

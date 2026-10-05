@@ -1,16 +1,5 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import _image from "../../assets/images/subheader.webp";
-const image = _image.src;
-import _image1 from "../../assets/images/swaminarayan.webp";
-const image1 = _image1.src;
-import Grid from "@mui/material/Grid";
-import Container from "@mui/material/Container";
-import SectionTitle from "../../common/SectionTitle/SectionTitle";
-import { useNavigate } from "../../common/routerCompat.js";
-import CommonBreadcrumbs from "../../common/CommonBreadcrumbs/CommonBreadcrumbs";
-import Typography from "@mui/material/Typography";
-import { MdSquare } from "react-icons/md";
 import { useParams } from "../../common/routerCompat.js";
 import { fetchAboutusDetails } from "../../api/API";
 import Aboustype1 from "./Aboustype1/Aboustype1";
@@ -18,26 +7,63 @@ import Aboustype2 from "./Aboustype2/Aboustype2";
 import Aboustype3 from "./Aboustype3/Aboustype3";
 import "./About.css";
 
+// Skeleton that mirrors the Aboustype1 layout, so the page doesn't change shape when data arrives
+const AboutSkeleton = () => (
+  <>
+    <div className="contact-img-wrap">
+      <div className="spinner-container-banner">
+        <div className="shimmer-activity-wrapper">
+          <div className="shimmer" />
+        </div>
+      </div>
+    </div>
+    <div className="at1-page">
+      <div className="at1-container">
+        <div className="at1-layout">
+          <div className="at1-main">
+            <section className="at1-section">
+              <div className="at1-skel shimmer at1-skel-title" />
+              <div className="at1-skel shimmer at1-skel-photo" />
+              {[...Array(6)].map((_, index) => (
+                <div key={index} className="at1-skel shimmer at1-skel-line" />
+              ))}
+            </section>
+          </div>
+          <aside className="at1-side">
+            <div className="at1-highlight">
+              <div className="at1-skel shimmer at1-skel-photo" />
+              <div className="at1-highlight-body">
+                <div className="at1-skel shimmer at1-skel-title" />
+                {[...Array(4)].map((_, index) => (
+                  <div key={index} className="at1-skel shimmer at1-skel-line" />
+                ))}
+              </div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </div>
+  </>
+);
+
 const About = () => {
-  const breadcrumbsData = [
-    { label: "Home", url: "/" },
-    { label: "About Us", url: "/about-us" },
-    <label color="text.primary" className="active-link-color">
-      {/* Lord Swaminarayan */}
-    </label>,
-  ];
 
   const [aboutUsData, setAboutUsData] = useState([]);
   const [aboutUsType, setAboutUsType] = useState([]);
-  const [loading, setLoading] = useState(false);
+  // Start in the loading state so the "no match" message never flashes before the data arrives
+  const [loading, setLoading] = useState(true);
 
   const params = useParams();
-  
+
   const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+
+  const [loadError, setLoadError] = useState(false);
+  const [reloadKey, setReloadKey] = useState(0);
 
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
+      setLoadError(false);
       try {
         const response = await fetchAboutusDetails({
           url: apiUrl,
@@ -48,80 +74,28 @@ const About = () => {
         setAboutUsType(
           response.data.responseBody.about_us_data.select_type_about_us
         );
-                                setLoading(false);
+        setLoading(false);
       } catch (error) {
         console.error("Error fetching data:", error);
+        setLoadError(true);
         setLoading(false);
       }
     };
 
     fetchData();
-  }, []);
+  }, [reloadKey]);
+
   return (
     <>
       {loading ? (
-        <>
-          <div className="shimmer-activity-wrapper">
-            <div className="shimmer" />
-          </div>
-          <Container className="about-us-page about_us_page">
-            <Grid container spacing={3} justifyContent="center">
-              <Grid item xs={12} sm={12} md={8}>
-                <div className="container about-container about-us-content">
-                  <div>
-                    <span className="span-bg-color">-</span>
-                  </div>
-                  <div className="container">
-                    <div className="container">
-                      <div>
-                        <div className="mt-5">
-                          <>
-                            {" "}
-                            <div
-                              className="slider-item"
-                              style={{ width: "100%" }}
-                            >
-                              <div
-                                className="slider-item-shimmer"
-                                style={{ width: "100%" }}
-                              ></div>
-                            </div>
-                          </>
-                        </div>
-
-                        {[...Array(10)].map((_, index) => (
-                          <div className="slider-item-shimmer-text-about mt-3" />
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </Grid>
-              <Grid item xs={12} sm={12} md={4}>
-                <>
-                  <div
-                    style={{ cursor: "pointer" }}
-                    className="about-us-content-wrap"
-                  >
-                    <div className="sant-photo-content pt-sm-0">
-                      <div
-                        className="sant-img-placeholder"
-                        style={{ width: "150px", height: "150px" }}
-                      ></div>
-                      <h4 className="shimmer" style={{ width: "60%" }}></h4>
-                    </div>
-                    {[...Array(6)].map((_, index) => (
-                      <div
-                        className="slider-item-shimmer-text-about mt-3"
-                        style={{ width: "100%" }}
-                      />
-                    ))}
-                  </div>
-                </>
-              </Grid>
-            </Grid>
-          </Container>
-        </>
+        <AboutSkeleton />
+      ) : loadError ? (
+        <div className="at-load-error">
+          <p>Could not load this page. Please check your connection and try again.</p>
+          <button type="button" onClick={() => setReloadKey((k) => k + 1)}>
+            Try again
+          </button>
+        </div>
       ) : aboutUsType === "1" ? (
         <Aboustype1 aboutUsData={aboutUsData} dataLoading={loading} />
       ) : aboutUsType === "2" ? (

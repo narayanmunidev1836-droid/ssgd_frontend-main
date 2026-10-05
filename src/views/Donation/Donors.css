@@ -345,3 +345,167 @@ height: 200px;
     grid-template-columns: 190px 1fr;
   }
 } */
+/* ── Donation list (redesign) ─────────────────────────────────── */
+.dn-page {
+  background: linear-gradient(180deg, #fdf9f4 0%, #f7f1e8 100%);
+  padding: 0 0 60px;
+}
+
+.dn-container {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+
+.dn-section-title {
+  position: relative;
+  font-family: "Poppins", sans-serif;
+  font-size: 22px;
+  font-weight: 800;
+  color: #3b0a0a;
+  margin: 40px 0 22px;
+  padding-left: 16px;
+  letter-spacing: 0.02em;
+}
+
+.dn-section-title::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 4px;
+  bottom: 4px;
+  width: 4px;
+  border-radius: 4px;
+  background: linear-gradient(180deg, #c8a96e, #8b1c1c);
+}
+
+.dn-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+}
+
+.dn-cell {
+  min-width: 0;
+}
+
+.dn-cell .bank-info-wrap {
+  height: 100%;
+  background: #fff;
+  border-radius: 16px;
+  border-top: 3px solid #c8a96e;
+  box-shadow: 0 6px 28px rgba(59, 10, 10, 0.08);
+  padding: 24px 24px 20px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.dn-cell .bank-info-wrap:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 36px rgba(59, 10, 10, 0.14);
+}
+
+.dn-cell .bank-details {
+  font-family: "Poppins", sans-serif;
+  font-size: 18px;
+  font-weight: 800;
+  color: #1a2a6c;
+  margin: 0 0 14px;
+  overflow-wrap: anywhere;
+}
+
+.dn-cell .bank-info-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
+}
+
+.dn-cell .bank-info-row {
+  display: grid;
+  grid-template-columns: minmax(110px, 40%) minmax(0, 1fr);
+  gap: 12px;
+  padding-bottom: 10px;
+  border-bottom: 1px dashed #efe4cf;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.dn-cell .bank-info-label {
+  color: #8b1c1c;
+  font-weight: 600;
+}
+
+.dn-cell .bank-info-value {
+  color: #444;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.dn-cell .donors-btn-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.dn-cell .donors-btn {
+  padding: 9px 22px;
+  border: 2px solid #8b1c1c;
+  border-radius: 6px;
+  background: transparent;
+  color: #8b1c1c;
+  font-family: "Poppins", sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.25s ease, color 0.25s ease;
+}
+
+.dn-cell .donors-btn:hover {
+  background: #8b1c1c;
+  color: #fff;
+}
+
+@media (max-width: 860px) {
+  .dn-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}
+
+@media (max-width: 560px) {
+  .dn-container {
+    padding: 0 16px;
+  }
+
+  .dn-section-title {
+    font-size: 19px;
+    margin-top: 28px;
+  }
+
+  .dn-cell .bank-info-wrap {
+    padding: 20px 18px 18px;
+  }
+
+  .dn-cell .bank-info-row {
+    grid-template-columns: 1fr;
+    gap: 2px;
+  }
+
+  .dn-cell .donors-btn {
+    flex: 1 1 140px;
+  }
+}
+
+/* Top spacing inside the cream background (no white gap above the page) */
+.dn-page {
+  padding-top: 40px;
+}
+
+.dn-container > div:first-child > .dn-section-title {
+  margin-top: 0;
+}

@@ -1,0 +1,26 @@
+.rmt-toggle {
+  display: inline-block;
+  margin-top: 8px;
+  padding: 0;
+  background: none;
+  border: 0;
+  color: #8b1c1c;
+  font-family: "Poppins", sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.rmt-toggle:hover {
+  text-decoration: underline;
+}
+
+.rmt-preview {
+  white-space: normal;
+}
+
+/* "Read more" sits at the end of the paragraph */
+.rmt-inline {
+  display: inline;
+  margin: 0 0 0 4px;
+}
