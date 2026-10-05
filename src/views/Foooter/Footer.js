@@ -5,26 +5,19 @@ import Container from "@mui/material/Container";
 import { SlLocationPin } from "react-icons/sl";
 import { MdOutlineEmail } from "react-icons/md";
 import { FiPhone } from "react-icons/fi";
+import {
+  FaFacebook,
+  FaWhatsapp,
+  FaYoutube,
+  FaInstagram,
+  FaTelegram,
+  FaXTwitter,
+} from "react-icons/fa6";
+import { SiSpotify, SiApplemusic } from "react-icons/si";
 // import NavbarLogo from "../../assets/images/logo.webp";
 import _image from "../../assets/images/logo (1).webp";
 const image = _image.src;
-import _image1 from "../../assets/images/note (1).webp";
-const image1 = _image1.src;
-import _image2 from "../../assets/images/facebook (5).webp";
-const image2 = _image2.src;
-import _image3 from "../../assets/images/whatsapp.webp";
-const image3 = _image3.src;
-import _image4 from "../../assets/images/youtube.webp";
-const image4 = _image4.src;
-import _image5 from "../../assets/images/instagram (3).webp";
-const image5 = _image5.src;
-import _image6 from "../../assets/images/spotify (1).webp";
-const image6 = _image6.src;
-import _image7 from "../../assets/images/telegram.webp";
-const image7 = _image7.src;
-import _image8 from "../../assets/images/logos.webp";
-const image8 = _image8.src;
-import _image9 from "../../assets/images/icons8-jiosaavn-20.webp";
+import _image9 from "../../assets/images/icons8-jiosaavn-50 (1).png";
 const image9 = _image9.src;
 import { fetchFooterData, fetchNavbarData } from "../../api/API";
 import "./Footer.css";
@@ -273,7 +266,7 @@ const Footer = () => {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <img src={image2} className="footer-img" alt="Facebook" />
+            <FaFacebook className="footer-img" color="#1877F2" aria-label="Facebook" />
           </a>
         </li>
       )}
@@ -284,7 +277,7 @@ const Footer = () => {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <img src={image3} className="footer-img" alt="WhatsApp" />
+            <FaWhatsapp className="footer-img" color="#25D366" aria-label="WhatsApp" />
           </a>
         </li>
       )}
@@ -295,7 +288,7 @@ const Footer = () => {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <img src={image4} className="footer-img" alt="YouTube" />
+            <FaYoutube className="footer-img" color="#FF0000" aria-label="YouTube" />
           </a>
         </li>
       )}
@@ -306,7 +299,7 @@ const Footer = () => {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <img src={image5} className="footer-img" alt="Instagram" />
+            <FaInstagram className="footer-img" color="#E4405F" aria-label="Instagram" />
           </a>
         </li>
       )}
@@ -317,7 +310,7 @@ const Footer = () => {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <img src={image1} className="footer-img" alt="Apple Music" />
+            <SiApplemusic className="footer-img" color="#FA243C" aria-label="Apple Music" />
           </a>
         </li>
       )}
@@ -328,7 +321,7 @@ const Footer = () => {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <img src={image6} className="footer-img" alt="Spotify" />
+            <SiSpotify className="footer-img" color="#1DB954" aria-label="Spotify" />
           </a>
         </li>
       )}
@@ -339,7 +332,7 @@ const Footer = () => {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <img src={image7} className="footer-img" alt="Telegram" />
+            <FaTelegram className="footer-img" color="#26A5E4" aria-label="Telegram" />
           </a>
         </li>
       )}
@@ -350,7 +343,7 @@ const Footer = () => {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <img src={image8} className="footer-img" alt="Twitter" />
+            <FaXTwitter className="footer-img" color="#000000" aria-label="Twitter" />
           </a>
         </li>
       )}

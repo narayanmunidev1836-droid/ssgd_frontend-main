@@ -168,7 +168,7 @@
 }
 
 .footer-img {
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: #ffffff;
   padding: 9px;
   border-radius: 10px;
   width: 40px;
@@ -178,7 +178,7 @@
 }
 
 .social-media-link-wrap li a:hover .footer-img {
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: #f2f2f2;
   transform: translateY(-3px);
 }
 
@@ -221,7 +221,7 @@
   width: 240px;
   height: 46px;
   border-radius: 6px;
-  background: linear-gradient(90deg, rgba(255,255,255,0.07) 25%, rgba(255,255,255,0.12) 50%, rgba(255,255,255,0.07) 75%);
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.07) 25%, rgba(255, 255, 255, 0.12) 50%, rgba(255, 255, 255, 0.07) 75%);
   background-size: 200% 100%;
   animation: footerShimmer 1.5s infinite linear;
 }
@@ -230,7 +230,7 @@
   width: 40px;
   height: 40px;
   border-radius: 10px;
-  background: linear-gradient(90deg, rgba(255,255,255,0.07) 25%, rgba(255,255,255,0.12) 50%, rgba(255,255,255,0.07) 75%);
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.07) 25%, rgba(255, 255, 255, 0.12) 50%, rgba(255, 255, 255, 0.07) 75%);
   background-size: 200% 100%;
   animation: footerShimmer 1.5s infinite linear;
 }
@@ -239,15 +239,20 @@
   width: 220px;
   height: 16px;
   border-radius: 4px;
-  background: linear-gradient(90deg, rgba(255,255,255,0.07) 25%, rgba(255,255,255,0.12) 50%, rgba(255,255,255,0.07) 75%);
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.07) 25%, rgba(255, 255, 255, 0.12) 50%, rgba(255, 255, 255, 0.07) 75%);
   background-size: 200% 100%;
   animation: footerShimmer 1.5s infinite linear;
   margin-top: 4px;
 }
 
 @keyframes footerShimmer {
-  0%   { background-position: 200% 0; }
-  100% { background-position: -200% 0; }
+  0% {
+    background-position: 200% 0;
+  }
+
+  100% {
+    background-position: -200% 0;
+  }
 }
 
 /* ======= Responsive ======= */
@@ -262,13 +267,16 @@
   .footer-wrap {
     padding: 36px 0 16px;
   }
+
   .footer-info p {
     font-size: 14px;
     padding: 0;
   }
+
   .footer-link-wrap li a {
     font-size: 14px;
   }
+
   .footer-contact p {
     font-size: 14px;
   }
@@ -280,27 +288,35 @@
     margin: 0;
     font-size: 13px;
   }
+
   .footer-link-wrap li a {
     font-size: 13px;
   }
+
   .footer-contact p {
     font-size: 13px;
   }
+
   .footer-link-wrap {
     gap: 8px;
   }
+
   .social-media-link-wrap {
     margin-bottom: 0;
   }
+
   .logo-footer {
     padding: 0;
   }
+
   .footer-wrap {
     padding: 28px 0 12px;
   }
+
   .footer-grid {
     gap: 24px;
   }
+
   .footer-bottom {
     flex-direction: column;
     gap: 4px;
