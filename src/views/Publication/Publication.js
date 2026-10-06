@@ -45,7 +45,7 @@ const Publication = ({ setIsPublicationLoaded }) => {
 
   return (
     <>
-      <div className="publications-section p-4">
+      <div className="publications-section p-4 temple-page-bg">
         <Container>
           {/* Section Header */}
           <div className="pub-section-header" data-aos="fade-up">

@@ -228,7 +228,7 @@ const BookAlbumList = () => {
         });
       }, []);
   return (
-    <>
+    <div className="temple-page-bg">
       <div className="contact-img-wrap">
         <div>
           <div className="contact-img-wrap">
@@ -331,7 +331,7 @@ const BookAlbumList = () => {
           )}
         </Grid>
       </Container>
-    </>
+    </div>
   );
 };
 

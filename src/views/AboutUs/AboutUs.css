@@ -754,3 +754,8 @@
   width: 100% !important;
   max-width: 100%;
 }
+
+/* The page wrapper is transparent so the temple background shows through */
+.au-page {
+  background: transparent;
+}

@@ -364,3 +364,122 @@ p {
   height: 250px;
   object-fit: cover;
 }
+
+/* Temple background used on the publication and activity detail pages */
+.temple-page-bg {
+  background-image: url("./assets/images/dailyKathaBackground.png");
+  background-color: #fdf9f4;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  /* Fixed to the viewport so the image does not rescale while content loads */
+  background-attachment: fixed;
+}
+
+/* Custom dropdown (StyledDropdown): cream background, gold-maroon accents */
+.styled-dropdown {
+  position: relative;
+}
+
+.styled-dropdown-trigger {
+  width: 100%;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 0 14px;
+  background: transparent;
+  color: var(--text-color);
+  border: 1.5px solid var(--box-border-color);
+  border-radius: 10px;
+  font-family: "Poppins", sans-serif;
+  font-size: 13.5px;
+  font-weight: 600;
+  text-align: left;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.styled-dropdown-trigger:hover,
+.styled-dropdown-trigger.is-open {
+  border-color: var(--text-color);
+}
+
+.styled-dropdown-trigger:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(8, 65, 107, 0.12);
+}
+
+.styled-dropdown-label {
+  display: grid;
+  min-width: 0;
+}
+
+.styled-dropdown-label-item {
+  grid-area: 1 / 1;
+  white-space: nowrap;
+}
+
+.styled-dropdown-caret {
+  font-size: 22px;
+  color: #8b1c1c;
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+
+.styled-dropdown-trigger.is-open .styled-dropdown-caret {
+  transform: rotate(180deg);
+}
+
+.styled-dropdown-menu {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  z-index: 1060;
+  width: max-content;
+  min-width: 100%;
+  margin: 0;
+  padding: 6px;
+  list-style: none;
+  background: #fffdf8;
+  border: 1px solid #e6d3a8;
+  border-radius: 12px;
+  box-shadow: 0 12px 32px rgba(59, 10, 10, 0.14);
+}
+
+.styled-dropdown-option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  white-space: nowrap;
+  color: #3b0a0a;
+  font-family: "Poppins", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.styled-dropdown-option:hover {
+  background: rgba(181, 9, 14, 0.07);
+}
+
+.styled-dropdown-option.is-selected {
+  color: #8b1c1c;
+  font-weight: 700;
+}
+
+.styled-dropdown-check {
+  color: #8b1c1c;
+  font-size: 18px;
+}
+
+
+.styled-dropdown-trigger:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}

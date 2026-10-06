@@ -1,8 +1,9 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import CommonBreadcrumbs from "../../common/CommonBreadcrumbs/CommonBreadcrumbs";
-import _image1 from "../../assets/images/date.webp";
-const image1 = _image1.src;
+import _dkBg from "../../assets/images/dailyKathaBackground.png";
+import { MdChevronLeft, MdChevronRight, MdCalendarMonth } from "react-icons/md";
+const dkPageBg = _dkBg.src;
 import TextField from "@mui/material/TextField";
 import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
@@ -99,6 +100,21 @@ const DailyKatha = () => {
     fetchData(newValue);
   };
 
+  // Prev / next move through the dates the API says have a katha
+  const dateList = Object.values(availableDates)
+    .map((d) => dayjs(String(d).replace(/\\\//g, "/"), "MM/DD/YYYY"))
+    .filter((d) => d.isValid())
+    .sort((a, b) => a.valueOf() - b.valueOf());
+  const currentIdx = selectedDate
+    ? dateList.findIndex((d) => d.isSame(selectedDate, "day"))
+    : -1;
+  const canGoPrev = currentIdx > 0;
+  const canGoNext = currentIdx >= 0 && currentIdx < dateList.length - 1;
+  const goToDate = (d) => {
+    setSelectedDate(d);
+    onChangeSelected(d);
+  };
+
   useEffect(() => {
     setLoading(true);
     const fetchBanner = async () => {
@@ -151,7 +167,7 @@ const DailyKatha = () => {
         )}
       </div>
 
-      <div className="dk-page">
+      <div className="dk-page" style={{ "--dk-page-bg": `url('${dkPageBg}')` }}>
         <div className="dk-container">
           <div className="dk-heading" data-aos="fade-up">
             <h2 className="dk-title">Daily Katha</h2>
@@ -159,14 +175,26 @@ const DailyKatha = () => {
 
           {/* Date picker card */}
           <div className="dk-date-card" data-aos="fade-up">
+            <button
+              type="button"
+              className="dk-date-nav"
+              aria-label="Previous date"
+              disabled={!canGoPrev}
+              onClick={() => canGoPrev && goToDate(dateList[currentIdx - 1])}
+            >
+              <MdChevronLeft />
+            </button>
             <div className="dk-date-info">
-              <img src={image1} className="dk-date-icon" alt="" />
+              <MdCalendarMonth className="dk-date-cal" aria-hidden="true" />
               <div>
                 <h4 className="dk-date-value">
                   {selectedDate
                     ? selectedDate.format("MMMM DD, YYYY")
                     : "No date selected"}
                 </h4>
+                {selectedDate && (
+                  <p className="dk-date-day">{selectedDate.format("dddd, DD MMMM YYYY")}</p>
+                )}
               </div>
             </div>
             <div className="dk-date-picker">
@@ -195,6 +223,15 @@ const DailyKatha = () => {
                 </DemoContainer>
               </LocalizationProvider>
             </div>
+            <button
+              type="button"
+              className="dk-date-nav"
+              aria-label="Next date"
+              disabled={!canGoNext}
+              onClick={() => canGoNext && goToDate(dateList[currentIdx + 1])}
+            >
+              <MdChevronRight />
+            </button>
           </div>
 
           <div className="spinner-container">

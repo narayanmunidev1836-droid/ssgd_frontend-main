@@ -1145,3 +1145,123 @@
 .katha-img-wrap.katha-img-wrap-publication .katha-content p:empty {
   display: none;
 }
+
+/* Sort dropdown and search sit on the cream page background, like the tabs */
+.publication-serach-wrap .publication-filter-dropdown,
+.publication-serach-wrap .search-input {
+  background: transparent;
+}
+
+/* Custom sort dropdown (replaces the native select popup) */
+.publication-filter-wrap {
+  position: relative;
+}
+
+.publication-filter-dropdown {
+  width: 100%;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 0 14px;
+  background: transparent;
+  color: var(--text-color);
+  border: 1.5px solid var(--box-border-color);
+  border-radius: 10px;
+  font-family: "Poppins", sans-serif;
+  font-size: 13.5px;
+  font-weight: 600;
+  text-align: left;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.publication-filter-dropdown:hover,
+.publication-filter-dropdown.is-open {
+  border-color: var(--text-color);
+}
+
+.publication-filter-dropdown:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(8, 65, 107, 0.12);
+}
+
+.publication-filter-caret {
+  font-size: 22px;
+  color: #8b1c1c;
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+
+.publication-filter-dropdown.is-open .publication-filter-caret {
+  transform: rotate(180deg);
+}
+
+.publication-filter-menu {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  right: 0;
+  z-index: 1060;
+  margin: 0;
+  padding: 6px;
+  list-style: none;
+  background: #fffdf8;
+  border: 1px solid #e6d3a8;
+  border-radius: 12px;
+  box-shadow: 0 12px 32px rgba(59, 10, 10, 0.14);
+}
+
+.publication-filter-option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 12px;
+  border-radius: 8px;
+  color: #3b0a0a;
+  font-family: "Poppins", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.publication-filter-option:hover {
+  background: rgba(181, 9, 14, 0.07);
+}
+
+.publication-filter-option.is-selected {
+  color: #8b1c1c;
+  font-weight: 700;
+}
+
+.publication-filter-check {
+  color: #8b1c1c;
+  font-size: 18px;
+}
+
+/* Menu is at least as wide as the trigger, and sized to its longest label
+   so options never wrap or get cut off on any screen width */
+.publication-filter-menu {
+  left: 0;
+  right: auto;
+  width: max-content;
+  min-width: 100%;
+}
+
+.publication-filter-option {
+  white-space: nowrap;
+  gap: 16px;
+}
+
+/* Trigger width is fixed by the longest label, so it does not change with the selection */
+.publication-filter-label {
+  display: grid;
+  min-width: 0;
+}
+
+.publication-filter-label-item {
+  grid-area: 1 / 1;
+  white-space: nowrap;
+}

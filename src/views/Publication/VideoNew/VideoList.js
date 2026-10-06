@@ -317,7 +317,7 @@ const VideoList = ({ videoListData, publiCationLoading }) => {
     });
   }, []);
   return (
-    <>
+    <div className="temple-page-bg">
       {isAlbumDetail && (
         <div>
           <div className="contact-img-wrap">
@@ -463,7 +463,7 @@ const VideoList = ({ videoListData, publiCationLoading }) => {
       </Container>
 
       {isModalOpen && <Dialog onClose={handleCloseModal} mediaUrl={mediaUrl} />}
-    </>
+    </div>
   );
 };
 

@@ -753,7 +753,7 @@ const AudioListPlayer = ({ audioListData, publiCationLoading }) => {
     audioPlayerHelper.songs[audioPlayerHelper.currentIndex]?.isPlaying;
 
   return (
-    <div>
+    <div className="temple-page-bg">
       {isAlbumDetail && (
         <div>
           <div className="contact-img-wrap">

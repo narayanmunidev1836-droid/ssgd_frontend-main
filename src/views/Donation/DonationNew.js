@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useEffect, useRef } from "react";
+import StyledDropdown from "../../common/StyledDropdown/StyledDropdown";
 import _image from "../../assets/images/subheader.webp";
 const image = _image.src;
 import CommonBreadcrumbs from "../../common/CommonBreadcrumbs/CommonBreadcrumbs";
@@ -1593,21 +1594,17 @@ export default function DonationNew({ memberId, memberType }) {
           </div>
         </div>
         {Array.isArray(verifyListData) && verifyListData.length > 0 && (
-          <select
-            className="form-select branch-selection my-3"
-            aria-label="Default select example"
+          <StyledDropdown
+            className="my-3"
+            ariaLabel="Select member"
+            placeholder="Please select a member"
             value={memberName}
-            onChange={handleMemberChange} // Use onChange instead of onClick for proper selection handling
-          >
-            <option value="" disabled hidden>
-              Please select a member
-            </option>
-            {verifyListData.map((member) => (
-              <option key={member.memberId} value={member.memberId}>
-                {member.firstName} {member.middleName} {member.lastName}
-              </option>
-            ))}
-          </select>
+            onChange={(value) => handleMemberChange({ target: { value } })}
+            options={verifyListData.map((member) => ({
+              value: member.memberId,
+              label: `${member.firstName} ${member.middleName} ${member.lastName}`,
+            }))}
+          />
         )}
       </Container>
 
@@ -1867,17 +1864,16 @@ export default function DonationNew({ memberId, memberType }) {
                   <div className="donation-aadharcard-dropdown">
                     <div>
                       <div className="donation-card-selection">
-                        <select
-                          onChange={handleCardTypeChange}
+                        <StyledDropdown
+                          ariaLabel="Select card type"
+                          onChange={(value) => handleCardTypeChange({ target: { value } })}
                           value={formData.cardType}
-                          className="dropdown-aadharcard"
-                          disabled={
-                            selectedMember && formData.cardNumber !== ""
-                          }
-                        >
-                          <option value="Aadhar card">Aadhar card</option>
-                          <option value="Pan card">Pan card</option>
-                        </select>
+                          disabled={!!(selectedMember && formData.cardNumber !== "")}
+                          options={[
+                            { value: "Aadhar card", label: "Aadhar card" },
+                            { value: "Pan card", label: "Pan card" },
+                          ]}
+                        />
                       </div>
                       <input
                         type="text"

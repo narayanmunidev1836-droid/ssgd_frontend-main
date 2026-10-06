@@ -1,5 +1,5 @@
-.contact-input:focus ~ label,
-textarea:focus ~ label {
+.contact-input:focus~label,
+textarea:focus~label {
   font-size: 0.75em;
   /* color: #999; */
   color: var(--text-color);
@@ -68,8 +68,8 @@ textarea:focus {
   outline: 0;
 }
 
-input:focus ~ span,
-textarea:focus ~ span {
+input:focus~span,
+textarea:focus~span {
   width: 100%;
   -webkit-transition: all 0.075s ease;
   transition: all 0.075s ease;
@@ -187,6 +187,7 @@ textarea {
   left: 50%;
   transform: translate(-50%, -50%);
 }
+
 .google-map {
   width: 100%;
   height: 280px;
@@ -197,10 +198,12 @@ textarea {
   height: 50px;
   margin-bottom: 17px;
 }
+
 .contact-text-area {
   height: 120px;
   padding: 14px;
 }
+
 .loader1 {
   border: 4px solid #f3f3f3;
   border-top: 4px solid var(--text-color);
@@ -209,15 +212,18 @@ textarea {
   height: 27px;
   animation: spin 1s linear infinite;
 }
+
 .PhoneInputInput {
   padding: 12px;
   border: 1px solid #dee2e6;
   border-radius: 0.375rem;
   margin-bottom: 20px;
 }
+
 .contact-us-form {
   padding-top: 60px;
 }
+
 .contact-input {
   width: 150px;
   border-radius: 2px;
@@ -228,6 +234,7 @@ textarea {
   0% {
     transform: rotate(0deg);
   }
+
   100% {
     transform: rotate(360deg);
   }
@@ -237,6 +244,7 @@ textarea {
   .contact.email {
     font-size: 22px !important;
   }
+
   .contact-form {
     /* padding-top: 82px !important; */
   }
@@ -252,6 +260,7 @@ textarea {
   .donation-input {
     width: auto !important;
   }
+
   .contact-form {
     padding-top: 0px !important;
   }
@@ -555,4 +564,31 @@ textarea {
   .ct-map iframe {
     height: 260px;
   }
+}
+
+/* The page wrapper is transparent so the temple background shows through */
+.ct-page {
+  background: transparent;
+}
+
+/* Map as a framed card so it stands apart from the temple background:
+   white mat, gold outline and a deeper shadow */
+.ct-map {
+  border: 1.5px solid #c8a96e;
+  border-radius: 18px;
+  box-shadow: 0 10px 32px rgba(59, 10, 10, 0.18);
+}
+
+.ct-map iframe {
+  border-radius: 10px;
+}
+/* Map separated from the background by shadow only: no padding, no border */
+.ct-map {
+  padding: 0;
+  border: none;
+  box-shadow: 0 12px 36px rgba(59, 10, 10, 0.2);
+}
+
+.ct-map iframe {
+  border-radius: 0;
 }

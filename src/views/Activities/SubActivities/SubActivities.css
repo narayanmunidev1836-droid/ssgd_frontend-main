@@ -510,3 +510,34 @@
     font-size: 9px;
   }
 }
+
+/* Sort dropdown and search sit on the cream page background, like the tabs.
+   !important is needed because the hover and focus states set their own fills. */
+.sub_activities .activities-selection,
+.sub_activities .activities-selection:hover,
+.sub_activities .activities-selection:focus,
+.sub_activities .activities-search-input,
+.sub_activities .activities-search-input:hover,
+.sub_activities .activities-search-input:focus {
+  background: transparent !important;
+}
+
+/* Filter dropdowns on the Activities list: the wrapper takes the activities-selection
+   width, so the border and fill live only on the trigger (no double box). The
+   wrapper also sits above the cards so the open menu is not hidden behind them. */
+.sub_activities .styled-dropdown {
+  z-index: 100;
+}
+
+.sub_activities .styled-dropdown.activities-selection {
+  height: auto;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  backdrop-filter: none;
+}
+
+.sub_activities .styled-dropdown.activities-selection .styled-dropdown-trigger {
+  height: 44px;
+  background: transparent;
+}

@@ -64,6 +64,7 @@ const Aboustype3 = ({ aboutUsData }) => {
         )}
       </div>
 
+      <div className="temple-page-bg">
       <Container className="about-us-page">
         <Grid container spacing={3} justifyContent="center" className="pt-0">
           <Grid item xs={12} sm={12} md={12} style={{ paddingTop: "0px" }}>
@@ -107,6 +108,7 @@ const Aboustype3 = ({ aboutUsData }) => {
           </Grid>
         </Grid>
       </Container>
+      </div>
     </>
   );
 };

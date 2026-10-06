@@ -62,6 +62,7 @@ const Aboustype2 = ({ aboutUsData }) => {
         )}
       </div>
 
+      <div className="temple-page-bg">
       <div className="at2-page">
         <div className="at2-container">
           <div className="at2-heading">
@@ -82,6 +83,7 @@ const Aboustype2 = ({ aboutUsData }) => {
             ))}
           </div>
         </div>
+      </div>
       </div>
     </>
   );

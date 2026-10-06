@@ -250,7 +250,7 @@ const ActivitiesDetails = () => {
     });
   }, []);
   return (
-    <>
+    <div className="temple-page-bg">
       <div className="contact-img-wrap">
         <div className="spinner-container-banner">
           {!imageLoaded && (
@@ -488,7 +488,7 @@ const ActivitiesDetails = () => {
           {/* =========================== */}
         </Slider>
       </Container>
-    </>
+    </div>
   );
 };
 

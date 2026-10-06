@@ -239,7 +239,7 @@ const PublicationDetails = () => {
   // };
 
   return (
-    <>
+    <div className="temple-page-bg">
       <div className="contact-img-wrap">
         <div className="spinner-container-banner">
           {!imageLoaded && (
@@ -402,7 +402,7 @@ const PublicationDetails = () => {
       </Container>
       <div className="section-padding"></div>
       <ToastContainer position="top-right" autoClose={2000} />
-    </>
+    </div>
   );
 };
 

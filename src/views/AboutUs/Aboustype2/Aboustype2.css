@@ -88,3 +88,8 @@
     padding: 8px;
   }
 }
+
+/* Transparent so the temple background shows through the page */
+.at2-page {
+  background: transparent;
+}

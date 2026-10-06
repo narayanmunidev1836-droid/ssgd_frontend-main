@@ -243,6 +243,7 @@ const Contact = (props) => {
           </div>
         )}
       </div>
+      <div className="temple-page-bg">
 
       <ToastContainer />
       <div className="ct-page">
@@ -365,6 +366,7 @@ const Contact = (props) => {
             ></iframe>
           </div>
         </div>
+      </div>
       </div>
     </>
   );

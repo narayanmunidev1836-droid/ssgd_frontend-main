@@ -75,6 +75,7 @@ const Aboustype1 = ({ aboutUsData }) => {
   return (
     <>
       {/* Top block: hero card with breadcrumb on its edge, then the list cards */}
+      <div className="temple-page-bg">
       <div className="at1-top">
         <div className="at1-hero-wrap">
           <section className="at1-hero" data-aos="fade-up">
@@ -124,67 +125,68 @@ const Aboustype1 = ({ aboutUsData }) => {
       </div>
 
       {/* Main column: each section as a card */}
-      <div className="at1-page">
-        <div className="at1-container">
-          <div className="at1-main">
-            {aboutUsData.about_desc.map((e, index) => (
-              <section className="at1-section" key={index} data-aos="fade-up">
-                {e.title && <h3 className="at1-section-title">{e.title}</h3>}
-                {e.image && (
-                  <div className="at1-photo">
-                    <LazyLoadImage
-                      src={e.image}
-                      alt=""
-                      className="at1-photo-img"
-                      effect="blur"
-                      wrapperClassName="lazy-load-image-background aboutustype"
-                      afterLoad={() => handleImageLoad(e.image)}
-                    />
-                  </div>
-                )}
-                <ReadMoreText
-                  html={e.content}
-                  limit={450}
-                  className="at1-text"
-                />
-              </section>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* Suggestions: other places to explore, at the end of the page */}
-      {suggestions.length > 0 && (
-        <div className="pm-page">
-          <div className="pm-container">
-            <h3 className="pm-heading">More to explore</h3>
-            <div className="pm-grid">
-              {suggestions.map((item, index) => (
-                <div
-                  key={item.id ?? index}
-                  className="pm-card"
-                  data-aos="fade-up"
-                  data-aos-delay={(index % 4) * 100}
-                  onClick={() => handleSuggestionClick(item)}
-                >
-                  <div className="pm-card-photo">
-                    <LazyLoadImage
-                      src={item.details.image}
-                      alt={item.details.title}
-                      className="pm-card-img"
-                      effect="blur"
-                      wrapperClassName="lazy-load-image-background aboutustype"
-                    />
-                  </div>
-                  <div className="pm-card-title">
-                    <p>{item.details.title}</p>
-                  </div>
-                </div>
+        <div className="at1-page">
+          <div className="at1-container">
+            <div className="at1-main">
+              {aboutUsData.about_desc.map((e, index) => (
+                <section className="at1-section" key={index} data-aos="fade-up">
+                  {e.title && <h3 className="at1-section-title">{e.title}</h3>}
+                  {e.image && (
+                    <div className="at1-photo">
+                      <LazyLoadImage
+                        src={e.image}
+                        alt=""
+                        className="at1-photo-img"
+                        effect="blur"
+                        wrapperClassName="lazy-load-image-background aboutustype"
+                        afterLoad={() => handleImageLoad(e.image)}
+                      />
+                    </div>
+                  )}
+                  <ReadMoreText
+                    html={e.content}
+                    limit={450}
+                    className="at1-text"
+                  />
+                </section>
               ))}
             </div>
           </div>
         </div>
-      )}
+
+        {/* Suggestions: other places to explore, at the end of the page */}
+        {suggestions.length > 0 && (
+          <div className="pm-page">
+            <div className="pm-container">
+              <h3 className="pm-heading">More to explore</h3>
+              <div className="pm-grid">
+                {suggestions.map((item, index) => (
+                  <div
+                    key={item.id ?? index}
+                    className="pm-card"
+                    data-aos="fade-up"
+                    data-aos-delay={(index % 4) * 100}
+                    onClick={() => handleSuggestionClick(item)}
+                  >
+                    <div className="pm-card-photo">
+                      <LazyLoadImage
+                        src={item.details.image}
+                        alt={item.details.title}
+                        className="pm-card-img"
+                        effect="blur"
+                        wrapperClassName="lazy-load-image-background aboutustype"
+                      />
+                    </div>
+                    <div className="pm-card-title">
+                      <p>{item.details.title}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
     </>
   );
 };

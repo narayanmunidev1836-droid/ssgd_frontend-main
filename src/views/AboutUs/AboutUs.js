@@ -158,6 +158,7 @@ const AboutUs = () => {
           </div>
         )}
       </div>
+      <div className="temple-page-bg">
 
       <div className="au-page">
         <div className="au-section-header" data-aos="fade-up">
@@ -288,6 +289,7 @@ const AboutUs = () => {
                 ))}
           </div>
         </div>
+      </div>
       </div>
     </>
   );

@@ -408,3 +408,27 @@
 .at1-hero-body {
   text-align: left;
 }
+
+/* Transparent so the temple background shows through the main column */
+.at1-page {
+  background: transparent;
+}
+
+/* Let the fixed temple background show: no solid colour on the top block or the More-to-explore section */
+.temple-page-bg .at1-top,
+.temple-page-bg .pm-page {
+  background: transparent;
+}
+
+/* Breadcrumb pill straddles the bottom edge of the hero card (same as the other
+   inner pages) instead of sitting on the text. Overrides the breakpoint rules above. */
+.at1-hero-wrap .breadcrumbs-wrap {
+  top: 100% !important;
+  bottom: auto !important;
+  transform: translate(-50%, -50%);
+}
+
+/* Keep the hero text clear of the pill */
+.at1-hero-wrap .at1-hero-body {
+  padding-bottom: 32px;
+}

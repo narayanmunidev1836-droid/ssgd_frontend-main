@@ -27,6 +27,7 @@ import "react-lazy-load-image-component/src/effects/blur.css";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { FormattedText } from "../../../common/UrlFormate/FormatedText";
+import StyledDropdown from "../../../common/StyledDropdown/StyledDropdown";
 
 const SubActivities = () => {
   const [activities, setActivities] = useState("");
@@ -277,7 +278,7 @@ useEffect(() => {
       });
     }, []);
   return (
-    <>
+    <div className="temple-page-bg">
       <div className="contact-img-wrap">
         <div className="spinner-container-banner">
           {!imageLoaded && (
@@ -301,37 +302,27 @@ useEffect(() => {
       <Container className="sub_activities" >
         <div className="first_div">
           <div className="second-div">
-            <select
+            <StyledDropdown
+              ariaLabel="Filter by year"
+              className="activities-selection"
               value={year}
-              onChange={handleChangeYear}
-              aria-label="Without label"
-              // className="activities-width"
-              className="activities-selection"
-              // style={{ margin: "8px", minWidth: "220px" }}
-            >
-              <option value="All">All</option>
-              {filterYear.map((yearItem) => (
-                <option key={yearItem} value={yearItem}>
-                  {yearItem}
-                </option>
-              ))}
-            </select>
+              onChange={(v) => handleChangeYear({ target: { value: v } })}
+              options={[
+                { value: "All", label: "All" },
+                ...filterYear.map((yearItem) => ({ value: yearItem, label: String(yearItem) })),
+              ]}
+            />
 
-            <select
-              value={activities}
-              onChange={handleChangeActivity}
-              aria-label="Without label"
-              // className="activities-width"
+            <StyledDropdown
+              ariaLabel="Filter by activity"
               className="activities-selection"
-              // style={{ margin: "8px", minWidth: "220px" }}
-            >
-              <option value="All">All</option>
-              {headerData.map((activity) => (
-                <option key={activity.id} value={activity.id}>
-                  {activity.name}
-                </option>
-              ))}
-            </select>
+              value={activities}
+              onChange={(v) => handleChangeActivity({ target: { value: v } })}
+              options={[
+                { value: "All", label: "All" },
+                ...headerData.map((activity) => ({ value: activity.id, label: activity.name })),
+              ]}
+            />
             {/* </div> */}
           </div>
 
@@ -481,7 +472,7 @@ useEffect(() => {
             ))}
           </Grid>} */}
       </Container>
-    </>
+    </div>
   );
 };
 

@@ -461,3 +461,17 @@
   transform: translateY(-2px);
   box-shadow: 0 6px 20px rgba(181, 9, 14, 0.35);
 }
+
+/* The heading is a flex item of the darshan row, so it must span the full row to centre */
+.dd-item-head {
+  flex: 0 0 100%;
+  width: 100%;
+  text-align: center;
+}
+
+/* No ॐ ornament on the Daily Darshan headings (Daily Katha keeps it).
+   Two classes so this wins over the shared .dk-item-head::before rule. */
+.dk-item-head.dd-item-head::before {
+  content: none;
+  display: none;
+}
