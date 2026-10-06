@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import CommonBreadcrumbs from "../../common/CommonBreadcrumbs/CommonBreadcrumbs";
-import _dkBg from "../../assets/images/dailyKathaBackground.png";
+import _dkBg from "../../assets/images/dailyKathaBackground.webp";
 import { MdChevronLeft, MdChevronRight, MdCalendarMonth } from "react-icons/md";
 const dkPageBg = _dkBg.src;
 import TextField from "@mui/material/TextField";

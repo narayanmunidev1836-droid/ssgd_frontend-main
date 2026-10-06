@@ -17,7 +17,7 @@ import { SiSpotify, SiApplemusic } from "react-icons/si";
 // import NavbarLogo from "../../assets/images/logo.webp";
 import _image from "../../assets/images/logo (1).webp";
 const image = _image.src;
-import _image9 from "../../assets/images/icons8-jiosaavn-50 (1).png";
+import _image9 from "../../assets/images/icons8-jiosaavn-50 (1).webp";
 const image9 = _image9.src;
 import { fetchFooterData, fetchNavbarData } from "../../api/API";
 import "./Footer.css";

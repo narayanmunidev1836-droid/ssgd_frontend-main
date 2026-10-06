@@ -16,7 +16,7 @@ import "lightgallery/css/lg-thumbnail.css";
 import "lightgallery/scss/lightgallery.scss";
 import "lightgallery/scss/lg-zoom.scss";
 import { FaSearchPlus } from "react-icons/fa";
-import _dkBg from "../../assets/images/dailyKathaBackground.png";
+import _dkBg from "../../assets/images/dailyKathaBackground.webp";
 const dkPageBg = _dkBg.src;
 import { MdChevronLeft, MdChevronRight, MdCalendarMonth } from "react-icons/md";
 import _imageNotFound from "../../assets/images/NoImageFound.webp";

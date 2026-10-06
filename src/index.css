@@ -367,7 +367,7 @@ p {
 
 /* Temple background used on the publication and activity detail pages */
 .temple-page-bg {
-  background-image: url("./assets/images/dailyKathaBackground.png");
+  background-image: url("./assets/images/dailyKathaBackground.webp");
   background-color: #fdf9f4;
   background-repeat: no-repeat;
   background-position: center center;

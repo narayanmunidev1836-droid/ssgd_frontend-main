@@ -9,8 +9,8 @@ import FullpageLoader from "../../common/HomeSliderLoader/FullpageLoader";
 import DonationShimmer from "./DonationShimmer";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import _donationHeader from "../../assets/images/donationHeader.png";
-import _donationBackground from "../../assets/images/donationBackground.png";
+import _donationHeader from "../../assets/images/donationHeader.webp";
+import _donationBackground from "../../assets/images/donationBackground.webp";
 import CommonBreadcrumbs from "../../common/CommonBreadcrumbs/CommonBreadcrumbs";
 import {
   FaBarcode,

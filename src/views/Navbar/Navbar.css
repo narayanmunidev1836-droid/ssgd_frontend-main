@@ -385,3 +385,8 @@ li.nav-item {
     font-size: 20px;
   }
 }
+
+/* "Daily" header item: pointer cursor, since it only opens its menu */
+.daily-nav-parent {
+  cursor: pointer;
+}

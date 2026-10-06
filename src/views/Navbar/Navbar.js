@@ -360,15 +360,23 @@ function Navbar() {
                     Donations
                   </NavLink>
                 </li>
-                <li className="nav-item">
-                  <NavLink to="/daily-katha" className="nav-link">
-                    Daily Katha
-                  </NavLink>
-                </li>
-                <li className="nav-item">
-                  <NavLink to="/daily-darshan" className="nav-link">
-                    Daily Darshan
-                  </NavLink>
+                <li className="nav-item dropdown">
+                  <span className="nav-link no-active daily-nav-parent">
+                    Daily
+                    <HiPlus className="nav-icon" />
+                  </span>
+                  <ul className="dropdown-menu">
+                    <li>
+                      <NavLink to="/daily-katha" className="dropdown-item">
+                        Daily Katha
+                      </NavLink>
+                    </li>
+                    <li>
+                      <NavLink to="/daily-darshan" className="dropdown-item">
+                        Daily Darshan
+                      </NavLink>
+                    </li>
+                  </ul>
                 </li>
                 <li className="nav-item">
                   <NavLink
