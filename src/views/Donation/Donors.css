@@ -1,8 +1,18 @@
-/* .bank-info {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-} */
+/* =========================================================
+   SSGD DONATION PAGE
+   Complete redesigned Donors.css
+   Matches the approved donation visual direction:
+   - Warm devotional background
+   - Compact hero banner
+   - Centered section headings
+   - Maroon / blue bank card headers
+   - Clean bank detail rows
+   - Responsive mobile layout
+   ========================================================= */
+
+/* ---------------------------------------------------------
+   Legacy / shared bank styles
+--------------------------------------------------------- */
 
 .section_title {
   font-size: 26px;
@@ -10,6 +20,16 @@
   position: relative;
   text-align: center;
   color: var(--text-color);
+}
+
+.section_title:before,
+.section_title:after {
+  content: "";
+  width: 50px;
+  height: 2px;
+  background: var(--text-color);
+  display: inline-block;
+  vertical-align: middle;
 }
 
 .section_title:before {
@@ -20,62 +40,45 @@
   margin: 0 0 10px 15px;
 }
 
-.section_title:before,
-.section_title:after {
-  content: "";
-  width: 50px;
-  height: 2px;
-  background: var(--text-color);
-  display: inline-block;
-}
-
 .bank-info {
   display: flex;
-  /* align-items: flex-start; */
   align-items: end;
   gap: 20px;
 }
 
 .bank-info-wrap {
   border-radius: 15px;
-  padding: 15px 10px 45px 10px;
-  /* border-top: 8px solid #b5090e; */
+  padding: 15px 10px 45px;
   border-top: 8px solid var(--text-color);
   border-left: 1px solid #25618c;
   border-right: 1px solid #25618c;
   border-bottom: 1px solid #25618c;
   position: relative;
   z-index: 0;
-  /* width: max-content; */
 }
 
 .bank-details {
   color: var(--global-color);
-  /* color: var(--text-color); */
   font-size: 20px;
   font-weight: 600;
   text-transform: capitalize;
-  margin: 14px 0px 20px 0px;
+  margin: 14px 0 20px;
 }
 
 .bank-info .info-text li {
   color: var(--text-color);
   font-size: 16px;
   font-weight: 600;
-  padding: 0px 0px 10px 0px;
-  /* width: max-content; */
+  padding: 0 0 10px;
   word-wrap: break-word;
   overflow-wrap: break-word;
 }
 
 .bank-info .info-details li {
-  /* color: var(--text-color); */
-  /* color: #777; */
   color: #777777eb;
   font-size: 16px;
   font-weight: 600;
-  padding: 0px 0px 10px 0px;
-  /* width: max-content; */
+  padding: 0 0 10px;
   word-wrap: break-word;
   overflow-wrap: break-word;
   letter-spacing: 0.2px;
@@ -106,6 +109,10 @@
   border-radius: 4px;
   cursor: pointer;
 }
+
+/* ---------------------------------------------------------
+   QR dialog
+--------------------------------------------------------- */
 
 .qr-fullscreen-dialog {
   width: 100vw;
@@ -167,345 +174,613 @@
   font-size: 28px;
   line-height: 1;
   cursor: pointer;
+  transition: background 0.2s ease;
 }
-.shimmer-box ,.shimmer-title {
-width: 100%;
-height: 200px;
+
+.qr-dialog-close:hover {
+  background: rgba(255, 255, 255, 0.28);
+}
+
+/* ---------------------------------------------------------
+   Shimmer
+--------------------------------------------------------- */
+
+.shimmer-box,
+.shimmer-title {
+  width: 100%;
+  height: 200px;
   border-radius: 12px;
-  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background: linear-gradient(90deg,
+      #f0f0f0 25%,
+      #e0e0e0 50%,
+      #f0f0f0 75%);
   background-size: 200% 100%;
   animation: shimmer 1.5s infinite linear;
 }
+
 .shimmer-title {
   height: 30px;
   border-radius: 6px;
 }
+
 @keyframes shimmer {
   0% {
     background-position: 200% 0;
   }
+
   100% {
     background-position: -200% 0;
   }
 }
 
-@media (min-width: 200px) and (max-width: 450px) {
-  .bank-info {
-    /* align-items: baseline; */
-  }
+/* =========================================================
+   DONATION PAGE
+========================================================= */
 
-  .bank-details {
-    font-size: 18px;
-  }
-
-  .bank-info .info-text,
-  .bank-info .info-details {
-    width: max-content;
-  }
-
-  .bank-info .info-text li {
-    font-size: 12px;
-  }
-
-  .bank-info .info-details li {
-    font-size: 12px;
-    width: 200px;
-  }
-
-  .section_title {
-    font-size: 18px;
-  }
-
-  .section_title:before,
-  .section_title:after {
-    content: "";
-    width: 30px;
-    height: 2px;
-    background: var(--text-color);
-    display: inline-block;
-  }
-
-  .section_title:before {
-    margin: 5px 5px 5px 0px;
-  }
-
-  .section_title:after {
-    margin: 5px 5px 5px 5px;
-  }
-
-  /* .section_title:before {
-    margin: 0px 6px 6px 0px;
-  } */
-  /* .section_title:after {
-    margin: 0px 0 6px 6px;
-  } */
-}
-
-@media (min-width: 451px) and (max-width: 575.99px) {
-  .bank-details {
-    font-size: 18px;
-  }
-
-  .bank-info .info-text,
-  .bank-info .info-details {
-    /* width: max-content; */
-  }
-
-  .bank-info .info-text li {
-    font-size: 15px;
-  }
-
-  .bank-info .info-details li {
-    font-size: 15px;
-    width: 255px;
-  }
-
-  .section_title {
-    font-size: 20px;
-  }
-
-  .section_title:before {
-    margin: 5px 5px 5px 0;
-  }
-
-  .section_title:after {
-    margin: 5px 0px 5px 5px;
-  }
-}
-
-@media (min-width: 577px) and (max-width: 768.99px) {
-  .bank-info .info-details li {
-    font-size: 16px;
-    width: 300px;
-  }
-}
-
-@media (min-width: 769px) and (max-width: 1199.98px) {
-  .bank-info .info-details li {
-    /* width: max-content; */
-    /* width: 600px; */
-  }
-}
-
-.bank-info-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  /* gap: 10px; */
-  /* margin-top: 20px; */
-}
-
-.bank-info-row {
-  display: grid;
-  grid-template-columns: 180px 1fr;
-  align-items: flex-start;
-  /* padding: 8px 12px; */
-  /* background-color: #f9f9f9; */
-  border-radius: 6px;
-}
-
-.bank-info-label {
-  color: var(--text-color);
-  font-size: 16px;
-  font-weight: 600;
-  padding: 0px 0px 10px 0px;
-  word-wrap: break-word;
-  overflow-wrap: break-word;
-
-}
-
-.bank-info-value {
-  color: #777777eb;
-  font-size: 16px;
-  font-weight: 600;
-  padding: 0px 0px 10px 0px;
-  /* width: max-content; */
-  word-wrap: break-word;
-  overflow-wrap: break-word;
-  letter-spacing: 0.2px;
-}
-
-@media (max-width: 600px) {
-  .bank-info-row {
-    grid-template-columns: 1fr;
-    row-gap: 5px;
-  }
-
-  .bank-info-label {
-    font-size: 14px;
-    padding-bottom: 0px;
-  }
-
-  .bank-info-value {
-    font-size: 14px;
-    padding-bottom: 15px;
-  }
-}
-/* @media (min-width: 769px) and (max-width: 1199.98px) {
-  .bank-info-row {
-    grid-template-columns: 190px 1fr;
-  }
-} */
-/* ── Donation list (redesign) ─────────────────────────────────── */
 .dn-page {
-  background: linear-gradient(180deg, #fdf9f4 0%, #f7f1e8 100%);
-  padding: 0 0 60px;
+  position: relative;
+  padding: 28px 0 70px;
+  background-color: #fdf8ee;
+  background-image: var(--dn-page-bg);
+  background-repeat: no-repeat;
+  background-position: center bottom;
+  background-size: 100% auto;
+  overflow: hidden;
+}
+
+.dn-page::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(180deg,
+      rgba(255, 252, 245, 0.12),
+      rgba(255, 252, 245, 0.02));
 }
 
 .dn-container {
-  max-width: 1140px;
+  width: min(1140px, calc(100% - 40px));
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 0;
   box-sizing: border-box;
+  position: relative;
+  z-index: 2;
+}
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.dn-hero {
+  position: relative;
+  width: 100%;
+  height: 195px;
+  background-image: var(--dn-hero-bg);
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 0 24px;
+  box-sizing: border-box;
+}
+
+.dn-hero-content {
+  max-width: 900px;
+  margin-top: -4px;
+  position: relative;
+  z-index: 2;
+}
+
+.dn-hero-title {
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  font-size: clamp(28px, 3.5vw, 42px);
+  font-weight: 800;
+  color: #6f1115;
+  line-height: 1.15;
+  text-shadow: 0 2px 12px rgba(255, 255, 255, 0.72);
+}
+
+.dn-hero-subtitle {
+  margin: 7px 0 0;
+  font-family: "Poppins", sans-serif;
+  font-size: clamp(12px, 1.15vw, 15px);
+  color: #555;
+  line-height: 1.5;
+  text-shadow: 0 1px 8px rgba(255, 255, 255, 0.8);
+}
+
+/* Breadcrumb sits on the bottom edge of the hero */
+
+.dn-hero .breadcrumbs-wrap {
+  position: absolute;
+  left: 50%;
+  bottom: -17px;
+  transform: translateX(-50%);
+  z-index: 10;
+}
+
+.dn-hero .breadcrumbs-wrap>* {
+  display: block;
+  background: rgba(255, 255, 255, 0.98);
+  border-radius: 30px;
+  padding: 9px 20px;
+  box-shadow: 0 5px 18px rgba(70, 20, 10, 0.12);
+  white-space: nowrap;
+}
+
+/* =========================================================
+   SECTION HEADINGS
+========================================================= */
+
+.dn-section-head {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin: 38px 0 22px;
+}
+
+.dn-section-head:first-child {
+  margin-top: 15px;
+}
+
+.dn-section-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  margin-bottom: 4px;
+  color: #8b171c;
+  font-size: 25px;
 }
 
 .dn-section-title {
   position: relative;
+  margin: 0;
+  padding: 0;
   font-family: "Poppins", sans-serif;
-  font-size: 22px;
+  font-size: 21px;
   font-weight: 800;
-  color: #3b0a0a;
-  margin: 40px 0 22px;
-  padding-left: 16px;
-  letter-spacing: 0.02em;
+  color: #551014;
+  line-height: 1.25;
+  letter-spacing: 0.01em;
+  text-align: center;
 }
 
-.dn-section-title::before {
+.dn-section-title::before,
+.dn-section-title::after {
   content: "";
-  position: absolute;
-  left: 0;
-  top: 4px;
-  bottom: 4px;
-  width: 4px;
-  border-radius: 4px;
-  background: linear-gradient(180deg, #c8a96e, #8b1c1c);
+  display: inline-block;
+  width: 45px;
+  height: 1px;
+  vertical-align: middle;
+  background: #c79b4d;
+  margin: 0 12px 6px;
 }
+
+.dn-section-sub {
+  max-width: 650px;
+  margin: 6px auto 0;
+  font-family: "Poppins", sans-serif;
+  font-size: 13px;
+  color: #777;
+  line-height: 1.55;
+}
+
+/* =========================================================
+   BANK GRID
+========================================================= */
 
 .dn-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 24px;
+  gap: 18px;
+  align-items: stretch;
 }
 
 .dn-cell {
   min-width: 0;
 }
 
+/* One card (USA) is centered */
+
+.dn-grid:has(> .dn-cell:only-child) {
+  grid-template-columns: minmax(0, 540px);
+  justify-content: center;
+}
+
+/* =========================================================
+   BANK CARD
+========================================================= */
+
 .dn-cell .bank-info-wrap {
   height: 100%;
-  background: #fff;
-  border-radius: 16px;
-  border-top: 3px solid #c8a96e;
-  box-shadow: 0 6px 28px rgba(59, 10, 10, 0.08);
-  padding: 24px 24px 20px;
+  padding: 0 0 18px;
+  background: rgba(255, 255, 255, 0.97);
+  border: 1px solid #d5a85f;
+  border-top: none;
+  border-radius: 12px;
+  overflow: hidden;
   box-sizing: border-box;
+  box-shadow: 0 7px 22px rgba(90, 45, 10, 0.08);
   display: flex;
   flex-direction: column;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
 }
 
 .dn-cell .bank-info-wrap:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 36px rgba(59, 10, 10, 0.14);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 28px rgba(90, 45, 10, 0.13);
 }
 
+/* =========================================================
+   CARD HEADER
+========================================================= */
+
 .dn-cell .bank-details {
+  margin: 0;
+  padding: 12px 17px;
+  min-height: 42px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  background: linear-gradient(90deg, #841319, #a51d22);
+  color: #fff;
   font-family: "Poppins", sans-serif;
-  font-size: 18px;
-  font-weight: 800;
-  color: #1a2a6c;
-  margin: 0 0 14px;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.35;
+  text-transform: none;
   overflow-wrap: anywhere;
 }
 
+/* USA = blue */
+
+.dn-tone-usa .dn-cell .bank-details {
+  background: linear-gradient(90deg, #20547f, #2e72a6);
+}
+
+/* =========================================================
+   BANK ROWS
+========================================================= */
+
 .dn-cell .bank-info-grid {
+  padding: 8px 18px 0;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 0;
   flex: 1;
 }
 
 .dn-cell .bank-info-row {
   display: grid;
-  grid-template-columns: minmax(110px, 40%) minmax(0, 1fr);
+  grid-template-columns: 125px minmax(0, 1fr);
   gap: 12px;
-  padding-bottom: 10px;
-  border-bottom: 1px dashed #efe4cf;
-  font-size: 14px;
-  line-height: 1.5;
+  align-items: start;
+  padding: 10px 0;
+  border-bottom: 1px dashed #eadfcf;
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.dn-cell .bank-info-row:last-child {
+  border-bottom: none;
 }
 
 .dn-cell .bank-info-label {
-  color: #8b1c1c;
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  color: #8c151a;
+  font-size: 13px;
   font-weight: 600;
+  padding: 0;
+  word-wrap: break-word;
+  overflow-wrap: anywhere;
+}
+
+.dn-cell .bank-info-label svg {
+  flex-shrink: 0;
+  margin-top: 2px;
+  color: #9a1b20;
+  font-size: 12px;
 }
 
 .dn-cell .bank-info-value {
   color: #444;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 0;
   overflow-wrap: anywhere;
   word-break: break-word;
+  letter-spacing: 0;
 }
+
+/* =========================================================
+   DONATION BUTTONS
+========================================================= */
 
 .dn-cell .donors-btn-wrap {
   display: flex;
+  justify-content: flex-end;
   flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 18px;
+  gap: 8px;
+  padding: 8px 18px 0;
+  margin: 0;
 }
 
 .dn-cell .donors-btn {
-  padding: 9px 22px;
-  border: 2px solid #8b1c1c;
-  border-radius: 6px;
-  background: transparent;
-  color: #8b1c1c;
+  min-width: 100px;
+  padding: 8px 15px;
+  border: 1px solid #96151b;
+  border-radius: 5px;
+  background: #fff;
+  color: #96151b;
   font-family: "Poppins", sans-serif;
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 600;
+  letter-spacing: 0;
+  line-height: 1.3;
   cursor: pointer;
-  transition: background 0.25s ease, color 0.25s ease;
+  transition:
+    background 0.25s ease,
+    color 0.25s ease,
+    transform 0.2s ease;
+}
+
+.dn-cell .donors-btn:first-child {
+  background: #a5161d;
+  color: #fff;
+  border-color: #a5161d;
 }
 
 .dn-cell .donors-btn:hover {
-  background: #8b1c1c;
+  background: #7d1016;
+  border-color: #7d1016;
   color: #fff;
+  transform: translateY(-1px);
 }
 
-@media (max-width: 860px) {
+.dn-cell .donors-btn:first-child:hover {
+  background: #7d1016;
+  border-color: #7d1016;
+}
+
+/* =========================================================
+   FIELD ICONS
+========================================================= */
+
+.dn-cell .bank-info-label svg {
+  flex-shrink: 0;
+}
+
+/* =========================================================
+   RESPONSIVE - TABLET
+========================================================= */
+
+@media (max-width: 900px) {
+  .dn-container {
+    width: min(100% - 32px, 700px);
+  }
+
   .dn-grid {
     grid-template-columns: 1fr;
     gap: 20px;
   }
+
+  .dn-grid:has(> .dn-cell:only-child) {
+    grid-template-columns: minmax(0, 560px);
+  }
+
+  .dn-section-head {
+    margin-top: 32px;
+  }
 }
 
-@media (max-width: 560px) {
-  .dn-container {
-    padding: 0 16px;
+/* =========================================================
+   RESPONSIVE - MOBILE
+========================================================= */
+
+@media (max-width: 768px) {
+  .dn-hero {
+    height: 180px;
+  }
+
+  .dn-hero-title {
+    font-size: 30px;
+  }
+
+  .dn-hero-subtitle {
+    font-size: 12px;
+  }
+
+  .dn-page {
+    padding-top: 22px;
+    background-size: auto 100%;
+    background-position: center bottom;
   }
 
   .dn-section-title {
     font-size: 19px;
-    margin-top: 28px;
+  }
+
+  .dn-section-title::before,
+  .dn-section-title::after {
+    width: 30px;
+    margin-left: 8px;
+    margin-right: 8px;
+  }
+
+  .dn-cell .bank-info-row {
+    grid-template-columns: 120px minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 576px) {
+  .dn-container {
+    width: min(100% - 28px, 520px);
+  }
+
+  .dn-hero {
+    height: 165px;
+    padding: 0 14px;
+  }
+
+  .dn-hero-title {
+    font-size: 27px;
+  }
+
+  .dn-hero-subtitle {
+    font-size: 11.5px;
+  }
+
+  .dn-hero .breadcrumbs-wrap {
+    bottom: -15px;
+  }
+
+  .dn-hero .breadcrumbs-wrap>* {
+    padding: 8px 15px;
+    font-size: 11px;
+  }
+
+  .dn-page {
+    padding-top: 18px;
+    padding-bottom: 50px;
+  }
+
+  .dn-section-head {
+    margin: 29px 0 18px;
+  }
+
+  .dn-section-icon {
+    width: 32px;
+    height: 32px;
+    font-size: 22px;
+  }
+
+  .dn-section-title {
+    font-size: 18px;
+  }
+
+  .dn-section-title::before,
+  .dn-section-title::after {
+    width: 23px;
+    margin-left: 6px;
+    margin-right: 6px;
+  }
+
+  .dn-section-sub {
+    font-size: 11.5px;
+    padding: 0 10px;
+  }
+
+  .dn-grid {
+    gap: 16px;
   }
 
   .dn-cell .bank-info-wrap {
-    padding: 20px 18px 18px;
+    border-radius: 11px;
+    padding-bottom: 16px;
+  }
+
+  .dn-cell .bank-details {
+    padding: 11px 14px;
+    min-height: 40px;
+    font-size: 13px;
+  }
+
+  .dn-cell .bank-info-grid {
+    padding: 6px 15px 0;
   }
 
   .dn-cell .bank-info-row {
     grid-template-columns: 1fr;
-    gap: 2px;
+    gap: 3px;
+    padding: 9px 0;
+  }
+
+  .dn-cell .bank-info-label {
+    font-size: 12px;
+  }
+
+  .dn-cell .bank-info-value {
+    padding-left: 18px;
+    font-size: 13px;
+  }
+
+  .dn-cell .donors-btn-wrap {
+    justify-content: stretch;
+    padding: 8px 15px 0;
   }
 
   .dn-cell .donors-btn {
     flex: 1 1 140px;
+    min-width: 0;
   }
 }
 
-/* Top spacing inside the cream background (no white gap above the page) */
-.dn-page {
-  padding-top: 40px;
+@media (max-width: 400px) {
+  .dn-container {
+    width: min(100% - 20px, 380px);
+  }
+
+  .dn-hero {
+    height: 150px;
+  }
+
+  .dn-hero-title {
+    font-size: 24px;
+  }
+
+  .dn-hero-subtitle {
+    font-size: 10.5px;
+  }
+
+  .dn-section-title {
+    font-size: 17px;
+  }
+
+  .dn-section-title::before,
+  .dn-section-title::after {
+    width: 18px;
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+
+  .dn-cell .bank-details {
+    font-size: 12px;
+  }
+
+  .dn-cell .donors-btn {
+    font-size: 11px;
+    padding: 8px 10px;
+  }
+}
+/* Breadcrumb pill straddles the bottom edge of the header at every width.
+   Overrides the per-breakpoint top values in CommonBreadcrumbs.css. */
+.dn-hero .breadcrumbs-wrap {
+  top: calc(100% + 6px) !important;
+  bottom: auto;
+  transform: translate(-50%, -50%);
 }
 
-.dn-container > div:first-child > .dn-section-title {
-  margin-top: 0;
+/* Bank card: the red title band runs edge to edge, with the card's rounded corners */
+.dn-cell .bank-info-wrap {
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.dn-cell .bank-info-wrap > .container {
+  width: 100%;
+  max-width: none;
+  padding: 0;
+  margin: 0;
 }

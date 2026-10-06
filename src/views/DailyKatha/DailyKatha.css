@@ -216,18 +216,7 @@ iframe.katha-video {
 
 .dk-heading {
   position: relative;
-  padding: 36px 0 8px 28px;
-}
-
-.dk-heading::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 42px;
-  bottom: 8px;
-  width: 4px;
-  border-radius: 4px;
-  background: linear-gradient(180deg, #c8a96e, #8b1c1c);
+  padding: 36px 0 8px 0;
 }
 
 .dk-title {

@@ -352,6 +352,12 @@ p {
   z-index: 1;
 }
 
+/* LazyLoadImage wraps the banner in an inline span; make it span the full width */
+.contact-img-wrap .lazy-load-image-background {
+  display: block;
+  width: 100%;
+}
+
 .contact-img-wrap .about-img {
   display: block;
   width: 100%;

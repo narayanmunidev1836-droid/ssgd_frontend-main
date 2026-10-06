@@ -1007,3 +1007,141 @@
     gap: 4px;
   }
 }
+
+/* =========================================================
+   PUBLICATION TABS — MOBILE PILLS
+   Overrides the full-width stacked tabs in the 992px block above. Scoped
+   to tablets and phones so the desktop tab row is unchanged.
+   ========================================================= */
+
+@media (max-width: 992px) {
+  /* Breadcrumb pill hangs below the banner, so keep the tabs clear of it */
+  .publication-serach-wrap {
+    margin-top: 36px;
+  }
+
+  .publication-tabs {
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  .publication-tab-wrap {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+    gap: 8px;
+  }
+
+  .publication-tab-wrap > div {
+    width: auto;
+  }
+
+  .publication-tabs button {
+    width: auto;
+    padding: 8px 16px;
+    font-size: 12.5px;
+    text-align: center;
+  }
+
+  /* Sort dropdown and search share one row under the tabs */
+  .publication-serach-wrap {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .publication-serach-wrap > div:first-child {
+    flex: 0 0 100%;
+  }
+
+  .publication-filter-wrap {
+    flex: 0 0 40%;
+    min-width: 0;
+  }
+
+  .publication-filter-dropdown {
+    width: 100% !important;
+    height: 42px;
+    font-size: 13px;
+  }
+
+  .publication_search_wrap {
+    flex: 1 1 0;
+    min-width: 0;
+  }
+
+  .publication_search_wrap .search-input {
+    height: 42px;
+    font-size: 13px;
+  }
+}
+
+/* =========================================================
+   PUBLICATION VIDEO ALBUM CARD
+   Full-bleed 16:9 thumbnail, two-line description, consistent
+   heights across the grid. Two-class selectors so these win over
+   the shared card rules above (e.g. the 10px padding for tablets).
+   ========================================================= */
+
+.katha-img-wrap.katha-img-wrap-publication {
+  padding: 0 !important;
+  border-radius: 12px;
+}
+
+.katha-img-wrap.katha-img-wrap-publication .video-album-img {
+  width: 100% !important;
+  height: auto !important;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  display: block;
+  border-radius: 12px 12px 0 0;
+}
+
+.katha-img-wrap.katha-img-wrap-publication .katha-content {
+  padding: 14px 16px 18px;
+  gap: 8px;
+  text-align: center;
+}
+
+.katha-img-wrap.katha-img-wrap-publication .katha-content p {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.4;
+  color: var(--muted-text);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Space below each card row, including the last one before the footer.
+   Set on the grid items (not the cards) so the cards keep their height.
+   .katha-content-wrap is only used by the publication list grids. */
+.katha-content-wrap.MuiGrid-container > .MuiGrid-item,
+.wallpaper-grid.MuiGrid-container > .MuiGrid-item {
+  padding-bottom: 36px;
+}
+
+/* Wallpaper cards sit in the middle of the row instead of the left edge.
+   Grid's negative margin and calc() width offset the row, so reset both. */
+.wallpaper-grid.MuiGrid-container {
+  width: 100%;
+  margin: 0;
+  justify-content: center;
+}
+
+.wallpaper-grid.MuiGrid-container > .MuiGrid-item {
+  display: flex;
+  justify-content: center;
+}
+
+.wallpaper-grid .wallpaper-content {
+  margin: 0 auto;
+}
+
+/* No description: drop the empty paragraph so there is no blank gap */
+.katha-img-wrap.katha-img-wrap-publication .katha-content p:empty {
+  display: none;
+}

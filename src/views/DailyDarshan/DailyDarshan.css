@@ -266,18 +266,6 @@
 .dd-item-head {
   margin: 40px 0 18px;
   position: relative;
-  padding-left: 16px;
-}
-
-.dd-item-head::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 4px;
-  bottom: 4px;
-  width: 4px;
-  border-radius: 4px;
-  background: linear-gradient(180deg, #c8a96e, #8b1c1c);
 }
 
 .dd-item-title {

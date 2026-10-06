@@ -98,7 +98,7 @@ const Images = ({ publicatioAlbumnData,publiCationLoading }) => {
 
   return (
     <div className="pt-4">
-      <Grid container spacing={2}>
+      <Grid container spacing={2} className="wallpaper-grid">
         {publiCationLoading ? (
           <Grid container spacing={3}>
           {[...Array(8)].map((_, index) => (

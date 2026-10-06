@@ -414,3 +414,35 @@
     height: 22vh;
   }
 }
+
+/* ======= Mobile hero height =======
+   Slides are 3:1 banners, which shrink to a thin strip on phones and leave
+   no room for the hero text. Give them a fixed height on small screens.
+   !important is needed because the slide <img> sets an inline height. */
+@media (max-width: 768px) {
+  .slider-img {
+    height: 380px !important;
+    object-fit: cover;
+  }
+  .homeSlideerShimmer {
+    height: 380px;
+  }
+}
+
+@media (max-width: 576px) {
+  .slider-img {
+    height: 340px !important;
+  }
+  .homeSlideerShimmer {
+    height: 340px;
+  }
+}
+
+@media (max-width: 400px) {
+  .slider-img {
+    height: 300px !important;
+  }
+  .homeSlideerShimmer {
+    height: 300px;
+  }
+}

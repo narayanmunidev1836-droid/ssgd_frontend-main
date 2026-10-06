@@ -111,7 +111,7 @@ const Branches = () => {
       {/* Section Header with Temple Panorama Background */}
       <div
         className="branches-section-header"
-        style={{ backgroundImage: `url('${templeHeroBg}')` }}
+        style={{ "--temple-bg": `url('${templeHeroBg}')` }}
       >
         <div className="branches-header-overlay" data-aos="fade-up">
           <h2 className="branches-main-title">Our Branches</h2>

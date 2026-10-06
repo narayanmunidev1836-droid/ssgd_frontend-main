@@ -854,6 +854,88 @@
   }
 }
 
+/* =========================================================
+   ALBUM DETAIL — SIDE BY SIDE (max-width: 768px)
+   Image on the left, album details on the right. Overrides the
+   column layout set in the 992px block above.
+   ========================================================= */
+
+@media (max-width: 768px) {
+  .album-detail-card {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 16px;
+  }
+  .album-detail-left {
+    width: 40%;
+    min-width: 0;
+    max-width: none;
+    flex-shrink: 0;
+    align-self: flex-start;
+  }
+  .album-detail-img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1 / 1;
+    max-width: 100%;
+  }
+  .album-detail-right {
+    min-width: 0;
+    align-items: flex-start;
+    text-align: left;
+  }
+  .album-meta-row {
+    justify-content: flex-start;
+  }
+  .album-action-buttons {
+    justify-content: flex-start;
+  }
+}
+
+/* =========================================================
+   ALBUM DETAIL — ACTION BUTTONS IN ONE ROW (max-width: 576px)
+   The details column is too narrow for three buttons, so the card
+   becomes a grid: image and text side by side, buttons full width below.
+   ========================================================= */
+
+@media (max-width: 576px) {
+  .album-detail-card {
+    display: grid;
+    grid-template-columns: 40% minmax(0, 1fr);
+    gap: 14px;
+    align-items: start;
+  }
+  .album-detail-right {
+    display: contents;
+  }
+  .album-detail-left {
+    grid-column: 1;
+    grid-row: 1 / span 4;
+    width: auto;
+  }
+  /* Buttons size to their labels and share the row; one drops to the next line when the card is too narrow */
+  .album-action-buttons {
+    grid-column: 1 / -1;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .album-download-btn,
+  .album-share-btn,
+  .album-fav-btn {
+    flex: 1 1 auto;
+    justify-content: center;
+    gap: 6px;
+    padding: 10px 14px;
+    font-size: 12px;
+    white-space: nowrap;
+  }
+
+  /* Longest label, so it gets the most room and is never cut off */
+  .album-download-btn {
+    flex-grow: 1.5;
+  }
+}
+
 @media (max-width: 399px) {
   .album-detail-title {
     font-size: 16px;

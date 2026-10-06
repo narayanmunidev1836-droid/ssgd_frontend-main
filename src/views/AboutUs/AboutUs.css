@@ -583,18 +583,6 @@
 
 .au-section-header {
   position: relative;
-  padding-left: 28px;
-}
-
-.au-section-header::before {
-  content: "";
-  position: absolute;
-  left: 20px;
-  top: 6px;
-  bottom: 6px;
-  width: 4px;
-  border-radius: 4px;
-  background: linear-gradient(180deg, #c8a96e, #8b1c1c);
 }
 
 .au-section-title {
@@ -748,10 +736,6 @@
 .au-section-header {
   text-align: center;
   padding-left: 20px;
-}
-
-.au-section-header::before {
-  display: none;
 }
 
 .au-section-subtitle {

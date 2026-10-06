@@ -1,34 +1,36 @@
 /* ── Section Header ───────────────────────────────────────── */
+/* The temple image is a fixed 3:1 band (the artwork's own ratio), and the
+   title sits below it on the cream background. The gap between temple and
+   text is therefore the same on every screen width. */
 .branches-section-header {
   width: 100%;
-  min-height: 390px;
-  background-size: cover;
-  background-position: center top;
-  background-repeat: no-repeat;
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
+  background: #faf6ef;
   position: relative;
 }
 
-/* Fade bottom of image into the card section background */
-.branches-section-header::after {
+.branches-section-header::before {
   content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 120px;
-  background: linear-gradient(to bottom, transparent, #faf6ef);
-  pointer-events: none;
-  z-index: 0;
+  display: block;
+  width: 100%;
+  /* Shorter than the artwork's 3:1 so the temple sits close to the title;
+     cover crops the top and bottom of the image evenly */
+  aspect-ratio: 4 / 1;
+  /* Image fades into the cream background at its bottom edge */
+  background-image:
+    linear-gradient(to bottom, transparent 70%, #faf6ef 100%),
+    var(--temple-bg);
+  background-size: 100% 100%, cover;
+  background-position: center center;
+  background-repeat: no-repeat;
 }
 
+/* Title sits over the faded lower quarter of the temple band. The margin is a
+   percentage of the header width, so the overlap scales with the band height. */
 .branches-header-overlay {
   position: relative;
-  z-index: 1;
   text-align: center;
-  padding: 0 24px 16px;
+  padding: 8px 24px 16px;
+  margin-top: -12%;
   width: 100%;
 }
 
@@ -299,8 +301,8 @@
     font-size: 1.8rem;
   }
 
-  .branches-section-header {
-    padding: 40px 16px 24px;
+  .branches-header-overlay {
+    padding: 8px 16px 16px;
   }
 }
 

@@ -121,12 +121,12 @@ const Activities = ({ setIsActivityLoaded }) => {
   return (
     <>
 
-     <section
-          className="activities-background-section"
-          style={{
-            backgroundImage: `url("${ElegantImage}")`,
-          }}
-        >
+      <section
+        className="activities-background-section"
+        style={{
+          backgroundImage: `url("${ElegantImage}")`,
+        }}
+      >
         <Container>
           <div className="activities-background-overlay">
             <div
@@ -159,96 +159,95 @@ const Activities = ({ setIsActivityLoaded }) => {
             <Slider {...sliderSettings} className="homeSlider">
               {!hasActivities
                 ? [...Array(4)].map((_, index) => (
-                    <div
-                      className="slider-item"
-                      key={index}
-                    >
-                      <div className="slider-item-shimmer">
-                        <div className="slider-item-shimmer-text" />
-                        <div className="slider-item-shimmer-text small" />
-                      </div>
+                  <div
+                    className="slider-item"
+                    key={index}
+                  >
+                    <div className="slider-item-shimmer">
+                      <div className="slider-item-shimmer-text" />
+                      <div className="slider-item-shimmer-text small" />
                     </div>
-                  ))
+                  </div>
+                ))
                 : Object.values(apiData).map((activity) => {
-                    const date = new Date(activity.activity_date);
+                  const date = new Date(activity.activity_date);
 
-                    const options = {
-                      day: "numeric",
-                      month: "short",
-                    };
+                  const options = {
+                    day: "numeric",
+                    month: "short",
+                  };
 
-                    const formattedDate =
-                      date.toLocaleDateString(
-                        "en-US",
-                        options
-                      );
-
-                    const day = date.getDate();
-                    const month =
-                      formattedDate.split(" ")[0];
-
-                    return (
-                      <Grid
-                        item
-                        xs={12}
-                        sm={6}
-                        md={4}
-                        key={activity.id}
-                        className="px-3 slider-item"
-                      >
-                        <Card
-                          className="activities-inner-content-wrap h-100"
-                          data-aos="fade-up"
-                          onClick={() =>
-                            handleClick(
-                              activity.activity_id,
-                              activity.title
-                            )
-                          }
-                        >
-                          <div className="act-img-wrap">
-                            <LazyLoadImage
-                              src={activity.image}
-                              style={{ width: "100%" }}
-                              alt={activity.title}
-                              className="activities-img-slider home homeActivityImg"
-                              wrapperClassName="lazy-load-image-background homeActivityImg"
-                            />
-                          </div>
-
-                          <div className="activities-inner-content-slider">
-                            <p className="sub-activites-name">
-                              {activity.name}
-                            </p>
-
-                            <h4 className="sub-activities-title">
-                              {activity.title}
-                            </h4>
-
-                            <h6 className="sub-activities-desc">
-                              {activity.short_description}
-                            </h6>
-                          </div>
-
-                          <div className="activities-date">
-                            <div>
-                              <h5>{day}</h5>
-                            </div>
-
-                            <div>
-                              <p>{month}</p>
-                            </div>
-                          </div>
-                        </Card>
-                      </Grid>
+                  const formattedDate =
+                    date.toLocaleDateString(
+                      "en-US",
+                      options
                     );
-                  })}
+
+                  const day = date.getDate();
+                  const month =
+                    formattedDate.split(" ")[0];
+
+                  return (
+                    <Grid
+                      item
+                      xs={12}
+                      sm={6}
+                      md={4}
+                      key={activity.id}
+                      className="px-3 slider-item"
+                    >
+                      <Card
+                        className="activities-inner-content-wrap h-100"
+                        data-aos="fade-up"
+                        onClick={() =>
+                          handleClick(
+                            activity.activity_id,
+                            activity.title
+                          )
+                        }
+                      >
+                        <div className="act-img-wrap">
+                          <LazyLoadImage
+                            src={activity.image}
+                            style={{ width: "100%" }}
+                            alt={activity.title}
+                            className="activities-img-slider home homeActivityImg"
+                            wrapperClassName="lazy-load-image-background homeActivityImg"
+                          />
+                        </div>
+
+                        <div className="activities-inner-content-slider">
+                          <p className="sub-activites-name">
+                            {activity.name}
+                          </p>
+
+                          <h4 className="sub-activities-title">
+                            {activity.title}
+                          </h4>
+
+                          <h6 className="sub-activities-desc">
+                            {activity.short_description}
+                          </h6>
+                        </div>
+
+                        <div className="activities-date">
+                          <div>
+                            <h5>{day}</h5>
+                          </div>
+
+                          <div>
+                            <p>{month}</p>
+                          </div>
+                        </div>
+                      </Card>
+                    </Grid>
+                  );
+                })}
             </Slider>
           </div>
-          </Container>
-        </section>
+        </Container>
+      </section>
 
-      <div className="paddingBotomSection"></div>
     </>
   );
 };

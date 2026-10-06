@@ -8,10 +8,57 @@ import "./Donors.css";
 import FullpageLoader from "../../common/HomeSliderLoader/FullpageLoader";
 import DonationShimmer from "./DonationShimmer";
 import AOS from "aos";
-import "aos/dist/aos.css";
+import "aos/dist/aos.css";
+import _donationHeader from "../../assets/images/donationHeader.png";
+import _donationBackground from "../../assets/images/donationBackground.png";
+import CommonBreadcrumbs from "../../common/CommonBreadcrumbs/CommonBreadcrumbs";
+import {
+  FaBarcode,
+  FaFlagUsa,
+  FaGlobe,
+  FaHashtag,
+  FaMapMarkerAlt,
+  FaPhoneAlt,
+  FaPlane,
+  FaUniversity,
+  FaUser,
+} from "react-icons/fa";
+
+// Per-section look: icon and subtitle above the cards, and the card header tone
+const sectionMeta = {
+  list_blogs_india: { tone: "india" },
+  list_blogs_usa: {
+    tone: "usa",
+    // icon: <FaFlagUsa />,
+    subtitle: "Support Swaminarayan Sanskardham's activities in the USA.",
+  },
+  list_blogs_abroad: {
+    tone: "abroad",
+    // icon: <FaPlane />,
+    subtitle: "For funds transfer from outside India, use the account details below.",
+  },
+  list_blogs_others: { tone: "others" },
+};
+
+// Icon for each bank detail row, matched on its label
+const fieldIcon = (title = "") => {
+  const t = title.toLowerCase();
+  if (t.includes("account name")) return <FaUser />;
+  if (t.includes("bank name")) return <FaUniversity />;
+  if (t.includes("a/c") || t.includes("account no")) return <FaHashtag />;
+  if (t.includes("ifsc") || t.includes("swift")) return <FaBarcode />;
+  if (t.includes("branch") || t.includes("address")) return <FaMapMarkerAlt />;
+  if (t.includes("information")) return <FaPhoneAlt />;
+  if (t.includes("type")) return <FaGlobe />;
+  return null;
+};
 
 
-const Donors = () => {
+const donationHeaderBg = _donationHeader.src;
+const donationPageBg = _donationBackground.src;
+
+
+const Donors = () => {
   const [blogData, setBlogData] = useState({});
   const [loader, setLoader] = useState(true);
   const [qrDialog, setQrDialog] = useState(null);
@@ -82,7 +129,7 @@ const Donors = () => {
         "_blank"
       );
     } else {
-            navigate(`/donationNew/${blog.id}`, {
+      navigate(`/donationNew/${blog.id}`, {
         state: {
           donation_india: blog.donation_india,
           donation_usa: blog.donation_usa,
@@ -128,8 +175,8 @@ const Donors = () => {
     dialog.addEventListener("click", onClick);
     return () => dialog.removeEventListener("click", onClick);
   }, [qrDialog]);
-  
-  
+
+
 
   const getTitle = (key) => {
     if (key === "list_blogs_usa") {
@@ -177,76 +224,87 @@ const Donors = () => {
     }).then((response) => {
       if (response.data.status) {
         setCountry(response.data.responseBody.site.country);
-              }
+      }
     });
-  
+
     const fetchBlog = fetchDonation({
       url: apiUrl,
       page: "donation_blog",
     }).then((response) => {
       if (response.data.status) {
         setBlogData(response.data.responseBody);
-              } else {
+      } else {
         console.error("Error updating blog data:", response.data);
       }
     });
-  
+
     // Wait for both requests to finish
-    Promise.all([ fetchBlog])
+    Promise.all([fetchBlog])
       .catch((error) => console.error("Error fetching data:", error))
       .finally(() => setLoader(false)); // Set loader to false only after both requests complete
   }, []);
-  
+
   if (loader) {
     return <DonationShimmer />; // Show loader until both requests finish
   }
-  
+
 
   const renderBlogSection = (key, blogs) => (
     <>
       <ToastContainer />
-      <h2 className="dn-section-title">{getTitle(key).toUpperCase()}</h2>
-      <div className="dn-grid">
+      <div className="dn-section-head">
+        {sectionMeta[key]?.icon && (
+          <span className="dn-section-icon">{sectionMeta[key].icon}</span>
+        )}
+        <h2 className="dn-section-title">{getTitle(key).toUpperCase()}</h2>
+        {sectionMeta[key]?.subtitle && (
+          <p className="dn-section-sub">{sectionMeta[key].subtitle}</p>
+        )}
+      </div>
+      <div className={`dn-grid dn-tone-${sectionMeta[key]?.tone || "others"}`}>
         {blogs.map((blog, index) => {
-                    const blogDetails = JSON.parse(blog.details);
+          const blogDetails = JSON.parse(blog.details);
           return (
             <div key={index} className="dn-cell">
               <div className="bank-info-wrap" data-aos="fade-up">
                 <div className="container">
                   <h4 className="bank-details">{blog.blog_title}</h4>
                   <div className="bank-info-grid">
-                  {blogDetails.map((item, i) => (
-                    <div className="bank-info-row" key={i}>
-                      <div className="bank-info-label">{item.title}:</div>
-                      <div className="bank-info-value">{item.detail ? item.detail : "-"}</div>
-                    </div>
-                  ))}
+                    {blogDetails.map((item, i) => (
+                      <div className="bank-info-row" key={i}>
+                        <div className="bank-info-label">
+                          {fieldIcon(item.title)}
+                          <span>{item.title}:</span>
+                        </div>
+                        <div className="bank-info-value">{item.detail ? item.detail : "-"}</div>
+                      </div>
+                    ))}
                   </div>
 
                 </div>
                 {(blog.is_online === "1" ||
                   (String(blog.is_qr) === "1" && blog.qr_image)) && (
-                <div className="donors-btn-wrap">
-                {blog.is_online === "1" && (
-                  <button
-                    type="button"
-                    className="donors-btn"
-                    onClick={() => handleOnlineClick(blog)}
-                  >
-                    Online
-                  </button>
-                )}
-                {String(blog.is_qr) === "1" && blog.qr_image && (
-                  <button
-                    type="button"
-                    className="donors-btn"
-                    onClick={() => openQrDialog(blog)}
-                  >
-                    View QR
-                  </button>
-                )}
-                </div>
-                )}
+                    <div className="donors-btn-wrap">
+                      {blog.is_online === "1" && (
+                        <button
+                          type="button"
+                          className="donors-btn"
+                          onClick={() => handleOnlineClick(blog)}
+                        >
+                          Online Donation
+                        </button>
+                      )}
+                      {String(blog.is_qr) === "1" && blog.qr_image && (
+                        <button
+                          type="button"
+                          className="donors-btn"
+                          onClick={() => openQrDialog(blog)}
+                        >
+                          View QR
+                        </button>
+                      )}
+                    </div>
+                  )}
               </div>
             </div>
           );
@@ -282,42 +340,69 @@ const Donors = () => {
   };
 
   return (
-    <div className="dn-page"><div className="dn-container">
-      {/* {Object.keys(blogData).map((key) => {
+    <>
+      <div
+        className="dn-hero"
+        style={{ "--dn-hero-bg": `url('${donationHeaderBg}')` }}
+      >
+        <div className="dn-hero-content">
+          <h1 className="dn-hero-title">Donations</h1>
+          <p className="dn-hero-subtitle">
+            Support a brighter future through seva, education and service
+          </p>
+        </div>
+        <div className="breadcrumbs-wrap">
+          <CommonBreadcrumbs
+            items={[
+              { label: "Home", url: "/" },
+              <label key="donations" className="active-link-color">
+                Donations
+              </label>,
+            ]}
+            separator="›"
+          />
+        </div>
+      </div>
+      <div
+        className="dn-page"
+        style={{ "--dn-page-bg": `url('${donationPageBg}')` }}
+      ><div className="dn-container">
+          {/* {Object.keys(blogData).map((key) => {
         if (Array.isArray(blogData[key]) && blogData[key].length > 0) {
           return <div key={key}>{renderBlogSection(key, blogData[key])}</div>;
         }
         return null;
       })} */}
-      {orderedKeys().map((key) => {
-        if (Array.isArray(blogData[key]) && blogData[key].length > 0) {
-          return <div key={key}>{renderBlogSection(key, blogData[key])}</div>;
-        }
-        return null;
-      })}
-      <dialog
-        ref={qrDialogRef}
-        className="qr-fullscreen-dialog"
-        closedby="any"
-        aria-labelledby="qr-dialog-title"
-        onClose={() => setQrDialog(null)}
-      >
-        <form method="dialog" className="qr-fullscreen-dialog-inner">
-          <h2 id="qr-dialog-title" className="qr-dialog-title">
-            {qrDialog?.title ? `${qrDialog.title} QR Code` : "QR Code"}
-          </h2>
-          {qrDialog?.imageUrl && (
-            <img
-              src={qrDialog.imageUrl}
-              alt={qrDialog.title ? `${qrDialog.title} QR Code` : "QR Code"}
-            />
-          )}
-          <button type="submit" className="qr-dialog-close" aria-label="Close QR code">
-            ×
-          </button>
-        </form>
-      </dialog>
-    </div></div>
+          {orderedKeys().map((key) => {
+            if (Array.isArray(blogData[key]) && blogData[key].length > 0) {
+              return <div key={key}>{renderBlogSection(key, blogData[key])}</div>;
+            }
+            return null;
+          })}
+          <dialog
+            ref={qrDialogRef}
+            className="qr-fullscreen-dialog"
+            closedby="any"
+            aria-labelledby="qr-dialog-title"
+            onClose={() => setQrDialog(null)}
+          >
+            <form method="dialog" className="qr-fullscreen-dialog-inner">
+              <h2 id="qr-dialog-title" className="qr-dialog-title">
+                {qrDialog?.title ? `${qrDialog.title} QR Code` : "QR Code"}
+              </h2>
+              {qrDialog?.imageUrl && (
+                <img
+                  src={qrDialog.imageUrl}
+                  alt={qrDialog.title ? `${qrDialog.title} QR Code` : "QR Code"}
+                />
+              )}
+              <button type="submit" className="qr-dialog-close" aria-label="Close QR code">
+                ×
+              </button>
+            </form>
+          </dialog>
+        </div></div>
+    </>
   );
 };
 
