@@ -9,7 +9,6 @@
   background: #fff;
   border-radius: var(--border-radius);
   overflow: hidden;
-  box-shadow: 0 5px 22px rgba(0, 0, 0, 0.1);
   border: none;
   transition: var(--transition);
   position: relative;

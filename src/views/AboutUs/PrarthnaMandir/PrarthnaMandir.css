@@ -21,15 +21,16 @@
   background: #fff;
   border-radius: 14px;
   overflow: hidden;
-  box-shadow: 0 6px 24px rgba(59, 10, 10, 0.08);
   cursor: pointer;
   min-width: 0;
+  border: 1px solid rgba(200, 169, 110, 0.25);
+  box-shadow: 0 4px 18px rgba(59, 10, 10, 0.08);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .pm-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 12px 34px rgba(59, 10, 10, 0.14);
+  box-shadow: 0 12px 34px rgba(59, 10, 10, 0.16);
 }
 
 .pm-card-photo {

@@ -146,7 +146,6 @@
   overflow: hidden;
   border: none !important;
   padding: 0 !important;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
   transition: var(--transition);
   display: block;
 }
@@ -296,7 +295,6 @@
 /* Related event cards — use same styling as home */
 .slider-item .activities-inner-content-wrap {
   height: 100%;
-  box-shadow: 0 5px 22px rgba(0, 0, 0, 0.1) !important;
   border: none !important;
   cursor: pointer;
   border-radius: var(--border-radius) !important;
@@ -304,6 +302,7 @@
   transition: var(--transition);
   position: relative;
   background: #fff !important;
+  box-shadow: none !important;
 }
 
 .slider-item .activities-inner-content-wrap:hover {

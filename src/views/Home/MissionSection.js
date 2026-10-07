@@ -4,14 +4,12 @@ import { useNavigate } from "../../common/routerCompat.js";
 import "./MissionSection.css";
 import _missionImg from "../../assets/images/templeTemp.webp";
 const missionImg = _missionImg.src;
-import _missionBg from "../../assets/images/mission-background.webp";
-const missionBg = _missionBg.src;
 
 const MissionSection = () => {
   const navigate = useNavigate();
 
   return (
-    <section className="mission-section" style={{ backgroundImage: `url(${missionBg})` }}>
+    <section className="mission-section">
       <div className="container">
         <div className="mission-inner">
           {/* Left: Text Content */}

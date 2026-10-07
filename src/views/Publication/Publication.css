@@ -1,28 +1,9 @@
 /* ========== Publications Section ========== */
 
 .publications-section {
-  background: #fdf9f4;
+  background: transparent;
   position: relative;
   overflow: hidden;
-}
-
-.publications-section::before {
-  content: '';
-  position: absolute;
-  right: -50px;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 280px;
-  height: 280px;
-  background: url('../../assets/images/Tample.webp') center/contain no-repeat;
-  opacity: 0.06;
-  pointer-events: none;
-  z-index: 0;
-}
-
-.publications-section > * {
-  position: relative;
-  z-index: 1;
 }
 
 /* ======= Section Header ======= */

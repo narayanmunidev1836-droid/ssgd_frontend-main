@@ -159,7 +159,7 @@ table {
   --surface: #ffffff;
   --surface-2: #f8fafc;
   --header-divider: rgba(255, 255, 255, 0.2);
-  --card-shadow: 0 4px 24px rgba(0, 0, 0, 0.07);
+  --card-shadow: none;
   --card-shadow-hover: 0 12px 40px rgba(0, 0, 0, 0.14);
   --border-radius: 12px;
   --border-radius-lg: 20px;

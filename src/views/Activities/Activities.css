@@ -132,9 +132,6 @@
 .activities-inner-content-wrap {
   height: 100%;
 
-  box-shadow:
-    0 5px 22px rgba(0, 0, 0, 0.10) !important;
-
   border: none !important;
 
   cursor: pointer;
@@ -149,6 +146,8 @@
   position: relative;
 
   background: #fff !important;
+
+  box-shadow: none !important;
 }
 
 .activities-inner-content-wrap:hover {

@@ -155,7 +155,6 @@
 
 .activities-inner-content-wrap-sub-actvities {
   height: 100%;
-  box-shadow: 0 5px 22px rgba(0, 0, 0, 0.1) !important;
   border: none !important;
   cursor: pointer;
   border-radius: var(--border-radius) !important;
@@ -165,6 +164,7 @@
   background: #fff !important;
   display: flex;
   flex-direction: column;
+  box-shadow: none !important;
 }
 
 .activities-inner-content-wrap-sub-actvities:hover {

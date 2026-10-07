@@ -25,6 +25,7 @@ const Activities = ({ setIsActivityLoaded }) => {
     AOS.init({
       duration: 1000,
       once: false,
+      offset: 0,
     });
   }, []);
 

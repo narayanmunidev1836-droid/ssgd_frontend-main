@@ -47,7 +47,7 @@ const Videos = () => {
   };
 
   useEffect(() => {
-    AOS.init({ duration: 1000, once: false });
+    AOS.init({ duration: 1000, once: false, offset: 0 });
   }, []);
 
   const apiKey = "AIzaSyDEPqey9i1sZFnOGiiE1jqa4tLLH-VC4D8";

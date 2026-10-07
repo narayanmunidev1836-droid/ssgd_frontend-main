@@ -1,7 +1,7 @@
 /* =========================================================
    CTA SECTION
-   Background image: ./cta-background.webp
-   Designed to closely match the supplied reference banner.
+   Sits on the shared .temple-page-bg; the cream panel below
+   carries its own background instead of a dedicated banner image.
    ========================================================= */
 
 .cta-section {
@@ -9,27 +9,30 @@
   min-height: 335px;
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: center;
   overflow: hidden;
+  padding: 0 24px;
 
-  background-image: url("../../assets/images/cta-background.webp");
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
+  background: transparent;
 
   position: relative;
 }
 
-/* Right-side content sits exactly inside the cream panel. */
+/* Content sits centered inside its own cream panel. */
 .cta-content-panel {
-  width: 58%;
+  width: 100%;
+  max-width: 680px;
   box-sizing: border-box;
-  padding: 30px 55px 30px 42px;
+  padding: 40px 56px;
 
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
+  text-align: center;
   gap: 8px;
+
+  background: rgba(247, 227, 196, 0.92);
+  border-radius: 20px;
 
   position: relative;
   z-index: 2;
@@ -98,16 +101,11 @@
 
 /* =========================================================
    RESPONSIVE
-   Photo sits on the left of the artwork, so on narrow screens
-   the artwork (3:1) becomes a top band and the text panel
-   stacks full-width below it on a matching cream background.
    ========================================================= */
 
 @media (max-width: 1100px) {
-  /* Narrower panel keeps the text clear of the curved edge of the photo */
   .cta-content-panel {
-    width: 54%;
-    padding: 28px 28px 28px 24px;
+    padding: 32px 36px;
   }
 
   .cta-heading {
@@ -122,16 +120,11 @@
     justify-content: flex-start;
     align-items: stretch;
     min-height: 0;
-    background-image: none;
-    background-color: #f7e3c4;
     padding-top: 0;
   }
 
   .cta-content-panel {
-    width: 100%;
     padding: 24px 20px 32px;
-    align-items: center;
-    text-align: center;
   }
 
   .cta-heading {

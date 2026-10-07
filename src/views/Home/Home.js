@@ -57,7 +57,7 @@ const Home = () => {
   }, [pdfCode]);
 
   useEffect(() => {
-    AOS.init({ duration: 1000, once: false });
+    AOS.init({ duration: 1000, once: false, offset: 0 });
   }, []);
 
   return (
@@ -67,33 +67,35 @@ const Home = () => {
       {/* Hero Slider */}
       <HomeSlider />
 
-      {/* Quick Navigation Cards */}
-      <QuickNavCards />
+      <div className="temple-page-bg">
+        {/* Quick Navigation Cards */}
+        <QuickNavCards />
 
-      {/* Mission Section */}
-      <MissionSection />
+        {/* Mission Section */}
+        <MissionSection />
 
-      {/* Live Events */}
-      <div className="live-events-bg-wrap">
-        <Videos />
+        {/* Live Events */}
+        <div className="live-events-bg-wrap">
+          <Videos />
+        </div>
+
+        {/* Publications */}
+        <Publication />
+
+        {/* Activities */}
+        <div className="activities-bg-wrap">
+          <Activities />
+        </div>
+
+        {/* Stats Counter */}
+        <StatsSection />
+
+        {/* Sant Photos / Gallery */}
+        <SantPhotos />
+
+        {/* CTA Section */}
+        <CTASection />
       </div>
-
-      {/* Publications */}
-      <Publication />
-
-      {/* Activities */}
-      <div className="activities-bg-wrap">
-        <Activities />
-      </div>
-
-      {/* Stats Counter */}
-      <StatsSection />
-
-      {/* Sant Photos / Gallery */}
-      <SantPhotos />
-
-      {/* CTA Section */}
-      <CTASection />
     </>
   );
 };

@@ -457,7 +457,6 @@
   background: #fff;
   border-radius: 14px;
   overflow: hidden;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
   cursor: pointer;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   min-width: 0;
@@ -553,7 +552,6 @@
 .au-card {
   background: #fff;
   border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
   overflow: hidden;
   min-width: 0;
 }
@@ -593,7 +591,6 @@
 
 .au-card {
   border-radius: 16px;
-  box-shadow: 0 6px 28px rgba(59, 10, 10, 0.08);
   border: 1px solid rgba(200, 169, 110, 0.18);
 }
 

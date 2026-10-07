@@ -78,7 +78,7 @@ const PrarthnaMandir = () => {
   }
 
   return (
-    <>
+    <div className="temple-page-bg">
       {/* Top block: hero card with breadcrumb on its edge */}
       <div className="at1-top">
         <div className="at1-hero-wrap">
@@ -137,7 +137,7 @@ const PrarthnaMandir = () => {
           </div>
         </div>
       )}
-    </>
+    </div>
   );
 };
 

@@ -166,7 +166,6 @@
   background: #fff;
   border-radius: 16px;
   padding: 10px 10px 14px;
-  box-shadow: 0 6px 24px rgba(59, 10, 10, 0.08);
   box-sizing: border-box;
   height: 100%;
 }
@@ -304,7 +303,6 @@
   overflow: hidden;
   border-radius: 18px;
   background: #fff;
-  box-shadow: 0 8px 26px rgba(59, 10, 10, 0.1);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -387,7 +385,6 @@
 /* ── Darshan photo card: same style as the Publication wallpaper card ── */
 .dd-cell .wallpaper-content {
   border-radius: 16px;
-  box-shadow: 0 5px 22px rgba(0, 0, 0, 0.1);
   padding: 0 0 4px;
   text-align: center;
 }
