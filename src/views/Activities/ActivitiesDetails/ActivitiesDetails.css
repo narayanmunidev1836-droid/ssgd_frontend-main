@@ -10,16 +10,16 @@
   padding-bottom: 30px;
 }
 
-/* This page has no banner image, so .contact-img-wrap holds only the
-   absolutely-positioned breadcrumb and would collapse to zero height,
-   leaving the pill tucked behind the sticky navbar. */
-.activity-detail-head {
+/* Pages with no banner image (activity detail, audio/video album detail):
+   .contact-img-wrap holds only the absolutely-positioned breadcrumb and would
+   collapse to zero height, leaving the pill tucked behind the sticky navbar. */
+.no-banner-head {
   height: 74px;
 }
 
 /* No top margin here: .contact-img-wrap above is empty, so a margin would
    collapse through it and escape .temple-page-bg, leaving a white strip under
-   the header. The gap below the breadcrumb comes from .activity-detail-head. */
+   the header. The gap below the breadcrumb comes from .no-banner-head. */
 .activitydetails-image {
   position: relative;
   width: 50%;

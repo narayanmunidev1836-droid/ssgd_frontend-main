@@ -228,7 +228,7 @@ const ActivitiesDetails = () => {
   }, []);
   return (
     <div className="temple-page-bg">
-      <div className="contact-img-wrap activity-detail-head">
+      <div className="contact-img-wrap no-banner-head">
         <div className="breadcrumbs-wrap">
           <CommonBreadcrumbs items={breadcrumbsData} separator="›" />
         </div>

@@ -756,25 +756,11 @@ const AudioListPlayer = ({ audioListData, publiCationLoading }) => {
     <div className="temple-page-bg">
       {isAlbumDetail && (
         <div>
-          <div className="contact-img-wrap">
-            <div className="spinner-container-banner">
-              <InnerpageLoader
-                src={banner}
-                className="about-img"
-                onImageLoad={handleImageLoad}
-              />
+          <div className="contact-img-wrap no-banner-head">
+            <div className="breadcrumbs-wrap">
+              <CommonBreadcrumbs items={breadcrumbsData} separator="›" />
             </div>
-            {imageLoaded && (
-              <div className="breadcrumbs-wrap">
-                <CommonBreadcrumbs items={breadcrumbsData} separator="›" />
-              </div>
-            )}
           </div>
-          {!imageLoaded && (
-            <div className="shimmer-activity-wrapper">
-              <div className="shimmer" />
-            </div>
-          )}
         </div>
       )}
 
