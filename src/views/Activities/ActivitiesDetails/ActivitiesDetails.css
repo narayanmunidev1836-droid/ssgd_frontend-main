@@ -292,6 +292,16 @@
   height: 100%;
 }
 
+/* Related event card link wrapper — keeps the real href (shows on hover)
+   while the Card inside still fills the slide the way it did as a plain div. */
+.related-activity-link {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  text-decoration: none !important;
+  color: inherit;
+}
+
 /* Related event cards — use same styling as home */
 .slider-item .activities-inner-content-wrap {
   height: 100%;

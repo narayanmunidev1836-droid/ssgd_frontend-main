@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import _image7 from "../../../assets/images/date.webp";
 const image7 = _image7.src;
 import Container from "@mui/material/Container";
@@ -8,7 +8,7 @@ import Card from "@mui/material/Card";
 import { GrPrevious } from "react-icons/gr";
 import { GrNext } from "react-icons/gr";
 import CommonBreadcrumbs from "../../../common/CommonBreadcrumbs/CommonBreadcrumbs";
-import { useParams } from "../../../common/routerCompat.js";
+import { Link, useParams } from "../../../common/routerCompat.js";
 import { fetchActivitiyDetails, fetchSlider } from "../../../api/API";
 import LightGallery from "lightgallery/react";
 import lgThumbnail from "lightgallery/plugins/thumbnail";
@@ -45,6 +45,7 @@ const ActivitiesDetails = () => {
   const [activityData, setACtivityData] = useState([]);
   const [imageLoaded, setImageLoaded] = useState(false);
   const [dataLoading, setDataLoading] = useState(false);
+  const latestRequestRef = useRef(null);
 
   const handleImageLoad = () => {
     setImageLoaded(true);
@@ -144,6 +145,8 @@ const ActivitiesDetails = () => {
   ];
 
   const fetchData = async (id, activity_id) => {
+    const requestKey = `${id}_${activity_id}`;
+    latestRequestRef.current = requestKey;
     setDataLoading(true);
     try {
       const response = await fetchActivitiyDetails({
@@ -152,6 +155,10 @@ const ActivitiesDetails = () => {
         activity_details_id: id,
         activity_id: activity_id,
       });
+      if (latestRequestRef.current !== requestKey) {
+        // A newer request started after this one; ignore this stale response.
+        return;
+      }
       if (response.data.status == true) {
         setApiData(response.data.responseBody);
                 // setActivityTitle(response.data.responseBody.details.title);
@@ -184,7 +191,9 @@ const ActivitiesDetails = () => {
         setActivityName(response.data.responseBody.activity);
                                               }
     } catch (error) {
-      setDataLoading(false);
+      if (latestRequestRef.current === requestKey) {
+        setDataLoading(false);
+      }
       console.error("Error fetching data:", error);
     }
   };
@@ -193,15 +202,6 @@ const ActivitiesDetails = () => {
   //   fetchData();
   // }, []);
   // const formattedDate = activityDate.format("MM/DD/YYYY");
-
-  const handleClick = (id, activity_id) => {
-    window.history.pushState(
-      null,
-      "",
-      `/activities-detail/${activity_id}/${id}`
-    );
-    fetchData(id, activity_id);
-  };
 
   useEffect(() => {
       }, [apiData]);
@@ -430,57 +430,61 @@ const ActivitiesDetails = () => {
               const month = formattedDate.split(" ")[0];
               return event.activity_name ? (
                 <Grid item xs={6} sm={6} md={4} key={index} className="slider-item">
-                  <Card
-                    className="activities-inner-content-wrap h-100"
-                    data-aos="fade-up"
-                    onClick={() => handleClick(event.id, event.activity_id)}
+                  <Link
+                    to={`/activities-detail/${event.activity_id}/${event.id}`}
+                    className="related-activity-link"
                   >
-                    <div className="detail-act-img-wrap">
-                      <LazyLoadImage
-                        src={
-                          event
-                            ? event.image !== ""
-                              ? event.image
+                    <Card
+                      className="activities-inner-content-wrap h-100"
+                      data-aos="fade-up"
+                    >
+                      <div className="detail-act-img-wrap">
+                        <LazyLoadImage
+                          src={
+                            event
+                              ? event.image !== ""
+                                ? event.image
+                                : imageNotFound
                               : imageNotFound
-                            : imageNotFound
-                        }
-                        className="activities-img-slider"
-                        wrapperClassName="lazy-load-image-background aboutustype"
-                        afterLoad={() => {
-                          const imageElement = document.querySelector(
-                            `.lazy-load-image-background[data-src="${
-                              event ? event.thumbnail_image : imageNotFound
-                            }"] img`
-                          );
-                          if (imageElement) {
-                            imageElement.classList.add("lazy-load-image-loaded");
                           }
-                        }}
-                        onError={(e) => {
-                          e.target.src = imageNotFound;
-                        }}
-                      />
-                    </div>
-
-                    <div className="activities-inner-content-slider">
-                      <p className="sub-activites-name">
-                        {event.activity_name}
-                      </p>
-
-                      <h4 className="sub-activities-title">{event.title}</h4>
-                      <h6 className="sub-activities-desc">
-                        {event.short_description ? event.short_description : <span style={{opacity:0}}>...</span>}
-                      </h6>
-                    </div>
-                    <div className="activities-date">
-                      <div>
-                        <h5>{day}</h5>
+                          className="activities-img-slider"
+                          wrapperClassName="lazy-load-image-background aboutustype"
+                          afterLoad={() => {
+                            const imageElement = document.querySelector(
+                              `.lazy-load-image-background[data-src="${
+                                event ? event.thumbnail_image : imageNotFound
+                              }"] img`
+                            );
+                            if (imageElement) {
+                              imageElement.classList.add("lazy-load-image-loaded");
+                            }
+                          }}
+                          onError={(e) => {
+                            e.target.src = imageNotFound;
+                          }}
+                        />
                       </div>
-                      <div>
-                        <p>{month}</p>
+
+                      <div className="activities-inner-content-slider">
+                        <p className="sub-activites-name">
+                          {event.activity_name}
+                        </p>
+
+                        <h4 className="sub-activities-title">{event.title}</h4>
+                        <h6 className="sub-activities-desc">
+                          {event.short_description ? event.short_description : <span style={{opacity:0}}>...</span>}
+                        </h6>
                       </div>
-                    </div>
-                  </Card>
+                      <div className="activities-date">
+                        <div>
+                          <h5>{day}</h5>
+                        </div>
+                        <div>
+                          <p>{month}</p>
+                        </div>
+                      </div>
+                    </Card>
+                  </Link>
                 </Grid>
               ) : (
                 ""
