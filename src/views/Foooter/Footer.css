@@ -194,7 +194,7 @@
   font-size: 13px;
   text-align: center;
   color: rgba(255, 255, 255, 0.35);
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   flex-wrap: wrap;
   gap: 6px;

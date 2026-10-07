@@ -378,6 +378,7 @@ const PublicationDetails = () => {
             albumnData={publicatioAlbumnData}
             isAlbum={isAlbum}
             publiCationLoading={initialLoading}
+            publicationName={apiData?.data?.responseBody?.publication?.name}
           />
         )}
         {SelectedPublicationslug === "video" && (

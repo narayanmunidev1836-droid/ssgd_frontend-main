@@ -172,8 +172,13 @@ const ActivitiesDetails = () => {
         setActivityDate(
           dayjs(response.data.responseBody.details.activity_date)
         );
-        setRelatedEvents(response.data.responseBody.relevent_details);
-                setSliderLength(response.data.responseBody.relevent_details.length);
+        const sameCategoryEvents = (
+          response.data.responseBody.relevent_details || []
+        ).filter(
+          (event) => String(event.activity_id) === String(activity_id)
+        );
+        setRelatedEvents(sameCategoryEvents);
+                setSliderLength(sameCategoryEvents.length);
         setDataLoading(false);
         setACtivityData(response.data.responseBody.details);
         setActivityName(response.data.responseBody.activity);
@@ -288,7 +293,7 @@ const ActivitiesDetails = () => {
                 return (
                   <>
                     <div key={index}>
-                      <div data-aos="fade-up">
+                      <div className="activitydetails-image" data-aos="fade-up">
                         <LazyLoadImage
                           src={activity.image}
                           alt={activity.title}

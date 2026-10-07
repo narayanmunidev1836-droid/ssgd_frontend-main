@@ -5,9 +5,19 @@ import { useNavigate } from "../../../common/routerCompat.js";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
-const AudioAlbumList = ({ albumnData,publiCationLoading }) => {
+const AudioAlbumList = ({ albumnData,publiCationLoading, publicationName }) => {
   const navigate = useNavigate();
-  
+
+  const normalizedPublicationName = (publicationName || "").trim().toLowerCase();
+  const isKatha = normalizedPublicationName === "katha";
+  const isKirtan = normalizedPublicationName === "kirtan";
+  const ratioClass = isKatha
+    ? " katha-img--ratio-16-9"
+    : isKirtan
+    ? " katha-img--ratio-1-1"
+    : "";
+  const kathaImgClass = `katha-img katha-albums-image${ratioClass}`;
+
   const handleClick = (album_id, publication_id) => {
         navigate(`/audio-album/${album_id}/publication/${publication_id}`);
   };
@@ -43,7 +53,7 @@ const AudioAlbumList = ({ albumnData,publiCationLoading }) => {
               <img
                 src={album.image}
                 alt=""
-                className="katha-img katha-albums-image"
+                className={kathaImgClass}
               />
               <div className="katha-content katha-content-publication">
                 <div className="video-album-content">

@@ -22,6 +22,14 @@
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
 }
 
+/* LazyLoadImage wraps the image in an inline-block span that otherwise
+   shrinks to the image's intrinsic width, pinning it to one side with
+   empty space beside it — make the wrapper span the full width instead. */
+.activitydetails-image .lazy-load-image-background {
+  display: block;
+  width: 100%;
+}
+
 .activities-name {
   color: var(--text-color);
   text-align: start;
@@ -129,6 +137,7 @@
   display: flex !important;
   gap: 16px;
   flex-wrap: wrap;
+  justify-content: center;
 }
 
 .wallpaper-content {
@@ -142,14 +151,23 @@
   display: block;
 }
 
+/* 5-per-row sizing is scoped to this page's LightGallery flex wrapper only —
+   .wallpaper-content is reused by the Wallpaper publication tab, which lays
+   cards out in MUI Grid columns and must not inherit this flex-basis. */
+.lg-react-element .wallpaper-content {
+  flex: 0 1 calc((100% - 4 * 16px) / 5);
+  max-width: calc((100% - 4 * 16px) / 5);
+}
+
 .wallpaper-content:hover {
   transform: translateY(-4px);
   box-shadow: 0 8px 28px rgba(0, 0, 0, 0.15);
 }
 
 .activities-img-thumbnail {
-  width: 220px;
-  height: 165px;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 3;
   object-fit: cover;
   display: block;
   border-radius: 12px;
@@ -187,12 +205,14 @@
 .gallery-shimmer-wrapper {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   gap: 16px;
 }
 
 .wallpaper-content-shimmer {
-  width: 220px;
-  height: 165px;
+  flex: 0 1 calc((100% - 4 * 16px) / 5);
+  max-width: calc((100% - 4 * 16px) / 5);
+  aspect-ratio: 4 / 3;
   border-radius: 12px;
   background: linear-gradient(
     90deg,
@@ -262,6 +282,7 @@
 .slider-margin .slick-track {
   display: flex !important;
   align-items: stretch !important;
+  margin: 0 auto !important;
 }
 
 .slider-margin .slick-slide {
@@ -412,6 +433,7 @@
   color: var(--text-color);
   margin: 0;
   line-height: 1.4;
+  min-height: 2.8em;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
@@ -662,14 +684,10 @@
    ========================================================= */
 
 @media (max-width: 991px) {
-  .activities-img-thumbnail {
-    width: 180px;
-    height: 140px;
-  }
-
+  .lg-react-element .wallpaper-content,
   .wallpaper-content-shimmer {
-    width: 180px;
-    height: 140px;
+    flex-basis: calc((100% - 3 * 16px) / 4);
+    max-width: calc((100% - 3 * 16px) / 4);
   }
 }
 
@@ -684,18 +702,10 @@
 }
 
 @media (min-width: 577px) and (max-width: 767px) {
-  .lg-react-element {
-    justify-content: center;
-  }
-
-  .activities-img-thumbnail {
-    width: 160px;
-    height: 130px;
-  }
-
+  .lg-react-element .wallpaper-content,
   .wallpaper-content-shimmer {
-    width: 160px;
-    height: 130px;
+    flex-basis: calc((100% - 2 * 16px) / 3);
+    max-width: calc((100% - 2 * 16px) / 3);
   }
 
   .activitydetails-image {
@@ -712,24 +722,15 @@
 }
 
 @media (max-width: 576px) {
-  .lg-react-element {
-    justify-content: center;
+  .lg-react-element,
+  .gallery-shimmer-wrapper {
     gap: 12px;
   }
 
-  .activities-img-thumbnail {
-    width: 100%;
-    height: auto;
-    aspect-ratio: 4/3;
-  }
-
-  .wallpaper-content {
-    width: calc(50% - 6px);
-  }
-
+  .lg-react-element .wallpaper-content,
   .wallpaper-content-shimmer {
-    width: calc(50% - 6px);
-    height: 120px;
+    flex-basis: calc(50% - 6px);
+    max-width: calc(50% - 6px);
   }
 
   .activitydetails-image {

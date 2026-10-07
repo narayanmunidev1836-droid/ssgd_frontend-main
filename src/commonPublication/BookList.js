@@ -12,7 +12,6 @@ import "aos/dist/aos.css";
 const BookList = ({ publicatioAlbumnData,publiCationLoading }) => {
   const navigate = useNavigate();
     const params = useParams();
-  
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const is_open_pdf = params.get("is_open_pdf");

@@ -10,9 +10,9 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 
 const BookAndAlbumList = ({ publicatioAlbumnData, isAlbum ,publiCationLoading }) => {
-  
+
   const params = useParams();
-  
+
   const navigate = useNavigate();
 
   const handleViewDetailsClick = (id, pub_id) => {

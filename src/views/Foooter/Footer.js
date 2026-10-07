@@ -106,7 +106,7 @@ const Footer = () => {
                     className="logo-footer"
                   /> */}
                   {loading ? (
-                     <div className="footer-logo-shimmer" />
+                    <div className="footer-logo-shimmer" />
                   ) : (
                     <img
                       src={apiData.footer_logo}
@@ -117,43 +117,43 @@ const Footer = () => {
                 </span>
               </a>
               <ul className="footer-link-wrap mt-4">
-  <li className="footer-link-wrap1">
-    <div>
-      <SlLocationPin className="footer-icon" />
-    </div>
-    {loading ? (
-      <div className="footer-shimmer-line" />
-    ) : (
-      <p>{apiData?.address}</p>
-    )}
-  </li>
+                <li className="footer-link-wrap1">
+                  <div>
+                    <SlLocationPin className="footer-icon" />
+                  </div>
+                  {loading ? (
+                    <div className="footer-shimmer-line" />
+                  ) : (
+                    <p>{apiData?.address}</p>
+                  )}
+                </li>
 
-  <li className="footer-link-wrap1">
-    <div>
-      <FiPhone className="footer-icon" />
-    </div>
-    {loading ? (
-      <div className="footer-shimmer-line" />
-    ) : (
-      <p onClick={handleContactClick} className="footer-link">
-        {apiData?.mobile_number}
-      </p>
-    )}
-  </li>
+                <li className="footer-link-wrap1">
+                  <div>
+                    <FiPhone className="footer-icon" />
+                  </div>
+                  {loading ? (
+                    <div className="footer-shimmer-line" />
+                  ) : (
+                    <p onClick={handleContactClick} className="footer-link">
+                      {apiData?.mobile_number}
+                    </p>
+                  )}
+                </li>
 
-  <li className="footer-link-wrap1">
-    <div>
-      <MdOutlineEmail className="footer-icon" />
-    </div>
-    {loading ? (
-      <div className="footer-shimmer-line" />
-    ) : (
-      <p onClick={handleEmailClick} className="footer-link">
-        {apiData?.email}
-      </p>
-    )}
-  </li>
-</ul>
+                <li className="footer-link-wrap1">
+                  <div>
+                    <MdOutlineEmail className="footer-icon" />
+                  </div>
+                  {loading ? (
+                    <div className="footer-shimmer-line" />
+                  ) : (
+                    <p onClick={handleEmailClick} className="footer-link">
+                      {apiData?.email}
+                    </p>
+                  )}
+                </li>
+              </ul>
 
             </Grid>
 
@@ -222,7 +222,7 @@ const Footer = () => {
                         <li key={page.id}>
                           {page.website_page === "other_website" ? (
                             <NavLink
-                            to={page.page_url}
+                              to={page.page_url}
                               target="_blank"
                               rel="noopener noreferrer"
                             >
@@ -251,137 +251,127 @@ const Footer = () => {
               <h5>Social Media</h5>
 
               <ul className="social-media-link-wrap">
-  {loading ? (
-    [...Array(9)].map((_, index) => (
-      <li key={index}>
-        <div className="footer-icon-shimmer" />
-      </li>
-    ))
-  ) : (
-    <>
-      {apiData?.fb_link && (
-        <li>
-          <a
-            href={apiData.fb_link}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <FaFacebook className="footer-img" color="#1877F2" aria-label="Facebook" />
-          </a>
-        </li>
-      )}
-      {apiData?.whatsapp_link && (
-        <li>
-          <a
-            href={apiData.whatsapp_link}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <FaWhatsapp className="footer-img" color="#25D366" aria-label="WhatsApp" />
-          </a>
-        </li>
-      )}
-      {apiData?.youtube_link && (
-        <li>
-          <a
-            href={apiData.youtube_link}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <FaYoutube className="footer-img" color="#FF0000" aria-label="YouTube" />
-          </a>
-        </li>
-      )}
-      {apiData?.instagram_link && (
-        <li>
-          <a
-            href={apiData.instagram_link}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <FaInstagram className="footer-img" color="#E4405F" aria-label="Instagram" />
-          </a>
-        </li>
-      )}
-      {apiData?.apple_music_link && (
-        <li>
-          <a
-            href={apiData.apple_music_link}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <SiApplemusic className="footer-img" color="#FA243C" aria-label="Apple Music" />
-          </a>
-        </li>
-      )}
-      {apiData?.spotify_link && (
-        <li>
-          <a
-            href={apiData.spotify_link}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <SiSpotify className="footer-img" color="#1DB954" aria-label="Spotify" />
-          </a>
-        </li>
-      )}
-      {apiData?.telegram_link && (
-        <li>
-          <a
-            href={apiData.telegram_link}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <FaTelegram className="footer-img" color="#26A5E4" aria-label="Telegram" />
-          </a>
-        </li>
-      )}
-      {apiData?.twitter_link && (
-        <li>
-          <a
-            href={apiData.twitter_link}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <FaXTwitter className="footer-img" color="#000000" aria-label="Twitter" />
-          </a>
-        </li>
-      )}
-      {apiData?.jio_sawan_link && (
-        <li>
-          <a
-            href={apiData.jio_sawan_link}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <img src={image9} className="footer-img" alt="JioSaavn" />
-          </a>
-        </li>
-      )}
-    </>
-  )}
-</ul>
+                {loading ? (
+                  [...Array(9)].map((_, index) => (
+                    <li key={index}>
+                      <div className="footer-icon-shimmer" />
+                    </li>
+                  ))
+                ) : (
+                  <>
+                    {apiData?.fb_link && (
+                      <li>
+                        <a
+                          href={apiData.fb_link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          <FaFacebook className="footer-img" color="#1877F2" aria-label="Facebook" />
+                        </a>
+                      </li>
+                    )}
+                    {apiData?.whatsapp_link && (
+                      <li>
+                        <a
+                          href={apiData.whatsapp_link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          <FaWhatsapp className="footer-img" color="#25D366" aria-label="WhatsApp" />
+                        </a>
+                      </li>
+                    )}
+                    {apiData?.youtube_link && (
+                      <li>
+                        <a
+                          href={apiData.youtube_link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          <FaYoutube className="footer-img" color="#FF0000" aria-label="YouTube" />
+                        </a>
+                      </li>
+                    )}
+                    {apiData?.instagram_link && (
+                      <li>
+                        <a
+                          href={apiData.instagram_link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          <FaInstagram className="footer-img" color="#E4405F" aria-label="Instagram" />
+                        </a>
+                      </li>
+                    )}
+                    {apiData?.apple_music_link && (
+                      <li>
+                        <a
+                          href={apiData.apple_music_link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          <SiApplemusic className="footer-img" color="#FA243C" aria-label="Apple Music" />
+                        </a>
+                      </li>
+                    )}
+                    {apiData?.spotify_link && (
+                      <li>
+                        <a
+                          href={apiData.spotify_link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          <SiSpotify className="footer-img" color="#1DB954" aria-label="Spotify" />
+                        </a>
+                      </li>
+                    )}
+                    {apiData?.telegram_link && (
+                      <li>
+                        <a
+                          href={apiData.telegram_link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          <FaTelegram className="footer-img" color="#26A5E4" aria-label="Telegram" />
+                        </a>
+                      </li>
+                    )}
+                    {apiData?.twitter_link && (
+                      <li>
+                        <a
+                          href={apiData.twitter_link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          <FaXTwitter className="footer-img" color="#000000" aria-label="Twitter" />
+                        </a>
+                      </li>
+                    )}
+                    {apiData?.jio_sawan_link && (
+                      <li>
+                        <a
+                          href={apiData.jio_sawan_link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          <img src={image9} className="footer-img" alt="JioSaavn" />
+                        </a>
+                      </li>
+                    )}
+                  </>
+                )}
+              </ul>
 
             </Grid>
           </Grid>
           <hr></hr>
-          <div className="container footer-bottom pb-2">
+          <div className="footer-bottom">
             <div className="copyright pb-2">
               &copy; Copyright{" "}
               <strong>
                 <span>{siteName}</span>
               </strong>
               &nbsp;All Rights Reserved
-            </div>
-            <div className="copyright pb-2">
-              Developed by{" "}
-              <a
-                href="https://srashtasoft.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Srashtasoft
-              </a>
             </div>
           </div>
           {/* ============================================================ */}
