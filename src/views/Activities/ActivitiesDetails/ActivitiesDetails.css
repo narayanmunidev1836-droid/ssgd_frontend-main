@@ -10,9 +10,21 @@
   padding-bottom: 30px;
 }
 
+/* This page has no banner image, so .contact-img-wrap holds only the
+   absolutely-positioned breadcrumb and would collapse to zero height,
+   leaving the pill tucked behind the sticky navbar. */
+.activity-detail-head {
+  height: 74px;
+}
+
+/* No top margin here: .contact-img-wrap above is empty, so a margin would
+   collapse through it and escape .temple-page-bg, leaving a white strip under
+   the header. The gap below the breadcrumb comes from .activity-detail-head. */
 .activitydetails-image {
   position: relative;
-  margin-top: 20px;
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .activity-details-image {
@@ -112,7 +124,10 @@
   margin-bottom: 28px;
 }
 
-.date-picker-img {
+/* Scoped to .date-picker-wrap: DailyKatha.css also defines a bare
+   .date-picker-img { width: 35px } (no height) and, loading after this
+   file, would otherwise win on width alone and stretch this square icon. */
+.date-picker-wrap .date-picker-img {
   width: 22px;
   height: 22px;
   opacity: 0.7;
@@ -701,10 +716,6 @@
 }
 
 @media (min-width: 768px) and (max-width: 991.98px) {
-  .activitydetails-image {
-    margin-top: 73px;
-  }
-
   .katha-img-wrap-publication {
     padding: 10px !important;
   }
@@ -715,10 +726,6 @@
   .wallpaper-content-shimmer {
     flex-basis: calc((100% - 2 * 16px) / 3);
     max-width: calc((100% - 2 * 16px) / 3);
-  }
-
-  .activitydetails-image {
-    margin-top: 45px;
   }
 
   .gallery-shimmer-wrapper {
@@ -743,7 +750,7 @@
   }
 
   .activitydetails-image {
-    margin-top: 45px;
+    width: 100%;
   }
 
   .activities-name {
