@@ -3,6 +3,10 @@
 .footer-bg {
   background: linear-gradient(160deg, #8b1218 0%, #6e0e13 30%, #5a0c10 60%, #7a1016 100%);
   color: #ffffff;
+  /* MUI Grid's spacing adds a negative top margin on .footer-wrap below; without
+     this, that margin collapses through this div and pulls the whole footer up
+     over whatever section comes before it. */
+  overflow: hidden;
 }
 
 .footer-wrap {
