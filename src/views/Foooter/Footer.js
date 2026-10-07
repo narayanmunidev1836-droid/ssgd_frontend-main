@@ -19,10 +19,22 @@ import _image from "../../assets/images/logo (1).webp";
 const image = _image.src;
 import _image9 from "../../assets/images/icons8-jiosaavn-50 (1).webp";
 const image9 = _image9.src;
+import _appIcon from "../../assets/images/ssgd-app-icon.png";
+const appIcon = _appIcon.src;
 import { fetchFooterData, fetchNavbarData } from "../../api/API";
 import "./Footer.css";
 import NavbarLoader from "../../common/NavbarLoader/NavbarLoader";
 import { NavLink } from "../../common/routerCompat.js";
+
+// Add an entry here for each new app as it ships; the footer renders one badge per entry.
+const appLinks = [
+  {
+    name: "Google Play",
+    store: "GET IT ON",
+    icon: appIcon,
+    url: "https://play.google.com/store/apps/details?id=org.ssgd",
+  },
+];
 
 const Footer = () => {
   const [apiData, setApiData] = useState([]);
@@ -362,6 +374,24 @@ const Footer = () => {
                 )}
               </ul>
 
+              <h5 className="mt-4">Our Apps</h5>
+              <div className="footer-app-links">
+                {appLinks.map((app) => (
+                  <a
+                    key={app.url}
+                    href={app.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="footer-app-link"
+                  >
+                    <img src={app.icon} alt={app.name} className="footer-app-icon" />
+                    <span>
+                      <small>{app.store}</small>
+                      {app.name}
+                    </span>
+                  </a>
+                ))}
+              </div>
             </Grid>
           </Grid>
           <hr></hr>

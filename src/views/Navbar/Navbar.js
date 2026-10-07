@@ -1,3 +1,4 @@
+
 "use client";
 import React, { useEffect, useState } from "react";
 // import navbarlogo from "../../assets/images/navbarlogo.webp";
@@ -307,15 +308,15 @@ function Navbar() {
                   <ul className="dropdown-menu">
                     {apiData &&
                       Object.values(apiData).map((item) => (
-                      <li key={item.id}>
-                        <NavLink
-                          to={`/activities/${item.id}/${FormattedText(item.name)}`}
-                         className={`dropdown-item ${decodeURIComponent(location.pathname) === `/activities/${item.id}/${FormattedText(item.name)}` ? "nav-link active" : ""}`}
-                        >
-                          {item.name}
-                        </NavLink>
-                      </li>
-                    ))}
+                        <li key={item.id}>
+                          <NavLink
+                            to={`/activities/${item.id}/${FormattedText(item.name)}`}
+                            className={`dropdown-item ${decodeURIComponent(location.pathname) === `/activities/${item.id}/${FormattedText(item.name)}` ? "nav-link active" : ""}`}
+                          >
+                            {item.name}
+                          </NavLink>
+                        </li>
+                      ))}
                   </ul>
                 </li>
 
@@ -340,7 +341,7 @@ function Navbar() {
                       publicationList.map((item) => (
                         <li key={item.id}>
                           <NavLink
-                           className={`dropdown-item ${location.pathname === `/publication-detail/${item.id}/${FormattedText(item.name)}` ? "nav-link active" : ""}`}
+                            className={`dropdown-item ${location.pathname === `/publication-detail/${item.id}/${FormattedText(item.name)}` ? "nav-link active" : ""}`}
                             to={`/publication-detail/${item.id
                               }/${FormattedText(item.name)}`}
                           >
@@ -359,24 +360,6 @@ function Navbar() {
                   <NavLink to="/donation" className="nav-link">
                     Donations
                   </NavLink>
-                </li>
-                <li className="nav-item dropdown">
-                  <span className="nav-link no-active daily-nav-parent">
-                    Daily
-                    <HiPlus className="nav-icon" />
-                  </span>
-                  <ul className="dropdown-menu">
-                    <li>
-                      <NavLink to="/daily-katha" className="dropdown-item">
-                        Daily Katha
-                      </NavLink>
-                    </li>
-                    <li>
-                      <NavLink to="/daily-darshan" className="dropdown-item">
-                        Daily Darshan
-                      </NavLink>
-                    </li>
-                  </ul>
                 </li>
                 <li className="nav-item">
                   <NavLink
@@ -482,25 +465,25 @@ function Navbar() {
                   <ul className="dropdown-menu">
                     {apiData &&
                       Object.values(apiData).map((item, index) => (
-                      <li key={item.id}>
-                        <a
-                          data-bs-dismiss="offcanvas"
-                          key={index}
-                          className={`dropdown-item ${location.pathname === `/activities/${item.id}/${FormattedText(item.name)}` ? " nav-link active" : ""}`}
-                          onClick={(e) => {
-                            e.preventDefault();
-                            handleNavLinkClick(
-                              `/activities/${item.id}/${FormattedText(item.name)}`,
-                              false
-                            );
-                          }}
-                          href={`/activities/${item.id}/${item.name}`}
-                        >
-                          {item.name}
-                        </a>
-                      </li>
+                        <li key={item.id}>
+                          <a
+                            data-bs-dismiss="offcanvas"
+                            key={index}
+                            className={`dropdown-item ${location.pathname === `/activities/${item.id}/${FormattedText(item.name)}` ? " nav-link active" : ""}`}
+                            onClick={(e) => {
+                              e.preventDefault();
+                              handleNavLinkClick(
+                                `/activities/${item.id}/${FormattedText(item.name)}`,
+                                false
+                              );
+                            }}
+                            href={`/activities/${item.id}/${item.name}`}
+                          >
+                            {item.name}
+                          </a>
+                        </li>
                       )
-                    )}
+                      )}
                   </ul>
                 </li>
 

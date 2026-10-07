@@ -82,6 +82,9 @@ const Home = () => {
         {/* Publications */}
         <Publication />
 
+        {/* Daily Darshan preview */}
+        <SantPhotos />
+
         {/* Activities */}
         <div className="activities-bg-wrap">
           <Activities />
@@ -89,9 +92,6 @@ const Home = () => {
 
         {/* Stats Counter */}
         <StatsSection />
-
-        {/* Sant Photos / Gallery */}
-        <SantPhotos />
 
         {/* CTA Section */}
         <CTASection />

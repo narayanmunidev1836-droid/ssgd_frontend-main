@@ -79,57 +79,63 @@
   border-color: var(--text-color);
 }
 
-/* ======= Slider Wrapper ======= */
+/* ======= Card Grid (same card look as the Daily Darshan page) ======= */
 
-.gallery-slider-wrap {
+.gallery-card-grid {
   position: relative;
   z-index: 1;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 22px;
 }
 
-/* ======= Slide Item ======= */
-
-.gallery-slide-item {
-  padding: 0 8px;
-}
-
-.gallery-tile {
-  border-radius: 10px;
+.gallery-card {
+  background: #fff;
+  border-radius: 16px;
+  border-top: 3px solid var(--accent-gold);
   overflow: hidden;
-  height: 220px;
+  cursor: pointer;
+  min-width: 0;
+  flex: 1 1 240px;
+  max-width: 280px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.gallery-tile:hover {
+.gallery-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.16);
+  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.16);
 }
 
-.gallery-tile-img {
+.gallery-card-photo {
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+}
+
+.gallery-card-img {
   width: 100%;
-  height: 220px;
+  height: 100%;
   object-fit: cover;
   display: block;
   transition: transform 0.45s ease;
 }
 
-.gallery-tile:hover .gallery-tile-img {
-  transform: scale(1.06);
+.gallery-card:hover .gallery-card-img {
+  transform: scale(1.05);
 }
 
-/* ======= Slick Dots ======= */
-
-.gallery-slider-wrap .slick-dots {
-  bottom: -32px;
+.gallery-card-shimmer {
+  aspect-ratio: 3 / 4;
+  cursor: default;
+  background: linear-gradient(110deg, #e8eaed 0%, #f5f5f5 40%, #e8eaed 80%, #e8eaed 100%);
+  background-size: 1200px 100%;
+  animation: gallerySkeletonSlide 1.6s infinite linear;
 }
 
-.gallery-slider-wrap .slick-dots li.slick-active button:before {
-  color: var(--global-color);
-  opacity: 1;
-}
-
-.gallery-slider-wrap .slick-dots li button:before {
-  color: rgba(181, 9, 14, 0.35);
-  font-size: 10px;
+@keyframes gallerySkeletonSlide {
+  0%   { background-position: -1200px 0; }
+  100% { background-position: 1200px 0; }
 }
 
 /* ======= Responsive ======= */
@@ -141,18 +147,14 @@
   .gallery-section-title {
     font-size: 22px;
   }
-  .gallery-tile,
-  .gallery-tile-img {
-    height: 180px;
-  }
 }
 
 @media (max-width: 480px) {
   .gallery-section {
     padding: 36px 0 52px;
   }
-  .gallery-tile,
-  .gallery-tile-img {
-    height: 200px;
+  .gallery-card {
+    flex: 1 1 100%;
+    max-width: 320px;
   }
 }
