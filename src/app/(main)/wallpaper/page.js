@@ -2,5 +2,10 @@
 import Wallpaper from "../../../views/Publication/Wallpaper/Wallpaper";
 
 export default function Page() {
-  return <Wallpaper />;
+  return (
+    <>
+      <h1 className="visually-hidden">Swaminarayan HD Wallpapers</h1>
+      <Wallpaper />
+    </>
+  );
 }

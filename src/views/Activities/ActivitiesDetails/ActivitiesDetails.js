@@ -268,7 +268,11 @@ const ActivitiesDetails = () => {
                           }}
                         />
                       </div>
-                      <h1 className="activities-name">{activity.title}</h1>
+                      {index === 0 ? (
+                        <h1 className="activities-name">{activity.title}</h1>
+                      ) : (
+                        <h2 className="activities-name">{activity.title}</h2>
+                      )}
                       <div className="activities-decs">
                         {activity.short_description}
                       </div>

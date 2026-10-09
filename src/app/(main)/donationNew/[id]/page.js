@@ -8,5 +8,10 @@ const DonationNew = dynamic(() => import("../../../../views/Donation/DonationNew
 });
 
 export default function Page() {
-  return <DonationNew />;
+  return (
+    <>
+      <h1 className="visually-hidden">Online Donation to Sanskardham Gurukul</h1>
+      <DonationNew />
+    </>
+  );
 }

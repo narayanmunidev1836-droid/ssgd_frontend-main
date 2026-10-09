@@ -2,5 +2,10 @@
 import AudioListPlayer from "../../../../../../views/Publication/AudioNew/AudioListPlayer";
 
 export default function Page() {
-  return <AudioListPlayer />;
+  return (
+    <>
+      <h1 className="visually-hidden">Audio Album: Swaminarayan Kirtans and Katha</h1>
+      <AudioListPlayer />
+    </>
+  );
 }

@@ -22,3 +22,19 @@ export function pageMeta({ title, description, path }) {
     },
   };
 }
+
+// "Bal-Shibir%20Camp" -> "Bal Shibir Camp" (route slugs carry the item title).
+export function slugToTitle(slug, fallback = "") {
+  if (!slug) return fallback;
+  let s = String(slug);
+  try {
+    s = decodeURIComponent(s);
+  } catch (e) {}
+  s = s.replace(/[-_+]+/g, " ").replace(/\s+/g, " ").trim();
+  return s || fallback;
+}
+
+// Metadata for dynamic detail routes: unique canonical per URL, no API call.
+export function detailMeta({ title, description, path }) {
+  return pageMeta({ title, description, path });
+}

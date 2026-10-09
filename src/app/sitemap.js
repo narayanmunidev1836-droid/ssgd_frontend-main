@@ -1,7 +1,7 @@
 import { SITE_URL } from "../common/seo";
 
-// Static routes only; detail pages (activities, albums, publications) are
-// API-driven and not listed here.
+// Static routes plus activity pages fetched from the API (see below). Other
+// detail pages (albums, publications) are not listed yet.
 const routes = [
   ["/", "daily", 1],
   ["/daily-darshan", "daily", 0.9],
@@ -21,9 +21,33 @@ const routes = [
   ["/terms-conditions", "yearly", 0.2],
 ];
 
-export default function sitemap() {
-  const lastModified = new Date();
-  return routes.map(([path, changeFrequency, priority]) => ({
+const API_BASE = "https://beadm.ssgd.org/api/v1/";
+
+// Activity pages come from the API. A failure must never break the sitemap,
+// so fall back to the static routes only.
+async function getActivityRoutes() {
+  try {
+    const res = await fetch(`${API_BASE}home_actiivty`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ url: process.env.NEXT_PUBLIC_API_URL, page: "home" }),
+      next: { revalidate: 86400 },
+    });
+    const json = await res.json();
+    const list = json?.responseBody?.activities || [];
+    return list
+      .filter((a) => a.activity_id && a.title)
+      .map((a) => [`/activities/${a.activity_id}/${encodeURIComponent(a.title)}`, "weekly", 0.6]);
+  } catch (e) {
+    return [];
+  }
+}
+
+export default async function sitemap() {
+  // Fixed date: `new Date()` would claim every page changed on every request.
+  const lastModified = new Date("2026-10-09");
+  const all = [...routes, ...(await getActivityRoutes())];
+  return all.map(([path, changeFrequency, priority]) => ({
     url: `${SITE_URL}${path}`,
     lastModified,
     changeFrequency,

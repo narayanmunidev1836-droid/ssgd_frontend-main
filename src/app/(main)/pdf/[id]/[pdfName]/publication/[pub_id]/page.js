@@ -8,5 +8,10 @@ const Pdf = dynamic(() => import("../../../../../../../views/Publication/Pdf/Pdf
 });
 
 export default function Page() {
-  return <Pdf />;
+  return (
+    <>
+      <h1 className="visually-hidden">Read Swaminarayan Book Online (PDF)</h1>
+      <Pdf />
+    </>
+  );
 }

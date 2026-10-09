@@ -62,7 +62,7 @@ import Providers from "./Providers";
 import { SITE_URL, SITE_NAME, FULL_NAME, OG_IMAGE } from "../common/seo";
 
 const DESCRIPTION =
-  "Official website of Shree Swaminarayan Sanskardham Gurukul (SSGD): daily darshan, katha, kirtans, publications, wallpapers, activities and online donation.";
+  "Official website of Shree Swaminarayan Sanskardham Gurukul (SSGD): daily darshan, katha, kirtans, publications, activities and online donation. Visit today.";
 
 export const metadata = {
   metadataBase: new URL(SITE_URL),
@@ -105,7 +105,7 @@ export const metadata = {
     locale: "en_IN",
     images: [{ url: OG_IMAGE, width: 480, height: 597, alt: FULL_NAME }],
   },
-  twitter: { card: "summary_large_image", title: FULL_NAME, description: DESCRIPTION, images: [OG_IMAGE] },
+  twitter: { card: "summary", title: FULL_NAME, description: DESCRIPTION, images: [OG_IMAGE] },
   icons: {
     icon: "/favicon.webp",
     apple: "/logo192.png",
@@ -136,6 +136,15 @@ const orgJsonLd = {
     "https://x.com/sanskardham",
     "https://t.me/SANSKARDHAM",
   ],
+};
+
+const websiteJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: FULL_NAME,
+  alternateName: "SSGD",
+  url: SITE_URL,
+  inLanguage: ["en", "gu"],
 };
 
 export const viewport = {
@@ -183,6 +192,11 @@ export default function RootLayout({ children }) {
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd) }}
+        />
+
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
         />
 
         <Providers>{children}</Providers>
