@@ -433,7 +433,11 @@ function Navbar() {
                   <a
                     data-bs-dismiss="offcanvas"
                     className="nav-link"
-                    onClick={() => handleNavLinkClick("/")}
+                    href="/"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handleNavLinkClick("/");
+                    }}
                   >
                     Home
                   </a>
@@ -555,7 +559,11 @@ function Navbar() {
                   <a
                     data-bs-dismiss="offcanvas"
                     className={`nav-link  ${containsActivity("branches") ? "active" : "no-active"}`}
-                    onClick={() => handleNavLinkClick("/branches")}
+                    href="/branches"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handleNavLinkClick("/branches");
+                    }}
                   >
                     Branches
                   </a>
@@ -565,7 +573,11 @@ function Navbar() {
                   <a
                     data-bs-dismiss="offcanvas"
                     className="nav-link"
-                    onClick={() => handleNavLinkClick("/donation")}
+                    href="/donation"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handleNavLinkClick("/donation");
+                    }}
                   >
                     Donations
                   </a>
@@ -575,7 +587,11 @@ function Navbar() {
                   <a
                     data-bs-dismiss="offcanvas"
                     className="nav-link"
-                    onClick={() => handleNavLinkClick("/daily-katha")}
+                    href="/daily-katha"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handleNavLinkClick("/daily-katha");
+                    }}
                   >
                     Daily Katha
                   </a>
@@ -585,7 +601,11 @@ function Navbar() {
                   <a
                     data-bs-dismiss="offcanvas"
                     className="nav-link"
-                    onClick={() => handleNavLinkClick("/daily-darshan")}
+                    href="/daily-darshan"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handleNavLinkClick("/daily-darshan");
+                    }}
                   >
                     Daily Darshan
                   </a>
@@ -595,7 +615,11 @@ function Navbar() {
                   <a
                     data-bs-dismiss="offcanvas"
                     className={`nav-link  ${containsActivity("about-us") ? "active" : "no-active"}`}
-                    onClick={() => handleNavLinkClick("/about-us")}
+                    href="/about-us"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handleNavLinkClick("/about-us");
+                    }}
                   >
                     About Us
                   </a>
@@ -605,7 +629,11 @@ function Navbar() {
                   <a
                     data-bs-dismiss="offcanvas"
                     className={`nav-link  ${containsActivity("contact-us") ? "active" : "no-active"}`}
-                    onClick={() => handleNavLinkClick("/contact-us")}
+                    href="/contact-us"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handleNavLinkClick("/contact-us");
+                    }}
                   >
                     Contact Us
                   </a>
