@@ -132,7 +132,7 @@ const Gallery = ({ title, date }) => {
         {/* <h6>Photo Gallery</h6> */}
         <div className="date-picker-wrap">
           <div>
-            <img src={image} className="date-picker-img" />
+            <img src={image} alt="" aria-hidden="true" className="date-picker-img" />
           </div>
           <div>
             <h5>10 Aug 2023</h5>

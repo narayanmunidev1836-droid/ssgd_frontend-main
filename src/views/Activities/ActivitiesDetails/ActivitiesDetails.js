@@ -315,7 +315,7 @@ const ActivitiesDetails = () => {
         {/* ===================================== */}
         <div className="date-picker-wrap">
           <div>
-            <img src={image7} className="date-picker-img" />
+            <img src={image7} alt="" aria-hidden="true" className="date-picker-img" />
           </div>
           <div>
             <h5>{activityDate.format("MMMM DD, YYYY")}</h5>

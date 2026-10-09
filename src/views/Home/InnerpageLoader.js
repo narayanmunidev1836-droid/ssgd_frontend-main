@@ -28,6 +28,7 @@ export default function InnerpageLoader({
     >
       <img
         src={src}
+        alt=""
         className={className}
         style={{
           display: loading ? "none" : "block",
