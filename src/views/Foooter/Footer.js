@@ -264,24 +264,17 @@ const Footer = () => {
 
               <ul className="social-media-link-wrap">
                 {loading ? (
-                  [...Array(9)].map((_, index) => (
-                    <li key={index}>
-                      <div className="footer-icon-shimmer" />
-                    </li>
-                  ))
+                  [...Array(10)].map((_, index) =>
+                    index === 5 ? (
+                      <li key={index} className="social-break" aria-hidden="true" />
+                    ) : (
+                      <li key={index}>
+                        <div className="footer-icon-shimmer" />
+                      </li>
+                    )
+                  )
                 ) : (
                   <>
-                    {apiData?.fb_link && (
-                      <li>
-                        <a
-                          href={apiData.fb_link}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          <FaFacebook className="footer-img" color="#1877F2" aria-label="Facebook" />
-                        </a>
-                      </li>
-                    )}
                     {apiData?.whatsapp_link && (
                       <li>
                         <a
@@ -293,14 +286,14 @@ const Footer = () => {
                         </a>
                       </li>
                     )}
-                    {apiData?.youtube_link && (
+                    {apiData?.fb_link && (
                       <li>
                         <a
-                          href={apiData.youtube_link}
+                          href={apiData.fb_link}
                           target="_blank"
                           rel="noopener noreferrer"
                         >
-                          <FaYoutube className="footer-img" color="#FF0000" aria-label="YouTube" />
+                          <FaFacebook className="footer-img" color="#1877F2" aria-label="Facebook" />
                         </a>
                       </li>
                     )}
@@ -312,28 +305,6 @@ const Footer = () => {
                           rel="noopener noreferrer"
                         >
                           <FaInstagram className="footer-img" color="#E4405F" aria-label="Instagram" />
-                        </a>
-                      </li>
-                    )}
-                    {apiData?.apple_music_link && (
-                      <li>
-                        <a
-                          href={apiData.apple_music_link}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          <SiApplemusic className="footer-img" color="#FA243C" aria-label="Apple Music" />
-                        </a>
-                      </li>
-                    )}
-                    {apiData?.spotify_link && (
-                      <li>
-                        <a
-                          href={apiData.spotify_link}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          <SiSpotify className="footer-img" color="#1DB954" aria-label="Spotify" />
                         </a>
                       </li>
                     )}
@@ -356,6 +327,40 @@ const Footer = () => {
                           rel="noopener noreferrer"
                         >
                           <FaXTwitter className="footer-img" color="#000000" aria-label="Twitter" />
+                        </a>
+                      </li>
+                    )}
+                    <li className="social-break" aria-hidden="true" />
+                    {apiData?.youtube_link && (
+                      <li>
+                        <a
+                          href={apiData.youtube_link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          <FaYoutube className="footer-img" color="#FF0000" aria-label="YouTube" />
+                        </a>
+                      </li>
+                    )}
+                    {apiData?.apple_music_link && (
+                      <li>
+                        <a
+                          href={apiData.apple_music_link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          <SiApplemusic className="footer-img" color="#FA243C" aria-label="Apple Music" />
+                        </a>
+                      </li>
+                    )}
+                    {apiData?.spotify_link && (
+                      <li>
+                        <a
+                          href={apiData.spotify_link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          <SiSpotify className="footer-img" color="#1DB954" aria-label="Spotify" />
                         </a>
                       </li>
                     )}

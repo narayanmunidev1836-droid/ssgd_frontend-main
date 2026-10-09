@@ -171,6 +171,14 @@
   padding: 0;
 }
 
+/* Forces a line break: social icons first row, music platforms second row.
+   Negative margin cancels one of the two row gaps the empty item adds. */
+.social-break {
+  flex-basis: 100%;
+  height: 0;
+  margin-top: -10px;
+}
+
 .footer-img {
   background-color: #ffffff;
   padding: 9px;
@@ -311,6 +319,44 @@
 }
 
 /* ======= Responsive ======= */
+
+/* Tablet + mobile: halve the gap MUI Grid spacing={4} puts between stacked
+   blocks (32px -> 16px; container offset reduced to match so the top padding
+   is unchanged) and drop the extra pb-md-4 under the last block. */
+@media (max-width: 991.98px) {
+  .footer-wrap.MuiGrid-container {
+    margin-top: -16px;
+  }
+
+  .footer-wrap.MuiGrid-container > .MuiGrid-item {
+    padding-top: 16px;
+  }
+
+  .footer-contact {
+    padding-bottom: 0 !important;
+  }
+
+  /* Quick Links in three columns instead of two (the 2nd column was a short
+     list leaving the right half empty). The two column wrappers and their
+     <ul>s are flattened so every link flows into one 3-column grid. */
+  .footer-grid {
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    justify-content: start;
+    column-gap: 28px;
+    row-gap: 10px;
+    margin-top: 24px;
+  }
+
+  .footer-grid > div,
+  .footer-grid .footer-link-wrap {
+    display: contents;
+  }
+
+  .footer-grid .visibility-hidden {
+    display: none;
+  }
+}
 
 @media (max-width: 899px) {
   .footer-info p {
