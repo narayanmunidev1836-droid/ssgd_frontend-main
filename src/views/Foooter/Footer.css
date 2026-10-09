@@ -358,6 +358,44 @@
   }
 }
 
+/* Tablet: put the three blocks side by side (MUI's own breakpoints would drop
+   Social Media onto a row of its own with empty space beside it). Each column is
+   narrow here, so Quick Links uses two columns and the social icons shrink a bit. */
+@media (min-width: 768px) and (max-width: 1199.98px) {
+  /* Horizontal grid gap 32px -> 16px (container offset reduced to match). */
+  .footer-wrap.MuiGrid-container {
+    width: calc(100% + 16px);
+    margin-left: -16px;
+  }
+
+  .footer-wrap.MuiGrid-container > .MuiGrid-item {
+    flex-basis: 33.3333%;
+    max-width: 33.3333%;
+    padding-left: 16px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991.98px) {
+  .footer-grid {
+    grid-template-columns: repeat(2, auto);
+    column-gap: 20px;
+  }
+
+  .social-media-link-wrap {
+    gap: 8px;
+  }
+
+  .footer-img {
+    width: 36px;
+    height: 36px;
+    padding: 8px;
+  }
+
+  .social-break {
+    margin-top: -8px;
+  }
+}
+
 @media (max-width: 899px) {
   .footer-info p {
     padding: 0;
@@ -414,13 +452,62 @@
     padding: 28px 0 12px;
   }
 
+  /* (row gap 10px / column gap 20px — Quick Links is a 3-column grid here) */
   .footer-grid {
-    gap: 24px;
+    gap: 10px 20px;
   }
 
   .footer-bottom {
     flex-direction: column;
     gap: 4px;
     text-align: center;
+  }
+
+  /* Mobile only: centre all footer content */
+  .footer-info,
+  .footer-links,
+  .footer-contact {
+    text-align: center;
+  }
+
+  /* Logo and the address/phone/email list share one centred 90% box, so the
+     list starts exactly where the logo starts. */
+  .footer-info .logo,
+  .footer-info .footer-link-wrap {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .footer-info .logo .navbar-brand {
+    width: 100%;
+    margin: 0;
+  }
+
+  .footer-info .logo-footer {
+    width: 100%;
+  }
+
+  .footer-info .footer-link-wrap {
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  /* global h5 is display:flex, so text-align alone won't centre the headings */
+  .footer-link-title,
+  .footer-contact h5 {
+    justify-content: center;
+  }
+
+  .footer-link-title::after,
+  .footer-contact h5::after {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .footer-grid,
+  .social-media-link-wrap,
+  .footer-app-links {
+    justify-content: center;
   }
 }
