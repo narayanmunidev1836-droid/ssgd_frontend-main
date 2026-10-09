@@ -3,12 +3,16 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "../../common/routerCompat.js";
 import "./SantPhotos.css";
 import { Container } from "@mui/material";
+import { FaSearchPlus } from "react-icons/fa";
+import Lightbox from "react-image-lightbox";
 import { fetchDailyDarshanData } from "../../api/API";
 
 function SantPhotos() {
   const navigate = useNavigate();
   const [galleryImages, setGalleryImages] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
+  const [photoIndex, setPhotoIndex] = useState(0);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -66,14 +70,41 @@ function SantPhotos() {
                   <div
                     key={index}
                     className="gallery-card"
-                    onClick={() => navigate("/daily-darshan")}
+                    onClick={() => {
+                      setPhotoIndex(index);
+                      setIsOpen(true);
+                    }}
                   >
                     <div className="gallery-card-photo">
                       <img src={img} alt={`Daily Darshan ${index + 1}`} className="gallery-card-img" />
+                      <div className="search-icon">
+                        <FaSearchPlus />
+                      </div>
                     </div>
                   </div>
                 ))}
           </div>
+        )}
+
+        {isOpen && (
+          <Lightbox
+            mainSrc={galleryImages[photoIndex]}
+            nextSrc={galleryImages[(photoIndex + 1) % galleryImages.length]}
+            prevSrc={
+              galleryImages[
+                (photoIndex + galleryImages.length - 1) % galleryImages.length
+              ]
+            }
+            onCloseRequest={() => setIsOpen(false)}
+            onMovePrevRequest={() =>
+              setPhotoIndex(
+                (photoIndex + galleryImages.length - 1) % galleryImages.length
+              )
+            }
+            onMoveNextRequest={() =>
+              setPhotoIndex((photoIndex + 1) % galleryImages.length)
+            }
+          />
         )}
       </div>
       </Container>

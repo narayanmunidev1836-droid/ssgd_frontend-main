@@ -109,8 +109,34 @@
 }
 
 .gallery-card-photo {
+  position: relative;
   aspect-ratio: 3 / 4;
   overflow: hidden;
+}
+
+/* Magnifier shown in the middle of the photo on hover (same as /daily-darshan) */
+.gallery-card .search-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 44px;
+  height: 44px;
+  font-size: 22px;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(4px);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.gallery-card:hover .search-icon {
+  opacity: 1;
 }
 
 .gallery-card-img {
