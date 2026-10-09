@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "../../common/routerCompat.js";
+import { useNavigate, Link } from "../../common/routerCompat.js";
 import Card from "@mui/material/Card";
 import Grid from "@mui/material/Grid";
 import Container from "@mui/material/Container";
@@ -223,7 +223,13 @@ const Activities = ({ setIsActivityLoaded }) => {
                           </p>
 
                           <h4 className="sub-activities-title">
-                            {activity.title}
+                            <Link
+                              to={`/activities/${activity.activity_id}/${activity.title}`}
+                              onClick={(e) => e.stopPropagation()}
+                              style={{ color: "inherit", textDecoration: "none" }}
+                            >
+                              {activity.title}
+                            </Link>
                           </h4>
 
                           <h6 className="sub-activities-desc">

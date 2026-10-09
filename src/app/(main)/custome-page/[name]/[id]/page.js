@@ -2,5 +2,10 @@
 import CustomePage from "../../../../../views/CustomePage/CustomePage";
 
 export default function Page() {
-  return <CustomePage />;
+  return (
+    <>
+      <h1 className="visually-hidden">Sanskardham Gurukul</h1>
+      <CustomePage />
+    </>
+  );
 }

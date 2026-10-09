@@ -59,15 +59,92 @@ import "../ThankYou/Thankyou.css";
 import "../views/CustomePage/CustomPage.css";
 import "../views/Donation/Donors.css";
 import Providers from "./Providers";
+import { SITE_URL, SITE_NAME, FULL_NAME, OG_IMAGE } from "../common/seo";
+
+const DESCRIPTION =
+  "Official website of Shree Swaminarayan Sanskardham Gurukul (SSGD): daily darshan, katha, kirtans, publications, activities and online donation. Visit today.";
 
 export const metadata = {
-  title: "Sanskardham",
-  description: "",
-  keywords: "",
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: FULL_NAME,
+    template: `%s | ${SITE_NAME}`,
+  },
+  description: DESCRIPTION,
+  keywords: [
+    "SSGD",
+    "Sanskardham",
+    "Swaminarayan Gurukul Sanskardham",
+    "Swaminarayan Gurukul",
+    "Swaminarayan Gurukul Dhrangadhra",
+    "Sanskardham Dhrangadhra",
+    "Swaminarayan Mandir Dhrangadhra",
+    "Gurukul Surendranagar",
+    "Swaminarayan Gurukul Gujarat",
+    "Swaminarayan Gurukul Halwad Road Dhrangadhra",
+    "Swaminarayan daily darshan",
+    "Swaminarayan katha",
+    "Swaminarayan kirtan",
+    "Sanskardham daily darshan",
+    "Sanskardham katha",
+    "Sanskardham kirtan",
+    "સંસ્કારધામ",
+    "સંસ્કારધામ ગુરુકુલ ધ્રાંગધ્રા",
+    "સ્વામિનારાયણ ગુરુકુલ",
+    "સ્વામિનારાયણ ગુરુકુલ ધ્રાંગધ્રા",
+    "સ્વામિનારાયણ મંદિર ધ્રાંગધ્રા",
+    "સુરેન્દ્રનગર ગુરુકુલ",
+  ],
+
+  openGraph: {
+    title: FULL_NAME,
+    description: DESCRIPTION,
+    url: "/",
+    siteName: FULL_NAME,
+    type: "website",
+    locale: "en_IN",
+    images: [{ url: OG_IMAGE, width: 480, height: 597, alt: FULL_NAME }],
+  },
+  twitter: { card: "summary", title: FULL_NAME, description: DESCRIPTION, images: [OG_IMAGE] },
   icons: {
     icon: "/favicon.webp",
     apple: "/logo192.png",
   },
+};
+
+const orgJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: FULL_NAME,
+  alternateName: ["SSGD", "Sanskardham", "શ્રી સ્વામિનારાયણ સંસ્કારધામ ગુરુકુલ"],
+  url: SITE_URL,
+  logo: `${SITE_URL}/logo512.png`,
+  email: "info@ssgd.org",
+  telephone: "+91 98258 03174",
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "Halwad Road, Post Box No. 22",
+    addressLocality: "Dhrangadhra",
+    addressRegion: "Gujarat",
+    postalCode: "363310",
+    addressCountry: "IN",
+  },
+  sameAs: [
+    "https://www.facebook.com/sanskardhamgurukul",
+    "https://www.youtube.com/@SanskardhamGurukul",
+    "https://instagram.com/sanskardhamgurukul",
+    "https://x.com/sanskardham",
+    "https://t.me/SANSKARDHAM",
+  ],
+};
+
+const websiteJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: FULL_NAME,
+  alternateName: "SSGD",
+  url: SITE_URL,
+  inLanguage: ["en", "gu"],
 };
 
 export const viewport = {
@@ -110,6 +187,16 @@ export default function RootLayout({ children }) {
           dangerouslySetInnerHTML={{
             __html: `if (true) { console.log = function no_console() {}; }`,
           }}
+        />
+
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd) }}
+        />
+
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
         />
 
         <Providers>{children}</Providers>

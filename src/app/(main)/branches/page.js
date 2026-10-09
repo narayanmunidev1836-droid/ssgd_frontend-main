@@ -2,5 +2,10 @@
 import Branches from "../../../views/Branches/Branches";
 
 export default function Page() {
-  return <Branches />;
+  return (
+    <>
+      <h1 className="visually-hidden">Sanskardham Gurukul Branches and Centers</h1>
+      <Branches />
+    </>
+  );
 }

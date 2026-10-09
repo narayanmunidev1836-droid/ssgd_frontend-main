@@ -120,6 +120,7 @@ const CustomPage = () => {
           <h4>{CustomPageData ? CustomPageData.name : "-"}</h4>
           <img
             src={CustomPageData.image ? CustomPageData.image : ""}
+            alt={CustomPageData.title || ""}
             className="custom-image"
           />
           <p

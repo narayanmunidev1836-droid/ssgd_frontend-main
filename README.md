@@ -14,7 +14,6 @@ npm run dev     # dev server (next dev) at http://localhost:3000
 npm start       # alias of npm run dev
 npm run build   # production build to .next/
 npm run serve   # production server (next start)
-npm test        # leftover CRA test script — not wired up, no tests exist
 ```
 
 ## Environment
@@ -65,6 +64,14 @@ The app was written against `react-router-dom` v6. `routerCompat` exports the sa
 | `NavLink` | appends `active` + `aria-current="page"`; `end` defaults to `true` when `to === "/"` (react-router v6 default) |
 
 Do not import `react-router-dom` anywhere — `grep react-router-dom src` must stay at 0.
+
+## SEO
+
+- `src/common/seo.js` — `SITE_URL`, `FULL_NAME`, `OG_IMAGE` and `pageMeta({ title, description, path })`.
+- Static routes export `metadata = pageMeta(...)` from their folder's `layout.js`; root `layout.js` has the defaults, Organization JSON-LD and Open Graph / Twitter tags.
+- `src/app/robots.js` and `src/app/sitemap.js` generate `/robots.txt` and `/sitemap.xml` (static routes only; `/view_bill` and `/thank_you` are `noindex`).
+- Open Graph image: `public/og-image.png` (480×597). Social networks cache it, so re-scrape after changing it.
+- Known gaps: list content is still fetched client-side, and album/publication detail pages are not in the sitemap.
 
 ## Deploy
 

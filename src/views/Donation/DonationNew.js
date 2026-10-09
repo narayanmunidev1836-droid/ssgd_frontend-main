@@ -2057,6 +2057,7 @@ export default function DonationNew({ memberId, memberType }) {
                 </div>
                 <img
                   src={selectedImage}
+                  alt="Donation"
                   className="donation-modal-image"
                   // style={{ width: "100%", height: "400px" }}
                 />

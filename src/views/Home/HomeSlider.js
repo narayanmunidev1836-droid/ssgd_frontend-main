@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import Slider from "react-slick";
-import { useNavigate } from "../../common/routerCompat.js";
+import { Link } from "../../common/routerCompat.js";
 import "./Home.css";
 import { fetchSlider } from "../../api/API";
 import { MdChevronLeft, MdChevronRight } from "react-icons/md";
@@ -21,7 +21,6 @@ const NextArrow = ({ onClick }) => (
 const HomeSlider = () => {
   const [apiData, setApiData] = useState([]);
   const [loading, setLoading] = useState(true);
-  const navigate = useNavigate();
 
   const sliderSettings = {
     speed: 800,
@@ -62,6 +61,10 @@ const HomeSlider = () => {
     <div className="container-fluid slider-wrap">
       {loading ? (
         <div className="homeSlideerShimmer">
+          {/* Keeps one H1 in the server-rendered HTML while slides load */}
+          <h1 className="visually-hidden">
+            Sanskardham Gurukul: Spirituality, Education and Service
+          </h1>
           <div className="shimmer-wrapper" style={{ height: "100%" }}>
             <div className="shimmer" />
           </div>
@@ -74,7 +77,7 @@ const HomeSlider = () => {
                 <div className="lazy-load-container">
                   <img
                     src={image}
-                    alt="Slide"
+                    alt={`Sanskardham Gurukul (SSGD) highlight ${index + 1} of ${apiData.length}`}
                     style={{ width: "100%", height: "auto" }}
                     className="slider-img"
                   />
@@ -88,6 +91,7 @@ const HomeSlider = () => {
             <div className="container">
               <div className="slider-hero-content">
                 <h1 className="slider-heading">
+                  <span className="visually-hidden">Sanskardham Gurukul: </span>
                   Spirituality
                   <br />
                   Education <span className="slider-bullet">•</span> Service
@@ -102,18 +106,12 @@ const HomeSlider = () => {
                   Swaminarayan's divine teachings.
                 </p>
                 <div className="slider-btns">
-                  <button
-                    className="slider-btn-primary"
-                    onClick={() => navigate("/about-us")}
-                  >
+                  <Link className="slider-btn-primary" to="/about-us">
                     Explore SSGD &nbsp;&#8594;
-                  </button>
-                  <button
-                    className="slider-btn-secondary"
-                    onClick={() => navigate("/daily-darshan")}
-                  >
+                  </Link>
+                  <Link className="slider-btn-secondary" to="/daily-darshan">
                     &#9654;&nbsp; Daily Darshan
-                  </button>
+                  </Link>
                 </div>
               </div>
             </div>

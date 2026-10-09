@@ -18,6 +18,7 @@ export default function ImageComponent({ src, width, size, className }) {
     >
       <img
         src={src}
+        alt=""
         className={className}
         style={{
           display: loading ? "none" : "block",

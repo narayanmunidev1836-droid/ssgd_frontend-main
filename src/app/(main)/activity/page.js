@@ -2,5 +2,10 @@
 import Activities from "../../../views/Activities/Activities";
 
 export default function Page() {
-  return <Activities />;
+  return (
+    <>
+      <h1 className="visually-hidden">Activities of Sanskardham Gurukul</h1>
+      <Activities />
+    </>
+  );
 }

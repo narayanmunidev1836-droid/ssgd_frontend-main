@@ -268,7 +268,11 @@ const ActivitiesDetails = () => {
                           }}
                         />
                       </div>
-                      <h1 className="activities-name">{activity.title}</h1>
+                      {index === 0 ? (
+                        <h1 className="activities-name">{activity.title}</h1>
+                      ) : (
+                        <h2 className="activities-name">{activity.title}</h2>
+                      )}
                       <div className="activities-decs">
                         {activity.short_description}
                       </div>
@@ -315,7 +319,7 @@ const ActivitiesDetails = () => {
         {/* ===================================== */}
         <div className="date-picker-wrap">
           <div>
-            <img src={image7} className="date-picker-img" />
+            <img src={image7} alt="" aria-hidden="true" className="date-picker-img" />
           </div>
           <div>
             <h5>{activityDate.format("MMMM DD, YYYY")}</h5>

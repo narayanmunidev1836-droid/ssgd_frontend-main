@@ -244,6 +244,8 @@
 }
 
 .slider-btn-primary {
+  display: inline-block;
+  text-decoration: none;
   background: var(--global-color);
   color: #fff;
   border: none;
@@ -277,6 +279,7 @@
   display: flex;
   align-items: center;
   gap: 6px;
+  text-decoration: none;
 }
 
 .slider-btn-secondary:hover {
