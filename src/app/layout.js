@@ -103,7 +103,7 @@ export const metadata = {
     siteName: FULL_NAME,
     type: "website",
     locale: "en_IN",
-    images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: FULL_NAME }],
+    images: [{ url: OG_IMAGE, width: 480, height: 597, alt: FULL_NAME }],
   },
   twitter: { card: "summary_large_image", title: FULL_NAME, description: DESCRIPTION, images: [OG_IMAGE] },
   icons: {

@@ -18,7 +18,7 @@ export function pageMeta({ title, description, path }) {
       siteName: FULL_NAME,
       type: "website",
       ...(path && { url: path }),
-      images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: FULL_NAME }],
+      images: [{ url: OG_IMAGE, width: 480, height: 597, alt: FULL_NAME }],
     },
   };
 }
