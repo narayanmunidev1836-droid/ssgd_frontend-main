@@ -61,7 +61,6 @@ const QuickNavCards = () => {
               </div>
               <div className="quick-nav-text">
                 <h5>{card.title}</h5>
-                <p>{card.subtitle}</p>
               </div>
               <div className="quick-nav-chevron">&#8250;</div>
             </div>

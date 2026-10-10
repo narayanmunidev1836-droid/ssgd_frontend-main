@@ -12,6 +12,7 @@ import PlayCircleIcon from "@mui/icons-material/PlayCircle";
 import PauseCircleIcon from "@mui/icons-material/PauseCircle";
 import MusicNoteIcon from "@mui/icons-material/MusicNote";
 import VolumeUpIcon from "@mui/icons-material/VolumeUp";
+import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import InnerpageLoader from "../../Home/InnerpageLoader";
 import {
   downloadAudio,
@@ -485,7 +486,36 @@ const AudioListPlayer = ({ audioListData, publiCationLoading }) => {
       audio.removeEventListener("loadedmetadata", handleLoadedMetadata);
       audio.removeEventListener("durationchange", handleDurationChange);
     };
-  }, []);
+    // <audio> is mounted only after the list loads (and not in favourites view)
+  }, [finalAudioListData, showFavourites]);
+
+  // Per-track durations, read from each file's metadata only
+  const [trackDurations, setTrackDurations] = useState({});
+  const songSrcKey = audioPlayerHelper.songs.map((s) => s.src).join("|");
+
+  useEffect(() => {
+    let cancelled = false;
+    const probes = audioPlayerHelper.songs
+      .filter((s) => s.src)
+      .map((s) => {
+        const probe = new Audio();
+        probe.preload = "metadata";
+        probe.onloadedmetadata = () => {
+          if (!cancelled && isFinite(probe.duration)) {
+            setTrackDurations((prev) => ({ ...prev, [s.src]: probe.duration }));
+          }
+        };
+        probe.src = s.src;
+        return probe;
+      });
+    return () => {
+      cancelled = true;
+      probes.forEach((p) => {
+        p.onloadedmetadata = null;
+        p.removeAttribute("src");
+      });
+    };
+  }, [songSrcKey]);
 
   const formatTime = (seconds) => {
     if (!seconds || isNaN(seconds)) return "0:00";
@@ -632,6 +662,36 @@ const AudioListPlayer = ({ audioListData, publiCationLoading }) => {
       ...audioPlayerHelperClone,
       songs: updatedSongs,
     });
+  };
+
+  // Start from the first track; "all" loop mode then advances track by track
+  const handlePlayAll = () => {
+    updateAudioState({
+      ...audioPlayerHelper,
+      loopMode: "all",
+      currentIndex: 0,
+      songs: audioPlayerHelper.songs.map((song, i) => ({
+        ...song,
+        isPlaying: i === 0,
+      })),
+    });
+  };
+
+  const allDurationsLoaded =
+    audioPlayerHelper.songs.length > 0 &&
+    audioPlayerHelper.songs.every((s) => trackDurations[s.src]);
+
+  const formatTotalTime = () => {
+    if (!allDurationsLoaded) return "--:--";
+    const total = Math.round(
+      audioPlayerHelper.songs.reduce((sum, s) => sum + trackDurations[s.src], 0)
+    );
+    const h = Math.floor(total / 3600);
+    const m = Math.floor((total % 3600) / 60);
+    const s = total % 60;
+    return h > 0
+      ? `${h}:${String(m).padStart(2, "0")}:${String(s).padStart(2, "0")}`
+      : `${m}:${String(s).padStart(2, "0")}`;
   };
 
   const toggleLoopMode = () => {
@@ -873,8 +933,20 @@ const AudioListPlayer = ({ audioListData, publiCationLoading }) => {
                       </strong>
                     </div>
                   </div>
+                  <div className="album-meta-item">
+                    <AccessTimeIcon className="album-meta-icon" />
+                    <div>
+                      <span className="album-meta-label">Total Duration</span>
+                      <strong className="album-meta-value">
+                        {formatTotalTime()}
+                      </strong>
+                    </div>
+                  </div>
                 </div>
                 <div className="album-action-buttons">
+                  <button className="album-download-btn" onClick={handlePlayAll}>
+                    <PlayCircleIcon /> Play All
+                  </button>
                   <button
                     className="album-download-btn"
                     onClick={handleDownloadAllAudio}
@@ -904,6 +976,7 @@ const AudioListPlayer = ({ audioListData, publiCationLoading }) => {
               <div className="track-table-header">
                 <div className="track-col-num">#</div>
                 <div className="track-col-title">Title</div>
+                <div className="track-col-duration">Duration</div>
                 <div className="track-col-actions">Actions</div>
               </div>
               {audioPlayerHelper.songs.map((song, index) => (
@@ -948,6 +1021,11 @@ const AudioListPlayer = ({ audioListData, publiCationLoading }) => {
                     {song.short_description && (
                       <p className="track-desc">{song.short_description}</p>
                     )}
+                  </div>
+                  <div className="track-col-duration">
+                    {trackDurations[song.src]
+                      ? formatTime(trackDurations[song.src])
+                      : "--:--"}
                   </div>
                   <div className="track-col-actions">
                     <button

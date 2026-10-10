@@ -111,7 +111,7 @@
 
 .album-action-buttons {
   display: flex;
-  gap: 12px;
+  gap: 10px;
   flex-wrap: wrap;
   align-items: center;
 }
@@ -124,7 +124,7 @@
   color: #fff;
   border: none;
   border-radius: 8px;
-  padding: 12px 24px;
+  padding: 12px 20px;
   font-size: 14px;
   font-weight: 600;
   cursor: pointer;
@@ -152,7 +152,7 @@
   color: var(--global-color);
   border: 1.5px solid var(--global-color);
   border-radius: 8px;
-  padding: 11px 24px;
+  padding: 11px 20px;
   font-size: 14px;
   font-weight: 600;
   cursor: pointer;
@@ -263,6 +263,23 @@
   align-items: center;
   gap: 8px;
   margin-left: 16px;
+  width: 176px;
+  flex-shrink: 0;
+  justify-content: space-between;
+}
+
+.track-table-header .track-col-actions {
+  justify-content: center;
+}
+
+.track-col-duration {
+  width: 64px;
+  flex-shrink: 0;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  color: var(--muted-text);
 }
 
 .track-play-btn,
@@ -786,9 +803,21 @@
   .album-detail-desc {
     font-size: 13px;
   }
+  /* Stay on one line when it fits; wrap only when the column is too narrow */
   .album-meta-row {
-    gap: 16px;
+    gap: 8px 12px;
     flex-wrap: wrap;
+    margin-bottom: 0;
+  }
+  .album-meta-item {
+    gap: 6px;
+    white-space: nowrap;
+  }
+  .album-meta-icon {
+    font-size: 18px !important;
+  }
+  .album-meta-label {
+    font-size: 11px;
   }
   .album-meta-value {
     font-size: 14px;
@@ -837,7 +866,12 @@
   }
   .track-col-actions {
     gap: 4px;
-    margin-left: 8px;
+    margin-left: 4px;
+    width: 144px;
+  }
+  .track-col-duration {
+    width: 44px;
+    font-size: 11px;
   }
   .track-row {
     padding: 10px 14px;
@@ -902,8 +936,13 @@
   .album-detail-card {
     display: grid;
     grid-template-columns: 40% minmax(0, 1fr);
+    /* Last text row is flexible, so the image's extra height lands below the text, not between rows */
+    grid-template-rows: auto auto auto 1fr;
     gap: 14px;
     align-items: start;
+  }
+  .album-detail-desc:empty {
+    display: none;
   }
   .album-detail-right {
     display: contents;
