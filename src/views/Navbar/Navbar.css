@@ -3,6 +3,9 @@
 .navbar {
   height: 75px;
   background-color: #ffffff;
+  /* Page background image averages #fcf0dd; top-to-bottom fade from a deeper
+     peach into a light cream */
+  background-image: linear-gradient(180deg, #f1d6ab 5%, #fdf4e6 100%);
   padding: 0 24px;
   position: sticky;
   top: 0;
@@ -179,6 +182,11 @@ li.nav-item {
   overflow: hidden;
 }
 
+/* Desktop submenu uses the same gradient as the navbar */
+.navbar-wrap .dropdown-menu {
+  background-image: linear-gradient(180deg, #f1d6ab 0%, #fdf4e6 60%);
+}
+
 .dropdown-menu li a {
   font-size: 12px;
   display: flex;
@@ -226,6 +234,11 @@ li.nav-item {
 
 /* ======= Offcanvas ======= */
 
+/* Sidebar uses the same gradient as the desktop submenu */
+.offcanvas {
+  background-image: linear-gradient(180deg, #f1d6ab 0%, #fdf4e6 60%);
+}
+
 .offcanvas-body {
   padding: 0 8px;
 }
@@ -251,7 +264,7 @@ li.nav-item {
 }
 
 .offcanvas-body .navbar-nav .nav-item .dropdown-menu {
-  background-color: #f9fafb;
+  background-color: transparent;
   width: auto;
   box-shadow: none;
   border-radius: 0;
@@ -309,6 +322,7 @@ li.nav-item {
 /* ======= Responsive ======= */
 
 @media (max-width: 1199.99px) {
+
   .navbar-text1,
   .navbar-wrap {
     display: none;
@@ -325,6 +339,7 @@ li.nav-item {
 }
 
 @media (max-width: 992.98px) {
+
   .navbar-text1,
   .navbar-wrap {
     display: none;
@@ -340,6 +355,7 @@ li.nav-item {
 }
 
 @media (max-width: 767.98px) {
+
   .navbar-text1,
   .navbar-wrap {
     display: none;
