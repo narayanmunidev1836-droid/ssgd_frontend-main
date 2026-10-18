@@ -228,7 +228,7 @@ const DailyDarshan = () => {
                 </h4>
                 {selectedDate && (
                   <p className="dk-date-day">
-                    {selectedDate.format("dddd, DD MMMM YYYY")}
+                    {selectedDate.format("dddd")}
                   </p>
                 )}
               </div>
@@ -271,18 +271,22 @@ const DailyDarshan = () => {
 
           <div className="d-flex " style={{ flexWrap: "wrap" }}>
             {loading
-              ? [...Array(4)].map((_, index) => (
-                <div className="dd-cell" key={index}>
-                  <div className="slider-item mt-4" key={index}>
-                    <div className="slider-item-shimmer">
-                      <div
-                        className="slider-item-shimmer-text small"
-                        style={{ height: "31px" }}
-                      />
+              ? (
+                <div className="dd-grid" style={{ width: "100%" }}>
+                  {[...Array(4)].map((_, index) => (
+                    <div className="dd-cell" key={index}>
+                      <div className="slider-item mt-4">
+                        <div className="slider-item-shimmer">
+                          <div
+                            className="slider-item-shimmer-text small"
+                            style={{ height: "31px" }}
+                          />
+                        </div>
+                      </div>
                     </div>
-                  </div>
+                  ))}
                 </div>
-              ))
+              )
               : apiData?.map((e, index) => {
                 const darshanClass =
                   apiData.length > 1 ? "multiple-darshan" : "";

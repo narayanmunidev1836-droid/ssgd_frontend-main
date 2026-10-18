@@ -387,6 +387,9 @@
   border-radius: 16px;
   padding: 0 0 4px;
   text-align: center;
+  /* Same 3:4 card height as the homepage Daily Darshan card */
+  height: auto;
+  aspect-ratio: 3 / 4;
 }
 
 .dd-cell .wallpaper-content:hover {
@@ -395,7 +398,8 @@
 
 .dd-cell .wallpaper-content > div:first-child {
   aspect-ratio: auto;
-  height: 250px;
+  flex: 1;
+  min-height: 0;
   padding: 0;
   background: none;
   overflow: hidden;

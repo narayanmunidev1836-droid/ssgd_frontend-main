@@ -15,28 +15,24 @@ const cards = [
   {
     img: darshanImg,
     title: "Daily Darshan",
-    subtitle: "આજનો દર્શન",
     path: "/daily-darshan",
     color: "#b5090e",
   },
   {
     img: kathaImg,
     title: "Daily Katha",
-    subtitle: "આજની કથા",
     path: "/daily-katha",
     color: "#08416b",
   },
   {
     img: eventsImg,
     title: "Live Events",
-    subtitle: "લાઈવ પ્રારોગ",
     path: "/",
     color: "#c9984a",
   },
   {
     img: donationImg,
     title: "Donations",
-    subtitle: "સેવા અને સહભાગ",
     path: "/donation",
     color: "#2a7a2a",
   },

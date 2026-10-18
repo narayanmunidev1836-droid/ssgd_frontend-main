@@ -38,10 +38,10 @@ const Videos = () => {
       });
       if (response.data.status === true) {
         setApiData(response.data);
-        setLoading(false);
       }
     } catch (error) {
       console.error("Error fetching data:", error);
+    } finally {
       setLoading(false);
     }
   };
@@ -50,10 +50,16 @@ const Videos = () => {
     AOS.init({ duration: 1000, once: false, offset: 0 });
   }, []);
 
+  // The real content replaces the shimmer after AOS.init, so re-scan it;
+  // otherwise its data-aos elements can stay at opacity 0.
+  useEffect(() => {
+    if (!loading) AOS.refreshHard();
+  }, [loading]);
+
   const apiKey = "AIzaSyDEPqey9i1sZFnOGiiE1jqa4tLLH-VC4D8";
   const channelId = "UC1Zzxq60fquqYgOK9RugT1Q";
   const youtubeEmbedUrl = apiData
-    ? getYoutubeEmbedUrl(apiData.responseBody.live_setting.youtube_link)
+    ? getYoutubeEmbedUrl(apiData.responseBody?.live_setting?.youtube_link)
     : null;
 
   const liveTitle = apiData?.responseBody?.live_setting?.title || "";

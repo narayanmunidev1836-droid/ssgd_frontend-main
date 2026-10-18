@@ -16,9 +16,9 @@ const MissionSection = () => {
           <div className="mission-text" data-aos="fade-right">
             <p className="mission-label">OUR MISSION</p>
             <h2 className="mission-heading-gu">
-              સંસ્કારિત, સુશિક્ષિત અને
+              A cultured, well-educated
               <br />
-              સેવામાં સમર્પિત સમાજ
+              society devoted to service
             </h2>
             <p className="mission-desc">
               To propagate the divine teachings of Bhagwan Shree Swaminarayan

@@ -21,18 +21,24 @@ import _image9 from "../../assets/images/icons8-jiosaavn-50 (1).webp";
 const image9 = _image9.src;
 import _appIcon from "../../assets/images/ssgd-app-icon.png";
 const appIcon = _appIcon.src;
+import _kirtanIcon from "../../assets/images/kirtanavali-app-icon.png";
+const kirtanIcon = _kirtanIcon.src;
 import { fetchFooterData, fetchNavbarData } from "../../api/API";
 import "./Footer.css";
 import NavbarLoader from "../../common/NavbarLoader/NavbarLoader";
 import { NavLink } from "../../common/routerCompat.js";
 
-// Add an entry here for each new app as it ships; the footer renders one badge per entry.
+// Add an entry here for each new app as it ships; the footer renders one row per entry in a single card.
 const appLinks = [
   {
-    name: "Google Play",
-    store: "GET IT ON",
+    name: "Rupala Ghanshyam",
     icon: appIcon,
     url: "https://play.google.com/store/apps/details?id=org.ssgd",
+  },
+  {
+    name: "Kirtanavali",
+    icon: kirtanIcon,
+    url: "https://play.google.com/store/apps/details?id=org.ssgd.kirtanavali",
   },
 ];
 
@@ -381,6 +387,7 @@ const Footer = () => {
 
               <h5 className="mt-4">Our Apps</h5>
               <div className="footer-app-links">
+                <small>GET IT ON GOOGLE PLAY</small>
                 {appLinks.map((app) => (
                   <a
                     key={app.url}
@@ -390,10 +397,7 @@ const Footer = () => {
                     className="footer-app-link"
                   >
                     <img src={app.icon} alt={app.name} className="footer-app-icon" />
-                    <span>
-                      <small>{app.store}</small>
-                      {app.name}
-                    </span>
+                    <span>{app.name}</span>
                   </a>
                 ))}
               </div>

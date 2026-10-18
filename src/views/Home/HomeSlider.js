@@ -97,7 +97,7 @@ const HomeSlider = () => {
                   Education <span className="slider-bullet">•</span> Service
                 </h1>
                 <p className="slider-gujarati">
-                  સંસ્કાર દ્વારા ઉજ્વળ સમાજનું નિર્માણ
+                  Building a bright society through values
                 </p>
                 <p className="slider-desc">
                   Shree Swaminarayan Sanskardham Gurukul (SSGD)
