@@ -149,6 +149,7 @@ export default function DonationNew({ memberId, memberType }) {
   );
   const [timeLeft, setTimeLeft] = useState(null);
   const [selectedFormDate, setSelectedFormDate] = useState();
+  const [formDatePickerOpen, setFormDatePickerOpen] = useState(false);
   const [bankDetails, setBankDetails] = useState();
   const [suggestions, setSuggestions] = useState([]);
   const cityInputRef = useRef(null);
@@ -1476,6 +1477,13 @@ export default function DonationNew({ memberId, memberType }) {
                       onChange={handleFormdateChange}
                       className="custom-input"
                       disablePast
+                      open={formDatePickerOpen}
+                      onOpen={() => setFormDatePickerOpen(true)}
+                      onClose={() => setFormDatePickerOpen(false)}
+                      slotProps={{
+                        // Clicking anywhere in the field opens the calendar, not just the icon
+                        textField: { onClick: () => setFormDatePickerOpen(true) },
+                      }}
                       renderInput={(params) => (
                         <TextField {...params} className="custom-input" />
                       )}

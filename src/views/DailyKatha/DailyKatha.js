@@ -29,6 +29,7 @@ const DailyKatha = () => {
   const [banner, setBanner] = useState([]);
   const [selectedDate, setSelectedDate] = useState(null);
   const [availableDates, setAvailableDates] = useState([]);
+  const [pickerOpen, setPickerOpen] = useState(false);
   const [imageLoaded, setImageLoaded] = useState(false);
 
   const fetchData = async (date) => {
@@ -215,8 +216,16 @@ const DailyKatha = () => {
                       return !availableDatesArray.includes(formattedDay);
                     }}
                     className="katha-date-picker"
+                    open={pickerOpen}
+                    onOpen={() => setPickerOpen(true)}
+                    onClose={() => setPickerOpen(false)}
                     slotProps={{
-                      textField: { size: "small", fullWidth: true },
+                      // Clicking anywhere in the field opens the calendar, not just the icon
+                      textField: {
+                        size: "small",
+                        fullWidth: true,
+                        onClick: () => setPickerOpen(true),
+                      },
                       popper: { className: "dk-picker-popper" },
                     }}
                   />
