@@ -376,7 +376,7 @@
 }
 
 .slider-item-shimmer {
-  background: #f0f2f5;
+  background: var(--shimmer-base);
 
   border-radius: var(--border-radius);
 
@@ -409,7 +409,7 @@
 }
 
 .slider-item-shimmer-text {
-  background: #e2e5ea;
+  background: var(--shimmer-dark);
 
   border-radius: 4px;
 

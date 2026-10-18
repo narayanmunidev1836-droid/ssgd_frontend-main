@@ -154,7 +154,7 @@
 .gallery-card-shimmer {
   aspect-ratio: 3 / 4;
   cursor: default;
-  background: linear-gradient(110deg, #e8eaed 0%, #f5f5f5 40%, #e8eaed 80%, #e8eaed 100%);
+  background: linear-gradient(110deg, var(--shimmer-base) 0%, var(--shimmer-light) 40%, var(--shimmer-base) 80%, var(--shimmer-base) 100%);
   background-size: 1200px 100%;
   animation: gallerySkeletonSlide 1.6s infinite linear;
 }

@@ -253,7 +253,7 @@
 
 /* ── Skeleton ─────────────────────────────────────────────── */
 .branch-card-skeleton {
-  background: #fff;
+  background: var(--shimmer-light);
   border-radius: 16px;
   overflow: hidden;
 }
@@ -278,7 +278,7 @@
 
 /* shimmer (reuse global) */
 .shimmer {
-  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background: linear-gradient(90deg, var(--shimmer-base) 25%, var(--shimmer-dark) 50%, var(--shimmer-base) 75%);
   background-size: 200% 100%;
   animation: shimmer 1.4s infinite;
 }

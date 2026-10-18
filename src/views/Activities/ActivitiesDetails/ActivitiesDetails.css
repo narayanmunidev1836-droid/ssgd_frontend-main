@@ -230,9 +230,9 @@
   border-radius: 12px;
   background: linear-gradient(
     90deg,
-    #f0f0f0 25%,
-    #e0e0e0 37%,
-    #f0f0f0 63%
+    var(--shimmer-base) 25%,
+    var(--shimmer-dark) 37%,
+    var(--shimmer-base) 63%
   );
   background-size: 400% 100%;
   animation: shimmer 1.4s ease infinite;
@@ -500,10 +500,10 @@
   border-radius: var(--border-radius-lg);
   background: linear-gradient(
     to right,
-    #f6f7f8 0%,
-    #edeef1 20%,
-    #f6f7f8 40%,
-    #f6f7f8 100%
+    var(--shimmer-base) 0%,
+    var(--shimmer-dark) 20%,
+    var(--shimmer-base) 40%,
+    var(--shimmer-base) 100%
   );
   background-size: 400% 100%;
   animation: shimmer 1.4s ease infinite;
@@ -511,7 +511,7 @@
 }
 
 .slider-item-shimmer {
-  background: #f0f2f5;
+  background: var(--shimmer-base);
   border-radius: var(--border-radius);
   height: 280px;
   overflow: hidden;
@@ -535,7 +535,7 @@
 }
 
 .slider-item-shimmer-text {
-  background: #e2e5ea;
+  background: var(--shimmer-dark);
   border-radius: 4px;
   height: 14px;
   margin: 12px 14px;

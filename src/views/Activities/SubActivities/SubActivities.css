@@ -10,7 +10,7 @@
   position: relative;
   width: 100%;
   height: 250px;
-  background: #f6f7f8;
+  background: var(--shimmer-base);
   overflow: hidden;
 }
 
@@ -19,10 +19,10 @@
   height: 100%;
   animation: shimmer 1.5s infinite;
   background: linear-gradient(to right,
-      #f6f7f8 0%,
-      #edeef1 20%,
-      #f6f7f8 40%,
-      #f6f7f8 100%);
+      var(--shimmer-base) 0%,
+      var(--shimmer-dark) 20%,
+      var(--shimmer-base) 40%,
+      var(--shimmer-base) 100%);
   background-size: 1000px 100%;
 }
 
@@ -329,7 +329,7 @@
    ========================================================= */
 
 .activity-shimmer-card {
-  background: #f0f2f5;
+  background: var(--shimmer-base);
   border-radius: var(--border-radius);
   height: 320px;
   overflow: hidden;
