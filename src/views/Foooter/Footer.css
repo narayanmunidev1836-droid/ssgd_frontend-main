@@ -18,7 +18,11 @@
 .logo-footer {
   width: 90%;
   /* max-width: 260px; */
-  padding-bottom: 0;
+  /* The logo is red/pink, so it needs a light plate to stand out on the red footer */
+  box-sizing: border-box;
+  padding: 10px 16px;
+  background: #fffdf8;
+  border-radius: 12px;
   /* filter: brightness(0) invert(1);
   opacity: 0.92; */
 }
@@ -252,7 +256,10 @@
 /* ======= Bottom Bar ======= */
 
 .footer-bg hr {
-  border-color: rgba(255, 255, 255, 0.08);
+  /* Thin gold divider above the copyright bar (opacity reset: Bootstrap dims hr to .25) */
+  border: 0;
+  border-top: 1px solid var(--accent-gold, #c9984a);
+  opacity: 0.6;
   margin: 8px 0;
 }
 
@@ -449,7 +456,7 @@
   }
 
   .logo-footer {
-    padding: 0;
+    padding: 8px 12px;
   }
 
   .footer-wrap {
