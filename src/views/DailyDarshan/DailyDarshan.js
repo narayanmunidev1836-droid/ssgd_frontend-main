@@ -33,6 +33,19 @@ import "react-lazy-load-image-component/src/effects/blur.css";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
+// The API tells the darshans apart only by media.short_description
+// ("Mangla Darshan", "Shringar Darshan", "Shayan Darshan"), and a date may
+// carry only some of them, so tabs are built from whatever comes back.
+const DARSHAN_ORDER = ["mangla", "shringar", "shayan"];
+
+const darshanKey = (label) => {
+  const s = String(label || "").toLowerCase();
+  if (s.includes("mang")) return "mangla";
+  if (s.includes("ring") || s.includes("rung") || s.includes("shang")) return "shringar";
+  if (s.includes("shayan") || s.includes("shyan")) return "shayan";
+  return s.trim() || "darshan";
+};
+
 const DailyDarshan = () => {
   const breadcrumbsData = [
     { label: "Home", url: "/" },
@@ -51,7 +64,7 @@ const DailyDarshan = () => {
   const [rerender, setRerender] = useState(false);
   const [imageLoaded, setImageLoaded] = useState(false);
   const [photoIndex, setPhotoIndex] = useState(0);
-  const [darshanIndex, setDarshanIndex] = useState(0);
+  const [activeKey, setActiveKey] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
 
   const onInit = () => {
@@ -124,9 +137,30 @@ const DailyDarshan = () => {
     fetchData(d);
   };
 
-  // useEffect(() => {
-  //   console.log("apiData", apiData);
-  // }, [apiData]);
+  // One tab per darshan type present in the response; items of the same type
+  // (a date can repeat one) are merged and their photos de-duplicated.
+  const darshanTabs = (() => {
+    const groups = {};
+    apiData.forEach((item) => {
+      const label = item.media?.short_description;
+      const key = darshanKey(label);
+      if (!groups[key]) groups[key] = { key, label: label || "Darshan", images: [] };
+      (item.media?.media || []).forEach((url) => {
+        if (!groups[key].images.includes(url)) groups[key].images.push(url);
+      });
+    });
+    const rank = (key) => {
+      const i = DARSHAN_ORDER.indexOf(key);
+      return i === -1 ? DARSHAN_ORDER.length : i;
+    };
+    return Object.values(groups)
+      .filter((g) => g.images.length > 0)
+      .sort((a, b) => rank(a.key) - rank(b.key));
+  })();
+  const activeTab =
+    darshanTabs.find((t) => t.key === activeKey) || darshanTabs[0];
+  // Title is null on some items, so take the first one that has it
+  const darshanTitle = apiData.map((item) => item.media?.title).find(Boolean);
 
   useEffect(() => {
     const fetchBanner = async () => {
@@ -151,9 +185,8 @@ const DailyDarshan = () => {
     setImageLoaded(true);
   };
 
-  const handleDownload = async (e, i) => {
+  const handleDownload = async (imageUrl) => {
     try {
-      const imageUrl = e?.media?.media?.[i];
       if (!imageUrl) {
         console.error("Invalid image URL");
         return;
@@ -296,102 +329,110 @@ const DailyDarshan = () => {
                   ))}
                 </div>
               )
-              : apiData?.map((e, index) => {
-                const darshanClass =
-                  apiData.length > 1 ? "multiple-darshan" : "";
-                return (
-                  <Fragment key={index}>
-                    <div className={`dk-item-head dd-item-head ${darshanClass}`}>
-                      <h3 className="dk-item-title dd-item-title">{e.media.title}</h3>
-                      <p className="dk-item-desc dd-item-desc">{e.media.short_description}</p>
+              : activeTab && (
+                <>
+                  {darshanTitle && (
+                    <div className="dk-item-head dd-item-head">
+                      <h3 className="dk-item-title dd-item-title">{darshanTitle}</h3>
                     </div>
+                  )}
 
-                    <div className="dd-grid">
-                      {e.media.media.map((mediaItem, i) => {
-                        return (
-                          <Fragment key={i}>
-                            <div className="dd-cell">
+                  <div className="dd-tabs" role="tablist">
+                    {darshanTabs.map((tab) => (
+                      <button
+                        key={tab.key}
+                        type="button"
+                        role="tab"
+                        aria-selected={tab.key === activeTab.key}
+                        className={`dd-tab-btn ${tab.key === activeTab.key ? "active" : ""}`}
+                        onClick={() => setActiveKey(tab.key)}
+                      >
+                        {tab.label}
+                      </button>
+                    ))}
+                  </div>
+
+                  <div className="dd-grid">
+                    {activeTab.images.map((imageUrl, i) => {
+                      return (
+                        <Fragment key={imageUrl}>
+                          <div className="dd-cell">
+                            <div
+                              className="wallpaper-content"
+                              style={{ width: "100%" }}
+                              data-aos="fade-up"
+                              data-aos-offset="0"
+                            >
                               <div
-                                className="wallpaper-content"
-                                style={{ width: "100%" }}
-                                data-aos="fade-up"
+                                onClick={() => {
+                                  setPhotoIndex(i);
+                                  setIsOpen(true);
+                                }}
                               >
-                                <div
-                                  onClick={() => {
-                                    setDarshanIndex(index);
-                                    setPhotoIndex(i);
-                                    setIsOpen(true);
-                                  }}
-                                >
-                                  <LazyLoadImage
-                                    src={e.media.media[i]}
-                                    alt=""
-                                    className="wallpaper-img"
-                                    wrapperClassName="lazy-load-image-background aboutustype"
-                                    afterLoad={() => {
-                                      const image = document.querySelector(
-                                        `.lazy-load-image-background[data-src="${e.media.media[i]}"]`
+                                <LazyLoadImage
+                                  src={imageUrl}
+                                  alt=""
+                                  className="wallpaper-img"
+                                  wrapperClassName="lazy-load-image-background aboutustype"
+                                  afterLoad={() => {
+                                    const image = document.querySelector(
+                                      `.lazy-load-image-background[data-src="${imageUrl}"]`
+                                    );
+                                    if (image) {
+                                      image.classList.add(
+                                        "lazy-load-image-loaded"
                                       );
-                                      if (image) {
-                                        image.classList.add(
-                                          "lazy-load-image-loaded"
-                                        );
-                                      }
-                                    }}
-                                  />
-                                  <div className="search-icon">
-                                    <FaSearchPlus />
-                                  </div>
+                                    }
+                                  }}
+                                />
+                                <div className="search-icon">
+                                  <FaSearchPlus />
                                 </div>
-
-                                <button
-                                  onClick={() => handleDownload(e, i)}
-                                  className="mt-2"
-                                >
-                                  Download
-                                </button>
                               </div>
-                            </div>
-                          </Fragment>
-                        );
-                      })}
 
-                      {isOpen && (
-                        <Lightbox
-                          mainSrc={
-                            apiData[darshanIndex].media.media[photoIndex]
-                          }
-                          nextSrc={
-                            apiData[darshanIndex].media.media[
-                            (photoIndex + 1) %
-                            apiData[darshanIndex].media.media.length
-                            ]
-                          }
-                          prevSrc={
-                            apiData[darshanIndex].media.media[
-                            (photoIndex + apiData.length - 1) %
-                            apiData[darshanIndex].media.media.length
-                            ]
-                          }
-                          onCloseRequest={() => setIsOpen(false)}
-                          onMovePrevRequest={() =>
-                            setPhotoIndex(
-                              (photoIndex + apiData.length - 1) %
-                              apiData[darshanIndex].media.media.length
-                            )
-                          }
-                          onMoveNextRequest={() =>
-                            setPhotoIndex(
-                              (photoIndex + 1) %
-                              apiData[darshanIndex].media.media.length
-                            )
-                          }
-                        />
-                      )}
-                    </div>
-                  </Fragment>
-                );
-              })}
+                              <button
+                                onClick={() => handleDownload(imageUrl)}
+                                className="mt-2"
+                              >
+                                Download
+                              </button>
+                            </div>
+                          </div>
+                        </Fragment>
+                      );
+                    })}
+
+                    {isOpen && (
+                      <Lightbox
+                        mainSrc={activeTab.images[photoIndex]}
+                        nextSrc={
+                          activeTab.images[
+                          (photoIndex + 1) % activeTab.images.length
+                          ]
+                        }
+                        prevSrc={
+                          activeTab.images[
+                          (photoIndex + activeTab.images.length - 1) %
+                          activeTab.images.length
+                          ]
+                        }
+                        onCloseRequest={() => setIsOpen(false)}
+                        onMovePrevRequest={() =>
+                          setPhotoIndex(
+                            (photoIndex + activeTab.images.length - 1) %
+                            activeTab.images.length
+                          )
+                        }
+                        onMoveNextRequest={() =>
+                          setPhotoIndex(
+                            (photoIndex + 1) % activeTab.images.length
+                          )
+                        }
+                      />
+                    )}
+                  </div>
+                </>
+              )}
           </div>
         </div>
       </div></div>

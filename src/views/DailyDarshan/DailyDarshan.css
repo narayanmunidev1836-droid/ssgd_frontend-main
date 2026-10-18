@@ -474,3 +474,39 @@
   width: 100%;
   text-align: center;
 }
+
+/* Mangla / Shringar / Shayan tabs under the heading */
+.dd-tabs {
+  flex: 0 0 100%;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 6px;
+}
+
+.dd-tab-btn {
+  padding: 9px 20px;
+  border-radius: 8px;
+  font-size: 13.5px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  font-family: "Poppins", sans-serif;
+  cursor: pointer;
+  transition: var(--transition);
+  border: 1.5px solid var(--box-border-color);
+  background: transparent;
+  color: var(--text-color);
+  white-space: nowrap;
+}
+
+.dd-tab-btn:hover {
+  background: var(--text-color-faint);
+}
+
+.dd-tab-btn.active {
+  background: var(--global-color);
+  color: #fff;
+  border-color: var(--global-color);
+  box-shadow: 0 4px 14px rgba(181, 9, 14, 0.3);
+}
