@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import _image1 from "../../assets/images/email.webp";
 const image1 = _image1.src;
 import _image2 from "../../assets/images/call.webp";
@@ -42,6 +42,16 @@ const Contact = (props) => {
   const emailPattern = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
   const [banner, setBanner] = useState([]);
   const [imageLoaded, setImageLoaded] = useState(false);
+  const [turnstileToken, setTurnstileToken] = useState("");
+  const turnstileRef = useRef(null);
+  const turnstileWidgetId = useRef(null);
+
+  const resetTurnstile = () => {
+    setTurnstileToken("");
+    if (window.turnstile && turnstileWidgetId.current !== null) {
+      window.turnstile.reset(turnstileWidgetId.current);
+    }
+  };
 
   const handleImageLoad = () => {
     setImageLoaded(true);
@@ -138,7 +148,33 @@ const Contact = (props) => {
       return;
     }
 
+    if (!turnstileToken) {
+      notify("Please complete the security check");
+      return;
+    }
+
     setSendingMessage(true);
+
+    try {
+      const verifyResponse = await fetch("/api/verify-turnstile", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ token: turnstileToken }),
+      });
+      const verifyResult = await verifyResponse.json();
+      if (!verifyResult.success) {
+        notify("Security check failed. Please try again");
+        resetTurnstile();
+        setSendingMessage(false);
+        return;
+      }
+    } catch (error) {
+      console.error("Error verifying security check:", error);
+      notify("Security check failed. Please try again");
+      resetTurnstile();
+      setSendingMessage(false);
+      return;
+    }
 
     const data = {
       url: process.env.NEXT_PUBLIC_API_URL,
@@ -151,20 +187,28 @@ const Contact = (props) => {
 
     try {
       const response = await contactDetails(data);
-      setFormData({
-        name: "",
-        email: "",
-        mo_no: "",
-        message: "",
-      });
-      if (response.data.code === 200) {
-        successNotify(response.data.message);
+      if (response.data.code === 200 || response.data.status) {
+        setFormData({
+          name: "",
+          email: "",
+          mo_no: "",
+          message: "",
+        });
+        successNotify(
+          response.data.message || "Your message has been sent successfully"
+        );
       } else {
-        successNotify("Email sent successfully");
+        notify(response.data.message || "Unable to send message. Please try again");
       }
     } catch (error) {
       console.error("Error sending form data:", error);
+      notify(
+        error?.response?.data?.message ||
+          "Unable to send message. Please try again"
+      );
     } finally {
+      // Turnstile tokens are single-use
+      resetTurnstile();
       setSendingMessage(false);
     }
   };
@@ -212,6 +256,44 @@ const Contact = (props) => {
     };
 
     fetchBanner();
+  }, []);
+
+  useEffect(() => {
+    const siteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
+    if (!siteKey) return;
+
+    const renderWidget = () => {
+      if (!turnstileRef.current || turnstileWidgetId.current !== null) return;
+      turnstileWidgetId.current = window.turnstile.render(turnstileRef.current, {
+        sitekey: siteKey,
+        callback: (token) => setTurnstileToken(token),
+        "expired-callback": () => setTurnstileToken(""),
+        "error-callback": () => setTurnstileToken(""),
+      });
+    };
+
+    let script = document.getElementById("cf-turnstile-script");
+    if (window.turnstile) {
+      renderWidget();
+    } else {
+      if (!script) {
+        script = document.createElement("script");
+        script.id = "cf-turnstile-script";
+        script.src =
+          "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit";
+        script.async = true;
+        document.head.appendChild(script);
+      }
+      script.addEventListener("load", renderWidget);
+    }
+
+    return () => {
+      if (script) script.removeEventListener("load", renderWidget);
+      if (window.turnstile && turnstileWidgetId.current !== null) {
+        window.turnstile.remove(turnstileWidgetId.current);
+      }
+      turnstileWidgetId.current = null;
+    };
   }, []);
 
   useEffect(() => {
@@ -341,6 +423,8 @@ const Contact = (props) => {
                 value={formData.message}
                 onChange={handleChange}
               ></textarea>
+
+              <div ref={turnstileRef}></div>
 
               <button
                 type="button"

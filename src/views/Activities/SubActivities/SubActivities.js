@@ -42,6 +42,8 @@ const SubActivities = () => {
   const [imageLoaded, setImageLoaded] = useState(false);
 
   const [totalData, setTotalData] = useState(0);
+  // searchInput follows every keystroke; searchData (what the API uses) trails it
+  const [searchInput, setSearchInput] = useState("");
   const [searchData, setSearchData] = useState("");
   const [headerData, setHeaderData] = useState([]);
   const [activityListLoader, setActivityListLoader] = useState(false);
@@ -63,6 +65,12 @@ const SubActivities = () => {
   //   setPage(0); // Remove this
   // }, [searchData, year, activities]);
   
+  // Wait for the user to stop typing before searching
+  useEffect(() => {
+    const timer = setTimeout(() => setSearchData(searchInput.trim()), 400);
+    return () => clearTimeout(timer);
+  }, [searchInput]);
+
   // Modify the search effect
   useEffect(() => {
     if (searchData !== '') {
@@ -332,8 +340,8 @@ useEffect(() => {
               type="search"
               className="activities-search-input"
               placeholder="Search activities..."
-              value={searchData}
-              onChange={(e) => setSearchData(e.target.value)}
+              value={searchInput}
+              onChange={(e) => setSearchInput(e.target.value)}
             />
           </div>
         </div>

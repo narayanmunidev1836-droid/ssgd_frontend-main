@@ -14,12 +14,14 @@ import _donationBackground from "../../assets/images/donationBackground.webp";
 import CommonBreadcrumbs from "../../common/CommonBreadcrumbs/CommonBreadcrumbs";
 import {
   FaBarcode,
+  FaCheck,
   FaFlagUsa,
   FaGlobe,
   FaHashtag,
   FaMapMarkerAlt,
   FaPhoneAlt,
   FaPlane,
+  FaRegCopy,
   FaUniversity,
   FaUser,
 } from "react-icons/fa";
@@ -46,12 +48,16 @@ const fieldIcon = (title = "") => {
   if (t.includes("account name")) return <FaUser />;
   if (t.includes("bank name")) return <FaUniversity />;
   if (t.includes("a/c") || t.includes("account no")) return <FaHashtag />;
-  if (t.includes("ifsc") || t.includes("swift")) return <FaBarcode />;
+  if (/ifsc?\b/.test(t) || t.includes("swift")) return <FaBarcode />;
   if (t.includes("branch") || t.includes("address")) return <FaMapMarkerAlt />;
   if (t.includes("information")) return <FaPhoneAlt />;
   if (t.includes("type")) return <FaGlobe />;
   return null;
 };
+
+// Rows whose value a donor is likely to copy into their banking app
+const isCopyable = (title = "") =>
+  /(a\/c|account)\s*(no|number)|ifsc?\b|swift/i.test(title);
 
 
 const donationHeaderBg = _donationHeader.src;
@@ -65,6 +71,7 @@ const Donors = () => {
   const qrDialogRef = useRef(null);
 
   const [country, setCountry] = useState("");
+  const [copiedId, setCopiedId] = useState(null);
   const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
   const navigate = useNavigate();
@@ -137,6 +144,16 @@ const Donors = () => {
           donation_others: blog.donation_others,
         },
       });
+    }
+  };
+
+  const copyDetail = async (id, text) => {
+    try {
+      await navigator.clipboard.writeText(text);
+      setCopiedId(id);
+      setTimeout(() => setCopiedId((current) => (current === id ? null : current)), 1500);
+    } catch (error) {
+      console.error("Error copying text:", error);
     }
   };
 
@@ -270,15 +287,31 @@ const Donors = () => {
                 <div className="container">
                   <h4 className="bank-details">{blog.blog_title}</h4>
                   <div className="bank-info-grid">
-                    {blogDetails.map((item, i) => (
-                      <div className="bank-info-row" key={i}>
-                        <div className="bank-info-label">
-                          {fieldIcon(item.title)}
-                          <span>{item.title}:</span>
+                    {blogDetails.map((item, i) => {
+                      const copyId = `${key}-${index}-${i}`;
+                      return (
+                        <div className="bank-info-row" key={i}>
+                          <div className="bank-info-label">
+                            {fieldIcon(item.title)}
+                            <span>{item.title}:</span>
+                          </div>
+                          <div className="bank-info-value">
+                            {item.detail ? item.detail : "-"}
+                            {item.detail && isCopyable(item.title) && (
+                              <button
+                                type="button"
+                                className="bank-copy-btn"
+                                aria-label={`Copy ${item.title}`}
+                                title={copiedId === copyId ? "Copied" : "Copy"}
+                                onClick={() => copyDetail(copyId, item.detail.trim())}
+                              >
+                                {copiedId === copyId ? <FaCheck /> : <FaRegCopy />}
+                              </button>
+                            )}
+                          </div>
                         </div>
-                        <div className="bank-info-value">{item.detail ? item.detail : "-"}</div>
-                      </div>
-                    ))}
+                      );
+                    })}
                   </div>
 
                 </div>

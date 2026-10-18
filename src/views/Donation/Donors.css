@@ -506,6 +506,23 @@
   letter-spacing: 0;
 }
 
+.dn-cell .bank-copy-btn {
+  display: inline-flex;
+  align-items: center;
+  margin-left: 8px;
+  padding: 2px;
+  border: none;
+  background: none;
+  color: #8c151a;
+  font-size: 13px;
+  cursor: pointer;
+  vertical-align: middle;
+}
+
+.dn-cell .bank-copy-btn:hover {
+  color: #5e0d11;
+}
+
 /* =========================================================
    DONATION BUTTONS
 ========================================================= */

@@ -350,10 +350,94 @@
   line-height: 1.7;
 }
 
+/* Numbered rows: centred number, then text and photo side by side, alternating */
+.at1-main {
+  grid-template-columns: minmax(0, 1fr);
+  gap: 48px;
+}
+
+.at1-main .at1-section {
+  background: none;
+  border: none;
+  padding: 0;
+  align-items: center;
+}
+
+.at1-section-num {
+  width: 38px;
+  height: 38px;
+  margin-bottom: 28px;
+  border: 2px solid #8b1c1c;
+  border-radius: 50%;
+  background: #fff;
+  color: #8b1c1c;
+  font-family: "Poppins", sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.at1-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 48px;
+  align-items: center;
+  width: 100%;
+}
+
+.at1-row-textonly {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+/* Odd rows: text left, photo right. Even rows: photo left, text right. */
+.at1-main .at1-section:nth-child(odd) .at1-photo {
+  order: 2;
+}
+
+.at1-main .at1-photo {
+  max-width: none;
+  margin: 0;
+  padding: 14px;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 6px 28px rgba(59, 10, 10, 0.1);
+}
+
+.at1-main .at1-photo-img {
+  max-height: 420px;
+  border-radius: 10px;
+}
+
+.at1-main .at1-section-title {
+  font-size: 26px;
+  color: #8b1c1c;
+  border-bottom: none;
+  padding-bottom: 0;
+  margin-bottom: 14px;
+}
+
+.at1-main .at1-text {
+  font-size: 15px;
+}
+
 @media (max-width: 720px) {
   .at1-main {
-    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+
+  .at1-row {
+    grid-template-columns: minmax(0, 1fr);
     gap: 20px;
+  }
+
+  .at1-main .at1-section:nth-child(odd) .at1-photo {
+    order: 0;
+  }
+
+  .at1-main .at1-section-title {
+    font-size: 21px;
   }
 
   .at1-main .at1-photo {

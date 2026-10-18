@@ -130,24 +130,31 @@ const Aboustype1 = ({ aboutUsData }) => {
             <div className="at1-main">
               {aboutUsData.about_desc.map((e, index) => (
                 <section className="at1-section" key={index} data-aos="fade-up">
-                  {e.title && <h3 className="at1-section-title">{e.title}</h3>}
-                  {e.image && (
-                    <div className="at1-photo">
-                      <LazyLoadImage
-                        src={e.image}
-                        alt=""
-                        className="at1-photo-img"
-                        effect="blur"
-                        wrapperClassName="lazy-load-image-background aboutustype"
-                        afterLoad={() => handleImageLoad(e.image)}
+                  <span className="at1-section-num" aria-hidden="true">
+                    {index + 1}
+                  </span>
+                  <div className={`at1-row${e.image ? "" : " at1-row-textonly"}`}>
+                    {e.image && (
+                      <div className="at1-photo">
+                        <LazyLoadImage
+                          src={e.image}
+                          alt=""
+                          className="at1-photo-img"
+                          effect="blur"
+                          wrapperClassName="lazy-load-image-background aboutustype"
+                          afterLoad={() => handleImageLoad(e.image)}
+                        />
+                      </div>
+                    )}
+                    <div className="at1-body">
+                      {e.title && <h3 className="at1-section-title">{e.title}</h3>}
+                      <ReadMoreText
+                        html={e.content}
+                        limit={450}
+                        className="at1-text"
                       />
                     </div>
-                  )}
-                  <ReadMoreText
-                    html={e.content}
-                    limit={450}
-                    className="at1-text"
-                  />
+                  </div>
                 </section>
               ))}
             </div>

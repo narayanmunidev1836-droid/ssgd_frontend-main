@@ -193,7 +193,7 @@ const DailyKatha = () => {
                     : "No date selected"}
                 </h4>
                 {selectedDate && (
-                  <p className="dk-date-day">{selectedDate.format("dddd, DD MMMM YYYY")}</p>
+                  <p className="dk-date-day">{selectedDate.format("dddd")}</p>
                 )}
               </div>
             </div>
