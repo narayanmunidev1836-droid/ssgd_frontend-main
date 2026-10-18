@@ -179,8 +179,16 @@
   .gallery-section {
     padding: 36px 0 52px;
   }
+}
+
+/* Phones: two cards per row (same as the Daily Darshan page) */
+@media (max-width: 575px) {
+  .gallery-card-grid {
+    gap: 14px;
+  }
+
   .gallery-card {
-    flex: 1 1 100%;
-    max-width: 320px;
+    flex: 0 0 calc(50% - 7px);
+    max-width: calc(50% - 7px);
   }
 }

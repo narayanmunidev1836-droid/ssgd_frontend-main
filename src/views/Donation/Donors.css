@@ -308,7 +308,8 @@
 }
 
 .dn-hero .breadcrumbs-wrap>* {
-  display: block;
+  /* flex keeps the text centred in the pill (the shared breadcrumb sets a fixed height on phones) */
+  display: flex;
   background: rgba(255, 255, 255, 0.98);
   border-radius: 30px;
   padding: 9px 20px;

@@ -266,6 +266,7 @@ const Contact = (props) => {
       if (!turnstileRef.current || turnstileWidgetId.current !== null) return;
       turnstileWidgetId.current = window.turnstile.render(turnstileRef.current, {
         sitekey: siteKey,
+        theme: "light",
         callback: (token) => setTurnstileToken(token),
         "expired-callback": () => setTurnstileToken(""),
         "error-callback": () => setTurnstileToken(""),
@@ -424,7 +425,7 @@ const Contact = (props) => {
                 onChange={handleChange}
               ></textarea>
 
-              <div ref={turnstileRef}></div>
+              <div ref={turnstileRef} className="ct-turnstile"></div>
 
               <button
                 type="button"

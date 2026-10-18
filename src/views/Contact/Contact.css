@@ -464,6 +464,19 @@ textarea {
   box-shadow: 0 0 0 3px rgba(200, 169, 110, 0.2);
 }
 
+.ct-turnstile {
+  align-self: flex-start;
+  border: 1px solid #e3d9c8;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+/* hide the widget's own square border so the rounded one above shows cleanly */
+.ct-turnstile iframe {
+  display: block;
+  margin: -1px;
+}
+
 .ct-submit {
   align-self: flex-end;
   min-width: 200px;
