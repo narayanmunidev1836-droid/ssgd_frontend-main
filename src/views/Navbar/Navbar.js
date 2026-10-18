@@ -30,7 +30,7 @@ function Navbar() {
   const [pages, setPages] = useState({});
   const [site, setSite] = useState({});
   const [loader, setLoader] = useState(true);
-  const [isActivitiesDropdownOpen, setIsActivitiesDropdownOpen] = useState(false);
+  const [openMenu, setOpenMenu] = useState(null);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -221,6 +221,7 @@ function Navbar() {
       offcanvasEl.addEventListener("hidden.bs.offcanvas", () => {
         // Reset body style manually in case Bootstrap doesn't do it
         document.body.style.overflow = "";
+        setOpenMenu(null);
       });
     }
 
@@ -233,23 +234,6 @@ function Navbar() {
       }
     };
   }, []);
-
-
-  useEffect(() => {
-    const offcanvasEl = document.getElementById("offcanvasNavbar"); // Replace with actual ID
-    if (!offcanvasEl) return;
-
-    const handleOffcanvasHidden = () => {
-      setIsActivitiesDropdownOpen(false);  // Reset dropdown state when offcanvas hides
-    };
-
-    offcanvasEl.addEventListener("hidden.bs.offcanvas", handleOffcanvasHidden);
-
-    return () => {
-      offcanvasEl.removeEventListener("hidden.bs.offcanvas", handleOffcanvasHidden);
-    };
-  }, []);
-
 
   return (
     <>
@@ -447,26 +431,17 @@ function Navbar() {
                 <li className="nav-item dropdown">
                   <NavLink
                     className={`nav-link ${containsActivity("activities") ? "active" : "no-active"}`}
-                    data-bs-toggle="dropdown"
-                    data-bs-dismiss={isActivitiesDropdownOpen ? "offcanvas" : undefined}
+                    aria-expanded={openMenu === "activities"}
                     onClick={(e) => {
                       e.preventDefault();
-                      if (isActivitiesDropdownOpen) {
-                        // If dropdown is open, close it and reset state
-                        setIsActivitiesDropdownOpen(false);
-                        navigate("/activities");
-                      } else {
-                        // If dropdown is closed, just open it
-                        setIsActivitiesDropdownOpen(true);
-                        handleNavLinkClick("/activities", true);
-                      }
+                      setOpenMenu(openMenu === "activities" ? null : "activities");
                     }}
                     to={`/activities`}
                   >
                     Activities <HiPlus className="nav-icon" />
                   </NavLink>
 
-                  <ul className="dropdown-menu">
+                  <ul className={`dropdown-menu ${openMenu === "activities" ? "show" : ""}`}>
                     {apiData &&
                       Object.values(apiData).map((item, index) => (
                         <li key={item.id}>
@@ -503,33 +478,17 @@ function Navbar() {
                       ? "active"
                       : "no-active"
                       }`}
-                    data-bs-toggle="dropdown"
-                    data-bs-dismiss={isActivitiesDropdownOpen ? "offcanvas" : undefined}
+                    aria-expanded={openMenu === "publications"}
                     onClick={(e) => {
                       e.preventDefault();
-                      if (isActivitiesDropdownOpen) {
-                        // If dropdown is open, close it and reset state
-                        setIsActivitiesDropdownOpen(false);
-                        navigate(
-                          publicationList &&
-                          `/publication-detail/${publicationList[0].id}/${publicationList[0].name}`
-                        );
-                      } else {
-                        // If dropdown is closed, just open it
-                        setIsActivitiesDropdownOpen(true);
-                        handleNavLinkClick(
-                          publicationList &&
-                          `/publication-detail/${publicationList[0].id}/${publicationList[0].name}`,
-                          true
-                        );
-                      }
+                      setOpenMenu(openMenu === "publications" ? null : "publications");
                     }}
                   >
                     Publications
                     <HiPlus className="nav-icon" />
                   </NavLink>
 
-                  <ul className="dropdown-menu">
+                  <ul className={`dropdown-menu ${openMenu === "publications" ? "show" : ""}`}>
                     {publicationList &&
                       publicationList.length > 0 &&
                       publicationList.map((item) => (

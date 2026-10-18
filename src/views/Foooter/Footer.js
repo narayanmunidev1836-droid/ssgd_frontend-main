@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { Grid, Typography } from "@mui/material";
+import { Grid } from "@mui/material";
 import Container from "@mui/material/Container";
 import { SlLocationPin } from "react-icons/sl";
 import { MdOutlineEmail } from "react-icons/md";
@@ -13,6 +13,7 @@ import {
   FaTelegram,
   FaXTwitter,
 } from "react-icons/fa6";
+import { GiLotus } from "react-icons/gi";
 import { SiSpotify, SiApplemusic } from "react-icons/si";
 // import NavbarLogo from "../../assets/images/logo.webp";
 import _image from "../../assets/images/logo (1).webp";
@@ -28,7 +29,7 @@ import "./Footer.css";
 import NavbarLoader from "../../common/NavbarLoader/NavbarLoader";
 import { NavLink } from "../../common/routerCompat.js";
 
-// Add an entry here for each new app as it ships; the footer renders one row per entry in a single card.
+// Add an entry here for each new app as it ships; each store renders as its own card with one row per app.
 const appLinks = [
   {
     name: "Rupala Ghanshyam",
@@ -39,6 +40,14 @@ const appLinks = [
     name: "Kirtanavali",
     icon: kirtanIcon,
     url: "https://play.google.com/store/apps/details?id=org.ssgd.kirtanavali",
+  },
+];
+
+const iosAppLinks = [
+  {
+    name: "Rupala Ghanshyam",
+    icon: appIcon,
+    url: "https://apps.apple.com/us/app/rupala-ghanshyam/id1503965095",
   },
 ];
 
@@ -111,7 +120,7 @@ const Footer = () => {
       <div className="footer-bg">
         <Container>
           <Grid container spacing={4} className="footer-wrap">
-            <Grid item lg={5} md={6} sm={6} xs={12} className="footer-info">
+            <Grid item lg={3} md={6} sm={6} xs={12} className="footer-info">
               {/* CRA shipped <a> inside <a> here (both href="/"). The HTML parser
                   splits nested anchors in SSR output, so React hydration fails (#418)
                   and cascades removeChild errors. Outer <a> kept (it drives the
@@ -172,45 +181,41 @@ const Footer = () => {
                   )}
                 </li>
               </ul>
-
             </Grid>
 
-            <Grid
-              item
-              lg={4}
-              md={6}
-              sm={6}
-              xs={12}
-              className="footer-links pb-xl-5 pb-xs-0"
-            >
+            <Grid item lg={2} md={6} sm={6} xs={12} className="footer-links">
               <h5 className="footer-link-title">Quick Links</h5>
-              <div className="footer-grid">
-                <div>
-                  <ul className="footer-link-wrap mt-4">
-                    <li>
-                      <NavLink to="/daily-katha">Daily Katha</NavLink>
-                    </li>
-                    <li>
-                      <NavLink to="/daily-darshan">Daily Darshan</NavLink>
-                    </li>
-                    <li>
-                      <NavLink to="/activities">Activities</NavLink>
-                    </li>
-                    <li>
-                      <NavLink
-                        to={`/publication-detail/${publicationList[0]?.id}/${publicationList[0]?.name}`}
-                      >
-                        Publications
-                      </NavLink>
-                      {/* <NavLink to="/publication-detail/">Publications</NavLink> */}
-                    </li>
-                    <li>
-                      <NavLink to="/branches">Branches</NavLink>
-                    </li>
-                    <li>
-                      <NavLink to="/about-us">About Us</NavLink>
-                    </li>
-                    {/* <li>
+              <ul className="footer-link-wrap footer-nav-list">
+                <li>
+                  <NavLink to="/daily-katha">Daily Katha</NavLink>
+                </li>
+                <li>
+                  <NavLink to="/daily-darshan">Daily Darshan</NavLink>
+                </li>
+                <li>
+                  <NavLink to="/activities">Activities</NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to={`/publication-detail/${publicationList[0]?.id}/${publicationList[0]?.name}`}
+                  >
+                    Publications
+                  </NavLink>
+                  {/* <NavLink to="/publication-detail/">Publications</NavLink> */}
+                </li>
+                <li>
+                  <NavLink to="/branches">Branches</NavLink>
+                </li>
+                <li>
+                  <NavLink to="/about-us">About Us</NavLink>
+                </li>
+              </ul>
+            </Grid>
+
+            <Grid item lg={2} md={6} sm={6} xs={12} className="footer-links">
+              <h5 className="footer-link-title">Other Links</h5>
+              <ul className="footer-link-wrap footer-nav-list">
+                <li>
                   <NavLink to="/contact-us">Contact Us</NavLink>
                 </li>
                 {donation === "1" ? (
@@ -219,54 +224,30 @@ const Footer = () => {
                   </li>
                 ) : (
                   ""
-                )} */}
-                  </ul>
-                </div>
-                <div>
-                  <h5 className="visibility-hidden">Quick Links</h5>
-                  <ul className="footer-link-wrap">
-                    <li className="">
-                      <NavLink to="/contact-us">Contact Us</NavLink>
+                )}
+                {apiData.pages &&
+                  Object.values(apiData.pages).map((page) => (
+                    <li key={page.id}>
+                      {page.website_page === "other_website" ? (
+                        <NavLink
+                          to={page.page_url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          {page.name}
+                        </NavLink>
+                      ) : (
+                        <NavLink to={`/custome-page/${page.name}/${page.id}`}>
+                          {page.name}
+                        </NavLink>
+                      )}
                     </li>
-                    {donation === "1" ? (
-                      <li>
-                        <NavLink to="/donation">Donation</NavLink>
-                      </li>
-                    ) : (
-                      ""
-                    )}
-                    {apiData.pages &&
-                      Object.values(apiData.pages).map((page) => (
-                        <li key={page.id}>
-                          {page.website_page === "other_website" ? (
-                            <NavLink
-                              to={page.page_url}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                            >
-                              {page.name}
-                            </NavLink>
-                          ) : (
-                            <NavLink to={`/custome-page/${page.name}/${page.id}`}>
-                              {page.name}
-                            </NavLink>
-                          )}
-                        </li>
-                      ))}
-                  </ul>
-                </div>
-              </div>
+                  ))}
+              </ul>
             </Grid>
 
-            <Grid
-              item
-              lg={3}
-              md={6}
-              xs={12}
-              className="footer-contact text-lg-start pb-md-4"
-              style={{ paddingBottom: "0" }}
-            >
-              <h5>Social Media</h5>
+            <Grid item lg={2.5} md={6} sm={6} xs={12} className="footer-contact">
+              <h5>Follow Us</h5>
 
               <ul className="social-media-link-wrap">
                 {loading ? (
@@ -384,22 +365,41 @@ const Footer = () => {
                   </>
                 )}
               </ul>
+            </Grid>
 
-              <h5 className="mt-4">Our Apps</h5>
-              <div className="footer-app-links">
-                <small>GET IT ON GOOGLE PLAY</small>
-                {appLinks.map((app) => (
-                  <a
-                    key={app.url}
-                    href={app.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="footer-app-link"
-                  >
-                    <img src={app.icon} alt={app.name} className="footer-app-icon" />
-                    <span>{app.name}</span>
-                  </a>
-                ))}
+            <Grid item lg={2.5} md={6} sm={6} xs={12} className="footer-contact">
+              <h5>Our Apps</h5>
+              <div className="footer-app-cards">
+                <div className="footer-app-links">
+                  <small>GET IT ON GOOGLE PLAY</small>
+                  {appLinks.map((app) => (
+                    <a
+                      key={app.url}
+                      href={app.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="footer-app-link"
+                    >
+                      <img src={app.icon} alt={app.name} className="footer-app-icon" />
+                      <span>{app.name}</span>
+                    </a>
+                  ))}
+                </div>
+                <div className="footer-app-links">
+                  <small>DOWNLOAD ON THE APP STORE</small>
+                  {iosAppLinks.map((app) => (
+                    <a
+                      key={app.url}
+                      href={app.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="footer-app-link"
+                    >
+                      <img src={app.icon} alt={app.name} className="footer-app-icon" />
+                      <span>{app.name}</span>
+                    </a>
+                  ))}
+                </div>
               </div>
             </Grid>
           </Grid>

@@ -113,17 +113,60 @@
   left: 0;
   width: 30px;
   height: 2px;
-  background: var(--global-color);
+  background: var(--accent-gold, #c9984a);
   border-radius: 2px;
 }
 
-.footer-grid {
-  display: flex;
-  gap: 40px;
+/* Link lists under Quick Links / Other Links, each link led by a small chevron */
+.footer-nav-list {
+  margin-top: 20px;
 }
 
-.visibility-hidden {
-  visibility: hidden;
+.footer-nav-list li a::before {
+  content: "";
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  margin-right: 14px;
+  vertical-align: middle;
+  border-top: 1.5px solid currentColor;
+  border-right: 1.5px solid currentColor;
+  transform: rotate(45deg);
+}
+
+/* Thin gold divider between the five columns (desktop only) */
+@media (min-width: 1200px) {
+
+  /* Follow Us column is narrow here: slightly smaller icons so five fit a row */
+  .footer-contact .social-media-link-wrap {
+    gap: 8px;
+  }
+
+  .social-media-link-wrap .footer-img {
+    width: 34px;
+    height: 34px;
+    padding: 7px;
+  }
+
+  .social-media-link-wrap .social-break {
+    margin-top: -8px;
+  }
+
+  .footer-links,
+  .footer-contact {
+    position: relative;
+  }
+
+  .footer-links::before,
+  .footer-contact::before {
+    content: "";
+    position: absolute;
+    top: 32px;
+    bottom: 0;
+    left: 16px;
+    width: 1px;
+    background: rgba(201, 152, 74, 0.3);
+  }
 }
 
 /* ======= Social Media Block ======= */
@@ -148,7 +191,7 @@
   left: 0;
   width: 30px;
   height: 2px;
-  background: var(--global-color);
+  background: var(--accent-gold, #c9984a);
   border-radius: 2px;
 }
 
@@ -200,7 +243,14 @@
 
 /* ======= App Download Links ======= */
 
-/* One card holds every app; each app is a row inside it */
+/* Play Store and App Store each get their own card, stacked in one column */
+.footer-app-cards {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+/* One card per store; each app is a row inside it */
 .footer-app-links {
   display: flex;
   flex-direction: column;
@@ -213,7 +263,7 @@
   border-radius: 10px;
 }
 
-.footer-app-links > small {
+.footer-app-links>small {
   padding: 0 4px 6px;
   font-size: 10px;
   font-weight: 500;
@@ -252,7 +302,6 @@
   line-height: 1.25;
 }
 
-
 /* ======= Bottom Bar ======= */
 
 .footer-bg hr {
@@ -267,7 +316,7 @@
   display: flex;
   font-size: 13px;
   text-align: center;
-  color: rgba(255, 255, 255, 0.35);
+  color: rgba(255, 255, 255, 0.85);
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
@@ -286,7 +335,31 @@
 
 .copyright {
   font-size: 13px;
-  color: rgba(255, 255, 255, 0.35);
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.footer-tagline {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 13px;
+}
+
+/* gold rule - lotus - gold rule after the tagline */
+.footer-tagline-ornament {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--accent-gold, #c9984a);
+  font-size: 20px;
+}
+
+.footer-tagline-ornament::before,
+.footer-tagline-ornament::after {
+  content: "";
+  width: 26px;
+  height: 1px;
+  background: var(--accent-gold, #c9984a);
 }
 
 /* ======= Shimmer ======= */
@@ -339,71 +412,27 @@
     margin-top: -16px;
   }
 
-  .footer-wrap.MuiGrid-container > .MuiGrid-item {
+  .footer-wrap.MuiGrid-container>.MuiGrid-item {
     padding-top: 16px;
   }
 
   .footer-contact {
     padding-bottom: 0 !important;
   }
-
-  /* Quick Links in three columns instead of two (the 2nd column was a short
-     list leaving the right half empty). The two column wrappers and their
-     <ul>s are flattened so every link flows into one 3-column grid. */
-  .footer-grid {
-    display: grid;
-    grid-template-columns: repeat(3, auto);
-    justify-content: start;
-    column-gap: 28px;
-    row-gap: 10px;
-    margin-top: 24px;
-  }
-
-  .footer-grid > div,
-  .footer-grid .footer-link-wrap {
-    display: contents;
-  }
-
-  .footer-grid .visibility-hidden {
-    display: none;
-  }
 }
 
-/* Tablet: put the three blocks side by side (MUI's own breakpoints would drop
-   Social Media onto a row of its own with empty space beside it). Each column is
-   narrow here, so Quick Links uses two columns and the social icons shrink a bit. */
+/* Tablet: the five blocks sit two per row (brand + Quick Links, Other Links +
+   Follow Us, Our Apps); the column dividers are desktop-only. */
 @media (min-width: 768px) and (max-width: 1199.98px) {
+
   /* Horizontal grid gap 32px -> 16px (container offset reduced to match). */
   .footer-wrap.MuiGrid-container {
     width: calc(100% + 16px);
     margin-left: -16px;
   }
 
-  .footer-wrap.MuiGrid-container > .MuiGrid-item {
-    flex-basis: 33.3333%;
-    max-width: 33.3333%;
+  .footer-wrap.MuiGrid-container>.MuiGrid-item {
     padding-left: 16px;
-  }
-}
-
-@media (min-width: 768px) and (max-width: 991.98px) {
-  .footer-grid {
-    grid-template-columns: repeat(2, auto);
-    column-gap: 20px;
-  }
-
-  .social-media-link-wrap {
-    gap: 8px;
-  }
-
-  .footer-img {
-    width: 36px;
-    height: 36px;
-    padding: 8px;
-  }
-
-  .social-break {
-    margin-top: -8px;
   }
 }
 
@@ -429,6 +458,15 @@
 
   .footer-contact p {
     font-size: 14px;
+  }
+
+  /* Link lists flow into two columns instead of one tall stack */
+  .footer-nav-list {
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    justify-content: start;
+    column-gap: 28px;
+    row-gap: 10px;
   }
 }
 
@@ -463,9 +501,13 @@
     padding: 28px 0 12px;
   }
 
-  /* (row gap 10px / column gap 20px — Quick Links is a 3-column grid here) */
-  .footer-grid {
-    gap: 10px 20px;
+  .footer-nav-list {
+    justify-content: center;
+    column-gap: 20px;
+  }
+
+  .footer-nav-list li a::before {
+    display: none;
   }
 
   .footer-bottom {
@@ -516,13 +558,11 @@
     transform: translateX(-50%);
   }
 
-  .footer-grid,
   .social-media-link-wrap {
     justify-content: center;
   }
 
-  .footer-app-links {
-    margin-left: auto;
-    margin-right: auto;
+  .footer-app-cards {
+    align-items: center;
   }
 }
