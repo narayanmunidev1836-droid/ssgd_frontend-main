@@ -153,6 +153,7 @@
 
 .dd-grid {
   display: grid;
+  width: 100%;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 22px;
   margin-top: 16px;
@@ -385,7 +386,7 @@
 /* ── Darshan photo card: same style as the Publication wallpaper card ── */
 .dd-cell .wallpaper-content {
   border-radius: 16px;
-  padding: 0 0 4px;
+  padding: 0;
   text-align: center;
   /* Same 3:4 card height as the homepage Daily Darshan card */
   height: auto;
@@ -404,7 +405,7 @@
   background: none;
   overflow: hidden;
   cursor: pointer;
-  border-radius: 16px 16px 0 0;
+  border-radius: 16px;
 }
 
 .dd-cell .lazy-load-image-background {
@@ -414,7 +415,7 @@
 .dd-cell .wallpaper-img {
   height: 100%;
   object-fit: cover;
-  border-radius: 16px 16px 0 0;
+  border-radius: 16px;
 }
 
 .dd-cell .wallpaper-content:hover .wallpaper-img {
@@ -439,11 +440,15 @@
   transform: translate(-50%, -50%);
 }
 
-/* Download: centred pill, like the wallpaper cards */
+/* Download: centred pill, overlaid on the bottom of the photo */
 .dd-cell .wallpaper-content > button {
-  width: auto;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 14px;
+  width: fit-content;
   height: auto;
-  margin: 12px auto 8px;
+  margin: 0 auto;
   padding: 9px 20px;
   border: none;
   border-radius: 40px;
@@ -468,11 +473,4 @@
   flex: 0 0 100%;
   width: 100%;
   text-align: center;
-}
-
-/* No ॐ ornament on the Daily Darshan headings (Daily Katha keeps it).
-   Two classes so this wins over the shared .dk-item-head::before rule. */
-.dk-item-head.dd-item-head::before {
-  content: none;
-  display: none;
 }

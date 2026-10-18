@@ -528,18 +528,10 @@ iframe.katha-video {
   color: #8b1c1c;
 }
 
-/* Section heading: ornament, title, subtitle */
+/* Section heading: title, subtitle */
 .dk-item-head {
   text-align: center;
   margin-bottom: 22px;
-}
-
-.dk-item-head::before {
-  content: "ॐ";
-  display: block;
-  font-size: 26px;
-  color: #c8a96e;
-  margin-bottom: 6px;
 }
 
 .dk-item-title {
@@ -603,4 +595,49 @@ iframe.katha-video {
 
 .dk-date-picker {
   padding-left: 4px;
+}
+
+/* Date card on phones: arrows at the two edges of the first row with the date
+   between them, and the date input on its own full-width row below */
+@media (max-width: 760px) {
+  .dk-date-card {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 14px;
+    padding: 16px;
+  }
+
+  .dk-date-card > .dk-date-nav:first-child {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .dk-date-card > .dk-date-nav:last-child {
+    grid-column: 3;
+    grid-row: 1;
+  }
+
+  .dk-date-info {
+    grid-column: 2;
+    grid-row: 1;
+    padding-right: 0;
+    border-right: none;
+  }
+
+  .dk-date-picker {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    width: 100%;
+    padding-left: 0;
+  }
+
+  .dk-date-cal {
+    font-size: 32px;
+  }
+
+  .dk-date-value {
+    font-size: 18px;
+    white-space: nowrap;
+  }
 }
