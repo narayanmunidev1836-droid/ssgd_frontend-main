@@ -51,6 +51,24 @@ const iosAppLinks = [
   },
 ];
 
+const AppCard = ({ label, apps }) => (
+  <div className="footer-app-links">
+    <small>{label}</small>
+    {apps.map((app) => (
+      <a
+        key={app.url}
+        href={app.url}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="footer-app-link"
+      >
+        <img src={app.icon} alt={app.name} className="footer-app-icon" />
+        <span>{app.name}</span>
+      </a>
+    ))}
+  </div>
+);
+
 const Footer = () => {
   const [apiData, setApiData] = useState([]);
   const [siteName, setSiteName] = useState("");
@@ -253,22 +271,8 @@ const Footer = () => {
                     </li>
                   ))}
               </ul>
-              <div className="footer-app-cards">
-                <div className="footer-app-links">
-                  <small>DOWNLOAD ON THE APP STORE</small>
-                  {iosAppLinks.map((app) => (
-                    <a
-                      key={app.url}
-                      href={app.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="footer-app-link"
-                    >
-                      <img src={app.icon} alt={app.name} className="footer-app-icon" />
-                      <span>{app.name}</span>
-                    </a>
-                  ))}
-                </div>
+              <div className="footer-app-cards d-none d-sm-flex">
+                <AppCard label="DOWNLOAD ON THE APP STORE" apps={iosAppLinks} />
               </div>
             </Grid>
 
@@ -391,25 +395,19 @@ const Footer = () => {
                   </>
                 )}
               </ul>
-              <div className="footer-app-cards">
-                <div className="footer-app-links">
-                  <small>GET IT ON GOOGLE PLAY</small>
-                  {appLinks.map((app) => (
-                    <a
-                      key={app.url}
-                      href={app.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="footer-app-link"
-                    >
-                      <img src={app.icon} alt={app.name} className="footer-app-icon" />
-                      <span>{app.name}</span>
-                    </a>
-                  ))}
-                </div>
+              <div className="footer-app-cards d-none d-sm-flex">
+                <AppCard label="GET IT ON GOOGLE PLAY" apps={appLinks} />
               </div>
             </Grid>
 
+            {/* Mobile only: both app cards stacked together (tablet/desktop keep them
+                under Other Links and Follow Us) */}
+            <Grid item xs={12} className="footer-contact d-sm-none">
+              <div className="footer-app-cards">
+                <AppCard label="DOWNLOAD ON THE APP STORE" apps={iosAppLinks} />
+                <AppCard label="GET IT ON GOOGLE PLAY" apps={appLinks} />
+              </div>
+            </Grid>
           </Grid>
           <hr></hr>
           <div className="footer-bottom">
