@@ -87,13 +87,13 @@
   transition: var(--transition);
   font-family: "Poppins", sans-serif;
   cursor: pointer;
-  box-shadow: 0 4px 14px rgba(181, 9, 14, 0.25);
+  box-shadow: 0 4px 14px rgba(160, 82, 45, 0.25);
 }
 
 .katha-img-wrap button:hover {
   background-color: var(--global-color-hover);
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(181, 9, 14, 0.35);
+  box-shadow: 0 6px 20px rgba(160, 82, 45, 0.35);
 }
 
 .wallpaper-content {
@@ -170,14 +170,14 @@
   transition: var(--transition);
   font-family: "Poppins", sans-serif;
   cursor: pointer;
-  box-shadow: 0 4px 14px rgba(181, 9, 14, 0.25);
+  box-shadow: 0 4px 14px rgba(160, 82, 45, 0.25);
   margin: 12px auto 16px;
 }
 
 .wallpaper-content button:hover {
   background-color: var(--global-color-hover);
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(181, 9, 14, 0.35);
+  box-shadow: 0 6px 20px rgba(160, 82, 45, 0.35);
 }
 
 /* =========================================================
@@ -236,7 +236,7 @@
   color: #fff;
   background-color: var(--global-color);
   border-color: var(--global-color);
-  box-shadow: 0 4px 14px rgba(181, 9, 14, 0.3);
+  box-shadow: 0 4px 14px rgba(160, 82, 45, 0.3);
 }
 
 /* =========================================================
@@ -1187,7 +1187,7 @@
 
 .publication-filter-caret {
   font-size: 22px;
-  color: #8b1c1c;
+  color: #8a4220;
   flex-shrink: 0;
   transition: transform 0.2s ease;
 }
@@ -1226,16 +1226,16 @@
 }
 
 .publication-filter-option:hover {
-  background: rgba(181, 9, 14, 0.07);
+  background: rgba(160, 82, 45, 0.07);
 }
 
 .publication-filter-option.is-selected {
-  color: #8b1c1c;
+  color: #8a4220;
   font-weight: 700;
 }
 
 .publication-filter-check {
-  color: #8b1c1c;
+  color: #8a4220;
   font-size: 18px;
 }
 

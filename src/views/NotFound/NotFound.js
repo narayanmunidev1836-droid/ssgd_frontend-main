@@ -73,7 +73,7 @@ const NotFound = () => {
           className="btn text-white px-4 py-2"
           style={{
             backgroundColor: "var(--global-color)",
-            boxShadow: "0 4px 10px rgba(139, 0, 7, 0.3)",
+            boxShadow: "0 4px 10px rgba(122, 59, 31, 0.3)",
           }}
         >
           <i className="fa-solid fa-house me-2" aria-hidden="true"></i>

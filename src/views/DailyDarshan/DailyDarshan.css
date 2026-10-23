@@ -187,10 +187,10 @@
 .dd-cell button {
   width: 100%;
   padding: 8px 12px;
-  border: 2px solid #8b1c1c;
+  border: 2px solid #8a4220;
   border-radius: 6px;
   background: transparent;
-  color: #8b1c1c;
+  color: #8a4220;
   font-family: "Poppins", sans-serif;
   font-size: 13px;
   font-weight: 600;
@@ -199,7 +199,7 @@
 }
 
 .dd-cell button:hover {
-  background: #8b1c1c;
+  background: #8a4220;
   color: #fff;
 }
 
@@ -370,7 +370,7 @@
   height: 46px;
   border: 0;
   border-radius: 0;
-  background: #8b1c1c;
+  background: #8a4220;
   color: #fff;
   font-size: 14px;
   font-weight: 700;
@@ -452,20 +452,20 @@
   padding: 9px 20px;
   border: none;
   border-radius: 40px;
-  background-color: var(--global-color, #b5090e);
+  background-color: var(--global-color, #a0522d);
   color: #fff;
   font-size: 13px;
   font-weight: 600;
   letter-spacing: 0.3px;
   text-transform: none;
-  box-shadow: 0 4px 14px rgba(181, 9, 14, 0.25);
+  box-shadow: 0 4px 14px rgba(160, 82, 45, 0.25);
   font-family: "Poppins", sans-serif;
 }
 
 .dd-cell .wallpaper-content > button:hover {
-  background-color: var(--global-color-hover, #8b0a0e);
+  background-color: var(--global-color-hover, #7a3b1f);
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(181, 9, 14, 0.35);
+  box-shadow: 0 6px 20px rgba(160, 82, 45, 0.35);
 }
 
 /* The heading is a flex item of the darshan row, so it must span the full row to centre */
@@ -508,5 +508,5 @@
   background: var(--global-color);
   color: #fff;
   border-color: var(--global-color);
-  box-shadow: 0 4px 14px rgba(181, 9, 14, 0.3);
+  box-shadow: 0 4px 14px rgba(160, 82, 45, 0.3);
 }

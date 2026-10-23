@@ -104,7 +104,7 @@ li.nav-item {
 
 .nav-link:hover {
   color: var(--global-color) !important;
-  background: rgba(181, 9, 14, 0.05);
+  background: rgba(160, 82, 45, 0.05);
 }
 
 .nav-link:hover::after {
@@ -126,7 +126,7 @@ li.nav-item {
 /* ======= Donation Button ======= */
 
 .nav-link.donation {
-  background: linear-gradient(135deg, var(--global-color) 0%, #8b0007 100%);
+  background: linear-gradient(135deg, var(--global-color) 0%, #7a3b1f 100%);
   color: #ffffff !important;
   border: none;
   border-radius: 50px;
@@ -138,7 +138,7 @@ li.nav-item {
   justify-content: center;
   padding: 0 20px !important;
   letter-spacing: 0.06em;
-  box-shadow: 0 4px 16px rgba(181, 9, 14, 0.35);
+  box-shadow: 0 4px 16px rgba(160, 82, 45, 0.35);
   cursor: pointer;
   transition: all 0.3s ease;
   font-size: 12px;
@@ -150,9 +150,9 @@ li.nav-item {
 }
 
 .nav-link.donation:hover {
-  background: linear-gradient(135deg, #8b0007 0%, var(--global-color) 100%);
+  background: linear-gradient(135deg, #7a3b1f 0%, var(--global-color) 100%);
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(181, 9, 14, 0.45);
+  box-shadow: 0 8px 24px rgba(160, 82, 45, 0.45);
   color: #ffffff !important;
 }
 
@@ -202,7 +202,7 @@ li.nav-item {
 }
 
 .dropdown-menu .dropdown-item:hover {
-  background-color: rgba(181, 9, 14, 0.06) !important;
+  background-color: rgba(160, 82, 45, 0.06) !important;
   color: var(--global-color);
   transform: translateX(4px);
   transition: 0.22s ease;
@@ -210,7 +210,7 @@ li.nav-item {
 
 .dropdown-item.active,
 .dropdown-item:active {
-  background-color: rgba(181, 9, 14, 0.08) !important;
+  background-color: rgba(160, 82, 45, 0.08) !important;
   color: var(--global-color);
 }
 

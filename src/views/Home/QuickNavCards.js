@@ -16,7 +16,7 @@ const cards = [
     img: darshanImg,
     title: "Daily Darshan",
     path: "/daily-darshan",
-    color: "#b5090e",
+    color: "#a0522d",
   },
   {
     img: kathaImg,

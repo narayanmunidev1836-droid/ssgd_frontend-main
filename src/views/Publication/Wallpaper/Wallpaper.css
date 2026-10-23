@@ -80,14 +80,14 @@
   transition: var(--transition);
   font-family: "Poppins", sans-serif;
   cursor: pointer;
-  box-shadow: 0 4px 14px rgba(181, 9, 14, 0.25);
+  box-shadow: 0 4px 14px rgba(160, 82, 45, 0.25);
   margin: 12px auto;
 }
 
 .wallpaper-content button:hover {
   background-color: var(--global-color-hover);
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(181, 9, 14, 0.35);
+  box-shadow: 0 6px 20px rgba(160, 82, 45, 0.35);
 }
 
 .gallery-activities-name {

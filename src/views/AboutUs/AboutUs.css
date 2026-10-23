@@ -438,7 +438,7 @@
 
 .au-short-desc {
   cursor: pointer;
-  color: #8b1c1c;
+  color: #8a4220;
   font-weight: 600;
   margin-bottom: 6px;
 }
@@ -691,7 +691,7 @@
 }
 
 .au-bottom-card:hover .au-bottom-label p {
-  color: #8b1c1c;
+  color: #8a4220;
 }
 
 @media (max-width: 768px) {
@@ -719,7 +719,7 @@
 }
 
 .au-read-more {
-  color: #8b1c1c;
+  color: #8a4220;
   font-weight: 600;
   white-space: nowrap;
   cursor: pointer;

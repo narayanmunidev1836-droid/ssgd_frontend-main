@@ -282,7 +282,7 @@
   font-family: "Poppins", sans-serif;
   font-size: clamp(28px, 3.5vw, 42px);
   font-weight: 800;
-  color: #6f1115;
+  color: #6a3219;
   line-height: 1.15;
   text-shadow: 0 2px 12px rgba(255, 255, 255, 0.72);
 }
@@ -340,7 +340,7 @@
   width: 38px;
   height: 38px;
   margin-bottom: 4px;
-  color: #8b171c;
+  color: #8a4220;
   font-size: 25px;
 }
 
@@ -435,7 +435,7 @@
   box-sizing: border-box;
   display: flex;
   align-items: center;
-  background: linear-gradient(90deg, #841319, #a51d22);
+  background: linear-gradient(90deg, #8a4220, #a0522d);
   color: #fff;
   font-family: "Poppins", sans-serif;
   font-size: 14px;
@@ -448,7 +448,7 @@
 /* USA = blue */
 
 .dn-tone-usa .dn-cell .bank-details {
-  background: linear-gradient(90deg, #841319, #a51d22);
+  background: linear-gradient(90deg, #8a4220, #a0522d);
 }
 
 /* =========================================================
@@ -482,7 +482,7 @@
   display: flex;
   align-items: flex-start;
   gap: 6px;
-  color: #8c151a;
+  color: #8a4220;
   font-size: 13px;
   font-weight: 600;
   padding: 0;
@@ -493,7 +493,7 @@
 .dn-cell .bank-info-label svg {
   flex-shrink: 0;
   margin-top: 2px;
-  color: #9a1b20;
+  color: #96492a;
   font-size: 12px;
 }
 
@@ -514,7 +514,7 @@
   padding: 2px;
   border: none;
   background: none;
-  color: #8c151a;
+  color: #8a4220;
   font-size: 13px;
   cursor: pointer;
   vertical-align: middle;
@@ -540,10 +540,10 @@
 .dn-cell .donors-btn {
   min-width: 100px;
   padding: 8px 15px;
-  border: 1px solid #96151b;
+  border: 1px solid #8a4220;
   border-radius: 5px;
   background: #fff;
-  color: #96151b;
+  color: #8a4220;
   font-family: "Poppins", sans-serif;
   font-size: 12px;
   font-weight: 600;
@@ -557,21 +557,21 @@
 }
 
 .dn-cell .donors-btn:first-child {
-  background: #a5161d;
+  background: #a0522d;
   color: #fff;
-  border-color: #a5161d;
+  border-color: #a0522d;
 }
 
 .dn-cell .donors-btn:hover {
-  background: #7d1016;
-  border-color: #7d1016;
+  background: #7a3b1f;
+  border-color: #7a3b1f;
   color: #fff;
   transform: translateY(-1px);
 }
 
 .dn-cell .donors-btn:first-child:hover {
-  background: #7d1016;
-  border-color: #7d1016;
+  background: #7a3b1f;
+  border-color: #7a3b1f;
 }
 
 /* =========================================================

@@ -146,7 +146,7 @@
 }
 
 .badge-pin-icon {
-  color: #8b1c1c;
+  color: #8a4220;
   font-size: 0.85rem;
   flex-shrink: 0;
 }
@@ -194,7 +194,7 @@
 }
 
 .branch-info-icon {
-  color: #8b1c1c;
+  color: #8a4220;
   font-size: 1rem;
   flex-shrink: 0;
   margin-top: 3px;
@@ -219,9 +219,9 @@
   align-items: center;
   gap: 8px;
   padding: 9px 22px;
-  border: 2px solid #8b1c1c;
+  border: 2px solid #8a4220;
   border-radius: 6px;
-  color: #8b1c1c;
+  color: #8a4220;
   font-size: 0.88rem;
   font-weight: 600;
   text-decoration: none;
@@ -230,7 +230,7 @@
 }
 
 .branch-view-btn:hover {
-  background: #8b1c1c;
+  background: #8a4220;
   color: #fff;
   text-decoration: none;
 }

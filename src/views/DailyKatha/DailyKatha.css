@@ -397,7 +397,7 @@ iframe.katha-video {
 
 .dk-date-picker .MuiSvgIcon-root,
 .dk-date-picker .MuiIconButton-root {
-  color: #8b1c1c;
+  color: #8a4220;
 }
 
 /* ── Date picker: calendar popup ─────────────────────────────── */
@@ -420,7 +420,7 @@ iframe.katha-video {
 }
 
 .dk-picker-popper .MuiPickersArrowSwitcher-root .MuiIconButton-root {
-  color: #8b1c1c;
+  color: #8a4220;
   background: #fbf3e6;
   border-radius: 10px;
 }
@@ -430,7 +430,7 @@ iframe.katha-video {
 }
 
 .dk-picker-popper .MuiDayCalendar-weekDayLabel {
-  color: #8b1c1c;
+  color: #8a4220;
   font-weight: 700;
   font-size: 12px;
   text-transform: uppercase;
@@ -452,7 +452,7 @@ iframe.katha-video {
 }
 
 .dk-picker-popper .MuiPickersDay-root.Mui-selected {
-  background: #8b1c1c;
+  background: #8a4220;
   color: #fff;
 }
 
@@ -502,17 +502,17 @@ iframe.katha-video {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border: 1.5px solid #8b1c1c;
+  border: 1.5px solid #8a4220;
   border-radius: 50%;
   background: #fff;
-  color: #8b1c1c;
+  color: #8a4220;
   font-size: 20px;
   cursor: pointer;
   transition: background 0.25s ease, color 0.25s ease;
 }
 
 .dk-date-nav:hover:not(:disabled) {
-  background: #8b1c1c;
+  background: #8a4220;
   color: #fff;
 }
 
@@ -525,7 +525,7 @@ iframe.katha-video {
   font-family: Georgia, "Times New Roman", serif;
   font-size: 22px;
   font-weight: 700;
-  color: #8b1c1c;
+  color: #8a4220;
 }
 
 /* Section heading: title, subtitle */
@@ -538,7 +538,7 @@ iframe.katha-video {
   font-family: Georgia, "Times New Roman", serif;
   font-size: 30px;
   font-weight: 700;
-  color: #8b1c1c;
+  color: #8a4220;
 }
 
 .dk-item-desc {
@@ -577,7 +577,7 @@ iframe.katha-video {
 
 .dk-date-cal {
   font-size: 40px;
-  color: #b5090e;
+  color: #a0522d;
   flex-shrink: 0;
 }
 

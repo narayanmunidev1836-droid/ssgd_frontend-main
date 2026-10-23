@@ -130,13 +130,13 @@
   cursor: pointer;
   transition: var(--transition);
   font-family: "Poppins", sans-serif;
-  box-shadow: 0 4px 14px rgba(181, 9, 14, 0.25);
+  box-shadow: 0 4px 14px rgba(160, 82, 45, 0.25);
 }
 
 .album-download-btn:hover {
   background: var(--global-color-hover);
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(181, 9, 14, 0.35);
+  box-shadow: 0 6px 20px rgba(160, 82, 45, 0.35);
 }
 
 .album-download-btn svg {
@@ -165,7 +165,7 @@
   background: var(--global-color);
   color: #fff;
   transform: translateY(-2px);
-  box-shadow: 0 4px 14px rgba(181, 9, 14, 0.3);
+  box-shadow: 0 4px 14px rgba(160, 82, 45, 0.3);
 }
 
 .album-share-btn svg,
@@ -222,7 +222,7 @@
 }
 
 .track-row-active {
-  background: rgba(181, 9, 14, 0.04);
+  background: rgba(160, 82, 45, 0.04);
 }
 
 .track-col-num {
@@ -1144,7 +1144,7 @@
 
 .favourite-track-goto:hover,
 .favourite-track-goto:focus-visible {
-  background: rgba(181, 9, 14, 0.1);
+  background: rgba(160, 82, 45, 0.1);
   outline: none;
 }
 

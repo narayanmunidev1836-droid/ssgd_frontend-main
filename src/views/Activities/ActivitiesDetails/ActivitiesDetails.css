@@ -412,7 +412,7 @@
 
 .slider-item .activities-inner-content-wrap:hover .activities-date {
   background: var(--global-color);
-  box-shadow: 0 4px 12px rgba(181, 9, 14, 0.4);
+  box-shadow: 0 4px 12px rgba(160, 82, 45, 0.4);
 }
 
 .slider-item .activities-date h5 {
@@ -444,7 +444,7 @@
   font-weight: 700;
   margin: 0;
   line-height: 1;
-  background: rgba(181, 9, 14, 0.07);
+  background: rgba(160, 82, 45, 0.07);
   padding: 4px 10px;
   border-radius: 20px;
   width: fit-content;

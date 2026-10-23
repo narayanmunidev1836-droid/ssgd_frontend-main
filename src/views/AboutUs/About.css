@@ -1,7 +1,7 @@
 .container.about-container {
   border-radius: 15px;
   padding: 15px 10px 50px 10px;
-  /* border-top: 8px solid #b5090e; */
+  /* border-top: 8px solid #a0522d; */
   border-top: 8px solid var(--text-color);
   border-left: 1px solid #25618c;
   border-right: 1px solid #25618c;
@@ -34,7 +34,7 @@
   text-align: center;
   font-size: 18px;
   margin: 14px 0px 14px;
-  /* color: #b5090e; */
+  /* color: #a0522d; */
   color: var(--text-color);
   font-weight: 700;
 }
@@ -43,7 +43,7 @@
   /* text-align: center; */
   font-size: 18px;
   margin: 14px 0px 14px;
-  /* color: #b5090e; */
+  /* color: #a0522d; */
   color: var(--text-color);
   font-weight: 700;
 }
@@ -157,9 +157,9 @@
 .at-load-error button {
   margin-top: 12px;
   padding: 9px 22px;
-  border: 2px solid #8b1c1c;
+  border: 2px solid #8a4220;
   border-radius: 6px;
-  background: #8b1c1c;
+  background: #8a4220;
   color: #fff;
   font-family: "Poppins", sans-serif;
   font-weight: 600;
