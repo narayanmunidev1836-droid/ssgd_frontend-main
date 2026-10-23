@@ -183,7 +183,7 @@ const Footer = () => {
               </ul>
             </Grid>
 
-            <Grid item lg={2} md={6} sm={6} xs={12} className="footer-links">
+            <Grid item lg={2.5} md={6} sm={6} xs={12} className="footer-links">
               <h5 className="footer-link-title">Quick Links</h5>
               <ul className="footer-link-wrap footer-nav-list">
                 <li>
@@ -212,11 +212,20 @@ const Footer = () => {
               </ul>
             </Grid>
 
-            <Grid item lg={2} md={6} sm={6} xs={12} className="footer-links">
+            <Grid item lg={3} md={6} sm={6} xs={12} className="footer-links">
               <h5 className="footer-link-title">Other Links</h5>
               <ul className="footer-link-wrap footer-nav-list">
                 <li>
                   <NavLink to="/contact-us">Contact Us</NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to="https://vachnamrut.ssgd.org"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Vachnamrut
+                  </NavLink>
                 </li>
                 {donation === "1" ? (
                   <li>
@@ -244,9 +253,26 @@ const Footer = () => {
                     </li>
                   ))}
               </ul>
+              <div className="footer-app-cards">
+                <div className="footer-app-links">
+                  <small>DOWNLOAD ON THE APP STORE</small>
+                  {iosAppLinks.map((app) => (
+                    <a
+                      key={app.url}
+                      href={app.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="footer-app-link"
+                    >
+                      <img src={app.icon} alt={app.name} className="footer-app-icon" />
+                      <span>{app.name}</span>
+                    </a>
+                  ))}
+                </div>
+              </div>
             </Grid>
 
-            <Grid item lg={2.5} md={6} sm={6} xs={12} className="footer-contact">
+            <Grid item lg={3.5} md={6} sm={6} xs={12} className="footer-contact">
               <h5>Follow Us</h5>
 
               <ul className="social-media-link-wrap">
@@ -365,10 +391,6 @@ const Footer = () => {
                   </>
                 )}
               </ul>
-            </Grid>
-
-            <Grid item lg={2.5} md={6} sm={6} xs={12} className="footer-contact">
-              <h5>Our Apps</h5>
               <div className="footer-app-cards">
                 <div className="footer-app-links">
                   <small>GET IT ON GOOGLE PLAY</small>
@@ -385,23 +407,9 @@ const Footer = () => {
                     </a>
                   ))}
                 </div>
-                <div className="footer-app-links">
-                  <small>DOWNLOAD ON THE APP STORE</small>
-                  {iosAppLinks.map((app) => (
-                    <a
-                      key={app.url}
-                      href={app.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="footer-app-link"
-                    >
-                      <img src={app.icon} alt={app.name} className="footer-app-icon" />
-                      <span>{app.name}</span>
-                    </a>
-                  ))}
-                </div>
               </div>
             </Grid>
+
           </Grid>
           <hr></hr>
           <div className="footer-bottom">

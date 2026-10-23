@@ -1,12 +1,9 @@
 /* ========== Footer ========== */
 
 .footer-bg {
-  background: linear-gradient(160deg,
-      #B52A30 0%,
-      #9B2027 35%,
-      #852027 70%,
-      #A52A30 100%);
+  background: url("/footerbackground.webp") center / cover no-repeat;
   color: #ffffff;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
   /* MUI Grid's spacing adds a negative top margin on .footer-wrap below; without
      this, that margin collapses through this div and pulls the whole footer up
      over whatever section comes before it. */
@@ -90,7 +87,10 @@
 }
 
 .footer-link-wrap li a:hover {
-  color: var(--accent-gold, #c9984a);
+  /* Gold blends into the orange image behind the footer, so hover goes full white */
+  color: #ffffff;
+  text-decoration: underline;
+  text-underline-offset: 4px;
   transform: translateX(4px);
 }
 
@@ -138,7 +138,7 @@
   transform: rotate(45deg);
 }
 
-/* Thin gold divider between the five columns (desktop only) */
+/* Thin gold divider between the four columns (desktop only) */
 @media (min-width: 1200px) {
 
   /* Follow Us column is narrow here: slightly smaller icons so five fit a row */
@@ -247,7 +247,7 @@
 
 /* ======= App Download Links ======= */
 
-/* Play Store and App Store each get their own card, stacked in one column */
+/* Play Store and App Store each get their own card, under Follow Us / Other Links */
 .footer-app-cards {
   display: flex;
   flex-direction: column;
@@ -262,7 +262,10 @@
   width: fit-content;
   margin-top: 16px;
   padding: 10px 12px 8px;
-  background: rgba(255, 255, 255, 0.06);
+  /* Dark frosted card so the text stays readable over the temple in the image */
+  background: rgba(60, 15, 10, 0.55);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
   border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 10px;
 }
@@ -272,7 +275,7 @@
   font-size: 10px;
   font-weight: 500;
   letter-spacing: 0.04em;
-  color: rgba(255, 255, 255, 0.7);
+  color: rgba(255, 255, 255, 0.85);
 }
 
 .footer-app-link {
@@ -334,7 +337,7 @@
 }
 
 .footer-bottom a:hover {
-  color: var(--accent-gold, #c9984a);
+  color: #ffffff;
 }
 
 .copyright {
@@ -412,6 +415,13 @@
    blocks (32px -> 16px; container offset reduced to match so the top padding
    is unchanged) and drop the extra pb-md-4 under the last block. */
 @media (max-width: 991.98px) {
+
+  /* The footer is tall and narrow here, so `cover` crops to the bright temple;
+     show the darker left side of the image so the white text stays readable. */
+  .footer-bg {
+    background-position: left center;
+  }
+
   .footer-wrap.MuiGrid-container {
     margin-top: -16px;
   }
@@ -425,8 +435,8 @@
   }
 }
 
-/* Tablet: the five blocks sit two per row (brand + Quick Links, Other Links +
-   Follow Us, Our Apps); the column dividers are desktop-only. */
+/* Tablet: the four blocks sit two per row (brand + Quick Links, Other Links +
+   Follow Us); the column dividers are desktop-only. */
 @media (min-width: 768px) and (max-width: 1199.98px) {
 
   /* Horizontal grid gap 32px -> 16px (container offset reduced to match). */
