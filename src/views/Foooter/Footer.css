@@ -416,12 +416,6 @@
    is unchanged) and drop the extra pb-md-4 under the last block. */
 @media (max-width: 991.98px) {
 
-  /* The footer is tall and narrow here, so `cover` crops to the bright temple;
-     show the darker left side of the image so the white text stays readable. */
-  .footer-bg {
-    background-position: left center;
-  }
-
   .footer-wrap.MuiGrid-container {
     margin-top: -16px;
   }
