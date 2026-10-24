@@ -51,7 +51,7 @@
   border-radius: 50%;
   overflow: hidden;
   flex-shrink: 0;
-  border: 2.5px solid rgba(0,0,0,0.08);
+  /* the round icons already carry their own gold ring */
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 

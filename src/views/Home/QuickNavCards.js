@@ -2,16 +2,16 @@
 import React from "react";
 import { useNavigate } from "../../common/routerCompat.js";
 import "./QuickNavCards.css";
-import _darshanImg from "../../assets/images/daily-darshan-img1.webp";
+import _darshanImg from "../../assets/images/quick-darshan.webp";
 const darshanImg = _darshanImg.src;
-import _kathaImg from "../../assets/images/B.Swami_1.webp";
+import _kathaImg from "../../assets/images/quick-katha.webp";
 const kathaImg = _kathaImg.src;
-import _eventsImg from "../../assets/images/slider_10.webp";
+import _eventsImg from "../../assets/images/quick-events.webp";
 const eventsImg = _eventsImg.src;
-import _donationImg from "../../assets/images/community_activities.webp";
+import _donationImg from "../../assets/images/quick-donation.webp";
 const donationImg = _donationImg.src;
 
-const cards = [
+export const cards = [
   {
     img: darshanImg,
     title: "Daily Darshan",
@@ -38,33 +38,37 @@ const cards = [
   },
 ];
 
-const QuickNavCards = () => {
+// Shared with the home hero, which shows the first two cards on its left and the last two on its right
+export const QuickNavCard = ({ card }) => {
   const navigate = useNavigate();
 
   return (
-    <div className="quick-nav-section">
-      <div className="container">
-        <div className="quick-nav-grid">
-          {cards.map((card, index) => (
-            <div
-              key={index}
-              className="quick-nav-card"
-              onClick={() => navigate(card.path)}
-              style={{ "--card-accent": card.color }}
-            >
-              <div className="quick-nav-img-wrap">
-                <img src={card.img} alt={card.title} className="quick-nav-thumb" />
-              </div>
-              <div className="quick-nav-text">
-                <h5>{card.title}</h5>
-              </div>
-              <div className="quick-nav-chevron">&#8250;</div>
-            </div>
-          ))}
-        </div>
+    <div
+      className="quick-nav-card"
+      onClick={() => navigate(card.path)}
+      style={{ "--card-accent": card.color }}
+    >
+      <div className="quick-nav-img-wrap">
+        <img src={card.img} alt={card.title} className="quick-nav-thumb" />
       </div>
+      <div className="quick-nav-text">
+        <h5>{card.title}</h5>
+      </div>
+      <div className="quick-nav-chevron">&#8250;</div>
     </div>
   );
 };
+
+const QuickNavCards = () => (
+  <div className="quick-nav-section">
+    <div className="container">
+      <div className="quick-nav-grid">
+        {cards.map((card) => (
+          <QuickNavCard key={card.title} card={card} />
+        ))}
+      </div>
+    </div>
+  </div>
+);
 
 export default QuickNavCards;
