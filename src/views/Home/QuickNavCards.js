@@ -11,7 +11,7 @@ const eventsImg = _eventsImg.src;
 import _donationImg from "../../assets/images/quick-donation.webp";
 const donationImg = _donationImg.src;
 
-export const cards = [
+const cards = [
   {
     img: darshanImg,
     title: "Daily Darshan",
@@ -38,8 +38,7 @@ export const cards = [
   },
 ];
 
-// Shared with the home hero, which shows the first two cards on its left and the last two on its right
-export const QuickNavCard = ({ card }) => {
+const QuickNavCard = ({ card }) => {
   const navigate = useNavigate();
 
   return (

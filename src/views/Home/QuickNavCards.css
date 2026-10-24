@@ -14,10 +14,11 @@
 .quick-nav-card {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 16px;
   background: #ffffff;
-  border-radius: 10px;
-  padding: 14px 16px;
+  border-radius: 16px;
+  padding: 16px 20px;
+  box-shadow: 0 4px 16px rgba(122, 59, 31, 0.08);
   cursor: pointer;
   transition: var(--transition);
   border: 1px solid rgba(0, 0, 0, 0.06);
@@ -46,8 +47,8 @@
 /* ======= Thumbnail image ======= */
 
 .quick-nav-img-wrap {
-  width: 60px;
-  height: 60px;
+  width: 68px;
+  height: 68px;
   border-radius: 50%;
   overflow: hidden;
   flex-shrink: 0;
@@ -75,7 +76,7 @@
 }
 
 .quick-nav-text h5 {
-  font-size: 14px !important;
+  font-size: 15px !important;
   font-weight: 700;
   color: var(--text-color);
   margin-bottom: 4px;

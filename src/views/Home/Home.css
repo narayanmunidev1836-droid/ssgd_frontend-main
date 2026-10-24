@@ -112,7 +112,7 @@
   display: block;
 }
 
-/* ======= Home hero: side cards + framed 16:9 slider ======= */
+/* ======= Home hero: framed 16:9 slider ======= */
 
 .home-hero {
   /* top gap under the header; bottom room for the slick dots */
@@ -122,15 +122,9 @@
 }
 
 .hero-grid {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  max-width: 1560px;
+  max-width: 1000px;
   margin: 0 auto;
   padding: 0 20px;
-}
-
-.hero-side {
-  display: none;
 }
 
 /* Rounded gradient frame with a thin gold ring around it */
@@ -159,6 +153,25 @@
   display: block !important;
 }
 
+/* Slow zoom-in on the active slide. The reset to 1 waits for the fade-out (1.5s, same as the slider speed) so the
+   image does not snap back while it is still visible. */
+.hero-frame .slider-img {
+  transform: scale(1);
+  transition: transform 0s linear 1.5s;
+}
+
+.hero-frame .slick-active .slider-img {
+  transform: scale(1.06);
+  transition: transform 7s ease-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-frame .slick-active .slider-img {
+    transform: none;
+    transition: none;
+  }
+}
+
 .homeSlideerShimmer {
   aspect-ratio: 16 / 9;
   border-radius: 20px;
@@ -166,69 +179,11 @@
 }
 
 @media (min-width: 768px) {
+
   .hero-frame,
   .hero-frame .slick-list,
   .homeSlideerShimmer {
     border-radius: 24px;
-  }
-}
-
-/* Desktop: two cards on each side of the slider; the card row below is hidden */
-@media (min-width: 1200px) {
-  .hero-grid {
-    grid-template-columns: minmax(0, 1fr) minmax(0, 3fr) minmax(0, 1fr);
-    gap: 36px;
-    padding: 0 32px;
-    align-items: stretch;
-  }
-
-  .hero-side {
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-  }
-
-  .temple-page-bg .quick-nav-section {
-    display: none;
-  }
-
-  /* No card row between the hero and this section on desktop, so it needs less top space */
-  .temple-page-bg .mission-section {
-    padding-top: 40px;
-  }
-
-  .hero-side .quick-nav-card {
-    flex: 1;
-    flex-direction: column;
-    justify-content: center;
-    gap: 14px;
-    padding: 16px;
-    text-align: center;
-    border-radius: 18px;
-    border-left: 1px solid rgba(0, 0, 0, 0.06);
-    border-top: 4px solid var(--card-accent, var(--global-color));
-  }
-
-  .hero-side .quick-nav-card:hover {
-    border-left-width: 1px;
-  }
-
-  .hero-side .quick-nav-img-wrap {
-    width: 96px;
-    height: 96px;
-  }
-
-  .hero-side .quick-nav-text {
-    flex: none;
-  }
-
-  .hero-side .quick-nav-text h5 {
-    font-size: 16px !important;
-    margin-bottom: 0;
-  }
-
-  .hero-side .quick-nav-chevron {
-    display: none;
   }
 }
 

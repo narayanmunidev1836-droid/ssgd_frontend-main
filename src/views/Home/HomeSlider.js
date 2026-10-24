@@ -3,20 +3,20 @@ import React, { useState, useEffect } from "react";
 import Slider from "react-slick";
 import "./Home.css";
 import { fetchSlider } from "../../api/API";
-import { QuickNavCard, cards } from "./QuickNavCards";
 
 const HomeSlider = () => {
   const [apiData, setApiData] = useState([]);
   const [loading, setLoading] = useState(true);
 
   const sliderSettings = {
-    speed: 800,
+    speed: 1500,
+    fade: true,
     slidesToShow: 1,
     slidesToScroll: 1,
     arrows: false,
     dots: true,
     autoplay: true,
-    autoplaySpeed: 3500,
+    autoplaySpeed: 6000,
     infinite: true,
     pauseOnHover: false,
     cssEase: "ease-in-out",
@@ -50,13 +50,6 @@ const HomeSlider = () => {
         Sanskardham Gurukul: Spirituality, Education and Service
       </h1>
       <div className="hero-grid">
-        {/* Desktop only: two quick-nav cards on each side of the slider */}
-        <div className="hero-side">
-          {cards.slice(0, 2).map((card) => (
-            <QuickNavCard key={card.title} card={card} />
-          ))}
-        </div>
-
         <div className="hero-frame">
           {loading ? (
             <div className="homeSlideerShimmer">
@@ -79,12 +72,6 @@ const HomeSlider = () => {
               ))}
             </Slider>
           )}
-        </div>
-
-        <div className="hero-side">
-          {cards.slice(2).map((card) => (
-            <QuickNavCard key={card.title} card={card} />
-          ))}
         </div>
       </div>
     </div>
