@@ -2,7 +2,7 @@
 import React from "react";
 import { useNavigate } from "../../common/routerCompat.js";
 import "./MissionSection.css";
-import _missionImg from "../../assets/images/templeTemp.webp";
+import _missionImg from "../../assets/images/mission-temple.webp";
 const missionImg = _missionImg.src;
 
 const MissionSection = () => {

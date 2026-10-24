@@ -116,7 +116,7 @@
 
 .home-hero {
   /* top gap under the header; bottom room for the slick dots */
-  padding: 28px 0 44px;
+  padding: 28px 0 32px;
   overflow: hidden;
   position: relative;
 }
@@ -190,6 +190,11 @@
 
   .temple-page-bg .quick-nav-section {
     display: none;
+  }
+
+  /* No card row between the hero and this section on desktop, so it needs less top space */
+  .temple-page-bg .mission-section {
+    padding-top: 40px;
   }
 
   .hero-side .quick-nav-card {
